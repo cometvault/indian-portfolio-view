@@ -1,0 +1,123 @@
+name: Update market data nightly
+
+on:
+  schedule:
+    # ~00:30 IST (19:00 UTC previous day)
+    - cron: '0 19 * * *'
+  workflow_dispatch:  # manual trigger from Actions tab
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Scrape IPO GMP (ipowatch)
+        run: |
+          python << 'EOF'
+          import json, re, datetime
+          from pathlib import Path
+          try:
+              import requests
+              from bs4 import BeautifulSoup
+          except ImportError:
+              print("Missing deps")
+              exit(1)
+
+          url = "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/"
+          headers = {"User-Agent": "Mozilla/5.0 (compatible; PortfolioViewBot/1.0; educational)"}
+          try:
+              r = requests.get(url, headers=headers, timeout=30)
+              r.raise_for_status()
+              soup = BeautifulSoup(r.text, "lxml")
+          except Exception as e:
+              print("Fetch failed:", e)
+              exit(0)
+
+          def parse_table(heading_text):
+              rows = []
+              for h in soup.find_all(["h2", "h3", "h4"]):
+                  if heading_text.lower() in h.get_text().lower():
+                      table = h.find_next("table")
+                      if not table:
+                          continue
+                      for tr in table.find_all("tr")[1:]:
+                          cells = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
+                          if len(cells) < 6:
+                              continue
+                          name = re.sub(r"\s+", " ", cells[0]).strip()
+                          gmp_raw = cells[1].replace("₹", "").replace(",", "").strip()
+                          gmp_m = re.search(r"-?\d+", gmp_raw)
+                          gmp = int(gmp_m.group()) if gmp_m else 0
+                          price = cells[3].replace("₹", "").strip() if len(cells) > 3 else ""
+                          est = cells[4] if len(cells) > 4 else ""
+                          dates = cells[5] if len(cells) > 5 else ""
+                          status = cells[6] if len(cells) > 6 else "—"
+                          if not name or name.lower().startswith("ipo"):
+                              continue
+                          rows.append({
+                              "name": name,
+                              "gmp": gmp,
+                              "priceBand": price,
+                              "estListing": est,
+                              "dates": dates,
+                              "status": status
+                          })
+                      break
+              return rows
+
+          mainboard = parse_table("Mainboard")
+          sme = parse_table("SME")
+
+          if not mainboard and not sme:
+              print("No tables parsed – leaving existing data")
+              exit(0)
+
+          data = {
+              "updated": datetime.date.today().isoformat(),
+              "source": "ipowatch.in (auto)",
+              "mainboard": mainboard or [],
+              "sme": sme or []
+          }
+          Path("data/ipo.json").write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+          print(f"Wrote {len(mainboard)} mainboard + {len(sme)} SME rows")
+          EOF
+
+      - name: Update gold rates (static snapshot note)
+        run: |
+          python << 'EOF'
+          import json, datetime
+          from pathlib import Path
+          path = Path("data/gold.json")
+          if path.exists():
+              data = json.loads(path.read_text(encoding="utf-8"))
+          else:
+              data = {"cities": []}
+          data["updated"] = datetime.date.today().isoformat()
+          data["note"] = "Indicative retail quotes (per 10 g). Actual rates vary by jeweller and making charges."
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+          print("Gold timestamp updated")
+          EOF
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ipo.json data/gold.json
+          if git diff --staged --quiet; then
+            echo "No data changes"
+          else
+            git commit -m "chore: nightly market data update $(date -u +%Y-%m-%d)"
+            git push
+          fi
