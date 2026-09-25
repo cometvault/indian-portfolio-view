@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indian Portfolio View — Diversification Reference</title>
+  <meta name="description" content="A clean reference view of IPO grey-market data, gold rates, and universal equity allocation proportions for the Indian market. Educational only.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Portfolio View <span>· India</span></a>
+      <nav>
+        <a href="index.html" class="active">Overview</a>
+        <a href="ipo.html">IPOs</a>
+        <a href="gold-etf.html">Gold &amp; ETF</a>
+        <a href="mutual-funds.html">Mutual Funds</a>
+        <a href="equity.html">Equity</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Portfolio Diversification Reference</h1>
+        <p>A minimal, universal view of how capital is typically proportioned across Indian market segments. Live IPO grey-market data, city gold rates, and allocation frameworks — purely educational, never advice.</p>
+        <div class="disclaimer">
+          This site does not provide buy, sell, or hold recommendations. All figures are informational. Market data can change rapidly. Consult a SEBI-registered advisor before any investment decision.
+        </div>
+      </div>
+
+      <section>
+        <p class="section-label">Navigate</p>
+        <div class="hero-grid">
+          <a href="ipo.html" class="hero-card">
+            <h3>IPOs</h3>
+            <p>Live grey-market premium, price bands &amp; status from public sources</p>
+          </a>
+          <a href="gold-etf.html" class="hero-card">
+            <h3>Gold &amp; ETF</h3>
+            <p>City-wise 22K / 24K rates · ETF exposure as ranked higher in hierarchy</p>
+          </a>
+          <a href="mutual-funds.html" class="hero-card">
+            <h3>Mutual Funds</h3>
+            <p>Category-level diversification framework without naming schemes</p>
+          </a>
+          <a href="equity.html" class="hero-card">
+            <h3>Equity</h3>
+            <p>50% Mid · 30% Large · 20% Small Cap — universal proportion view</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="alloc-section">
+        <h2>Illustrative Equity Mix</h2>
+        <p>A common long-term diversification proportion used purely as a directional reference for the Indian equity market.</p>
+        <div class="alloc-bar">
+          <div class="alloc-segment alloc-mid" style="flex: 50">50% Mid Cap</div>
+          <div class="alloc-segment alloc-large" style="flex: 30">30% Large Cap</div>
+          <div class="alloc-segment alloc-small" style="flex: 20">20% Small Cap</div>
+        </div>
+        <div class="alloc-legend">
+          <span class="legend-mid">Mid Cap — growth-oriented segment</span>
+          <span class="legend-large">Large Cap — stability &amp; liquidity</span>
+          <span class="legend-small">Small Cap — higher variability</span>
+        </div>
+      </section>
+
+      <section style="margin-top: 3rem;">
+        <h2>How this site works</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-title">Live data</div>
+            <p style="margin:0; font-size:0.9rem;">IPO GMP is fetched from publicly available tables (ipowatch.in and similar). Gold rates reflect city-level retail quotes. Data refreshes on page load and can be updated nightly via GitHub Actions.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">No recommendations</div>
+            <p style="margin:0; font-size:0.9rem;">No specific mutual-fund schemes or ETF tickers are listed. Allocation percentages are universal directional references only — not personalised advice.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+      <p>Data sources are third-party public websites. Verify independently.</p>
+    </div>
+  </footer>
+</body>
+</html>
