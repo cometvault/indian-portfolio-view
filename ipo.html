@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPOs — Grey Market Premium | Portfolio View</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Portfolio View <span>· India</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="ipo.html" class="active">IPOs</a>
+        <a href="gold-etf.html">Gold &amp; ETF</a>
+        <a href="mutual-funds.html">Mutual Funds</a>
+        <a href="equity.html">Equity</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>IPO Grey Market Premium</h1>
+        <p>Live-fetched summary of mainboard and SME IPOs with grey-market premium, estimated listing indication, and status. Data is sourced from public tables (primarily ipowatch.in) and refreshed on load or via nightly automation.</p>
+        <div class="disclaimer">
+          GMP is an unofficial street quote and does not guarantee listing performance. It is for educational observation only. Never apply solely on the basis of premium figures.
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <button class="btn" id="refreshBtn" onclick="loadIPOData(true)">
+          <span id="refreshIcon">↻</span> Refresh data
+        </button>
+        <span id="lastUpdated">Loading…</span>
+      </div>
+
+      <h2 style="margin-bottom: 1rem;">Mainboard</h2>
+      <div class="table-wrap" style="margin-bottom: 2.5rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>IPO</th>
+              <th>GMP (₹)</th>
+              <th>Price Band</th>
+              <th>Est. Listing</th>
+              <th>Dates</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="mainboardBody">
+            <tr><td colspan="6" style="text-align:center; color: var(--text-muted);">Loading data…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="margin-bottom: 1rem;">SME</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>IPO</th>
+              <th>GMP (₹)</th>
+              <th>Price Band</th>
+              <th>Est. Listing</th>
+              <th>Dates</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="smeBody">
+            <tr><td colspan="6" style="text-align:center; color: var(--text-muted);">Loading data…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        Source reference: <a href="https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/" target="_blank" rel="noopener">ipowatch.in</a> and other public GMP aggregators. Values fluctuate and may differ across dealers.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+    </div>
+  </footer>
+
+  <script src="js/ipo.js"></script>
+</body>
+</html>
