@@ -1,0 +1,144 @@
+{
+  "updated": "2026-09-25",
+  "source": "ipowatch.in (manual snapshot)",
+  "mainboard": [
+    {
+      "name": "Orient Cables",
+      "gmp": 113,
+      "priceBand": "272",
+      "estListing": "₹385 (41.54%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "A-One Steels",
+      "gmp": 49,
+      "priceBand": "405",
+      "estListing": "₹454 (12.10%)",
+      "dates": "24-28 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Runwal Enterprises",
+      "gmp": 30,
+      "priceBand": "305",
+      "estListing": "₹335 (9.84%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "German Green Steel",
+      "gmp": 28,
+      "priceBand": "139",
+      "estListing": "₹167 (20.14%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Moneyview",
+      "gmp": 14,
+      "priceBand": "34",
+      "estListing": "₹48 (41.18%)",
+      "dates": "24-28 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Adroit Industries",
+      "gmp": 34,
+      "priceBand": "134",
+      "estListing": "₹168 (25.37%)",
+      "dates": "23-25 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Swastika Infra",
+      "gmp": 8,
+      "priceBand": "185",
+      "estListing": "₹193 (4.32%)",
+      "dates": "23-25 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Acevector",
+      "gmp": 2,
+      "priceBand": "32",
+      "estListing": "₹34 (6.25%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "SRIT India",
+      "gmp": 22,
+      "priceBand": "130",
+      "estListing": "₹152 (16.92%)",
+      "dates": "28-30 Sep",
+      "status": "Upcoming"
+    },
+    {
+      "name": "Shah Investor’s Home",
+      "gmp": 12,
+      "priceBand": "167",
+      "estListing": "₹179 (7.19%)",
+      "dates": "28-30 Sep",
+      "status": "Upcoming"
+    }
+  ],
+  "sme": [
+    {
+      "name": "Bench Mark Infotech",
+      "gmp": 12,
+      "priceBand": "110",
+      "estListing": "₹122 (10.91%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Roopa Screen",
+      "gmp": 8,
+      "priceBand": "64",
+      "estListing": "₹72 (12.50%)",
+      "dates": "24-28 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Shree TNB Polymers",
+      "gmp": 5,
+      "priceBand": "52",
+      "estListing": "₹57 (9.62%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Dudani Retail",
+      "gmp": 3,
+      "priceBand": "29",
+      "estListing": "₹32 (10.34%)",
+      "dates": "25-29 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Liqvd Digital",
+      "gmp": 3,
+      "priceBand": "54",
+      "estListing": "₹57 (5.56%)",
+      "dates": "23-25 Sep",
+      "status": "Open"
+    },
+    {
+      "name": "Paramount Syntex",
+      "gmp": 0,
+      "priceBand": "127",
+      "estListing": "₹127 (0.00%)",
+      "dates": "30 Sep – 6 Oct",
+      "status": "Upcoming"
+    },
+    {
+      "name": "Dove Soft",
+      "gmp": 0,
+      "priceBand": "111",
+      "estListing": "₹111 (0.00%)",
+      "dates": "30 Sep – 5 Oct",
+      "status": "Upcoming"
+    }
+  ]
+}
