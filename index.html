@@ -55,14 +55,30 @@
         <div class="calc-result" id="calcResult" aria-live="polite">
           <p class="calc-focus" id="calcFocus"></p>
           <p class="calc-notes" id="calcNotes"></p>
-
           <p class="calc-bars-label">Allocation mix</p>
           <div class="alloc-bar" id="calcBar"></div>
           <div class="alloc-legend" id="calcLegend"></div>
-
           <div class="calc-detail-grid" id="calcDetails"></div>
-
           <p class="amount-breakdown" id="amountBreakdown"></p>
+        </div>
+      </section>
+
+      <section class="infographic-section">
+        <h2>Visual guides</h2>
+        <p>Interactive views of how allocation and risk hierarchy are often framed — educational only.</p>
+        <div class="infographic-grid">
+          <div class="infographic-card">
+            <h3>Allocation mix</h3>
+            <div id="infographicDonut"></div>
+          </div>
+          <div class="infographic-card">
+            <h3>Life-stage shift</h3>
+            <div id="infographicStages" style="width:100%"></div>
+          </div>
+          <div class="infographic-card">
+            <h3>Equity risk hierarchy</h3>
+            <div id="infographicPyramid" style="width:100%"></div>
+          </div>
         </div>
       </section>
 
@@ -127,5 +143,7 @@
   </footer>
 
   <script src="js/calculator.js"></script>
+  <script src="js/infographics.js"></script>
+  <script src="js/disclaimer.js"></script>
 </body>
 </html>
