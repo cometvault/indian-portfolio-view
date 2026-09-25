@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mutual Funds — Portfolio View</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Portfolio View <span>· India</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="ipo.html">IPOs</a>
+        <a href="gold-etf.html">Gold &amp; ETF</a>
+        <a href="mutual-funds.html" class="active">Mutual Funds</a>
+        <a href="equity.html">Equity</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Mutual Funds</h1>
+        <p>Category-level diversification framework for the Indian mutual-fund landscape. No individual scheme names are shown — only the structural roles different categories play within a long-term allocation.</p>
+        <div class="disclaimer">
+          This page contains no fund recommendations, rankings, or star ratings. It describes universal category characteristics only. Past category performance is not indicative of future results.
+        </div>
+      </div>
+
+      <section>
+        <h2>Equity categories — role in a portfolio</h2>
+        <div class="grid grid-2" style="margin-top: 1.25rem;">
+          <div class="card">
+            <div class="card-title">Large Cap</div>
+            <p style="margin:0; font-size:0.9rem;">Focus on the top-ranked companies by market capitalisation. Typically lower volatility relative to broader equity, higher liquidity, and a core role for capital preservation within the equity sleeve.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Mid Cap</div>
+            <p style="margin:0; font-size:0.9rem;">Companies ranked outside the largest cohort but still of meaningful size. Historically higher growth potential accompanied by higher drawdowns. Often forms the growth engine of an equity allocation.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Small Cap</div>
+            <p style="margin:0; font-size:0.9rem;">Smaller companies with greater variability in earnings and liquidity. Higher long-term return potential historically, offset by deeper and more prolonged drawdowns. Usually a satellite allocation.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Flexi / Multi Cap</div>
+            <p style="margin:0; font-size:0.9rem;">Manager discretion across market-cap segments. Can act as a single-fund core for investors who prefer not to rebalance across discrete large/mid/small buckets.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 2.5rem;">
+        <h2>Debt &amp; hybrid categories — stabilisers</h2>
+        <div class="grid grid-2" style="margin-top: 1.25rem;">
+          <div class="card">
+            <div class="card-title">Short / Medium Duration Debt</div>
+            <p style="margin:0; font-size:0.9rem;">Provide liquidity buffer and lower interest-rate sensitivity. Useful for near-term goals or as a ballast against equity volatility.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Hybrid / Balanced</div>
+            <p style="margin:0; font-size:0.9rem;">Combine equity and debt in predefined ratios. Can simplify allocation for investors who want automatic rebalancing between growth and stability.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 2.5rem;">
+        <h2>Illustrative category mix (directional only)</h2>
+        <p>One universal way many long-horizon investors think about proportions — not a prescription:</p>
+        <div class="alloc-bar" style="margin-top: 1rem;">
+          <div class="alloc-segment" style="flex:40; background:#2c5282;">Equity 40–70%</div>
+          <div class="alloc-segment" style="flex:25; background:#4a5568;">Debt 20–40%</div>
+          <div class="alloc-segment" style="flex:15; background:#718096;">Gold / Alt 5–15%</div>
+        </div>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.75rem;">Exact weights depend on age, goals, risk capacity and time horizon. The ranges above are educational brackets only.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+    </div>
+  </footer>
+</body>
+</html>
