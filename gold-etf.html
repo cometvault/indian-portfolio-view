@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold &amp; ETF — Portfolio View</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Portfolio View <span>· India</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="ipo.html">IPOs</a>
+        <a href="gold-etf.html" class="active">Gold &amp; ETF</a>
+        <a href="mutual-funds.html">Mutual Funds</a>
+        <a href="equity.html">Equity</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Gold &amp; ETF</h1>
+        <p>City-wise retail gold rates for major metros and a note on ETF ranking within the gold allocation hierarchy. No specific ETF names are listed.</p>
+        <div class="disclaimer">
+          Gold rates vary by jeweller, making charges and local taxes. Figures shown are indicative retail quotes. ETF exposure sits higher in the liquidity and cost hierarchy for pure gold exposure; this is a structural observation, not a recommendation.
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <button class="btn" id="refreshGoldBtn" onclick="loadGoldData(true)">
+          <span id="refreshGoldIcon">↻</span> Refresh rates
+        </button>
+        <span id="goldLastUpdated">Loading…</span>
+      </div>
+
+      <h2 style="margin-bottom: 1.25rem;">City Gold Rates (per 10 g)</h2>
+      <div class="grid grid-2" id="goldCards">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="etf-note" style="margin-top: 2.5rem;">
+        <h3>ETF ranking within gold allocation</h3>
+        <p style="margin-bottom: 0.75rem;">Within a gold sleeve of a portfolio, exchange-traded funds that track physical gold are generally ranked higher than physical jewellery or coins for the following structural reasons:</p>
+        <ul style="padding-left: 1.25rem; color: var(--text-muted); font-size: 0.95rem;">
+          <li style="margin-bottom: 0.4rem;">Lower and transparent cost of ownership (expense ratio vs making charges)</li>
+          <li style="margin-bottom: 0.4rem;">High liquidity and ease of entry/exit on exchange</li>
+          <li style="margin-bottom: 0.4rem;">Purity and storage handled by the underlying mechanism</li>
+          <li>No GST on secondary-market transactions in many cases</li>
+        </ul>
+        <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem;">Specific scheme names are intentionally omitted. Allocation weight to gold itself remains a personal risk-tolerance decision.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+    </div>
+  </footer>
+
+  <script src="js/gold.js"></script>
+</body>
+</html>

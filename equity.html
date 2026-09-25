@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equity Allocation — Portfolio View</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Portfolio View <span>· India</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="ipo.html">IPOs</a>
+        <a href="gold-etf.html">Gold &amp; ETF</a>
+        <a href="mutual-funds.html">Mutual Funds</a>
+        <a href="equity.html" class="active">Equity</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Equity Allocation</h1>
+        <p>Universal directional proportions for the Indian equity market: <strong>50% Mid Cap · 30% Large Cap · 20% Small Cap</strong>. These percentages describe how a diversified equity sleeve can look — not which securities to buy or sell.</p>
+        <div class="disclaimer">
+          No stock, index fund or active scheme names are listed. The split is a structural reference commonly discussed for long-term Indian equity exposure. It is not personalised advice and does not constitute a recommendation.
+        </div>
+      </div>
+
+      <section class="alloc-section">
+        <h2>Target proportions</h2>
+        <div class="alloc-bar">
+          <div class="alloc-segment alloc-mid" style="flex:50">50% Mid Cap</div>
+          <div class="alloc-segment alloc-large" style="flex:30">30% Large Cap</div>
+          <div class="alloc-segment alloc-small" style="flex:20">20% Small Cap</div>
+        </div>
+        <div class="alloc-legend">
+          <span class="legend-mid">Mid Cap — 50%</span>
+          <span class="legend-large">Large Cap — 30%</span>
+          <span class="legend-small">Small Cap — 20%</span>
+        </div>
+      </section>
+
+      <section style="margin-top: 2.5rem;">
+        <h2>Why this shape is often discussed</h2>
+        <div class="grid grid-3" style="margin-top: 1.25rem;">
+          <div class="card">
+            <div class="card-title">Mid Cap (50%)</div>
+            <p style="margin:0; font-size:0.9rem;">Historically the segment with a favourable growth-versus-volatility balance for many multi-year periods in India. Forms the growth core of the equity sleeve.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Large Cap (30%)</div>
+            <p style="margin:0; font-size:0.9rem;">Provides relative stability, deeper liquidity and lower single-stock concentration risk. Acts as the ballast within equity.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Small Cap (20%)</div>
+            <p style="margin:0; font-size:0.9rem;">Offers higher long-term return potential at the cost of larger drawdowns and lower liquidity. Kept as a smaller satellite allocation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 2.5rem;">
+        <h2>Implementation notes (category level only)</h2>
+        <div class="card">
+          <ul style="padding-left: 1.25rem; color: var(--text-muted); font-size: 0.95rem;">
+            <li style="margin-bottom: 0.5rem;">The percentages can be realised through passive index funds, active mutual funds, or a combination — scheme names are omitted by design.</li>
+            <li style="margin-bottom: 0.5rem;">Periodic rebalancing (e.g., annually or when any sleeve drifts &gt;5 percentage points) keeps the proportions intentional.</li>
+            <li style="margin-bottom: 0.5rem;">Investors with shorter horizons or lower risk tolerance may tilt more heavily toward large-cap; those with longer horizons may accept a larger mid/small tilt.</li>
+            <li>Tax, expense ratios and tracking error differ across vehicles; these practical factors are left for individual evaluation.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-top: 2.5rem;">
+        <h2>Index context (illustrative)</h2>
+        <p style="font-size:0.9rem;">Commonly referenced total-return indices for each segment include Nifty 100 / Nifty 50 (large), Nifty Midcap 150 (mid) and Nifty Smallcap 250 (small). Relative performance varies by period; no forward-looking claim is made.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+    </div>
+  </footer>
+</body>
+</html>
