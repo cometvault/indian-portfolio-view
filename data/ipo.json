@@ -1,12 +1,28 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "source": "ipowatch.in (auto)",
   "mainboard": [
     {
+      "name": "Vishal Nirmiti",
+      "gmp": 0,
+      "priceBand": "220",
+      "estListing": "₹220 (0.00%)",
+      "dates": "30-5 Oct",
+      "status": "Upcoming"
+    },
+    {
+      "name": "Nityas Gems",
+      "gmp": 0,
+      "priceBand": "75",
+      "estListing": "₹75 (0.00%)",
+      "dates": "30-5 Oct",
+      "status": "Upcoming"
+    },
+    {
       "name": "SRIT India",
-      "gmp": 22,
+      "gmp": 32,
       "priceBand": "130",
-      "estListing": "₹152 (16.92%)",
+      "estListing": "₹162 (24.62%)",
       "dates": "28-30 Sep",
       "status": "Upcoming"
     },
@@ -44,9 +60,9 @@
     },
     {
       "name": "Orient Cables",
-      "gmp": 113,
+      "gmp": 80,
       "priceBand": "272",
-      "estListing": "₹385 (41.54%)",
+      "estListing": "₹352 (29.41%)",
       "dates": "25-29 Sep",
       "status": "Open"
     },
@@ -60,43 +76,43 @@
     },
     {
       "name": "A-One Steels",
-      "gmp": 49,
+      "gmp": 51,
       "priceBand": "405",
-      "estListing": "₹454 (12.10%)",
+      "estListing": "₹456 (12.59%)",
       "dates": "24-28 Sep",
       "status": "Open"
     },
     {
       "name": "Adroit Industries",
-      "gmp": 34,
+      "gmp": 47,
       "priceBand": "134",
-      "estListing": "₹168 (25.37%)",
+      "estListing": "₹181 (35.07%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Swastika Infra",
-      "gmp": 8,
+      "gmp": 5,
       "priceBand": "185",
-      "estListing": "₹193 (4.32%)",
+      "estListing": "₹190 (2.43%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Elevate Campuses",
-      "gmp": 3,
+      "gmp": 4,
       "priceBand": "362",
-      "estListing": "₹364 (0.83%)",
+      "estListing": "₹366 (1.10%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "ArMee Infotech",
-      "gmp": 20,
+      "gmp": 8,
       "priceBand": "375",
-      "estListing": "₹395 (5.33%)",
+      "estListing": "₹383 (2.13%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Varmora Granito",
@@ -165,6 +181,14 @@
       "status": "Upcoming"
     },
     {
+      "name": "Shree TNB Polymers",
+      "gmp": 0,
+      "priceBand": "52",
+      "estListing": "₹52 (0.00%)",
+      "dates": "28-5 Oct",
+      "status": "Upcoming"
+    },
+    {
       "name": "Acme Universal",
       "gmp": 0,
       "priceBand": "71",
@@ -197,18 +221,10 @@
       "status": "Open"
     },
     {
-      "name": "Shree TNB Polymers",
-      "gmp": 5,
-      "priceBand": "52",
-      "estListing": "₹57 (9.62%)",
-      "dates": "25-29 Sep",
-      "status": "Open"
-    },
-    {
       "name": "Bench Mark Infotech",
-      "gmp": 12,
+      "gmp": 16,
       "priceBand": "110",
-      "estListing": "₹122 (10.91%)",
+      "estListing": "₹126 (14.55%)",
       "dates": "25-29 Sep",
       "status": "Open"
     },
@@ -246,9 +262,9 @@
     },
     {
       "name": "Roopa Screen",
-      "gmp": 8,
+      "gmp": 0,
       "priceBand": "64",
-      "estListing": "₹72 (12.50%)",
+      "estListing": "₹64 (0.00%)",
       "dates": "24-28 Sep",
       "status": "Open"
     },
@@ -258,7 +274,7 @@
       "priceBand": "78",
       "estListing": "₹78 (0.00%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Unitec Fibres",
@@ -266,7 +282,7 @@
       "priceBand": "88",
       "estListing": "₹88 (0.00%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "S.K.Offset",
@@ -274,15 +290,15 @@
       "priceBand": "125",
       "estListing": "₹125 (0.00%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Liqvd Digital",
-      "gmp": 3,
+      "gmp": 0,
       "priceBand": "54",
-      "estListing": "₹57 (5.56%)",
+      "estListing": "₹54 (0.00%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Pooja Logistics",
@@ -290,7 +306,7 @@
       "priceBand": "115",
       "estListing": "₹115 (0.00%)",
       "dates": "23-25 Sep",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "name": "Anand Seamless",
@@ -318,26 +334,18 @@
     },
     {
       "name": "Robokidz Eduventures",
-      "gmp": 70,
+      "gmp": 77,
       "priceBand": "106",
-      "estListing": "₹176 (66.04%)",
+      "estListing": "₹183 (72.64%)",
       "dates": "21-23 Sep",
       "status": "Closed"
     },
     {
       "name": "FX Multitech",
-      "gmp": 4,
+      "gmp": 6,
       "priceBand": "116",
-      "estListing": "₹120 (3.45%)",
+      "estListing": "₹126 (5.17%)",
       "dates": "21-23 Sep",
-      "status": "Closed"
-    },
-    {
-      "name": "Axiom Gas Engineering",
-      "gmp": 0,
-      "priceBand": "53",
-      "estListing": "₹53 (0.00%)",
-      "dates": "18-22 Sep",
       "status": "Closed"
     }
   ]
