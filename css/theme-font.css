@@ -1,4 +1,4 @@
-/* Font + motion overlay — Space Grotesk display (reference match), white bg, soft transitions */
+/* Font + motion + exact-copy layout */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
@@ -37,7 +37,6 @@ h2 {
   letter-spacing: -0.03em !important;
 }
 
-/* Motion */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
@@ -54,11 +53,9 @@ h2 {
 body.page-enter main {
   animation: pageIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
 .calc-result.visible {
   animation: scaleIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
 .infographic-card.is-visible {
   animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -82,25 +79,172 @@ body.page-enter .hero-grid .hero-card:nth-child(4) { animation-delay: 0.34s; }
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(11, 31, 58, 0.1);
 }
-
 .age-tab {
   transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.15s ease;
 }
 .age-tab:active { transform: scale(0.97); }
-
 .alloc-segment {
   transition: flex 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 nav a {
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 nav a:active { transform: scale(0.96); }
+.data-stamp { animation: fadeUp 0.5s ease both; }
 
-.data-stamp {
-  animation: fadeUp 0.5s ease both;
+.hero-block {
+  padding: 2.25rem 0 1.5rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2rem;
+}
+.hero-block h1 { max-width: 18ch; margin-bottom: 0.75rem; }
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  max-width: 28ch;
+}
+.trust-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  white-space: nowrap;
+}
+.ledger-eyebrow {
+  font-family: var(--font);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.02em;
+}
+.risk-caption {
+  margin-top: 0.75rem !important;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.cta-band {
+  margin: 3rem 0 2.5rem;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.cta-line {
+  font-family: var(--font);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.cta-btn {
+  display: inline-flex;
+  padding: 0.7rem 1.4rem;
+  font-size: 0.95rem;
 }
 
+.faq-section {
+  margin: 2.5rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.faq-section h2 { margin-bottom: 1rem; }
+.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.faq-item[open] {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-family: var(--font);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.faq-item[open] summary::after {
+  content: "\2212";
+  color: var(--ink);
+}
+.faq-item summary:hover { background: var(--paper); }
+.faq-item p {
+  margin: 0;
+  padding: 0 1.15rem 1.1rem;
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  animation: fadeUp 0.3s ease both;
+}
+
+.disclaimer-tag {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  margin-bottom: 0.5rem;
+}
+.disclaimer-panel h2 {
+  text-align: center;
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+.disclaimer-one {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.35rem;
+}
+.disclaimer-full-link {
+  text-align: center;
+  margin-top: 0.85rem;
+  margin-bottom: 0;
+  font-size: 0.82rem;
+}
+.disclaimer-full-link a {
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+.dest-section { margin: 2.5rem 0; }
+
+@media (max-width: 700px) {
+  .hero-block h1 { max-width: none; }
+  .hero-sub { max-width: none; }
+  .chip { font-size: 0.72rem; padding: 0.3rem 0.7rem; }
+  .cta-line { font-size: 1.1rem; }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
