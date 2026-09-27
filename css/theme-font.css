@@ -1,0 +1,109 @@
+/* Font + motion overlay — Space Grotesk display (reference match), white bg, soft transitions */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  --font: "Space Grotesk", Inter, system-ui, sans-serif;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --paper: #ffffff;
+  --paper-elevated: #ffffff;
+  --bg: #ffffff;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  color: var(--ink);
+}
+
+h1, h2, h3, h4, .logo, .calc-detail .pct, .donut-center-sub, .city-price {
+  font-family: var(--font) !important;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 4.5vw, 2.55rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 1.12 !important;
+}
+
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.6rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.logo {
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Motion */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+body.page-enter main {
+  animation: pageIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.calc-result.visible {
+  animation: scaleIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.infographic-card.is-visible {
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.infographic-grid .infographic-card:nth-child(1).is-visible { animation-delay: 0.05s; }
+.infographic-grid .infographic-card:nth-child(2).is-visible { animation-delay: 0.15s; }
+.infographic-grid .infographic-card:nth-child(3).is-visible { animation-delay: 0.25s; }
+
+.hero-grid .hero-card {
+  opacity: 0;
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+body.page-enter .hero-grid .hero-card:nth-child(1) { animation-delay: 0.1s; }
+body.page-enter .hero-grid .hero-card:nth-child(2) { animation-delay: 0.18s; }
+body.page-enter .hero-grid .hero-card:nth-child(3) { animation-delay: 0.26s; }
+body.page-enter .hero-grid .hero-card:nth-child(4) { animation-delay: 0.34s; }
+
+.hero-card, .card {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.25s ease;
+}
+.hero-card:hover, .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(11, 31, 58, 0.1);
+}
+
+.age-tab {
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.15s ease;
+}
+.age-tab:active { transform: scale(0.97); }
+
+.alloc-segment {
+  transition: flex 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+nav a {
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+nav a:active { transform: scale(0.96); }
+
+.data-stamp {
+  animation: fadeUp 0.5s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
