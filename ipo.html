@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
   <header>
@@ -27,8 +26,9 @@
   <main>
     <div class="container">
       <div class="page-header">
+        <div class="data-stamp" data-stamp>Data refreshes daily ~12:00 IST</div>
         <h1>IPO Grey Market Premium</h1>
-        <p>Live-fetched summary of mainboard and SME IPOs with grey-market premium, estimated listing indication, and status. Data is sourced from public tables (primarily ipowatch.in) and refreshed on load or via nightly automation.</p>
+        <p>Live-fetched summary of mainboard and SME IPOs with grey-market premium, estimated listing indication, and status. Data is sourced from public tables and refreshed on load or via nightly automation.</p>
         <div class="disclaimer">
           GMP is an unofficial street quote and does not guarantee listing performance. It is for educational observation only. Never apply solely on the basis of premium figures.
         </div>
@@ -55,7 +55,7 @@
             </tr>
           </thead>
           <tbody id="mainboardBody">
-            <tr><td colspan="6" style="text-align:center; color: var(--text-muted);">Loading data…</td></tr>
+            <tr><td colspan="6" style="text-align:center; color: var(--ink-muted);">Loading data…</td></tr>
           </tbody>
         </table>
       </div>
@@ -74,12 +74,12 @@
             </tr>
           </thead>
           <tbody id="smeBody">
-            <tr><td colspan="6" style="text-align:center; color: var(--text-muted);">Loading data…</td></tr>
+            <tr><td colspan="6" style="text-align:center; color: var(--ink-muted);">Loading data…</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--ink-muted);">
         Source reference: <a href="https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/" target="_blank" rel="noopener">ipowatch.in</a> and other public GMP aggregators. Values fluctuate and may differ across dealers.
       </p>
     </div>
@@ -92,6 +92,7 @@
   </footer>
 
   <script src="js/ipo.js"></script>
+  <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
 </body>
 </html>
