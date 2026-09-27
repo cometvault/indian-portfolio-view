@@ -1,0 +1,66 @@
+/* Four city gold rate cards in one row */
+.gold-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+.gold-card {
+  background: #fff;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.15rem 1.2rem;
+  box-shadow: 0 1px 2px rgba(11, 31, 58, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.gold-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(11, 31, 58, 0.08);
+}
+.gold-city {
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink, #0b1f3a);
+  margin: 0 0 0.85rem;
+  letter-spacing: -0.02em;
+}
+.gold-rates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.gold-rate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.gold-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-faint, #6b7c8f);
+}
+.gold-price {
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink, #0b1f3a);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.gold-change-line {
+  margin: 0.75rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-muted, #3d5166);
+}
+.city-change.positive { color: #1a7f4b; }
+.city-change.negative { color: #b91c1c; }
+
+@media (max-width: 900px) {
+  .gold-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .gold-cards { grid-template-columns: 1fr; }
+}

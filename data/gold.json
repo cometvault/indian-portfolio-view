@@ -1,30 +1,31 @@
 {
-  "updated": "2026-09-26",
-  "note": "Indicative retail quotes (per 10 g). Actual rates vary by jeweller and making charges.",
+  "updated": "2026-09-27",
+  "source": "goodreturns.in",
+  "note": "Per gram. Retail quotes vary by jeweller.",
   "cities": [
     {
-      "city": "Mumbai",
-      "rate24k": 152840,
-      "rate22k": 140100,
-      "change24k": 160
-    },
-    {
       "city": "Bangalore",
-      "rate24k": 152840,
-      "rate22k": 140100,
-      "change24k": 160
+      "rate24k": 15268,
+      "rate22k": 13995,
+      "change24k": 0
     },
     {
-      "city": "Hyderabad",
-      "rate24k": 152840,
-      "rate22k": 140100,
-      "change24k": 160
+      "city": "Mumbai",
+      "rate24k": 15268,
+      "rate22k": 13995,
+      "change24k": 0
     },
     {
       "city": "Kolkata",
-      "rate24k": 152840,
-      "rate22k": 140100,
-      "change24k": 160
+      "rate24k": 15268,
+      "rate22k": 13995,
+      "change24k": 0
+    },
+    {
+      "city": "Hyderabad",
+      "rate24k": 15268,
+      "rate22k": 13995,
+      "change24k": 0
     }
   ]
 }

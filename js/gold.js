@@ -1,11 +1,10 @@
 /**
- * Gold rates loader
- * Uses local data/gold.json (updated nightly or on refresh).
+ * Gold rates — 4 city cards from data/gold.json (goodreturns.in)
  */
 
 const GOLD_JSON = 'data/gold.json';
 
-async function loadGoldData(force = false) {
+async function loadGoldData(force) {
   const btn = document.getElementById('refreshGoldBtn');
   const icon = document.getElementById('refreshGoldIcon');
   const status = document.getElementById('goldLastUpdated');
@@ -19,14 +18,14 @@ async function loadGoldData(force = false) {
     const data = await res.json();
     renderGold(data);
     if (status) {
-      status.textContent = 'Last updated: ' + (data.updated || 'unknown') +
-        (data.note ? ' \u00b7 ' + data.note : '');
+      status.textContent = 'Updated at ' + (data.updated || '—') +
+        (data.source ? ' \u00b7 ' + data.source : '');
     }
   } catch (err) {
-    console.warn('Gold JSON fetch failed, using embedded fallback', err);
+    console.warn('Gold fetch failed, using fallback', err);
     const fallback = getFallbackGold();
     renderGold(fallback);
-    if (status) status.textContent = 'Using cached sample data \u00b7 ' + fallback.updated;
+    if (status) status.textContent = 'Updated at ' + fallback.updated + ' \u00b7 sample';
   } finally {
     if (btn) btn.disabled = false;
     if (icon) icon.textContent = '\u21bb';
@@ -37,22 +36,32 @@ function renderGold(data) {
   const container = document.getElementById('goldCards');
   if (!container) return;
   const cities = data.cities || [];
-  container.innerHTML = cities.map(c => `
-    <div class="card">
-      <div class="card-title">${escapeHtml(c.city)}</div>
-      <div class="city-rate">
-        <span class="city-name">24K / gram</span>
-        <span class="city-price">\u20b9${formatNum(c.rate24k)}</span>
-      </div>
-      <div class="city-rate">
-        <span class="city-name">22K / gram</span>
-        <span class="city-price">\u20b9${formatNum(c.rate22k)}</span>
-      </div>
-      ${c.change24k != null ? `<div class="card-sub" style="margin-top:0.75rem">
-        24K change: <span class="${c.change24k >= 0 ? 'positive' : 'negative'}">${c.change24k >= 0 ? '+' : ''}\u20b9${c.change24k}</span>
-      </div>` : ''}
-    </div>
-  `).join('');
+  if (!cities.length) {
+    container.innerHTML = '<p class="empty-cell">Nothing open right now \u2014 check back tomorrow.</p>';
+    return;
+  }
+  container.innerHTML = cities.map(function (c) {
+    const change = c.change24k != null
+      ? '<span class="city-change ' + (c.change24k >= 0 ? 'positive' : 'negative') + '">' +
+        (c.change24k >= 0 ? '+' : '') + '\u20b9' + formatNum(c.change24k) + '</span>'
+      : '';
+    return (
+      '<div class="gold-card">' +
+        '<p class="gold-city">' + escapeHtml(c.city) + '</p>' +
+        '<div class="gold-rates">' +
+          '<div class="gold-rate-row">' +
+            '<span class="gold-label">22K / gram</span>' +
+            '<span class="gold-price">\u20b9' + formatNum(c.rate22k) + '</span>' +
+          '</div>' +
+          '<div class="gold-rate-row">' +
+            '<span class="gold-label">24K / gram</span>' +
+            '<span class="gold-price">\u20b9' + formatNum(c.rate24k) + '</span>' +
+          '</div>' +
+        '</div>' +
+        (change ? '<p class="gold-change-line">24K ' + change + '</p>' : '') +
+      '</div>'
+    );
+  }).join('');
 }
 
 function formatNum(n) {
@@ -60,22 +69,24 @@ function formatNum(n) {
 }
 
 function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
 }
 
 function getFallbackGold() {
   return {
-    updated: '2026-09-25 (sample)',
-    note: 'Indicative retail quotes; actual rates vary by jeweller',
+    updated: '2026-09-27',
+    source: 'goodreturns.in',
     cities: [
-      { city: 'Mumbai', rate24k: 152840, rate22k: 140100, change24k: 160 },
-      { city: 'Bangalore', rate24k: 152840, rate22k: 140100, change24k: 160 },
-      { city: 'Hyderabad', rate24k: 152840, rate22k: 140100, change24k: 160 },
-      { city: 'Kolkata', rate24k: 152840, rate22k: 140100, change24k: 160 }
+      { city: 'Bangalore', rate24k: 15268, rate22k: 13995, change24k: 0 },
+      { city: 'Mumbai', rate24k: 15268, rate22k: 13995, change24k: 0 },
+      { city: 'Kolkata', rate24k: 15268, rate22k: 13995, change24k: 0 },
+      { city: 'Hyderabad', rate24k: 15268, rate22k: 13995, change24k: 0 }
     ]
   };
 }
 
-document.addEventListener('DOMContentLoaded', () => loadGoldData(false));
+document.addEventListener('DOMContentLoaded', function () {
+  loadGoldData(false);
+});
