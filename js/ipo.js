@@ -17,19 +17,22 @@ async function loadIPOData(force = false) {
     const res = await fetch(url, { cache: force ? 'no-store' : 'default' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    renderTables(data);
+    const clean = (window.PVSecurity && PVSecurity.sanitizeIpoData)
+      ? PVSecurity.sanitizeIpoData(data) : data;
+    if (!clean) throw new Error('Invalid IPO payload');
+    renderTables(clean);
     if (status) {
-      status.textContent = 'Last updated: ' + (data.updated || 'unknown') +
-        (data.source ? ' \u00b7 Source: ' + data.source : '');
+      status.textContent = 'Last updated: ' + (clean.updated || 'unknown') +
+        (clean.source ? ' · Source: ' + clean.source : '');
     }
   } catch (err) {
     console.warn('IPO JSON fetch failed, using embedded fallback', err);
     const fallback = getFallbackIPO();
     renderTables(fallback);
-    if (status) status.textContent = 'Using cached sample data \u00b7 ' + fallback.updated;
+    if (status) status.textContent = 'Using cached sample data · ' + fallback.updated;
   } finally {
     if (btn) btn.disabled = false;
-    if (icon) icon.textContent = '\u21bb';
+    if (icon) icon.textContent = '↻';
   }
 }
 
@@ -40,7 +43,6 @@ function renderTables(data) {
   if (smeBody) smeBody.innerHTML = rowsHTML(data.sme || []);
 }
 
-/** Upper end of price band, e.g. "272-280" \u2192 280, "272" \u2192 272 */
 function parseUpperPrice(band) {
   if (band == null || band === '') return null;
   const nums = String(band).replace(/,/g, '').match(/\d+(?:\.\d+)?/g);
@@ -48,7 +50,6 @@ function parseUpperPrice(band) {
   return parseFloat(nums[nums.length - 1]);
 }
 
-/** GMP as % of issue price (upper band) */
 function gmpPercent(gmp, band) {
   const price = parseUpperPrice(band);
   if (price == null || !price || gmp == null) return null;
@@ -57,7 +58,7 @@ function gmpPercent(gmp, band) {
 
 function rowsHTML(list) {
   if (!list.length) {
-    return '<tr><td colspan="7" class="empty-cell">Nothing open right now \u2014 check back tomorrow.</td></tr>';
+    return '<tr><td colspan="7" class="empty-cell">Nothing open right now — check back tomorrow.</td></tr>';
   }
   return list.map(function (item) {
     const gmpClass = (item.gmp > 0) ? 'positive' : (item.gmp < 0 ? 'negative' : 'neutral');
@@ -66,15 +67,15 @@ function rowsHTML(list) {
       : st === 'Upcoming' ? 'badge-upcoming'
       : st === 'Listed' ? 'badge-open'
       : 'badge-closed';
-    const dates = String(item.dates || '\u2014').split(/[-\u2013\u2014]/);
-    const opens = (dates[0] || '\u2014').trim();
-    const closes = (dates[1] || dates[0] || '\u2014').trim();
+    const dates = String(item.dates || item.opens || '—').split(/[-–—]/);
+    const opens = (item.opens || dates[0] || '—').toString().trim();
+    const closes = (item.closes || dates[1] || dates[0] || '—').toString().trim();
     const pct = gmpPercent(item.gmp, item.priceBand);
-    const pctStr = pct == null ? '\u2014' : (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%';
+    const pctStr = pct == null ? '—' : (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%';
     return '<tr>' +
       '<td>' + escapeHtml(item.name) + '</td>' +
-      '<td class="num">\u20b9' + escapeHtml(String(item.priceBand || '\u2014')) + '</td>' +
-      '<td class="num ' + gmpClass + '">' + (item.gmp != null ? '\u20b9' + item.gmp : '\u2014') + '</td>' +
+      '<td class="num">₹' + escapeHtml(String(item.priceBand || '—')) + '</td>' +
+      '<td class="num ' + gmpClass + '">' + (item.gmp != null ? '₹' + item.gmp : '—') + '</td>' +
       '<td class="num ' + gmpClass + '">' + pctStr + '</td>' +
       '<td>' + escapeHtml(opens) + '</td>' +
       '<td>' + escapeHtml(closes) + '</td>' +
@@ -84,7 +85,7 @@ function rowsHTML(list) {
 }
 
 function normalizeStatus(s) {
-  if (!s) return '\u2014';
+  if (!s) return '—';
   const t = String(s).toLowerCase();
   if (t.includes('open') && !t.includes('up')) return 'Open';
   if (t.includes('upcom')) return 'Upcoming';
@@ -94,8 +95,9 @@ function normalizeStatus(s) {
 }
 
 function escapeHtml(str) {
+  if (window.PVSecurity) return PVSecurity.escapeHtml(str);
   const div = document.createElement('div');
-  div.textContent = str;
+  div.textContent = str == null ? '' : String(str);
   return div.innerHTML;
 }
 
@@ -124,5 +126,7 @@ function getFallbackIPO() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('refreshBtn');
+  if (btn) btn.addEventListener('click', function () { loadIPOData(true); });
   loadIPOData(false);
 });
