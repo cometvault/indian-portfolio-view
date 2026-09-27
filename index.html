@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
   <header>
@@ -18,7 +17,7 @@
       <nav>
         <a href="index.html" class="active">Overview</a>
         <a href="ipo.html">IPOs</a>
-        <a href="gold-etf.html">Gold & ETF</a>
+        <a href="gold-etf.html">Gold &amp; ETF</a>
         <a href="mutual-funds.html">Mutual Funds</a>
         <a href="equity.html">Equity</a>
       </nav>
@@ -28,6 +27,7 @@
   <main>
     <div class="container">
       <div class="page-header">
+        <div class="data-stamp" data-stamp>Data refreshes daily ~12:00 IST</div>
         <h1>Portfolio Diversification Reference</h1>
         <p>A minimal, universal view of how capital is typically proportioned across Indian market segments by life stage. Live IPO data, city gold rates, and allocation frameworks — purely educational, never advice.</p>
         <div class="disclaimer">
@@ -37,7 +37,7 @@
 
       <section class="calc-section" id="calculator">
         <h2>Age-based portfolio calculator</h2>
-        <p class="calc-intro">Select your age bracket to see a directional allocation across Core SIP, Direct Equity, Debt & Emergency, and Gold. Optional: enter a monthly investable amount to see rupee splits. Category-level only — no scheme names.</p>
+        <p class="calc-intro">Select your age bracket to see a directional allocation across Core SIP, Direct Equity, Debt &amp; Emergency, and Gold. Optional: enter a monthly investable amount to see rupee splits. Category-level only — no scheme names.</p>
 
         <div class="age-tabs" role="tablist" aria-label="Age bracket">
           <button type="button" class="age-tab" data-age="20-25" role="tab">20 – 25</button>
@@ -88,10 +88,10 @@
         <div class="hero-grid">
           <a href="ipo.html" class="hero-card">
             <h3>IPOs</h3>
-            <p>Live grey-market premium, price bands & status from public sources</p>
+            <p>Live grey-market premium, price bands &amp; status from public sources</p>
           </a>
           <a href="gold-etf.html" class="hero-card">
-            <h3>Gold & ETF</h3>
+            <h3>Gold &amp; ETF</h3>
             <p>City-wise 22K / 24K rates · ETF ranked higher in gold hierarchy</p>
           </a>
           <a href="mutual-funds.html" class="hero-card">
@@ -115,7 +115,7 @@
         </div>
         <div class="alloc-legend">
           <span class="legend-mid">Mid Cap — growth-oriented segment</span>
-          <span class="legend-large">Large Cap — stability & liquidity</span>
+          <span class="legend-large">Large Cap — stability &amp; liquidity</span>
           <span class="legend-small">Small Cap — higher variability</span>
         </div>
       </section>
@@ -145,6 +145,7 @@
 
   <script src="js/calculator.js"></script>
   <script src="js/infographics.js"></script>
+  <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
 </body>
 </html>
