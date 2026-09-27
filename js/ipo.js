@@ -1,7 +1,6 @@
 /**
  * IPO data loader
- * Prefers local data/ipo.json (updated by GitHub Action or manual refresh).
- * Falls back to a CORS-friendly public mirror or embedded sample if fetch fails.
+ * Prefers local data/ipo.json; falls back to embedded sample.
  */
 
 const IPO_JSON = 'data/ipo.json';
@@ -21,16 +20,16 @@ async function loadIPOData(force = false) {
     renderTables(data);
     if (status) {
       status.textContent = 'Last updated: ' + (data.updated || 'unknown') +
-        (data.source ? ' · Source: ' + data.source : '');
+        (data.source ? ' \u00b7 Source: ' + data.source : '');
     }
   } catch (err) {
     console.warn('IPO JSON fetch failed, using embedded fallback', err);
     const fallback = getFallbackIPO();
     renderTables(fallback);
-    if (status) status.textContent = 'Using cached sample data · ' + fallback.updated;
+    if (status) status.textContent = 'Using cached sample data \u00b7 ' + fallback.updated;
   } finally {
     if (btn) btn.disabled = false;
-    if (icon) icon.textContent = '↻';
+    if (icon) icon.textContent = '\u21bb';
   }
 }
 
@@ -41,22 +40,38 @@ function renderTables(data) {
   if (smeBody) smeBody.innerHTML = rowsHTML(data.sme || []);
 }
 
+function normalizeStatus(s) {
+  if (!s) return '\u2014';
+  const t = String(s).toLowerCase();
+  if (t.includes('open') && !t.includes('up')) return 'Open';
+  if (t.includes('upcom')) return 'Upcoming';
+  if (t.includes('list')) return 'Listed';
+  if (t.includes('close') || t.includes('allot')) return 'Closed';
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 function rowsHTML(list) {
   if (!list.length) {
-    return '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">No data available</td></tr>';
+    return '<tr><td colspan="6" class="empty-cell">Nothing open right now \u2014 check back tomorrow.</td></tr>';
   }
-  return list.map(item => {
+  return list.map(function (item) {
     const gmpClass = (item.gmp > 0) ? 'positive' : (item.gmp < 0 ? 'negative' : 'neutral');
-    const statusClass = item.status === 'Open' ? 'badge-open' :
-                        item.status === 'Upcoming' ? 'badge-upcoming' : 'badge-closed';
-    return `<tr>
-      <td>${escapeHtml(item.name)}</td>
-      <td class="num ${gmpClass}">${item.gmp != null ? '₹' + item.gmp : '—'}</td>
-      <td class="num">₹${escapeHtml(String(item.priceBand || '—'))}</td>
-      <td class="num">${escapeHtml(item.estListing || '—')}</td>
-      <td>${escapeHtml(item.dates || '—')}</td>
-      <td><span class="badge ${statusClass}">${escapeHtml(item.status || '—')}</span></td>
-    </tr>`;
+    const status = normalizeStatus(item.status);
+    const statusClass = status === 'Open' ? 'badge-open'
+      : status === 'Upcoming' ? 'badge-upcoming'
+      : status === 'Listed' ? 'badge-open'
+      : 'badge-closed';
+    const parts = String(item.dates || '\u2014').split(/[-\u2013\u2014]/);
+    const opens = (parts[0] || '\u2014').trim();
+    const closes = (parts[1] || parts[0] || '\u2014').trim();
+    return '<tr>' +
+      '<td>' + escapeHtml(item.name) + '</td>' +
+      '<td class="num">\u20b9' + escapeHtml(String(item.priceBand || '\u2014')) + '</td>' +
+      '<td class="num ' + gmpClass + '">' + (item.gmp != null ? '\u20b9' + item.gmp : '\u2014') + '</td>' +
+      '<td>' + escapeHtml(opens) + '</td>' +
+      '<td>' + escapeHtml(closes) + '</td>' +
+      '<td><span class="badge ' + statusClass + '">' + escapeHtml(status) + '</span></td>' +
+      '</tr>';
   }).join('');
 }
 
@@ -71,24 +86,19 @@ function getFallbackIPO() {
     updated: '2026-09-25 (sample)',
     source: 'ipowatch.in (snapshot)',
     mainboard: [
-      { name: 'Orient Cables', gmp: 113, priceBand: '272', estListing: '₹385 (41.54%)', dates: '25-29 Sep', status: 'Open' },
-      { name: 'A-One Steels', gmp: 49, priceBand: '405', estListing: '₹454 (12.10%)', dates: '24-28 Sep', status: 'Open' },
-      { name: 'Runwal Enterprises', gmp: 30, priceBand: '305', estListing: '₹335 (9.84%)', dates: '25-29 Sep', status: 'Open' },
-      { name: 'German Green Steel', gmp: 28, priceBand: '139', estListing: '₹167 (20.14%)', dates: '25-29 Sep', status: 'Open' },
-      { name: 'Moneyview', gmp: 14, priceBand: '34', estListing: '₹48 (41.18%)', dates: '24-28 Sep', status: 'Open' },
-      { name: 'Adroit Industries', gmp: 34, priceBand: '134', estListing: '₹168 (25.37%)', dates: '23-25 Sep', status: 'Open' },
-      { name: 'SRIT India', gmp: 22, priceBand: '130', estListing: '₹152 (16.92%)', dates: '28-30 Sep', status: 'Upcoming' },
-      { name: 'Shah Investor’s Home', gmp: 12, priceBand: '167', estListing: '₹179 (7.19%)', dates: '28-30 Sep', status: 'Upcoming' }
+      { name: 'Orient Cables', gmp: 113, priceBand: '272', dates: '25-29 Sep', status: 'Open' },
+      { name: 'A-One Steels', gmp: 49, priceBand: '405', dates: '24-28 Sep', status: 'Open' },
+      { name: 'Runwal Enterprises', gmp: 30, priceBand: '305', dates: '25-29 Sep', status: 'Open' },
+      { name: 'German Green Steel', gmp: 28, priceBand: '139', dates: '25-29 Sep', status: 'Open' },
+      { name: 'Moneyview', gmp: 14, priceBand: '34', dates: '24-28 Sep', status: 'Open' },
+      { name: 'SRIT India', gmp: 22, priceBand: '130', dates: '28-30 Sep', status: 'Upcoming' }
     ],
     sme: [
-      { name: 'Bench Mark Infotech', gmp: 12, priceBand: '110', estListing: '₹122 (10.91%)', dates: '25-29 Sep', status: 'Open' },
-      { name: 'Roopa Screen', gmp: 8, priceBand: '64', estListing: '₹72 (12.50%)', dates: '24-28 Sep', status: 'Open' },
-      { name: 'Shree TNB Polymers', gmp: 5, priceBand: '52', estListing: '₹57 (9.62%)', dates: '25-29 Sep', status: 'Open' },
-      { name: 'Dudani Retail', gmp: 3, priceBand: '29', estListing: '₹32 (10.34%)', dates: '25-29 Sep', status: 'Open' },
-      { name: 'Liqvd Digital', gmp: 3, priceBand: '54', estListing: '₹57 (5.56%)', dates: '23-25 Sep', status: 'Open' }
+      { name: 'Bench Mark Infotech', gmp: 12, priceBand: '110', dates: '25-29 Sep', status: 'Open' },
+      { name: 'Roopa Screen', gmp: 8, priceBand: '64', dates: '24-28 Sep', status: 'Open' },
+      { name: 'Shree TNB Polymers', gmp: 5, priceBand: '52', dates: '25-29 Sep', status: 'Open' }
     ]
   };
 }
 
-// Auto-load on page ready
-document.addEventListener('DOMContentLoaded', () => loadIPOData(false));
+document.addEventListener('DOMContentLoaded', function () { loadIPOData(false); });
