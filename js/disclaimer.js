@@ -1,12 +1,28 @@
 /**
  * Mandatory full disclaimer gate.
- * Shows on every page load. User must scroll the full text (when needed)
- * and check the box before Continue unlocks.
+ * Shows once when the user first opens the site in this browser tab/session.
+ * Navigating between pages does NOT show it again until the tab is closed.
  */
 (function () {
   var SCROLL_THRESHOLD = 16;
+  var STORAGE_KEY = 'portfolioView_disclaimerAccepted_v2';
+
+  function hasAccepted() {
+    try {
+      return sessionStorage.getItem(STORAGE_KEY) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markAccepted() {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, '1');
+    } catch (e) {}
+  }
 
   function accept() {
+    markAccepted();
     var modal = document.getElementById('disclaimerModal');
     if (!modal) return;
     modal.classList.add('is-hiding');
@@ -17,7 +33,6 @@
   }
 
   function isFullyScrolled(el) {
-    // Content fits without overflow = already "read"
     if (el.scrollHeight <= el.clientHeight + SCROLL_THRESHOLD) return true;
     return el.scrollHeight - el.scrollTop - el.clientHeight <= SCROLL_THRESHOLD;
   }
@@ -54,7 +69,6 @@
       body.scrollTop = 0;
       body.focus();
     }
-    // Re-measure after layout
     requestAnimationFrame(updateButton);
     setTimeout(updateButton, 80);
   }
@@ -114,10 +128,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    try {
-      localStorage.removeItem('portfolioView_disclaimerAccepted_v1');
-      sessionStorage.removeItem('portfolioView_disclaimerAccepted_v1');
-    } catch (e) {}
+    // Already accepted this session → skip (page navigations stay clear)
+    if (hasAccepted()) return;
 
     buildModal();
     show();
