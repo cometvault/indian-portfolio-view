@@ -20,16 +20,16 @@ async function loadGoldData(force = false) {
     renderGold(data);
     if (status) {
       status.textContent = 'Last updated: ' + (data.updated || 'unknown') +
-        (data.note ? ' · ' + data.note : '');
+        (data.note ? ' \u00b7 ' + data.note : '');
     }
   } catch (err) {
     console.warn('Gold JSON fetch failed, using embedded fallback', err);
     const fallback = getFallbackGold();
     renderGold(fallback);
-    if (status) status.textContent = 'Using cached sample data · ' + fallback.updated;
+    if (status) status.textContent = 'Using cached sample data \u00b7 ' + fallback.updated;
   } finally {
     if (btn) btn.disabled = false;
-    if (icon) icon.textContent = '↻';
+    if (icon) icon.textContent = '\u21bb';
   }
 }
 
@@ -41,15 +41,15 @@ function renderGold(data) {
     <div class="card">
       <div class="card-title">${escapeHtml(c.city)}</div>
       <div class="city-rate">
-        <span class="city-name">24 Carat</span>
-        <span class="city-price">₹${formatNum(c.rate24k)} / 10 g</span>
+        <span class="city-name">24K / gram</span>
+        <span class="city-price">\u20b9${formatNum(c.rate24k)}</span>
       </div>
       <div class="city-rate">
-        <span class="city-name">22 Carat</span>
-        <span class="city-price">₹${formatNum(c.rate22k)} / 10 g</span>
+        <span class="city-name">22K / gram</span>
+        <span class="city-price">\u20b9${formatNum(c.rate22k)}</span>
       </div>
       ${c.change24k != null ? `<div class="card-sub" style="margin-top:0.75rem">
-        24K change: <span class="${c.change24k >= 0 ? 'positive' : 'negative'}">${c.change24k >= 0 ? '+' : ''}₹${c.change24k}</span>
+        24K change: <span class="${c.change24k >= 0 ? 'positive' : 'negative'}">${c.change24k >= 0 ? '+' : ''}\u20b9${c.change24k}</span>
       </div>` : ''}
     </div>
   `).join('');
@@ -66,7 +66,6 @@ function escapeHtml(str) {
 }
 
 function getFallbackGold() {
-  // Approximate retail rates around 25 Sep 2026 (illustrative)
   return {
     updated: '2026-09-25 (sample)',
     note: 'Indicative retail quotes; actual rates vary by jeweller',

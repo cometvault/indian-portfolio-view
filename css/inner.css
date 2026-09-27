@@ -1,0 +1,129 @@
+/* Inner pages layout + text alignment */
+.back-link {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.back-link a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+.back-link a:hover { color: var(--ink); }
+
+.table-heading {
+  font-size: 1.05rem !important;
+  margin-bottom: 0.75rem;
+}
+
+.empty-cell {
+  text-align: center;
+  color: var(--ink-muted);
+  padding: 1.5rem 1rem !important;
+}
+
+.page-footnote {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-weight: 500;
+  max-width: 42ch;
+  line-height: 1.45;
+}
+
+.hierarchy-section { margin-top: 2.5rem; }
+.hierarchy-section h2 { margin-bottom: 1rem; }
+
+.hold-list, .segment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+.hold-row, .segment-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.hold-row:last-child, .segment-row:last-child { border-bottom: none; }
+.hold-name, .segment-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.hold-desc, .segment-desc {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.85rem;
+  margin: 1.5rem 0;
+}
+.category-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.category-card h3 {
+  font-family: var(--font) !important;
+  font-size: 1.05rem !important;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+}
+.category-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.equity-bar { margin: 1.25rem 0 0.5rem; }
+.equity-caption {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.segment-list { margin-top: 0.5rem; }
+
+.hero-sub, .page-footnote, .hold-desc, .segment-desc, .category-card p,
+.faq-item p, .faq-item summary, .chip, .cta-line {
+  text-wrap: pretty;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+.hero-block h1 { text-wrap: balance; }
+
+@media (max-width: 700px) {
+  .hold-row, .segment-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+  .alloc-bar.equity-bar {
+    flex-direction: column;
+    height: auto;
+  }
+  .alloc-bar.equity-bar .alloc-segment {
+    padding: 0.55rem;
+    justify-content: flex-start;
+  }
+}
