@@ -50,18 +50,43 @@
     return s;
   }
 
+  /** Parse "25-29 Sep" or "30-5 Oct" or "28 Sep - 30 Sep" into open/close labels */
+  function parseOpenClose(dates, opens, closes) {
+    if (opens || closes) {
+      return { opens: safeLabel(opens, 16), closes: safeLabel(closes, 16) };
+    }
+    var s = String(dates == null ? '' : dates).replace(/\s+/g, ' ').trim();
+    if (!s) return { opens: '', closes: '' };
+    // "25-29 Sep" / "30-5 Oct"
+    var m = s.match(/^(\d{1,2})\s*[-–—]\s*(\d{1,2})\s+([A-Za-z]{3,9})\.?$/i);
+    if (m) {
+      return {
+        opens: safeLabel(m[1] + ' ' + m[3], 16),
+        closes: safeLabel(m[2] + ' ' + m[3], 16)
+      };
+    }
+    // "28 Sep - 30 Sep" / "28 Sep–30 Oct"
+    m = s.match(/^(\d{1,2}\s+[A-Za-z]{3,9})\.?\s*[-–—]\s*(\d{1,2}\s+[A-Za-z]{3,9})\.?$/i);
+    if (m) {
+      return { opens: safeLabel(m[1], 16), closes: safeLabel(m[2], 16) };
+    }
+    return { opens: safeLabel(s, 16), closes: safeLabel(s, 16) };
+  }
+
   function sanitizeIpoData(raw) {
     if (!raw || typeof raw !== 'object') return null;
     function row(item) {
       if (!item || typeof item !== 'object') return null;
       var name = safeLabel(item.name, 60);
       if (!name) return null;
+      var oc = parseOpenClose(item.dates, item.opens, item.closes);
       return {
         name: name,
         priceBand: safeLabel(item.priceBand, 24),
         gmp: safeNumber(item.gmp),
-        opens: safeLabel(item.opens, 16),
-        closes: safeLabel(item.closes, 16),
+        opens: oc.opens,
+        closes: oc.closes,
+        dates: safeLabel(item.dates, 24),
         status: safeStatus(item.status)
       };
     }
