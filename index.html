@@ -3,20 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indian Portfolio View — Know your mix</title>
+  <title>Indian Portfolio View \u2014 Know your mix</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Pick your age. See your split. Educational portfolio mix reference for India.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/theme-font.css">
+  <link rel="stylesheet" href="css/logo.css">
   <link rel="stylesheet" href="css/headline-align.css">
   <link rel="stylesheet" href="css/pie.css">
 </head>
 <body>
   <header>
     <div class="container header-inner">
-      <a href="index.html" class="logo">Portfolio View <span>· India</span></a>
+      <a href="index.html" class="logo" aria-label="Portfolio View India">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" fill="#0b1f3a"/>
+          <circle cx="20" cy="20" r="12" stroke="#2563eb" stroke-width="7" stroke-dasharray="28.3 47.1" stroke-dashoffset="0" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="12" stroke="#06b6d4" stroke-width="7" stroke-dasharray="25.1 50.3" stroke-dashoffset="-28.3" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="12" stroke="#8b5cf6" stroke-width="7" stroke-dasharray="15.7 59.7" stroke-dashoffset="-53.4" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="12" stroke="#f59e0b" stroke-width="7" stroke-dasharray="12.6 62.8" stroke-dashoffset="-69.1" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="7.5" fill="#0b1f3a"/>
+          <circle cx="20" cy="20" r="2.2" fill="#fff"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Portfolio View</span>
+          <span class="logo-tag">India</span>
+        </span>
+      </a>
       <nav>
         <a href="index.html" class="active">Overview</a>
         <a href="ipo.html">IPOs</a>
@@ -31,8 +47,8 @@
     <div class="container">
 
       <section class="hero-block">
-        <h1>Know your mix before you invest a rupee.</h1>
-        <p class="hero-sub">Pick your age. See your split. That’s it.</p>
+        <h1>Know your mix before you\u00a0invest a\u00a0rupee.</h1>
+        <p class="hero-sub">Pick your age. See your split.\u00a0That\u2019s\u00a0it.</p>
         <div class="trust-chips">
           <span class="chip">Updated every noon</span>
           <span class="chip">No scheme names, ever</span>
@@ -43,16 +59,16 @@
       <section class="calc-section" id="calculator">
         <p class="ledger-eyebrow">Your mix at</p>
         <div class="age-tabs" role="tablist" aria-label="Age bracket">
-          <button type="button" class="age-tab" data-age="20-25" role="tab">20 – 25</button>
-          <button type="button" class="age-tab" data-age="25-30" role="tab">25 – 30</button>
-          <button type="button" class="age-tab" data-age="30-40" role="tab">30 – 40</button>
-          <button type="button" class="age-tab" data-age="40-50" role="tab">40 – 50</button>
+          <button type="button" class="age-tab" data-age="20-25" role="tab">20 \u2013 25</button>
+          <button type="button" class="age-tab" data-age="25-30" role="tab">25 \u2013 30</button>
+          <button type="button" class="age-tab" data-age="30-40" role="tab">30 \u2013 40</button>
+          <button type="button" class="age-tab" data-age="40-50" role="tab">40 \u2013 50</button>
           <button type="button" class="age-tab" data-age="50+" role="tab">50+</button>
         </div>
 
         <div class="calc-amount-row">
           <label for="monthlyAmount">Monthly amount</label>
-          <input type="number" id="monthlyAmount" min="0" step="500" value="" placeholder="₹ amount, optional" aria-label="Optional monthly amount">
+          <input type="number" id="monthlyAmount" min="0" step="500" value="" placeholder="\u20b9 amount, optional" aria-label="Optional monthly amount">
         </div>
 
         <div class="calc-result" id="calcResult" aria-live="polite">
@@ -87,14 +103,14 @@
           </a>
           <a href="equity.html" class="hero-card">
             <h3>Equity</h3>
-            <p>Mid, large, small — in proportion.</p>
+            <p>Mid, large, small \u2014 in proportion.</p>
           </a>
         </div>
       </section>
 
       <section class="cta-band">
         <p class="cta-line">Your age. Your mix. Ten seconds.</p>
-        <a href="#calculator" class="btn btn-primary cta-btn">See my mix ↑</a>
+        <a href="#calculator" class="btn btn-primary cta-btn">See my mix \u2191</a>
       </section>
 
       <section class="faq-section" id="faq">
@@ -102,7 +118,7 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>Is this telling me what to buy?</summary>
-            <p>No — it's a shape, not a stock pick.</p>
+            <p>No \u2014 it's a shape, not a stock pick.</p>
           </details>
           <details class="faq-item">
             <summary>Where's the data from?</summary>
