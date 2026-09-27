@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title>Gold &amp; ETF | Portfolio View</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +57,7 @@
       </section>
 
       <div class="status-bar">
-        <button class="btn" id="refreshGoldBtn" type="button" onclick="loadGoldData(true)">
+        <button class="btn" id="refreshGoldBtn" type="button">
           <span id="refreshGoldIcon">&#8635;</span> Refresh
         </button>
         <span id="goldLastUpdated">Pulling today's numbers...</span>
@@ -104,6 +107,7 @@
     </div>
   </footer>
 
+  <script src="js/security.js"></script>
   <script src="js/gold.js"></script>
   <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
