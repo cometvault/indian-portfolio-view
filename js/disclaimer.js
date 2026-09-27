@@ -1,10 +1,10 @@
 /**
  * Mandatory full disclaimer gate.
- * Shows on every page load. User must scroll the full text and check the box
- * before the Continue button unlocks. Protects the developer educational-only position.
+ * Shows on every page load. User must scroll the full text (when needed)
+ * and check the box before Continue unlocks.
  */
 (function () {
-  var SCROLL_THRESHOLD = 12;
+  var SCROLL_THRESHOLD = 16;
 
   function accept() {
     var modal = document.getElementById('disclaimerModal');
@@ -16,6 +16,12 @@
     }, 280);
   }
 
+  function isFullyScrolled(el) {
+    // Content fits without overflow = already "read"
+    if (el.scrollHeight <= el.clientHeight + SCROLL_THRESHOLD) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight <= SCROLL_THRESHOLD;
+  }
+
   function updateButton() {
     var body = document.getElementById('disclaimerScroll');
     var check = document.getElementById('disclaimerCheck');
@@ -23,13 +29,13 @@
     var hint = document.getElementById('disclaimerHint');
     if (!body || !check || !btn) return;
 
-    var scrolled =
-      body.scrollHeight - body.scrollTop - body.clientHeight <= SCROLL_THRESHOLD;
+    var scrolled = isFullyScrolled(body);
     if (scrolled) body.classList.add('is-scrolled');
     else body.classList.remove('is-scrolled');
 
     var ok = scrolled && check.checked;
     btn.disabled = !ok;
+
     if (hint) {
       if (!scrolled) hint.textContent = 'Scroll to the end of the disclaimer to continue.';
       else if (!check.checked) hint.textContent = 'Confirm you understand before continuing.';
@@ -44,8 +50,13 @@
     void modal.offsetWidth;
     modal.classList.add('is-open');
     var body = document.getElementById('disclaimerScroll');
-    if (body) body.focus();
-    updateButton();
+    if (body) {
+      body.scrollTop = 0;
+      body.focus();
+    }
+    // Re-measure after layout
+    requestAnimationFrame(updateButton);
+    setTimeout(updateButton, 80);
   }
 
   function buildModal() {
@@ -72,7 +83,6 @@
           '<p><strong>Your responsibility.</strong> By continuing you confirm that you understand the above, that you will not treat this site as advice, and that any investment decision you make is solely your own.</p>' +
           '<div class="disclaimer-scroll-end" aria-hidden="true"></div>' +
         '</div>' +
-        '<div class="disclaimer-fade" aria-hidden="true"></div>' +
         '<label class="disclaimer-check" for="disclaimerCheck">' +
           '<input type="checkbox" id="disclaimerCheck" />' +
           '<span>I have read the full disclaimer and understand this is educational only, not advice.</span>' +
