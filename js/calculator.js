@@ -1,7 +1,14 @@
 /**
  * Age-based portfolio allocation calculator
- * Bars tween via CSS flex transition when age bracket changes.
+ * Interactive pie chart: data left, chart right.
  */
+
+const SEG = {
+  sip:    { color: '#2563eb', soft: '#dbeafe', label: 'SIP' },
+  equity: { color: '#06b6d4', soft: '#cffafe', label: 'Equity' },
+  debt:   { color: '#8b5cf6', soft: '#ede9fe', label: 'Debt' },
+  gold:   { color: '#f59e0b', soft: '#fef3c7', label: 'Gold' }
+};
 
 const ALLOCATIONS = {
   '20-25': {
@@ -50,6 +57,54 @@ function formatINR(n) {
   return '\u20b9' + Math.round(n).toLocaleString('en-IN');
 }
 
+function polar(cx, cy, r, angleDeg) {
+  const a = (angleDeg - 90) * Math.PI / 180;
+  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+}
+
+function buildPieSVG(segments, size) {
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size / 2 - 8;
+  const inner = r * 0.58;
+  let angle = 0;
+  const paths = [];
+
+  segments.forEach(function (s) {
+    const sweep = (s.pct / 100) * 360;
+    if (sweep <= 0) return;
+    const start = angle;
+    const end = angle + sweep;
+    const large = sweep > 180 ? 1 : 0;
+    const p1 = polar(cx, cy, r, start);
+    const p2 = polar(cx, cy, r, end);
+    const p3 = polar(cx, cy, inner, end);
+    const p4 = polar(cx, cy, inner, start);
+    const d = [
+      'M', p1.x, p1.y,
+      'A', r, r, 0, large, 1, p2.x, p2.y,
+      'L', p3.x, p3.y,
+      'A', inner, inner, 0, large, 0, p4.x, p4.y,
+      'Z'
+    ].join(' ');
+    paths.push(
+      '<path class="pie-slice" data-key="' + s.key + '" d="' + d + '" fill="' + s.color + '" ' +
+      'stroke="#fff" stroke-width="3">' +
+      '<title>' + s.label + ': ' + s.pct + '%</title></path>'
+    );
+    angle = end;
+  });
+
+  return (
+    '<svg class="pie-svg" viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" role="img" aria-label="Allocation pie">' +
+    paths.join('') +
+    '<circle cx="' + cx + '" cy="' + cy + '" r="' + (inner - 2) + '" fill="#fff"/>' +
+    '<text class="pie-center-label" x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle">Mix</text>' +
+    '<text class="pie-center-pct" x="' + cx + '" y="' + (cy + 16) + '" text-anchor="middle">100%</text>' +
+    '</svg>'
+  );
+}
+
 function renderAllocation(key) {
   const a = ALLOCATIONS[key];
   if (!a) return;
@@ -57,7 +112,7 @@ function renderAllocation(key) {
   const result = document.getElementById('calcResult');
   const focus = document.getElementById('calcFocus');
   const notes = document.getElementById('calcNotes');
-  const bar = document.getElementById('calcBar');
+  const pieHost = document.getElementById('calcPie');
   const legend = document.getElementById('calcLegend');
   const details = document.getElementById('calcDetails');
   const amountEl = document.getElementById('monthlyAmount');
@@ -66,38 +121,87 @@ function renderAllocation(key) {
   if (focus) focus.textContent = a.focus;
   if (notes) notes.textContent = a.notes;
 
-  if (bar) {
-    let segs = bar.querySelectorAll('.alloc-segment');
-    if (segs.length !== 4) {
-      bar.innerHTML =
-        '<div class="alloc-segment alloc-sip" style="flex:' + a.sip + '">' + a.sip + '%</div>' +
-        '<div class="alloc-segment alloc-equity" style="flex:' + a.equity + '">' + a.equity + '%</div>' +
-        '<div class="alloc-segment alloc-debt" style="flex:' + a.debt + '">' + a.debt + '%</div>' +
-        '<div class="alloc-segment alloc-gold" style="flex:' + a.gold + '">' + a.gold + '%</div>';
-    } else {
-      const vals = [a.sip, a.equity, a.debt, a.gold];
-      const labels = ['SIP', 'Equity', 'Debt', 'Gold'];
-      segs.forEach(function (el, i) {
-        el.style.flex = vals[i];
-        el.textContent = vals[i] + '% ' + labels[i];
+  const segments = [
+    { key: 'sip',    label: SEG.sip.label,    pct: a.sip,    color: SEG.sip.color,    soft: SEG.sip.soft,    detail: a.sipDetail },
+    { key: 'equity', label: SEG.equity.label, pct: a.equity, color: SEG.equity.color, soft: SEG.equity.soft, detail: a.equityDetail },
+    { key: 'debt',   label: SEG.debt.label,   pct: a.debt,   color: SEG.debt.color,   soft: SEG.debt.soft,   detail: a.debtDetail },
+    { key: 'gold',   label: SEG.gold.label,   pct: a.gold,   color: SEG.gold.color,   soft: SEG.gold.soft,   detail: a.goldDetail }
+  ];
+
+  if (pieHost) {
+    pieHost.innerHTML = buildPieSVG(segments, 220);
+    pieHost.querySelectorAll('.pie-slice').forEach(function (slice) {
+      slice.addEventListener('mouseenter', function () {
+        pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
+          s.classList.remove('is-active');
+          s.classList.add('is-dim');
+        });
+        slice.classList.add('is-active');
+        slice.classList.remove('is-dim');
+        const k = slice.getAttribute('data-key');
+        if (legend) {
+          legend.querySelectorAll('.pie-row').forEach(function (row) {
+            row.classList.toggle('is-active', row.getAttribute('data-key') === k);
+          });
+        }
       });
-    }
+      slice.addEventListener('mouseleave', function () {
+        pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
+          s.classList.remove('is-active', 'is-dim');
+        });
+        if (legend) legend.querySelectorAll('.pie-row').forEach(function (row) {
+          row.classList.remove('is-active');
+        });
+      });
+    });
   }
 
   if (legend) {
-    legend.innerHTML =
-      '<span class="legend-sip">SIP ' + a.sip + '%</span>' +
-      '<span class="legend-equity">Equity ' + a.equity + '%</span>' +
-      '<span class="legend-debt">Debt ' + a.debt + '%</span>' +
-      '<span class="legend-gold">Gold ' + a.gold + '%</span>';
+    const amount = parseFloat(amountEl && amountEl.value) || 0;
+    legend.innerHTML = segments.map(function (s) {
+      const rupee = amount > 0
+        ? '<span class="pie-rupee">' + formatINR(amount * s.pct / 100) + '</span>'
+        : '';
+      return (
+        '<div class="pie-row" data-key="' + s.key + '" style="--seg:' + s.color + ';--soft:' + s.soft + '">' +
+        '<span class="pie-dot"></span>' +
+        '<span class="pie-label">' + s.label + '</span>' +
+        '<span class="pie-pct">' + s.pct + '%</span>' +
+        rupee +
+        '</div>'
+      );
+    }).join('');
+
+    legend.querySelectorAll('.pie-row').forEach(function (row) {
+      row.addEventListener('mouseenter', function () {
+        const k = row.getAttribute('data-key');
+        if (pieHost) {
+          pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
+            const match = s.getAttribute('data-key') === k;
+            s.classList.toggle('is-active', match);
+            s.classList.toggle('is-dim', !match);
+          });
+        }
+        row.classList.add('is-active');
+      });
+      row.addEventListener('mouseleave', function () {
+        if (pieHost) pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
+          s.classList.remove('is-active', 'is-dim');
+        });
+        row.classList.remove('is-active');
+      });
+    });
   }
 
   if (details) {
-    details.innerHTML =
-      '<div class="calc-detail"><h4>SIP</h4><div class="pct">' + a.sip + '%</div><p>' + a.sipDetail + '</p></div>' +
-      '<div class="calc-detail"><h4>Equity</h4><div class="pct">' + a.equity + '%</div><p>' + a.equityDetail + '</p></div>' +
-      '<div class="calc-detail"><h4>Debt</h4><div class="pct">' + a.debt + '%</div><p>' + a.debtDetail + '</p></div>' +
-      '<div class="calc-detail"><h4>Gold</h4><div class="pct">' + a.gold + '%</div><p>' + a.goldDetail + '</p></div>';
+    details.innerHTML = segments.map(function (s) {
+      return (
+        '<div class="calc-detail" style="border-left:3px solid ' + s.color + '">' +
+        '<h4>' + s.label + '</h4>' +
+        '<div class="pct">' + s.pct + '%</div>' +
+        '<p>' + s.detail + '</p></div>'
+      );
+    }).join('');
   }
 
   const amount = parseFloat(amountEl && amountEl.value) || 0;
@@ -105,17 +209,15 @@ function renderAllocation(key) {
     if (amount > 0) {
       breakdown.innerHTML =
         'Of <span>' + formatINR(amount) + '</span> / month \u2192 ' +
-        'SIP <span>' + formatINR(amount * a.sip / 100) + '</span> \u00b7 ' +
-        'Equity <span>' + formatINR(amount * a.equity / 100) + '</span> \u00b7 ' +
-        'Debt <span>' + formatINR(amount * a.debt / 100) + '</span> \u00b7 ' +
-        'Gold <span>' + formatINR(amount * a.gold / 100) + '</span>';
+        segments.map(function (s) {
+          return s.label + ' <span>' + formatINR(amount * s.pct / 100) + '</span>';
+        }).join(' \u00b7 ');
     } else {
       breakdown.textContent = '';
     }
   }
 
   if (result) result.classList.add('visible');
-  document.dispatchEvent(new CustomEvent('allocation-change', { detail: { key: key, alloc: a } }));
 }
 
 function initCalculator() {

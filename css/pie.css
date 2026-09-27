@@ -1,0 +1,100 @@
+/* Interactive pie: data left, chart right */
+.pie-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem 2rem;
+  align-items: center;
+  margin: 1.25rem 0 0.5rem;
+}
+.pie-data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.pie-row {
+  display: grid;
+  grid-template-columns: 12px 1fr auto auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  cursor: default;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.pie-row.is-active {
+  background: var(--soft, #f8fafc);
+  border-color: var(--seg);
+  transform: translateX(2px);
+}
+.pie-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--seg);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--seg) 22%, transparent);
+  flex-shrink: 0;
+}
+.pie-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.pie-pct {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.pie-rupee {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  min-width: 4.5rem;
+  text-align: right;
+}
+.pie-chart-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pie-svg {
+  display: block;
+  max-width: 220px;
+  height: auto;
+  filter: drop-shadow(0 8px 20px rgba(11, 31, 58, 0.08));
+}
+.pie-slice {
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+}
+.pie-slice.is-dim { opacity: 0.35; }
+.pie-slice.is-active {
+  opacity: 1;
+  filter: brightness(1.08);
+}
+.pie-center-label {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  fill: #6b7c8f;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.pie-center-pct {
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  fill: #0b1f3a;
+}
+@media (max-width: 640px) {
+  .pie-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .pie-data { width: 100%; }
+  .pie-chart-wrap { order: -1; }
+}
