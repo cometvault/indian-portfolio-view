@@ -86,18 +86,18 @@ function renderAllocation(key) {
 
   if (legend) {
     legend.innerHTML =
-      '<span class="legend-sip">Core SIP ' + a.sip + '%</span>' +
-      '<span class="legend-equity">Direct Equity ' + a.equity + '%</span>' +
-      '<span class="legend-debt">Debt &amp; Emergency ' + a.debt + '%</span>' +
+      '<span class="legend-sip">SIP ' + a.sip + '%</span>' +
+      '<span class="legend-equity">Equity ' + a.equity + '%</span>' +
+      '<span class="legend-debt">Debt ' + a.debt + '%</span>' +
       '<span class="legend-gold">Gold ' + a.gold + '%</span>';
   }
 
   if (details) {
     details.innerHTML =
-      '<div class="calc-detail"><h4>Core SIP (automated)</h4><div class="pct">' + a.sip + '%</div><p>' + a.sipDetail + '</p></div>' +
-      '<div class="calc-detail"><h4>Direct Equity (satellite)</h4><div class="pct">' + a.equity + '%</div><p>' + a.equityDetail + '</p></div>' +
-      '<div class="calc-detail"><h4>Debt &amp; Emergency</h4><div class="pct">' + a.debt + '%</div><p>' + a.debtDetail + '</p></div>' +
-      '<div class="calc-detail"><h4>Gold / Commodities</h4><div class="pct">' + a.gold + '%</div><p>' + a.goldDetail + '</p></div>';
+      '<div class="calc-detail"><h4>SIP</h4><div class="pct">' + a.sip + '%</div><p>' + a.sipDetail + '</p></div>' +
+      '<div class="calc-detail"><h4>Equity</h4><div class="pct">' + a.equity + '%</div><p>' + a.equityDetail + '</p></div>' +
+      '<div class="calc-detail"><h4>Debt</h4><div class="pct">' + a.debt + '%</div><p>' + a.debtDetail + '</p></div>' +
+      '<div class="calc-detail"><h4>Gold</h4><div class="pct">' + a.gold + '%</div><p>' + a.goldDetail + '</p></div>';
   }
 
   const amount = parseFloat(amountEl && amountEl.value) || 0;
