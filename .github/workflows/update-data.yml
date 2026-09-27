@@ -57,13 +57,13 @@ jobs:
                           if len(cells) < 6:
                               continue
                           name = re.sub(r"\s+", " ", cells[0]).strip()
-                          gmp_raw = cells[1].replace("₹", "").replace(",", "").strip()
+                          gmp_raw = cells[1].replace("\u20b9", "").replace(",", "").strip()
                           gmp_m = re.search(r"-?\d+", gmp_raw)
                           gmp = int(gmp_m.group()) if gmp_m else 0
-                          price = cells[3].replace("₹", "").strip() if len(cells) > 3 else ""
+                          price = cells[3].replace("\u20b9", "").strip() if len(cells) > 3 else ""
                           est = cells[4] if len(cells) > 4 else ""
                           dates = cells[5] if len(cells) > 5 else ""
-                          status = cells[6] if len(cells) > 6 else "—"
+                          status = cells[6] if len(cells) > 6 else "\u2014"
                           if not name or name.lower().startswith("ipo"):
                               continue
                           rows.append({
@@ -81,7 +81,7 @@ jobs:
           sme = parse_table("SME")
 
           if not mainboard and not sme:
-              print("No tables parsed – leaving existing data")
+              print("No tables parsed \u2013 leaving existing data")
               exit(0)
 
           data = {
@@ -94,20 +94,65 @@ jobs:
           print(f"Wrote {len(mainboard)} mainboard + {len(sme)} SME rows")
           EOF
 
-      - name: Update gold rates (static snapshot note)
+      - name: Scrape gold rates (goodreturns.in)
         run: |
           python << 'EOF'
-          import json, datetime
+          import json, datetime, re, urllib.request
           from pathlib import Path
+
+          CITIES = [
+              ("Bangalore", "https://www.goodreturns.in/gold-rates/bangalore.html"),
+              ("Mumbai", "https://www.goodreturns.in/gold-rates/mumbai.html"),
+              ("Kolkata", "https://www.goodreturns.in/gold-rates/kolkata.html"),
+              ("Hyderabad", "https://www.goodreturns.in/gold-rates/hyderabad.html"),
+          ]
+
+          def fetch(url):
+              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 PortfolioView/1.0"})
+              with urllib.request.urlopen(req, timeout=25) as r:
+                  return r.read().decode("utf-8", errors="ignore")
+
+          def parse_rates(html):
+              m24 = re.search(r"\u20b9\s*([\d,]+)\s*per gram for 24 karat", html, re.I)
+              m22 = re.search(r"\u20b9\s*([\d,]+)\s*per gram for 22 karat", html, re.I)
+              if not m24:
+                  m24 = re.search(r"24K[^\u20b9]*\u20b9\s*([\d,]+)", html)
+              if not m22:
+                  m22 = re.search(r"22K[^\u20b9]*\u20b9\s*([\d,]+)", html)
+              def num(m):
+                  return int(m.group(1).replace(",", "")) if m else None
+              return num(m24), num(m22)
+
+          cities = []
+          for name, url in CITIES:
+              try:
+                  html = fetch(url)
+                  r24, r22 = parse_rates(html)
+                  if r24 and r22:
+                      cities.append({"city": name, "rate24k": r24, "rate22k": r22, "change24k": 0})
+                      print(f"{name}: 24K={r24} 22K={r22}")
+                  else:
+                      print(f"{name}: parse failed")
+              except Exception as e:
+                  print(f"{name}: error {e}")
+
           path = Path("data/gold.json")
-          if path.exists():
+          if cities:
+              data = {
+                  "updated": datetime.date.today().isoformat(),
+                  "source": "goodreturns.in",
+                  "note": "Per gram. Retail quotes vary by jeweller.",
+                  "cities": cities,
+              }
+          elif path.exists():
               data = json.loads(path.read_text(encoding="utf-8"))
+              data["updated"] = datetime.date.today().isoformat()
+              print("Kept previous rates; scrape empty")
           else:
-              data = {"cities": []}
-          data["updated"] = datetime.date.today().isoformat()
-          data["note"] = "Indicative retail quotes (per 10 g). Actual rates vary by jeweller and making charges."
+              data = {"updated": datetime.date.today().isoformat(), "cities": []}
+
           path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-          print("Gold timestamp updated")
+          print("Gold JSON written")
           EOF
 
       - name: Commit & push if changed
