@@ -1,0 +1,162 @@
+/* Mandatory full-form disclaimer gate */
+body.modal-open { overflow: hidden !important; }
+
+.disclaimer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+.disclaimer-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.disclaimer-modal.is-hiding {
+  opacity: 0;
+}
+
+.disclaimer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 31, 58, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.disclaimer-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  max-height: min(90vh, 680px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(11, 31, 58, 0.22);
+  padding: 1.35rem 1.35rem 1.25rem;
+  overflow: hidden;
+}
+
+.disclaimer-tag {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b7c8f;
+  text-align: center;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.disclaimer-panel h2 {
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #0b1f3a;
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+}
+
+.disclaimer-scroll {
+  flex: 1 1 auto;
+  min-height: 140px;
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.15rem 0.35rem 1.5rem 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  outline: none;
+  scroll-behavior: smooth;
+}
+.disclaimer-scroll:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.disclaimer-scroll p {
+  margin: 0 0 0.75rem;
+  padding: 0 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #334155;
+  font-family: Inter, system-ui, sans-serif;
+}
+.disclaimer-scroll p:first-child {
+  padding-top: 0.75rem;
+}
+.disclaimer-scroll p strong {
+  color: #0b1f3a;
+  font-weight: 600;
+}
+.disclaimer-scroll-end {
+  height: 8px;
+}
+
+.disclaimer-fade {
+  pointer-events: none;
+  height: 0;
+}
+
+.disclaimer-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0.9rem 0 0.35rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #0b1f3a;
+  font-family: Inter, system-ui, sans-serif;
+  user-select: none;
+}
+.disclaimer-check input {
+  margin-top: 0.15rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.disclaimer-hint {
+  min-height: 1.2rem;
+  margin: 0 0 0.55rem;
+  font-size: 0.78rem;
+  color: #b45309;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.disclaimer-accept {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.disclaimer-accept:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  .disclaimer-panel {
+    padding: 1.15rem 1rem 1.05rem;
+    max-height: 92vh;
+  }
+  .disclaimer-scroll {
+    max-height: 220px;
+  }
+  .disclaimer-panel h2 {
+    font-size: 1.2rem;
+  }
+}
