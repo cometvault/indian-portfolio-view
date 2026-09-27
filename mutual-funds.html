@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mutual Funds — Portfolio View</title>
+  <title>Mutual Funds | Portfolio View</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -26,55 +26,49 @@
 
   <main>
     <div class="container">
-      <div class="page-header">
-        <div class="data-stamp" data-stamp>Data refreshes daily ~12:00 IST</div>
-        <h1>Mutual Funds</h1>
-        <p>Category-level roles within a diversified Indian portfolio. No scheme names — only how categories typically fit into Core SIP versus satellite sleeves.</p>
-        <div class="disclaimer">
-          This page describes structural roles of mutual-fund categories. It is not a recommendation to buy, sell, or hold any scheme. Always evaluate expense ratios, tracking error, tax treatment and suitability with a SEBI-registered advisor.
+      <p class="back-link"><a href="index.html">← Overview</a></p>
+
+      <section class="hero-block">
+        <h1>Categories, not fund names.</h1>
+        <p class="hero-sub">A framework, not a picks list.</p>
+      </section>
+
+      <div class="category-grid">
+        <div class="category-card">
+          <h3>Large Cap</h3>
+          <p>Steadier, slower, dependable.</p>
+        </div>
+        <div class="category-card">
+          <h3>Mid Cap</h3>
+          <p>The middle ground, on purpose.</p>
+        </div>
+        <div class="category-card">
+          <h3>Small Cap</h3>
+          <p>Higher swings, higher ceiling.</p>
+        </div>
+        <div class="category-card">
+          <h3>Debt Funds</h3>
+          <p>Where the stability lives.</p>
+        </div>
+        <div class="category-card">
+          <h3>Hybrid</h3>
+          <p>A bit of both, in one place.</p>
         </div>
       </div>
 
-      <section>
-        <h2>Category roles (directional)</h2>
-        <div class="grid grid-2" style="margin-top: 1.25rem;">
-          <div class="card">
-            <div class="card-title">Large-Cap</div>
-            <p style="margin:0;">Stability and liquidity core. Often forms the ballast of an equity-oriented SIP sleeve.</p>
-          </div>
-          <div class="card">
-            <div class="card-title">Mid-Cap</div>
-            <p style="margin:0;">Growth engine within equity. Higher variability than large-cap; commonly a meaningful weight in long-horizon sleeves.</p>
-          </div>
-          <div class="card">
-            <div class="card-title">Small-Cap</div>
-            <p style="margin:0;">Satellite growth allocation. Higher drawdown risk; kept smaller in most directional frameworks.</p>
-          </div>
-          <div class="card">
-            <div class="card-title">Flexi / Multi-Cap</div>
-            <p style="margin:0;">Manager-driven allocation across market caps. Often used as a simplified core SIP building block.</p>
-          </div>
-          <div class="card">
-            <div class="card-title">Debt &amp; Liquid</div>
-            <p style="margin:0;">Emergency corpus and near-term goals. Primary home for capital that must stay accessible and relatively stable.</p>
-          </div>
-          <div class="card">
-            <div class="card-title">Hybrid / Multi-Asset</div>
-            <p style="margin:0;">Blended equity–debt exposure. Frequently used when simplifying the portfolio or moderating equity risk with age.</p>
-          </div>
-        </div>
-      </section>
+      <p class="page-footnote">No scheme names here — bring this shape to your own research.</p>
 
-      <section style="margin-top: 2.5rem;">
-        <h2>How categories map to the calculator</h2>
-        <div class="card">
-          <p style="margin-bottom: 0.75rem;">The age-based calculator on the Overview page splits capital into four sleeves. Mutual-fund categories typically sit inside those sleeves as follows (category-level only):</p>
-          <ul style="padding-left: 1.25rem; color: var(--ink-muted); font-size: 0.95rem;">
-            <li style="margin-bottom: 0.4rem;"><strong>Core SIP</strong> — Large-cap, Flexi-cap, Multi-cap, Hybrid</li>
-            <li style="margin-bottom: 0.4rem;"><strong>Direct Equity (satellite)</strong> — Mid-cap and Small-cap oriented exposure (or stock selection)</li>
-            <li style="margin-bottom: 0.4rem;"><strong>Debt &amp; Emergency</strong> — Liquid, short-duration debt, PPF-style instruments</li>
-            <li><strong>Gold</strong> — Gold ETFs / SGB-style exposure (see Gold &amp; ETF page)</li>
-          </ul>
+      <section class="faq-section" id="faq">
+        <h2>Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Why no fund names?</summary>
+            <p>So you compare categories, not chase past returns.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which category should I pick?</summary>
+            <p>Depends on your timeline — start with Overview.</p>
+          </details>
         </div>
       </section>
     </div>
@@ -82,9 +76,10 @@
 
   <footer>
     <div class="container">
-      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+      <p>Educational only. Not advice. Not SEBI-registered.</p>
     </div>
   </footer>
+
   <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
 </body>

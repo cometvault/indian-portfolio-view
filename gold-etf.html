@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gold &amp; ETF — Portfolio View</title>
+  <title>Gold &amp; ETF | Portfolio View</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -26,42 +26,61 @@
 
   <main>
     <div class="container">
-      <div class="page-header">
-        <div class="data-stamp" data-stamp>Data refreshes daily ~12:00 IST</div>
-        <h1>Gold &amp; ETF</h1>
-        <p>City-wise retail gold rates for major metros and a note on ETF ranking within the gold allocation hierarchy. No specific ETF names are listed.</p>
-        <div class="disclaimer">
-          Gold rates vary by jeweller, making charges and local taxes. Figures shown are indicative retail quotes. ETF exposure sits higher in the liquidity and cost hierarchy for pure gold exposure; this is a structural observation, not a recommendation.
-        </div>
-      </div>
+      <p class="back-link"><a href="index.html">← Overview</a></p>
+
+      <section class="hero-block">
+        <h1>Today's rate, in your city.</h1>
+        <p class="hero-sub">22K and 24K, side by side.</p>
+      </section>
 
       <div class="status-bar">
-        <button class="btn" id="refreshGoldBtn" onclick="loadGoldData(true)">
-          <span id="refreshGoldIcon">↻</span> Refresh rates
+        <button class="btn" id="refreshGoldBtn" type="button" onclick="loadGoldData(true)">
+          <span id="refreshGoldIcon">↻</span> Refresh
         </button>
-        <span id="goldLastUpdated">Loading…</span>
+        <span id="goldLastUpdated">Pulling today's numbers…</span>
       </div>
 
-      <h2 style="margin-bottom: 1.25rem;">City Gold Rates (per 10 g)</h2>
       <div class="grid grid-2" id="goldCards"></div>
 
-      <div class="etf-note" style="margin-top: 2.5rem;">
-        <h3>ETF ranking within gold allocation</h3>
-        <p style="margin-bottom: 0.75rem;">Within a gold sleeve of a portfolio, exchange-traded funds that track physical gold are generally ranked higher than physical jewellery or coins for the following structural reasons:</p>
-        <ul style="padding-left: 1.25rem; color: var(--ink-muted); font-size: 0.95rem;">
-          <li style="margin-bottom: 0.4rem;">Lower and transparent cost of ownership (expense ratio vs making charges)</li>
-          <li style="margin-bottom: 0.4rem;">High liquidity and ease of entry/exit on exchange</li>
-          <li style="margin-bottom: 0.4rem;">Purity and storage handled by the underlying mechanism</li>
-          <li>No GST on secondary-market transactions in many cases</li>
-        </ul>
-        <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem;">Specific scheme names are intentionally omitted. Allocation weight to gold itself remains a personal risk-tolerance decision.</p>
-      </div>
+      <section class="hierarchy-section">
+        <h2>Gold, ranked by how you hold it</h2>
+        <div class="hold-list">
+          <div class="hold-row">
+            <span class="hold-name">Gold ETF</span>
+            <span class="hold-desc">Easiest to buy, easiest to sell.</span>
+          </div>
+          <div class="hold-row">
+            <span class="hold-name">Digital gold</span>
+            <span class="hold-desc">Convenient, smaller holdings.</span>
+          </div>
+          <div class="hold-row">
+            <span class="hold-name">Physical gold</span>
+            <span class="hold-desc">Yours to hold, harder to trade.</span>
+          </div>
+        </div>
+      </section>
+
+      <p class="page-footnote">Retail quotes vary by jeweller — use this as a city-level reference.</p>
+
+      <section class="faq-section" id="faq">
+        <h2>Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Why is ETF ranked first?</summary>
+            <p>Liquidity — you can exit in seconds, not days.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do rates include making charges?</summary>
+            <p>No — this is the metal rate only.</p>
+          </details>
+        </div>
+      </section>
     </div>
   </main>
 
   <footer>
     <div class="container">
-      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
+      <p>Educational only. Not advice. Not SEBI-registered.</p>
     </div>
   </footer>
 
