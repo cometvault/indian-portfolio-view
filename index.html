@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indian Portfolio View — Diversification Reference</title>
-  <meta name="description" content="Interactive age-based portfolio allocation calculator and reference view for the Indian market. Educational only.">
+  <title>Indian Portfolio View — Know your mix</title>
+  <meta name="description" content="Pick your age. See your split. Educational portfolio mix reference for India.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -27,19 +27,19 @@
 
   <main>
     <div class="container">
-      <div class="page-header">
-        <div class="data-stamp" data-stamp>Data refreshes daily ~12:00 IST</div>
-        <h1>Portfolio Diversification Reference</h1>
-        <p>A minimal, universal view of how capital is typically proportioned across Indian market segments by life stage. Live IPO data, city gold rates, and allocation frameworks — purely educational, never advice.</p>
-        <div class="disclaimer">
-          This site does not provide buy, sell, or hold recommendations. All figures are informational directional references. Market data can change rapidly. Consult a SEBI-registered advisor before any investment decision.
+
+      <section class="hero-block">
+        <h1>Know your mix before you invest a rupee.</h1>
+        <p class="hero-sub">Pick your age. See your split. That's it.</p>
+        <div class="trust-chips">
+          <span class="chip">Updated every noon</span>
+          <span class="chip">No scheme names, ever</span>
+          <span class="chip">Reference, not advice</span>
         </div>
-      </div>
+      </section>
 
       <section class="calc-section" id="calculator">
-        <h2>Age-based portfolio calculator</h2>
-        <p class="calc-intro">Select your age bracket to see a directional allocation across Core SIP, Direct Equity, Debt &amp; Emergency, and Gold. Optional: enter a monthly investable amount to see rupee splits. Category-level only — no scheme names.</p>
-
+        <p class="ledger-eyebrow">Your mix at</p>
         <div class="age-tabs" role="tablist" aria-label="Age bracket">
           <button type="button" class="age-tab" data-age="20-25" role="tab">20 – 25</button>
           <button type="button" class="age-tab" data-age="25-30" role="tab">25 – 30</button>
@@ -49,15 +49,13 @@
         </div>
 
         <div class="calc-amount-row">
-          <label for="monthlyAmount">Monthly investable amount (₹)</label>
-          <input type="number" id="monthlyAmount" min="0" step="500" value="20000" placeholder="20000" aria-describedby="amountHint">
-          <span class="calc-amount-hint" id="amountHint">Optional — used to show ₹ splits below</span>
+          <label for="monthlyAmount">Monthly amount</label>
+          <input type="number" id="monthlyAmount" min="0" step="500" value="" placeholder="₹ amount, optional" aria-label="Optional monthly amount">
         </div>
 
         <div class="calc-result" id="calcResult" aria-live="polite">
           <p class="calc-focus" id="calcFocus"></p>
           <p class="calc-notes" id="calcNotes"></p>
-          <p class="calc-bars-label">Allocation mix</p>
           <div class="alloc-bar" id="calcBar"></div>
           <div class="alloc-legend" id="calcLegend"></div>
           <div class="calc-detail-grid" id="calcDetails"></div>
@@ -66,81 +64,77 @@
       </section>
 
       <section class="infographic-section">
-        <h2>Visual guides</h2>
-        <p>Interactive views of how allocation and risk hierarchy are often framed — educational only.</p>
         <div class="infographic-grid">
           <div class="infographic-card">
-            <h3>Allocation mix</h3>
+            <h3>Your mix</h3>
             <div id="infographicDonut"></div>
           </div>
           <div class="infographic-card">
-            <h3>Life-stage shift</h3>
+            <h3>Same rule, different age</h3>
             <div id="infographicStages" style="width:100%"></div>
           </div>
           <div class="infographic-card">
-            <h3>Equity risk hierarchy</h3>
+            <h3>Risk, inside your equity</h3>
             <div id="infographicPyramid" style="width:100%"></div>
+            <p class="infographic-caption risk-caption">Steadier ← → Bolder</p>
           </div>
         </div>
       </section>
 
-      <section>
-        <p class="section-label">Explore</p>
+      <section class="dest-section">
+        <p class="section-label">Updates daily</p>
         <div class="hero-grid">
           <a href="ipo.html" class="hero-card">
             <h3>IPOs</h3>
-            <p>Live grey-market premium, price bands &amp; status from public sources</p>
+            <p>Who's listing, and at what premium.</p>
           </a>
           <a href="gold-etf.html" class="hero-card">
             <h3>Gold &amp; ETF</h3>
-            <p>City-wise 22K / 24K rates · ETF ranked higher in gold hierarchy</p>
+            <p>Today's rate, every city.</p>
           </a>
+        </div>
+        <p class="section-label" style="margin-top:1.5rem">Learn the shape</p>
+        <div class="hero-grid">
           <a href="mutual-funds.html" class="hero-card">
             <h3>Mutual Funds</h3>
-            <p>Category-level framework without naming schemes</p>
+            <p>Categories ranked, no fund names.</p>
           </a>
           <a href="equity.html" class="hero-card">
             <h3>Equity</h3>
-            <p>50% Mid · 30% Large · 20% Small — universal proportion view</p>
+            <p>Mid, large, small — in proportion.</p>
           </a>
         </div>
       </section>
 
-      <section class="alloc-section">
-        <h2>Illustrative equity sleeve (within Direct Equity)</h2>
-        <p>A common long-term proportion for the satellite equity bucket — directional only.</p>
-        <div class="alloc-bar">
-          <div class="alloc-segment alloc-mid" style="flex: 50">50% Mid Cap</div>
-          <div class="alloc-segment alloc-large" style="flex: 30">30% Large Cap</div>
-          <div class="alloc-segment alloc-small" style="flex: 20">20% Small Cap</div>
-        </div>
-        <div class="alloc-legend">
-          <span class="legend-mid">Mid Cap — growth-oriented segment</span>
-          <span class="legend-large">Large Cap — stability &amp; liquidity</span>
-          <span class="legend-small">Small Cap — higher variability</span>
+      <section class="cta-band">
+        <p class="cta-line">Your age. Your mix. Ten seconds.</p>
+        <a href="#calculator" class="btn btn-primary cta-btn">See my mix ↑</a>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <h2>Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is this telling me what to buy?</summary>
+            <p>No — it's a shape, not a stock pick.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Where's the data from?</summary>
+            <p>Public sources, refreshed every noon.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Should I follow this exactly?</summary>
+            <p>Use it as a start, not a finish line.</p>
+          </details>
         </div>
       </section>
 
-      <section style="margin-top: 3rem;">
-        <h2>How this site works</h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <div class="card-title">Live data</div>
-            <p style="margin:0;">IPO GMP is loaded from public tables. Gold rates reflect city-level retail quotes. Data refreshes on page load and can update nightly via GitHub Actions.</p>
-          </div>
-          <div class="card">
-            <div class="card-title">No recommendations</div>
-            <p style="margin:0;">No specific mutual-fund schemes or ETF tickers are listed. Percentages are universal directional references only — not personalised advice.</p>
-          </div>
-        </div>
-      </section>
     </div>
   </main>
 
   <footer>
     <div class="container">
-      <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
-      <p>Data sources are third-party public websites. Verify independently.</p>
+      <p>Educational only. Not advice. Not SEBI-registered.</p>
     </div>
   </footer>
 
