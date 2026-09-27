@@ -1,0 +1,31 @@
+/* Headline alignment — no random mid-phrase breaks */
+.hero-block h1 {
+  max-width: 22em !important;
+  text-wrap: balance !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  line-height: 1.15 !important;
+}
+.hero-sub {
+  max-width: 36em !important;
+  text-wrap: balance !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  line-height: 1.45 !important;
+}
+@media (max-width: 700px) {
+  .hero-block h1 {
+    max-width: 100% !important;
+    font-size: clamp(1.55rem, 6.5vw, 2.1rem) !important;
+  }
+  .hero-sub {
+    max-width: 100% !important;
+    font-size: 1.02rem !important;
+  }
+}
+.hero-block h1,
+.hero-sub {
+  text-wrap: balance;
+}
