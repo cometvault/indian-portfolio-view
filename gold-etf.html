@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/theme-font.css">
+  <link rel="stylesheet" href="css/headline-align.css">
   <link rel="stylesheet" href="css/inner.css">
 </head>
 <body>
@@ -30,49 +31,61 @@
       <p class="back-link"><a href="index.html">← Overview</a></p>
 
       <section class="hero-block">
-        <h1>Today's rate, in your city.</h1>
-        <p class="hero-sub">22K and 24K, side by side.</p>
+        <h1>Today's rate, in your city.</h1>
+        <p class="hero-sub">22K and 24K, side by side.</p>
       </section>
 
       <div class="status-bar">
-        <button class="btn" id="refreshGoldBtn" type="button" onclick="loadGoldData(true)">
-          <span id="refreshGoldIcon">↻</span> Refresh
-        </button>
-        <span id="goldLastUpdated">Pulling today's numbers…</span>
+        <label for="citySelect" class="sr-only">Choose your city</label>
+        <select id="citySelect" aria-label="Choose your city">
+          <option value="">Choose your city</option>
+        </select>
+        <span id="lastUpdated">Updated at —</span>
       </div>
 
-      <div class="grid grid-2" id="goldCards"></div>
-
-      <section class="hierarchy-section">
-        <h2>Gold, ranked by how you hold it</h2>
-        <div class="hold-list">
-          <div class="hold-row">
-            <span class="hold-name">Gold ETF</span>
-            <span class="hold-desc">Easiest to buy, easiest to sell.</span>
-          </div>
-          <div class="hold-row">
-            <span class="hold-name">Digital gold</span>
-            <span class="hold-desc">Convenient, smaller holdings.</span>
-          </div>
-          <div class="hold-row">
-            <span class="hold-name">Physical gold</span>
-            <span class="hold-desc">Yours to hold, harder to trade.</span>
-          </div>
+      <div class="rate-cards" id="rateCards">
+        <div class="rate-card">
+          <p class="rate-label">22K / gram</p>
+          <p class="rate-value" id="rate22">—</p>
         </div>
-      </section>
+        <div class="rate-card">
+          <p class="rate-label">24K / gram</p>
+          <p class="rate-value" id="rate24">—</p>
+        </div>
+        <div class="rate-card">
+          <p class="rate-label">Updated at</p>
+          <p class="rate-value rate-time" id="rateTime">—</p>
+        </div>
+      </div>
 
-      <p class="page-footnote">Retail quotes vary by jeweller — use this as a city-level reference.</p>
+      <h2 class="section-heading">Gold, ranked by how you hold it</h2>
+      <div class="hold-list">
+        <div class="hold-row">
+          <strong>Gold ETF</strong>
+          <span class="hold-desc">Easiest to buy, easiest to sell.</span>
+        </div>
+        <div class="hold-row">
+          <strong>Digital gold</strong>
+          <span class="hold-desc">Convenient, smaller holdings.</span>
+        </div>
+        <div class="hold-row">
+          <strong>Physical gold</strong>
+          <span class="hold-desc">Yours to hold, harder to trade.</span>
+        </div>
+      </div>
+
+      <p class="page-footnote">Rates are public city averages — not a buy signal.</p>
 
       <section class="faq-section" id="faq">
         <h2>Questions</h2>
         <div class="faq-list">
           <details class="faq-item">
-            <summary>Why is ETF ranked first?</summary>
-            <p>Liquidity — you can exit in seconds, not days.</p>
+            <summary>Why ETF first?</summary>
+            <p>Liquidity and cost — easiest to enter and exit.</p>
           </details>
           <details class="faq-item">
-            <summary>Do rates include making charges?</summary>
-            <p>No — this is the metal rate only.</p>
+            <summary>Is physical gold worse?</summary>
+            <p>Not worse — just harder to trade in small sizes.</p>
           </details>
         </div>
       </section>
