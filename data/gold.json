@@ -5,26 +5,26 @@
   "cities": [
     {
       "city": "Bangalore",
-      "rate24k": 15268,
-      "rate22k": 13995,
+      "rate24k": 139950,
+      "rate22k": 139950,
       "change24k": 0
     },
     {
       "city": "Mumbai",
-      "rate24k": 15268,
-      "rate22k": 13995,
+      "rate24k": 139950,
+      "rate22k": 139950,
       "change24k": 0
     },
     {
       "city": "Kolkata",
-      "rate24k": 15268,
-      "rate22k": 13995,
+      "rate24k": 139950,
+      "rate22k": 139950,
       "change24k": 0
     },
     {
       "city": "Hyderabad",
-      "rate24k": 15268,
-      "rate22k": 13995,
+      "rate24k": 139950,
+      "rate22k": 139950,
       "change24k": 0
     }
   ]
