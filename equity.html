@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
   <header>
@@ -27,6 +26,7 @@
   <main>
     <div class="container">
       <div class="page-header">
+        <div class="data-stamp" data-stamp>Data refreshes daily ~12:00 IST</div>
         <h1>Equity Allocation</h1>
         <p>Universal directional proportions for the Indian equity market: <strong>50% Mid Cap · 30% Large Cap · 20% Small Cap</strong>. These percentages describe how a diversified equity sleeve can look — not which securities to buy or sell.</p>
         <div class="disclaimer">
@@ -69,7 +69,7 @@
       <section style="margin-top: 2.5rem;">
         <h2>Implementation notes (category level only)</h2>
         <div class="card">
-          <ul style="padding-left: 1.25rem; color: var(--text-muted); font-size: 0.95rem;">
+          <ul style="padding-left: 1.25rem; color: var(--ink-muted); font-size: 0.95rem;">
             <li style="margin-bottom: 0.5rem;">The percentages can be realised through passive index funds, active mutual funds, or a combination — scheme names are omitted by design.</li>
             <li style="margin-bottom: 0.5rem;">Periodic rebalancing (e.g., annually or when any sleeve drifts &gt;5 percentage points) keeps the proportions intentional.</li>
             <li style="margin-bottom: 0.5rem;">Investors with shorter horizons or lower risk tolerance may tilt more heavily toward large-cap; those with longer horizons may accept a larger mid/small tilt.</li>
@@ -90,7 +90,7 @@
       <p>Educational reference only · Not SEBI-registered · Not investment advice</p>
     </div>
   </footer>
-
+  <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
 </body>
 </html>
