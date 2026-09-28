@@ -15,15 +15,15 @@ const ALLOCATIONS = {
     focus: 'Aggressive compounding & wealth foundation',
     notes: 'Maximum risk capacity. Zero big financial dependents.',
     sip: 35, sipDetail: 'Nifty 50 + Flexi-Cap style core (category-level)',
-    equity: 40, equityDetail: '50% Mid \u00b7 30% Small \u00b7 20% Large within satellite',
-    debt: 15, debtDetail: '3\u20136 months liquid corpus',
+    equity: 40, equityDetail: '50% Mid · 30% Small · 20% Large within satellite',
+    debt: 15, debtDetail: '3-6 months liquid corpus',
     gold: 10, goldDetail: 'Gold ETF / SGB style exposure'
   },
   '25-30': {
     focus: 'Career scaling, marriage, house down-payment',
     notes: 'Protect short-term goal money in liquid funds ~2 years prior.',
     sip: 40, sipDetail: 'Flexi-Cap + Large-Cap style core',
-    equity: 35, equityDetail: '40% Mid \u00b7 30% Small \u00b7 30% Large within satellite',
+    equity: 35, equityDetail: '40% Mid · 30% Small · 30% Large within satellite',
     debt: 15, debtDetail: 'Expand corpus for short-term goals',
     gold: 10, goldDetail: 'Gold ETF style exposure'
   },
@@ -54,7 +54,7 @@ const ALLOCATIONS = {
 };
 
 function formatINR(n) {
-  return '\u20b9' + Math.round(n).toLocaleString('en-IN');
+  return '₹' + Math.round(n).toLocaleString('en-IN');
 }
 
 function polar(cx, cy, r, angleDeg) {
@@ -208,10 +208,10 @@ function renderAllocation(key) {
   if (breakdown) {
     if (amount > 0) {
       breakdown.innerHTML =
-        'Of <span>' + formatINR(amount) + '</span> / month \u2192 ' +
+        'Of <span>' + formatINR(amount) + '</span> / month → ' +
         segments.map(function (s) {
           return s.label + ' <span>' + formatINR(amount * s.pct / 100) + '</span>';
-        }).join(' \u00b7 ');
+        }).join(' · ');
     } else {
       breakdown.textContent = '';
     }
@@ -220,27 +220,65 @@ function renderAllocation(key) {
   if (result) result.classList.add('visible');
 }
 
+function loadCalcState() {
+  try {
+    var raw = localStorage.getItem('portfolioView_ntf_v1');
+    if (!raw) return {};
+    var o = JSON.parse(raw);
+    return o && typeof o === 'object' ? o : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveCalcState(partial) {
+  try {
+    var cur = loadCalcState();
+    Object.keys(partial).forEach(function (k) { cur[k] = partial[k]; });
+    localStorage.setItem('portfolioView_ntf_v1', JSON.stringify(cur));
+  } catch (e) {}
+}
+
 function initCalculator() {
   const tabs = document.querySelectorAll('.age-tab');
   const amountInput = document.getElementById('monthlyAmount');
+  if (!tabs.length) return;
+
   let current = null;
+  const saved = loadCalcState();
+
+  if (amountInput && saved.monthlyAmount != null && saved.monthlyAmount !== '') {
+    amountInput.value = saved.monthlyAmount;
+  }
 
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
       tabs.forEach(function (t) { t.classList.remove('active'); });
       tab.classList.add('active');
       current = tab.dataset.age;
+      saveCalcState({ ageBracket: current });
       renderAllocation(current);
     });
   });
 
   if (amountInput) {
     amountInput.addEventListener('input', function () {
+      saveCalcState({ monthlyAmount: amountInput.value });
       if (current) renderAllocation(current);
     });
   }
 
-  if (tabs.length) tabs[0].click();
+  var start = saved.ageBracket || null;
+  var matched = false;
+  if (start) {
+    tabs.forEach(function (tab) {
+      if (tab.dataset.age === start) {
+        tab.click();
+        matched = true;
+      }
+    });
+  }
+  if (!matched && tabs.length) tabs[0].click();
 }
 
 document.addEventListener('DOMContentLoaded', initCalculator);
