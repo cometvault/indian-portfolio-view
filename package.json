@@ -1,0 +1,14 @@
+{
+  "name": "indian-portfolio-view",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Educational portfolio reference — Netlify frontend + Functions auth",
+  "scripts": {
+    "build": "echo static"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.6"
+  }
+}
