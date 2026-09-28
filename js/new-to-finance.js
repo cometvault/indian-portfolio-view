@@ -1,5 +1,5 @@
 /**
- * New To Finance — emergency fund, IPO bucket, localStorage.
+ * New To Finance — emergency fund, IPO bucket, localStorage + cloud.
  */
 (function () {
   var KEY = 'portfolioView_ntf_v1';
@@ -34,6 +34,9 @@
       });
       localStorage.setItem(KEY, JSON.stringify(cur));
     } catch (e) {}
+    if (window.PVAuth && typeof window.PVAuth.savePrefs === 'function') {
+      window.PVAuth.savePrefs(partial);
+    }
   }
 
   function updateEmergency() {
@@ -145,6 +148,25 @@
     restore();
     updateEmergency();
     updateIpo();
+
+    if (window.PVAuth && typeof window.PVAuth.loadPrefs === 'function') {
+      window.PVAuth.loadPrefs().then(function (prefs) {
+        if (!prefs) return;
+        var map = {
+          monthlyExpenses: 'monthlyExpenses',
+          coverMonths: 'coverMonths',
+          currentEmergency: 'currentEmergency',
+          ipoBalance: 'ipoBalance',
+          ipoAppAmount: 'ipoAppAmount'
+        };
+        Object.keys(map).forEach(function (k) {
+          var el = document.getElementById(map[k]);
+          if (el && prefs[k] != null && prefs[k] !== '') el.value = prefs[k];
+        });
+        updateEmergency();
+        updateIpo();
+      }).catch(function () {});
+    }
 
     ['monthlyExpenses', 'coverMonths', 'currentEmergency'].forEach(function (id) {
       var el = document.getElementById(id);
