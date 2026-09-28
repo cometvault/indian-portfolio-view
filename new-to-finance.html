@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/theme-font.css">
+  <link rel="stylesheet" href="css/logo.css">
+  <link rel="stylesheet" href="css/disclaimer.css">
+  <link rel="stylesheet" href="css/headline-align.css">
+  <link rel="stylesheet" href="css/inner.css">
+  <link rel="stylesheet" href="css/pie.css">
+  <link rel="stylesheet" href="css/new-to-finance.css">
+  <title>New To Finance - Start Here | Portfolio View</title>
+  <meta name="description" content="Beginner path: emergency fund, IPO savings bucket, then age-based mix. Educational only.">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Portfolio View India">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" fill="#0b1f3a"/>
+          <circle cx="20" cy="20" r="12" stroke="#2563eb" stroke-width="7" stroke-dasharray="28.3 47.1" stroke-dashoffset="0" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="12" stroke="#06b6d4" stroke-width="7" stroke-dasharray="25.1 50.3" stroke-dashoffset="-28.3" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="12" stroke="#8b5cf6" stroke-width="7" stroke-dasharray="15.7 59.7" stroke-dashoffset="-53.4" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="12" stroke="#f59e0b" stroke-width="7" stroke-dasharray="12.6 62.8" stroke-dashoffset="-69.1" transform="rotate(-90 20 20)" fill="none"/>
+          <circle cx="20" cy="20" r="7.5" fill="#0b1f3a"/>
+          <circle cx="20" cy="20" r="2.2" fill="#fff"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Portfolio View</span>
+          <span class="logo-tag">India</span>
+        </span>
+      </a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="new-to-finance.html" class="active">New To Finance</a>
+        <a href="ipo.html">IPOs</a>
+        <a href="gold-etf.html">Gold & ETF</a>
+        <a href="mutual-funds.html">Mutual Funds</a>
+        <a href="equity.html">Equity</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <p class="back-link"><a href="index.html">&larr; Overview</a></p>
+
+      <section class="hero-block">
+        <h1>New to finance - start here.</h1>
+        <p class="hero-sub">Build a buffer. Keep an IPO bucket. Then invest by age.</p>
+      </section>
+
+      <p class="ntf-intro">A simple order: <strong>1)</strong> emergency fund first, <strong>2)</strong> a separate IPO savings pot, <strong>3)</strong> then SIPs, equity, and gold shaped by your age. Educational shapes only - not advice.</p>
+
+      <section class="ntf-card" id="emergency">
+        <h2 class="ntf-heading">Emergency fund</h2>
+        <p class="ntf-sub">A cash buffer before market risk.</p>
+        <div class="ntf-form-grid">
+          <div class="ntf-field">
+            <label for="monthlyExpenses">Monthly expenses (Rs)</label>
+            <input type="number" id="monthlyExpenses" min="0" step="500" inputmode="numeric" placeholder="e.g. 40000">
+          </div>
+          <div class="ntf-field">
+            <label for="coverMonths">Months of cover</label>
+            <select id="coverMonths" aria-label="Months of emergency cover">
+              <option value="3" selected>3 months</option>
+              <option value="4">4 months</option>
+              <option value="5">5 months</option>
+              <option value="6">6 months</option>
+            </select>
+          </div>
+          <div class="ntf-field">
+            <label for="currentEmergency">Current emergency savings (Rs) <span class="optional">optional</span></label>
+            <input type="number" id="currentEmergency" min="0" step="500" inputmode="numeric" placeholder="e.g. 50000">
+          </div>
+        </div>
+        <div class="ntf-result" id="efResult" aria-live="polite">
+          <p class="ntf-target-label">Emergency fund target</p>
+          <p class="ntf-target-value" id="efTarget">-</p>
+          <p class="ntf-note" id="efHint">Keep this in a Savings Account or Liquid Fund / Liquid FD.</p>
+          <div class="ntf-progress-wrap" id="efProgressWrap" hidden>
+            <div class="ntf-progress-meta">
+              <span id="efProgressLabel">Progress</span>
+              <span id="efGapLabel"></span>
+            </div>
+            <div class="ntf-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="efBar">
+              <div class="ntf-progress-fill" id="efFill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ntf-card" id="ipo-savings">
+        <h2 class="ntf-heading">IPO savings balance</h2>
+        <p class="ntf-sub">A separate pot for Mainboard applications only.</p>
+        <div class="ntf-form-grid">
+          <div class="ntf-field">
+            <label for="ipoBalance">IPO savings balance (Rs)</label>
+            <input type="number" id="ipoBalance" min="0" step="1000" value="30000" inputmode="numeric">
+          </div>
+          <div class="ntf-field">
+            <label for="ipoAppAmount">Typical retail application (Rs)</label>
+            <input type="number" id="ipoAppAmount" min="1000" step="500" value="15000" inputmode="numeric">
+          </div>
+        </div>
+        <p class="ntf-display" id="ipoBalanceDisplay">IPO Savings Balance: Rs 30,000</p>
+        <p class="ntf-note">Reserved for applying to Mainboard IPOs only (not SME).</p>
+        <p class="ntf-note" id="ipoCoverage">Covers about 2 applications at Rs 15,000 each. Application size varies per IPO.</p>
+        <a href="ipo.html" class="btn btn-primary ntf-btn">View live IPOs</a>
+      </section>
+
+      <section class="ntf-section" id="blocks">
+        <h2 class="ntf-heading">Investment building blocks</h2>
+        <p class="ntf-sub">Learn the shape - no scheme names.</p>
+        <div class="ntf-blocks">
+          <a href="equity.html" class="ntf-block-card">
+            <span class="ntf-block-icon" aria-hidden="true">EQ</span>
+            <h3>Equity portfolio</h3>
+            <p>Mid, large, small - in a fixed proportion over time.</p>
+            <span class="ntf-learn">Learn more →</span>
+          </a>
+          <a href="mutual-funds.html" class="ntf-block-card">
+            <span class="ntf-block-icon" aria-hidden="true">MF</span>
+            <h3>Mutual funds & SIP</h3>
+            <p>Categories only - equity, debt, hybrid roles.</p>
+            <span class="ntf-learn">Learn more →</span>
+          </a>
+          <a href="gold-etf.html" class="ntf-block-card">
+            <span class="ntf-block-icon" aria-hidden="true">AU</span>
+            <h3>Gold & ETF</h3>
+            <p>City rates and how gold is often held.</p>
+            <span class="ntf-learn">Learn more →</span>
+          </a>
+          <a href="ipo.html" class="ntf-block-card">
+            <span class="ntf-block-icon" aria-hidden="true">IPO</span>
+            <h3>IPOs</h3>
+            <p>Who is listing, grey-market premium, open dates.</p>
+            <span class="ntf-learn">Learn more →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="calc-section ntf-card" id="calculator">
+        <h2 class="ntf-heading">Age-based portfolio mix</h2>
+        <p class="ntf-sub">Pick your age. See a directional split. Not a product list.</p>
+        <p class="ledger-eyebrow">Your mix at</p>
+        <div class="age-tabs" role="tablist" aria-label="Age bracket">
+          <button type="button" class="age-tab" data-age="20-25" role="tab">20 - 25</button>
+          <button type="button" class="age-tab" data-age="25-30" role="tab">25 - 30</button>
+          <button type="button" class="age-tab" data-age="30-40" role="tab">30 - 40</button>
+          <button type="button" class="age-tab" data-age="40-50" role="tab">40 - 50</button>
+          <button type="button" class="age-tab" data-age="50+" role="tab">50+</button>
+        </div>
+        <div class="calc-amount-row">
+          <label for="monthlyAmount">Monthly investable amount</label>
+          <input type="number" id="monthlyAmount" min="0" step="500" value="" placeholder="Rs amount, optional" aria-label="Optional monthly investable amount">
+        </div>
+        <div class="calc-result" id="calcResult" aria-live="polite">
+          <p class="calc-focus" id="calcFocus"></p>
+          <p class="calc-notes" id="calcNotes"></p>
+          <div class="pie-layout">
+            <div class="pie-data" id="calcLegend"></div>
+            <div class="pie-chart-wrap" id="calcPie"></div>
+          </div>
+          <div class="calc-detail-grid" id="calcDetails"></div>
+          <p class="amount-breakdown" id="amountBreakdown"></p>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <h2>Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is this telling me what to buy?</summary>
+            <p>No - it's a shape, not a stock pick.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Must I finish the emergency fund first?</summary>
+            <p>It is a common starting order - use it as a guide, not a rule.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Should I follow the age mix exactly?</summary>
+            <p>Use it as a start, not a finish line.</p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Educational only. Not advice. Not SEBI-registered.</p>
+    </div>
+  </footer>
+
+  <script src="js/security.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/new-to-finance.js"></script>
+  <script src="js/transitions.js"></script>
+</body>
+</html>
