@@ -1,9 +1,7 @@
 /**
- * Public Supabase config (anon key is safe in the browser).
- * Fill from: Supabase → Project Settings → API
- * Enable Google: Authentication → Providers → Google
+ * Public Supabase config (publishable/anon key only — never the secret key).
  */
 window.PV_SUPABASE = {
-  url: '',
-  anonKey: ''
+  url: 'https://yqqozmfixnnkepfijmfp.supabase.co',
+  anonKey: ''  // paste publishable key: sb_publishable_...
 };
