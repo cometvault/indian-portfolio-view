@@ -1,10 +1,11 @@
 /**
- * Auth via Supabase Google OAuth — shared session + nav on every page.
+ * Site-wide Google auth via Supabase — persistent session + profile in header.
  */
 (function (global) {
   var supabaseClient = null;
   var currentUser = null;
   var PREFS_META_KEY = 'pv_prefs';
+  var STORAGE_KEY = 'pv-supabase-auth';
 
   function cfg() {
     return global.PV_SUPABASE || {};
@@ -12,14 +13,14 @@
 
   function configured() {
     var c = cfg();
-    return !!(c.url && c.anonKey && c.url.indexOf('http') === 0);
+    return !!(c.url && c.anonKey && String(c.url).indexOf('http') === 0);
   }
 
   function getClient() {
     if (supabaseClient) return supabaseClient;
     if (!configured()) return null;
     if (!global.supabase || !global.supabase.createClient) {
-      console.warn('Supabase JS not loaded');
+      console.warn('[PVAuth] Supabase JS not loaded');
       return null;
     }
     supabaseClient = global.supabase.createClient(cfg().url, cfg().anonKey, {
@@ -27,8 +28,9 @@
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
+        flowType: 'pkce',
         storage: global.localStorage,
-        storageKey: 'pv-supabase-auth'
+        storageKey: STORAGE_KEY
       }
     });
     return supabaseClient;
@@ -40,11 +42,17 @@
     var meta = u.user_metadata || {};
     return {
       email: u.email || '',
-      name: meta.full_name || meta.name || (u.email ? u.email.split('@')[0] : ''),
+      name: meta.full_name || meta.name || (u.email ? u.email.split('@')[0] : 'Account'),
       avatar: meta.avatar_url || meta.picture || null,
       id: u.id,
       meta: meta
     };
+  }
+
+  function closeMenus() {
+    document.querySelectorAll('.profile-menu.is-open').forEach(function (m) {
+      m.classList.remove('is-open');
+    });
   }
 
   function paintNav(user) {
@@ -52,28 +60,94 @@
     var slots = document.querySelectorAll('[data-auth-nav]');
     slots.forEach(function (el) {
       el.innerHTML = '';
-      if (user && user.email) {
-        var label = document.createElement('span');
-        label.className = 'nav-user';
-        label.title = user.email;
-        label.textContent = user.name || user.email.split('@')[0];
-        var out = document.createElement('a');
-        out.href = '#';
+      if (user && (user.email || user.id)) {
+        var wrap = document.createElement('div');
+        wrap.className = 'profile-menu';
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'profile-trigger';
+        btn.setAttribute('aria-haspopup', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.title = user.email || 'Account';
+
+        if (user.avatar) {
+          var img = document.createElement('img');
+          img.src = user.avatar;
+          img.alt = '';
+          img.className = 'profile-avatar';
+          img.referrerPolicy = 'no-referrer';
+          btn.appendChild(img);
+        } else {
+          var av = document.createElement('span');
+          av.className = 'profile-avatar profile-avatar--letter';
+          av.textContent = (user.name || 'U').charAt(0).toUpperCase();
+          btn.appendChild(av);
+        }
+
+        var name = document.createElement('span');
+        name.className = 'profile-name';
+        name.textContent = user.name || 'Account';
+        btn.appendChild(name);
+
+        var caret = document.createElement('span');
+        caret.className = 'profile-caret';
+        caret.setAttribute('aria-hidden', 'true');
+        caret.textContent = '\u25be';
+        btn.appendChild(caret);
+
+        var dropdown = document.createElement('div');
+        dropdown.className = 'profile-dropdown';
+        dropdown.setAttribute('role', 'menu');
+
+        var emailRow = document.createElement('div');
+        emailRow.className = 'profile-email';
+        emailRow.textContent = user.email || '';
+        dropdown.appendChild(emailRow);
+
+        var linkNtf = document.createElement('a');
+        linkNtf.href = 'new-to-finance.html';
+        linkNtf.textContent = 'My calculator';
+        linkNtf.setAttribute('role', 'menuitem');
+        dropdown.appendChild(linkNtf);
+
+        var out = document.createElement('button');
+        out.type = 'button';
+        out.className = 'profile-logout';
         out.textContent = 'Log out';
+        out.setAttribute('role', 'menuitem');
         out.addEventListener('click', function (e) {
           e.preventDefault();
+          closeMenus();
           Auth.logout().finally(function () {
             window.location.href = 'index.html';
           });
         });
-        el.appendChild(label);
-        el.appendChild(out);
+        dropdown.appendChild(out);
+
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = wrap.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        wrap.appendChild(btn);
+        wrap.appendChild(dropdown);
+        el.appendChild(wrap);
       } else {
         var a = document.createElement('a');
         a.href = 'login.html';
+        a.className = 'nav-login-link';
         a.textContent = 'Login';
         el.appendChild(a);
       }
+    });
+  }
+
+  if (!global.__pvAuthClickBound) {
+    global.__pvAuthClickBound = true;
+    document.addEventListener('click', function () {
+      closeMenus();
     });
   }
 
@@ -109,7 +183,10 @@
       var redirectTo = window.location.origin + '/login.html';
       var result = await client.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: redirectTo }
+        options: {
+          redirectTo: redirectTo,
+          queryParams: { prompt: 'select_account' }
+        }
       });
       if (result.error) {
         return { ok: false, error: result.error.message || 'Google sign-in failed' };
@@ -119,8 +196,19 @@
 
     logout: async function () {
       var client = getClient();
-      if (!client) return { ok: true };
-      await client.auth.signOut();
+      if (client) {
+        try {
+          await client.auth.signOut({ scope: 'local' });
+        } catch (e) {}
+      }
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+        Object.keys(localStorage).forEach(function (k) {
+          if (k.indexOf('sb-') === 0 || k.indexOf('supabase') === 0) {
+            localStorage.removeItem(k);
+          }
+        });
+      } catch (e) {}
       paintNav(null);
       return { ok: true };
     },
@@ -131,7 +219,6 @@
         var raw = localStorage.getItem('portfolioView_ntf_v1');
         if (raw) local = JSON.parse(raw) || {};
       } catch (e) {}
-
       try {
         var session = await Auth.getSession();
         if (session && session.user) {
@@ -162,7 +249,6 @@
       try {
         localStorage.setItem('portfolioView_ntf_v1', JSON.stringify(cur));
       } catch (e) {}
-
       try {
         var client = getClient();
         if (!client) return cur;
@@ -172,27 +258,25 @@
         data[PREFS_META_KEY] = cur;
         await client.auth.updateUser({ data: data });
       } catch (e) {
-        console.warn('Cloud prefs save skipped', e);
+        console.warn('[PVAuth] cloud prefs save skipped', e);
       }
       return cur;
     },
 
     paintNav: paintNav,
 
-    initNav: function () {
+    initNav: async function () {
       var client = getClient();
       if (!client) {
         paintNav(null);
         return;
       }
-
-      client.auth.getSession().then(function (res) {
-        var user = publicUser(res.data && res.data.session);
-        paintNav(user);
-      }).catch(function () {
+      try {
+        var res = await client.auth.getSession();
+        paintNav(publicUser(res.data && res.data.session));
+      } catch (e) {
         paintNav(null);
-      });
-
+      }
       client.auth.onAuthStateChange(function (event, session) {
         paintNav(publicUser(session));
       });
@@ -201,11 +285,15 @@
 
   global.PVAuth = Auth;
 
+  function boot() {
+    if (document.querySelector('[data-auth-nav]')) {
+      Auth.initNav();
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      if (document.querySelector('[data-auth-nav]')) Auth.initNav();
-    });
-  } else if (document.querySelector('[data-auth-nav]')) {
-    Auth.initNav();
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 })(typeof window !== 'undefined' ? window : this);
