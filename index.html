@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://accounts.google.com; frame-src https://accounts.google.com https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Indian Portfolio View - Know your mix</title>
+  <title>Indian Portfolio View — Know your mix</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Pick your age. See your split. Educational portfolio mix reference for India.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,6 @@
 
   <main>
     <div class="container">
-
       <section class="hero-block">
         <h1>Know your mix before you invest a rupee.</h1>
         <p class="hero-sub">Pick your age. See your split. That's it.</p>
@@ -88,7 +87,7 @@
           </a>
           <a href="equity.html" class="hero-card">
             <h3>Equity</h3>
-            <p>Mid, large, small - in proportion.</p>
+            <p>Mid, large, small — in proportion.</p>
           </a>
         </div>
       </section>
@@ -103,7 +102,7 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>Is this telling me what to buy?</summary>
-            <p>No - it's a shape, not a stock pick.</p>
+            <p>No — it's a shape, not a stock pick.</p>
           </details>
           <details class="faq-item">
             <summary>Where's the data from?</summary>
@@ -115,7 +114,6 @@
           </details>
         </div>
       </section>
-
     </div>
   </main>
 
@@ -128,6 +126,8 @@
   <script src="js/security.js"></script>
   <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="js/auth-client.js"></script>
 </body>
 </html>
