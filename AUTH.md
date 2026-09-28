@@ -1,46 +1,48 @@
-# Auth setup (Netlify)
+# Auth — Google via Supabase
 
-## What you get
+Email/password signup is **removed**. Sign-in is **Continue with Google** only.
 
-- **Login** `/login.html` and **Sign up** `/signup.html`
-- API via Netlify Functions:
-  - `POST /api/signup` — create account
-  - `POST /api/login` — sign in (HttpOnly cookie)
-  - `POST /api/logout` — clear session
-  - `GET /api/me` — current user
-- Users stored in **Netlify Blobs** (password hashed with bcrypt)
-- Session = JWT in `pv_session` cookie (7 days)
+## 1. Create a Supabase project
 
-## One-time Netlify config
+1. Go to https://supabase.com → New project
+2. **Project Settings → API**
+   - Copy **Project URL**
+   - Copy **anon public** key
 
-1. Site linked to this repo (publish directory = repo root).
-2. **Site settings → Environment variables** → Add:
-   - **Key:** `AUTH_SECRET`
-   - **Value:** a long random string (32+ characters). Example:
-     ```bash
-     openssl rand -hex 32
-     ```
-3. Redeploy the site.
-4. Open `https://YOUR-SITE.netlify.app/signup.html` and create an account.
+## 2. Put them in the site
 
-## Local Functions (optional)
+Edit `js/supabase-config.js`:
 
-```bash
-npm install
-npx netlify dev
+```js
+window.PV_SUPABASE = {
+  url: 'https://YOUR_PROJECT.supabase.co',
+  anonKey: 'YOUR_ANON_KEY'
+};
 ```
 
-Requires Netlify CLI and the same `AUTH_SECRET` in a local `.env` (do not commit `.env`).
+Commit and let Netlify redeploy.
 
-## Security notes
+## 3. Enable Google provider
 
-- Never commit `AUTH_SECRET`.
-- Auth only works on the **Netlify** domain (Functions + Blobs).
-- GitHub Pages / static file hosts cannot run this backend.
-- This is **account preference** auth — not SEBI KYC, not a broker login.
+1. Supabase → **Authentication → Providers → Google** → Enable
+2. Google Cloud Console → Credentials → OAuth client ID (Web):
+   - Authorized JavaScript origins: `https://easy-nivesh.netlify.app`
+   - Authorized redirect URIs: `https://YOUR_PROJECT.supabase.co/auth/v1/callback`
+3. Paste Client ID + Secret into Supabase Google settings → Save
 
-## Next (later)
+## 4. Supabase URL config
 
-- Persist New To Finance fields server-side per user
-- Email verification / password reset
-- Rate limiting on `/api/login` and `/api/signup`
+**Authentication → URL configuration**
+
+- Site URL: `https://easy-nivesh.netlify.app`
+- Redirect URLs: `https://easy-nivesh.netlify.app/login.html` and `https://easy-nivesh.netlify.app/**`
+
+## 5. Test
+
+https://easy-nivesh.netlify.app/login.html → **Continue with Google**
+
+## Notes
+
+- Anon key is public by design. Never put **service_role** in the frontend.
+- `AUTH_SECRET` is not needed for Google auth.
+- Netlify site must be **Public**.
