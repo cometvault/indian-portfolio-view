@@ -1,0 +1,111 @@
+/* Auth pages */
+.auth-wrap {
+  max-width: 420px;
+  margin: 0 auto 3rem;
+  padding: 0 0.5rem;
+}
+
+.auth-card {
+  background: #fff;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 14px;
+  padding: 1.5rem 1.35rem 1.6rem;
+}
+
+.auth-card h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+}
+
+.auth-lead {
+  margin: 0 0 1.25rem;
+  font-size: 0.92rem;
+  color: var(--ink-muted, #4a5d73);
+  line-height: 1.45;
+}
+
+.auth-field { margin-bottom: 0.9rem; }
+
+.auth-field label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--ink, #0b1f3a);
+}
+
+.auth-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--ink, #0b1f3a);
+  background: #fff;
+}
+
+.auth-field input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: #2563eb;
+}
+
+.auth-error {
+  display: none;
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 0.88rem;
+}
+
+.auth-error.is-visible { display: block; }
+
+.auth-actions { margin-top: 1rem; }
+
+.auth-actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.auth-actions .btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  margin: 1.1rem 0 0;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--ink-muted, #4a5d73);
+}
+
+.auth-switch a {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.auth-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--ink-faint, #6b7c8f);
+  line-height: 1.4;
+}
+
+.nav-auth { margin-left: 0.25rem; }
+
+.nav-user {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted, #4a5d73);
+  padding: 0.35rem 0.55rem;
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
