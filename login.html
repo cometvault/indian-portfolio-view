@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://accounts.google.com; frame-src https://accounts.google.com https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/logo.css">
   <link rel="stylesheet" href="css/auth.css">
   <title>Login | Portfolio View</title>
-  <meta name="description" content="Sign in to save your beginner calculator preferences.">
+  <meta name="description" content="Sign in with Google to save preferences.">
 </head>
 <body>
   <header>
@@ -51,23 +51,12 @@
       <div class="auth-wrap">
         <div class="auth-card">
           <h1>Sign in</h1>
-          <p class="auth-lead">Access your saved preferences on this site. Educational only — not advice.</p>
+          <p class="auth-lead">Continue with Google. Educational only — not advice.</p>
           <div class="auth-error" id="authError" role="alert"></div>
-          <form id="loginForm" novalidate>
-            <div class="auth-field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@email.com">
-            </div>
-            <div class="auth-field">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" autocomplete="current-password" required minlength="8" placeholder="At least 8 characters">
-            </div>
-            <div class="auth-actions">
-              <button type="submit" class="btn btn-primary" id="submitBtn">Sign in</button>
-            </div>
-          </form>
-          <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
-          <p class="auth-note">Sessions use a secure cookie on this Netlify site only. No investment products are sold here.</p>
+          <div class="auth-actions">
+            <button type="button" class="btn btn-primary" id="googleBtn">Continue with Google</button>
+          </div>
+          <p class="auth-note">We only use your Google account to sign you in. No investment products are sold here.</p>
         </div>
       </div>
     </div>
@@ -77,32 +66,39 @@
       <p>Educational only. Not advice. Not SEBI-registered.</p>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="js/auth-client.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
+    (async function () {
       var err = document.getElementById('authError');
-      var btn = document.getElementById('submitBtn');
-      err.classList.remove('is-visible');
-      err.textContent = '';
-      btn.disabled = true;
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
+      var btn = document.getElementById('googleBtn');
+      function showError(msg) {
+        err.textContent = msg;
+        err.classList.add('is-visible');
+      }
       try {
-        var res = await PVAuth.login(email, password);
-        if (!res.ok) {
-          err.textContent = (res.data && res.data.error) || 'Could not sign in.';
-          err.classList.add('is-visible');
-          btn.disabled = false;
+        var session = await PVAuth.getSession();
+        if (session) {
+          window.location.replace('new-to-finance.html');
           return;
         }
-        window.location.href = 'new-to-finance.html';
-      } catch (ex) {
-        err.textContent = 'Network error. Is the site running on Netlify with Functions enabled?';
-        err.classList.add('is-visible');
-        btn.disabled = false;
+      } catch (e) {}
+      if (!PVAuth.isConfigured()) {
+        showError('Google sign-in is not configured yet. Add Supabase URL and anon key in js/supabase-config.js');
+        btn.disabled = true;
+        return;
       }
-    });
+      btn.addEventListener('click', async function () {
+        err.classList.remove('is-visible');
+        btn.disabled = true;
+        var res = await PVAuth.signInWithGoogle();
+        if (!res.ok) {
+          showError(res.error || 'Could not start Google sign-in.');
+          btn.disabled = false;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
