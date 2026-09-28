@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://accounts.google.com; frame-src https://accounts.google.com https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title>Mutual Funds | Portfolio View</title>
@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/disclaimer.css">
   <link rel="stylesheet" href="css/headline-align.css">
   <link rel="stylesheet" href="css/inner.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
   <header>
@@ -40,9 +41,10 @@
         <a href="index.html">Overview</a>
         <a href="new-to-finance.html">New To Finance</a>
         <a href="ipo.html">IPOs</a>
-        <a href="gold-etf.html">Gold &amp; ETF</a>
+        <a href="gold-etf.html">Gold & ETF</a>
         <a href="mutual-funds.html" class="active">Mutual Funds</a>
         <a href="equity.html">Equity</a>
+        <span class="nav-auth" data-auth-nav></span>
       </nav>
     </div>
   </header>
@@ -62,12 +64,12 @@
         <div class="category-card"><h3>Debt</h3><p>Where the stability lives.</p></div>
         <div class="category-card"><h3>Hybrid</h3><p>A bit of both, in one place.</p></div>
       </div>
-      <p class="page-footnote">No scheme names here - bring this shape to your own research.</p>
+      <p class="page-footnote">No scheme names here — bring this shape to your own research.</p>
       <section class="faq-section" id="faq">
         <h2>Questions</h2>
         <div class="faq-list">
           <details class="faq-item"><summary>Why no fund names?</summary><p>So you compare categories, not chase past returns.</p></details>
-          <details class="faq-item"><summary>Which category should I pick?</summary><p>Depends on your timeline - start with Overview.</p></details>
+          <details class="faq-item"><summary>Which category should I pick?</summary><p>Depends on your timeline — start with Overview.</p></details>
         </div>
       </section>
     </div>
@@ -75,5 +77,8 @@
   <footer><div class="container"><p>Educational only. Not advice. Not SEBI-registered.</p></div></footer>
   <script src="js/security.js"></script>
   <script src="js/transitions.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth-client.js"></script>
 </body>
 </html>
