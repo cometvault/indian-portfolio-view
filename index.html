@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/logo.css">
   <link rel="stylesheet" href="css/disclaimer.css">
   <link rel="stylesheet" href="css/headline-align.css">
-  <link rel="stylesheet" href="css/pie.css">
+  <link rel="stylesheet" href="css/new-to-finance.css">
 </head>
 <body>
   <header>
@@ -39,6 +39,7 @@
       </a>
       <nav>
         <a href="index.html" class="active">Overview</a>
+        <a href="new-to-finance.html">New To Finance</a>
         <a href="ipo.html">IPOs</a>
         <a href="gold-etf.html">Gold &amp; ETF</a>
         <a href="mutual-funds.html">Mutual Funds</a>
@@ -60,31 +61,9 @@
         </div>
       </section>
 
-      <section class="calc-section" id="calculator">
-        <p class="ledger-eyebrow">Your mix at</p>
-        <div class="age-tabs" role="tablist" aria-label="Age bracket">
-          <button type="button" class="age-tab" data-age="20-25" role="tab">20 - 25</button>
-          <button type="button" class="age-tab" data-age="25-30" role="tab">25 - 30</button>
-          <button type="button" class="age-tab" data-age="30-40" role="tab">30 - 40</button>
-          <button type="button" class="age-tab" data-age="40-50" role="tab">40 - 50</button>
-          <button type="button" class="age-tab" data-age="50+" role="tab">50+</button>
-        </div>
-
-        <div class="calc-amount-row">
-          <label for="monthlyAmount">Monthly amount</label>
-          <input type="number" id="monthlyAmount" min="0" step="500" value="" placeholder="Rs amount, optional" aria-label="Optional monthly amount">
-        </div>
-
-        <div class="calc-result" id="calcResult" aria-live="polite">
-          <p class="calc-focus" id="calcFocus"></p>
-          <p class="calc-notes" id="calcNotes"></p>
-          <div class="pie-layout">
-            <div class="pie-data" id="calcLegend"></div>
-            <div class="pie-chart-wrap" id="calcPie"></div>
-          </div>
-          <div class="calc-detail-grid" id="calcDetails"></div>
-          <p class="amount-breakdown" id="amountBreakdown"></p>
-        </div>
+      <section class="ntf-teaser" id="beginner-teaser">
+        <p class="ntf-teaser-text">Just starting out? Try the beginner path on the New To Finance page.</p>
+        <a href="new-to-finance.html" class="btn btn-primary">New To Finance →</a>
       </section>
 
       <section class="dest-section">
@@ -114,7 +93,7 @@
 
       <section class="cta-band">
         <p class="cta-line">Your age. Your mix. Ten seconds.</p>
-        <a href="#calculator" class="btn btn-primary cta-btn">See my mix</a>
+        <a href="new-to-finance.html#calculator" class="btn btn-primary cta-btn">See my mix →</a>
       </section>
 
       <section class="faq-section" id="faq">
@@ -145,7 +124,6 @@
   </footer>
 
   <script src="js/security.js"></script>
-  <script src="js/calculator.js"></script>
   <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
 </body>
