@@ -2,35 +2,65 @@
 
 Educational portfolio mix reference for the Indian market.
 
-**Live site:** https://cometvault.github.io/indian-portfolio-view/
+**Public site (frontend):** hosted on **Netlify** (your Netlify URL).
+
+**Source code:** this GitHub repository — keep it **private**. Do **not** use GitHub Pages for the public site.
 
 No buy / sell / hold advice. No scheme or ticker names. Directional shapes only.
 
 ---
 
-## Pages
+## Architecture (current → next)
 
-| Page | What you get |
-|------|----------------|
-| **Overview** | Age-based mix calculator + interactive pie |
-| **IPOs** | Mainboard & SME grey-market premium (GMP + %) |
-| **Gold & ETF** | 22K / 24K rates for Bangalore, Mumbai, Kolkata, Hyderabad |
-| **Mutual Funds** | Equity / Debt / Hybrid category roles only |
-| **Equity** | Fixed 50% Mid · 30% Large · 20% Small sleeve |
+| Layer | Where | Who can access |
+|-------|--------|----------------|
+| **Frontend (public)** | Netlify | Anyone with your Netlify URL |
+| **Source code** | GitHub (private repo) | You (+ collaborators you invite) |
+| **Backend / login** | Planned next | API + auth (not in this static site yet) |
+
+GitHub is **not** the public website. Disable GitHub Pages so `*.github.io` is not a second public copy.
 
 ---
 
-## Deploy (GitHub Pages)
+## Disable GitHub Pages (required)
 
-Already configured for this repo.
+1. Open the repo on GitHub → **Settings** → **Pages**.
+2. Under **Build and deployment** → **Source**, choose **None** (or remove the `main` / root publish).
+3. Save. The site at `https://cometvault.github.io/indian-portfolio-view/` should stop serving.
 
-1. **Settings → Pages**
-   - Source: **Deploy from a branch**
-   - Branch: `main` / `/ (root)`
-2. Wait ~1 minute.
-3. Open: `https://<user>.github.io/indian-portfolio-view/`
+Optional: delete any custom domain on Pages if you ever added one.
 
-Project pages need no CNAME. A `.nojekyll` file is included so GitHub Pages serves all static files as-is.
+---
+
+## Make the repo private (recommended)
+
+1. Repo → **Settings** → **General** → **Danger Zone** → **Change repository visibility** → **Make private**.
+2. Netlify can still deploy: connect the repo with the **Netlify GitHub App** (it keeps access after the repo becomes private).
+
+---
+
+## Netlify setup (frontend only)
+
+1. Netlify → **Add new site** → Import from Git → this repo.
+2. **Build settings** for a static site:
+   - Build command: *(leave empty)* or `echo "static"`
+   - Publish directory: `/` (repo root)
+3. Deploy. Use the Netlify URL (or your custom domain) as the **only** public frontend.
+
+Continuous deploy: every push to `main` rebuilds on Netlify if the site is linked to the repo.
+
+---
+
+## Pages
+
+| Page | Content |
+|------|---------|
+| **Overview** | Hub + teaser to beginner path |
+| **New To Finance** | Emergency fund, IPO bucket, age mix calculator |
+| **IPOs** | GMP + % |
+| **Gold & ETF** | City rates |
+| **Mutual Funds** | Categories only |
+| **Equity** | 50 / 30 / 20 |
 
 ---
 
@@ -38,36 +68,33 @@ Project pages need no CNAME. A `.nojekyll` file is included so GitHub Pages serv
 
 | File | Source | Refresh |
 |------|--------|---------|
-| `data/ipo.json` | ipowatch.in (public GMP table) | Nightly Action + on-page load |
-| `data/gold.json` | goodreturns.in city pages | Nightly Action + on-page load |
+| `data/ipo.json` | ipowatch.in | Nightly Action + on-page load |
+| `data/gold.json` | goodreturns.in | Nightly Action + on-page load |
 
-Manual refresh: **Actions → Update market data nightly → Run workflow**.
+Actions still run on the private repo if Actions are enabled.
 
-Scraping is best-effort. If a source changes layout, existing JSON is left unchanged until fixed.
+---
+
+## Backend / login (next update)
+
+This project is still **static HTML/CSS/JS**. Login and a real backend will need:
+
+- An API host (e.g. Netlify Functions, Cloudflare Workers, or a small Node/Python service)
+- Auth (e.g. email OTP, OAuth, or a provider like Clerk / Auth0 / Supabase Auth)
+- Secrets only on the server — never in the frontend repo as public env values meant to stay secret
+
+Until then, the Netlify site is public HTML only; treat it as educational content, not a secured app.
 
 ---
 
 ## Local preview
 
 ```bash
-# from repo root
 python3 -m http.server 8080
-# open http://localhost:8080
 ```
-
-Or: `npx serve .`
 
 ---
 
 ## Disclaimer
 
-A full mandatory disclaimer (scroll + checkbox) appears on every page load. Content is educational only, not SEBI-registered advice, and carries no liability for decisions made using this site.
-
----
-
-## Stack
-
-- Static HTML / CSS / vanilla JS
-- Pure SVG pie chart (no chart library)
-- GitHub Actions (Python + BeautifulSoup) for nightly data
-- Space Grotesk + Inter typography
+Educational only. Not SEBI-registered. Not investment advice.
