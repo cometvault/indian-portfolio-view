@@ -69,7 +69,6 @@ function buildPieSVG(segments, size) {
   const inner = r * 0.58;
   let angle = 0;
   const paths = [];
-
   segments.forEach(function (s) {
     const sweep = (s.pct / 100) * 360;
     if (sweep <= 0) return;
@@ -80,35 +79,16 @@ function buildPieSVG(segments, size) {
     const p2 = polar(cx, cy, r, end);
     const p3 = polar(cx, cy, inner, end);
     const p4 = polar(cx, cy, inner, start);
-    const d = [
-      'M', p1.x, p1.y,
-      'A', r, r, 0, large, 1, p2.x, p2.y,
-      'L', p3.x, p3.y,
-      'A', inner, inner, 0, large, 0, p4.x, p4.y,
-      'Z'
-    ].join(' ');
-    paths.push(
-      '<path class="pie-slice" data-key="' + s.key + '" d="' + d + '" fill="' + s.color + '" ' +
-      'stroke="#fff" stroke-width="3">' +
-      '<title>' + s.label + ': ' + s.pct + '%</title></path>'
-    );
+    const d = ['M', p1.x, p1.y, 'A', r, r, 0, large, 1, p2.x, p2.y, 'L', p3.x, p3.y, 'A', inner, inner, 0, large, 0, p4.x, p4.y, 'Z'].join(' ');
+    paths.push('<path class="pie-slice" data-key="' + s.key + '" d="' + d + '" fill="' + s.color + '" stroke="#fff" stroke-width="3"><title>' + s.label + ': ' + s.pct + '%</title></path>');
     angle = end;
   });
-
-  return (
-    '<svg class="pie-svg" viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" role="img" aria-label="Allocation pie">' +
-    paths.join('') +
-    '<circle cx="' + cx + '" cy="' + cy + '" r="' + (inner - 2) + '" fill="#fff"/>' +
-    '<text class="pie-center-label" x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle">Mix</text>' +
-    '<text class="pie-center-pct" x="' + cx + '" y="' + (cy + 16) + '" text-anchor="middle">100%</text>' +
-    '</svg>'
-  );
+  return '<svg class="pie-svg" viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" role="img" aria-label="Allocation pie">' + paths.join('') + '<circle cx="' + cx + '" cy="' + cy + '" r="' + (inner - 2) + '" fill="#fff"/><text class="pie-center-label" x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle">Mix</text><text class="pie-center-pct" x="' + cx + '" y="' + (cy + 16) + '" text-anchor="middle">100%</text></svg>';
 }
 
 function renderAllocation(key) {
   const a = ALLOCATIONS[key];
   if (!a) return;
-
   const result = document.getElementById('calcResult');
   const focus = document.getElementById('calcFocus');
   const notes = document.getElementById('calcNotes');
@@ -117,106 +97,60 @@ function renderAllocation(key) {
   const details = document.getElementById('calcDetails');
   const amountEl = document.getElementById('monthlyAmount');
   const breakdown = document.getElementById('amountBreakdown');
-
   if (focus) focus.textContent = a.focus;
   if (notes) notes.textContent = a.notes;
-
   const segments = [
-    { key: 'sip',    label: SEG.sip.label,    pct: a.sip,    color: SEG.sip.color,    soft: SEG.sip.soft,    detail: a.sipDetail },
+    { key: 'sip', label: SEG.sip.label, pct: a.sip, color: SEG.sip.color, soft: SEG.sip.soft, detail: a.sipDetail },
     { key: 'equity', label: SEG.equity.label, pct: a.equity, color: SEG.equity.color, soft: SEG.equity.soft, detail: a.equityDetail },
-    { key: 'debt',   label: SEG.debt.label,   pct: a.debt,   color: SEG.debt.color,   soft: SEG.debt.soft,   detail: a.debtDetail },
-    { key: 'gold',   label: SEG.gold.label,   pct: a.gold,   color: SEG.gold.color,   soft: SEG.gold.soft,   detail: a.goldDetail }
+    { key: 'debt', label: SEG.debt.label, pct: a.debt, color: SEG.debt.color, soft: SEG.debt.soft, detail: a.debtDetail },
+    { key: 'gold', label: SEG.gold.label, pct: a.gold, color: SEG.gold.color, soft: SEG.gold.soft, detail: a.goldDetail }
   ];
-
   if (pieHost) {
     pieHost.innerHTML = buildPieSVG(segments, 220);
     pieHost.querySelectorAll('.pie-slice').forEach(function (slice) {
       slice.addEventListener('mouseenter', function () {
-        pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
-          s.classList.remove('is-active');
-          s.classList.add('is-dim');
-        });
-        slice.classList.add('is-active');
-        slice.classList.remove('is-dim');
+        pieHost.querySelectorAll('.pie-slice').forEach(function (s) { s.classList.remove('is-active'); s.classList.add('is-dim'); });
+        slice.classList.add('is-active'); slice.classList.remove('is-dim');
         const k = slice.getAttribute('data-key');
-        if (legend) {
-          legend.querySelectorAll('.pie-row').forEach(function (row) {
-            row.classList.toggle('is-active', row.getAttribute('data-key') === k);
-          });
-        }
+        if (legend) legend.querySelectorAll('.pie-row').forEach(function (row) { row.classList.toggle('is-active', row.getAttribute('data-key') === k); });
       });
       slice.addEventListener('mouseleave', function () {
-        pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
-          s.classList.remove('is-active', 'is-dim');
-        });
-        if (legend) legend.querySelectorAll('.pie-row').forEach(function (row) {
-          row.classList.remove('is-active');
-        });
+        pieHost.querySelectorAll('.pie-slice').forEach(function (s) { s.classList.remove('is-active', 'is-dim'); });
+        if (legend) legend.querySelectorAll('.pie-row').forEach(function (row) { row.classList.remove('is-active'); });
       });
     });
   }
-
   if (legend) {
     const amount = parseFloat(amountEl && amountEl.value) || 0;
     legend.innerHTML = segments.map(function (s) {
-      const rupee = amount > 0
-        ? '<span class="pie-rupee">' + formatINR(amount * s.pct / 100) + '</span>'
-        : '';
-      return (
-        '<div class="pie-row" data-key="' + s.key + '" style="--seg:' + s.color + ';--soft:' + s.soft + '">' +
-        '<span class="pie-dot"></span>' +
-        '<span class="pie-label">' + s.label + '</span>' +
-        '<span class="pie-pct">' + s.pct + '%</span>' +
-        rupee +
-        '</div>'
-      );
+      const rupee = amount > 0 ? '<span class="pie-rupee">' + formatINR(amount * s.pct / 100) + '</span>' : '';
+      return '<div class="pie-row" data-key="' + s.key + '" style="--seg:' + s.color + ';--soft:' + s.soft + '"><span class="pie-dot"></span><span class="pie-label">' + s.label + '</span><span class="pie-pct">' + s.pct + '%</span>' + rupee + '</div>';
     }).join('');
-
     legend.querySelectorAll('.pie-row').forEach(function (row) {
       row.addEventListener('mouseenter', function () {
         const k = row.getAttribute('data-key');
-        if (pieHost) {
-          pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
-            const match = s.getAttribute('data-key') === k;
-            s.classList.toggle('is-active', match);
-            s.classList.toggle('is-dim', !match);
-          });
-        }
+        if (pieHost) pieHost.querySelectorAll('.pie-slice').forEach(function (s) { const match = s.getAttribute('data-key') === k; s.classList.toggle('is-active', match); s.classList.toggle('is-dim', !match); });
         row.classList.add('is-active');
       });
       row.addEventListener('mouseleave', function () {
-        if (pieHost) pieHost.querySelectorAll('.pie-slice').forEach(function (s) {
-          s.classList.remove('is-active', 'is-dim');
-        });
+        if (pieHost) pieHost.querySelectorAll('.pie-slice').forEach(function (s) { s.classList.remove('is-active', 'is-dim'); });
         row.classList.remove('is-active');
       });
     });
   }
-
   if (details) {
     details.innerHTML = segments.map(function (s) {
-      return (
-        '<div class="calc-detail" style="border-left:3px solid ' + s.color + '">' +
-        '<h4>' + s.label + '</h4>' +
-        '<div class="pct">' + s.pct + '%</div>' +
-        '<p>' + s.detail + '</p></div>'
-      );
+      return '<div class="calc-detail" style="border-left:3px solid ' + s.color + '"><h4>' + s.label + '</h4><div class="pct">' + s.pct + '%</div><p>' + s.detail + '</p></div>';
     }).join('');
   }
-
   const amount = parseFloat(amountEl && amountEl.value) || 0;
   if (breakdown) {
     if (amount > 0) {
-      breakdown.innerHTML =
-        'Of <span>' + formatINR(amount) + '</span> / month → ' +
-        segments.map(function (s) {
-          return s.label + ' <span>' + formatINR(amount * s.pct / 100) + '</span>';
-        }).join(' · ');
+      breakdown.innerHTML = 'Of <span>' + formatINR(amount) + '</span> / month → ' + segments.map(function (s) { return s.label + ' <span>' + formatINR(amount * s.pct / 100) + '</span>'; }).join(' · ');
     } else {
       breakdown.textContent = '';
     }
   }
-
   if (result) result.classList.add('visible');
 }
 
@@ -237,20 +171,20 @@ function saveCalcState(partial) {
     Object.keys(partial).forEach(function (k) { cur[k] = partial[k]; });
     localStorage.setItem('portfolioView_ntf_v1', JSON.stringify(cur));
   } catch (e) {}
+  if (window.PVAuth && typeof window.PVAuth.savePrefs === 'function') {
+    window.PVAuth.savePrefs(partial);
+  }
 }
 
 function initCalculator() {
   const tabs = document.querySelectorAll('.age-tab');
   const amountInput = document.getElementById('monthlyAmount');
   if (!tabs.length) return;
-
   let current = null;
   const saved = loadCalcState();
-
   if (amountInput && saved.monthlyAmount != null && saved.monthlyAmount !== '') {
     amountInput.value = saved.monthlyAmount;
   }
-
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
       tabs.forEach(function (t) { t.classList.remove('active'); });
@@ -260,14 +194,12 @@ function initCalculator() {
       renderAllocation(current);
     });
   });
-
   if (amountInput) {
     amountInput.addEventListener('input', function () {
       saveCalcState({ monthlyAmount: amountInput.value });
       if (current) renderAllocation(current);
     });
   }
-
   var start = saved.ageBracket || null;
   var matched = false;
   if (start) {
@@ -281,4 +213,22 @@ function initCalculator() {
   if (!matched && tabs.length) tabs[0].click();
 }
 
-document.addEventListener('DOMContentLoaded', initCalculator);
+document.addEventListener('DOMContentLoaded', function () {
+  initCalculator();
+  if (window.PVAuth && typeof window.PVAuth.loadPrefs === 'function') {
+    window.PVAuth.loadPrefs().then(function (prefs) {
+      if (!prefs) return;
+      var amountInput = document.getElementById('monthlyAmount');
+      if (amountInput && prefs.monthlyAmount != null && prefs.monthlyAmount !== '') {
+        amountInput.value = prefs.monthlyAmount;
+      }
+      if (prefs.ageBracket) {
+        document.querySelectorAll('.age-tab').forEach(function (tab) {
+          if (tab.dataset.age === prefs.ageBracket) tab.click();
+        });
+      } else if (amountInput && amountInput.value) {
+        amountInput.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }).catch(function () {});
+  }
+});
