@@ -1,0 +1,226 @@
+/* New To Finance page + Overview teaser */
+
+.ntf-intro {
+  max-width: 42rem;
+  margin: 0 0 2rem;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-muted, #4a5d73);
+}
+
+.ntf-card {
+  background: #fff;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 14px;
+  padding: 1.35rem 1.35rem 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.ntf-heading {
+  margin: 0 0 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink, #0b1f3a);
+}
+
+.ntf-sub {
+  margin: 0 0 1.15rem;
+  font-size: 0.9rem;
+  color: var(--ink-muted, #4a5d73);
+}
+
+.ntf-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.ntf-field label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink, #0b1f3a);
+  margin-bottom: 0.35rem;
+}
+
+.ntf-field .optional {
+  font-weight: 500;
+  color: var(--ink-faint, #6b7c8f);
+  font-size: 0.75rem;
+}
+
+.ntf-field input,
+.ntf-field select {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--ink, #0b1f3a);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.ntf-field input:focus,
+.ntf-field select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: #2563eb;
+}
+
+.ntf-target-label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint, #6b7c8f);
+}
+
+.ntf-target-value {
+  margin: 0.2rem 0 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink, #0b1f3a);
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+}
+
+.ntf-note {
+  margin: 0 0 0.65rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted, #4a5d73);
+  line-height: 1.45;
+}
+
+.ntf-display {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink, #0b1f3a);
+}
+
+.ntf-progress-wrap {
+  margin-top: 1rem;
+}
+
+.ntf-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-muted, #4a5d73);
+  margin-bottom: 0.35rem;
+}
+
+.ntf-progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.ntf-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  transition: width 0.35s ease;
+}
+
+.ntf-btn {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.ntf-section {
+  margin-bottom: 1.75rem;
+}
+
+.ntf-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.85rem;
+}
+
+.ntf-block-card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.1rem 1.15rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ntf-block-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 16px rgba(11, 31, 58, 0.08);
+  text-decoration: none;
+}
+
+.ntf-block-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 8px;
+  background: #0b1f3a;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.65rem;
+}
+
+.ntf-block-card h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.98rem;
+  color: var(--ink, #0b1f3a);
+}
+
+.ntf-block-card p {
+  margin: 0 0 0.65rem;
+  font-size: 0.86rem;
+  color: var(--ink-muted, #4a5d73);
+  line-height: 1.4;
+}
+
+.ntf-learn {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.ntf-teaser {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.25rem;
+  background: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.ntf-teaser-text {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink, #0b1f3a);
+  max-width: 36rem;
+}
+
+@media (max-width: 700px) {
+  nav a { padding: 0.3rem 0.45rem; font-size: 0.75rem; }
+  .ntf-card { padding: 1.1rem 1rem; }
+}
