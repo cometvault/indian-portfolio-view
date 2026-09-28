@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://accounts.google.com; frame-src https://accounts.google.com https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Gold &amp; ETF | Portfolio View</title>
+  <title>Gold & ETF | Portfolio View</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/headline-align.css">
   <link rel="stylesheet" href="css/inner.css">
   <link rel="stylesheet" href="css/gold-cards.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
   <header>
@@ -41,9 +42,10 @@
         <a href="index.html">Overview</a>
         <a href="new-to-finance.html">New To Finance</a>
         <a href="ipo.html">IPOs</a>
-        <a href="gold-etf.html" class="active">Gold &amp; ETF</a>
+        <a href="gold-etf.html" class="active">Gold & ETF</a>
         <a href="mutual-funds.html">Mutual Funds</a>
         <a href="equity.html">Equity</a>
+        <span class="nav-auth" data-auth-nav></span>
       </nav>
     </div>
   </header>
@@ -56,7 +58,7 @@
       </section>
       <div class="status-bar">
         <button class="btn" id="refreshGoldBtn" type="button"><span id="refreshGoldIcon">&#8635;</span> Refresh</button>
-        <span id="goldLastUpdated">Pulling today's numbers...</span>
+        <span id="goldLastUpdated">Pulling today's numbers…</span>
       </div>
       <div class="gold-cards" id="goldCards"></div>
       <section class="hierarchy-section">
@@ -67,12 +69,12 @@
           <div class="hold-row"><span class="hold-name">Physical gold</span><span class="hold-desc">Yours to hold, harder to trade.</span></div>
         </div>
       </section>
-      <p class="page-footnote">Retail quotes vary by jeweller - use this as a city-level reference.</p>
+      <p class="page-footnote">Retail quotes vary by jeweller — use this as a city-level reference.</p>
       <section class="faq-section" id="faq">
         <h2>Questions</h2>
         <div class="faq-list">
-          <details class="faq-item"><summary>Why is ETF ranked first?</summary><p>Liquidity - you can exit in seconds, not days.</p></details>
-          <details class="faq-item"><summary>Do rates include making charges?</summary><p>No - this is the metal rate only.</p></details>
+          <details class="faq-item"><summary>Why is ETF ranked first?</summary><p>Liquidity — you can exit in seconds, not days.</p></details>
+          <details class="faq-item"><summary>Do rates include making charges?</summary><p>No — this is the metal rate only.</p></details>
         </div>
       </section>
     </div>
@@ -81,5 +83,8 @@
   <script src="js/security.js"></script>
   <script src="js/gold.js"></script>
   <script src="js/transitions.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth-client.js"></script>
 </body>
 </html>
