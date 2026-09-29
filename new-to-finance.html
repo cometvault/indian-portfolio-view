@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://accounts.google.com; frame-src https://accounts.google.com https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="css/inner.css">
   <link rel="stylesheet" href="css/pie.css">
   <link rel="stylesheet" href="css/new-to-finance.css">
-  <link rel="stylesheet" href="css/auth.css">
   <title>New To Finance — Start Here | Portfolio View</title>
   <meta name="description" content="Beginner path: emergency fund, IPO savings bucket, then age-based mix. Educational only.">
 </head>
@@ -47,7 +46,6 @@
         <a href="gold-etf.html">Gold & ETF</a>
         <a href="mutual-funds.html">Mutual Funds</a>
         <a href="equity.html">Equity</a>
-        <span class="nav-auth" data-auth-nav></span>
       </nav>
     </div>
   </header>
@@ -131,8 +129,8 @@
         <div class="age-tabs" role="tablist" aria-label="Age bracket">
           <button type="button" class="age-tab" data-age="20-25" role="tab">20–25</button>
           <button type="button" class="age-tab" data-age="25-30" role="tab">25–30</button>
-          <button type="button" class="age-tab" data-age="30-40" role="tab">30–40</button>
           <button type="button" class="age-tab" data-age="40-50" role="tab">40–50</button>
+          <button type="button" class="age-tab" data-age="30-40" role="tab">30–40</button>
           <button type="button" class="age-tab" data-age="50+" role="tab">50+</button>
         </div>
         <div class="calc-amount-row">
@@ -169,8 +167,5 @@
   <script src="js/calculator.js"></script>
   <script src="js/new-to-finance.js"></script>
   <script src="js/transitions.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/auth-client.js"></script>
 </body>
 </html>
