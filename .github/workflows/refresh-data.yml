@@ -1,0 +1,17 @@
+name: Refresh market data
+on:
+  schedule:
+    - cron: "30 6 * * 1-5"
+    - cron: "30 12 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Note
+        run: |
+          echo "Wire scrapers for data/ipo.json and data/gold.json here."
+          echo "Schema: see data/SCHEMA.md"
+          date -u
