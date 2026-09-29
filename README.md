@@ -1,25 +1,26 @@
 # Portfolio View India
 
-Educational portfolio mix reference for India. Static HTML/CSS/JS only.
+Educational portfolio reference for first-time investors in India.
 
-## Live site (GitHub Pages)
+**Live:** https://cometvault.github.io/indian-portfolio-view/
 
-Enable Pages: **Settings → Pages → Deploy from branch `main` / root (/**).
+## Pages
 
-Site URL:
+- Home (`index.html`) — age mix widget + market snapshot
+- New To Finance — cash flow, emergency fund, age mix, optional IPO pot, monthly plan
+- IPOs — open / upcoming / closed, Mainboard + SME
+- Gold & ETF — city rates
+- Mutual Funds / Equity — category shapes only
+- About, Glossary, Disclaimer
 
-**https://cometvault.github.io/indian-portfolio-view/**
+## Stack
 
-## Local
+Static HTML + `css/styles.css` + `js/app.js` + `data/*.json`
 
-```bash
-npx serve .
-```
+## Data
 
-Or open `index.html` in a browser.
+See `data/SCHEMA.md`. Workflow stub: `.github/workflows/refresh-data.yml`
 
 ## Notes
 
-- Educational only. Not SEBI-registered. Not investment advice.
-- No login. No backend required.
-- Netlify is no longer used for this project.
+Educational only. Not investment advice. Not SEBI-registered.
