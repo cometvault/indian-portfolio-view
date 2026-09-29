@@ -1,94 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>IPOs — Grey Market Premium | Portfolio View</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>IPOs — Portfolio View India</title>
+  <meta name="description" content="What’s open, how IPOs work, and how to think about grey-market premium. Educational only.">
+  <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/ipo.html">
+  <meta name="theme-color" content="#0f6b4f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%230f6b4f'/%3E%3Ccircle cx='20' cy='20' r='2' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/theme-font.css">
-  <link rel="stylesheet" href="css/logo.css">
-  <link rel="stylesheet" href="css/disclaimer.css">
-  <link rel="stylesheet" href="css/headline-align.css">
-  <link rel="stylesheet" href="css/inner.css">
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="Portfolio View India">
-        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <circle cx="20" cy="20" r="19" fill="#0b1f3a"/>
-          <circle cx="20" cy="20" r="12" stroke="#2563eb" stroke-width="7" stroke-dasharray="28.3 47.1" stroke-dashoffset="0" transform="rotate(-90 20 20)" fill="none"/>
-          <circle cx="20" cy="20" r="12" stroke="#06b6d4" stroke-width="7" stroke-dasharray="25.1 50.3" stroke-dashoffset="-28.3" transform="rotate(-90 20 20)" fill="none"/>
-          <circle cx="20" cy="20" r="12" stroke="#8b5cf6" stroke-width="7" stroke-dasharray="15.7 59.7" stroke-dashoffset="-53.4" transform="rotate(-90 20 20)" fill="none"/>
-          <circle cx="20" cy="20" r="12" stroke="#f59e0b" stroke-width="7" stroke-dasharray="12.6 62.8" stroke-dashoffset="-69.1" transform="rotate(-90 20 20)" fill="none"/>
-          <circle cx="20" cy="20" r="7.5" fill="#0b1f3a"/>
-          <circle cx="20" cy="20" r="2.2" fill="#fff"/>
-        </svg>
-        <span class="logo-text">
-          <span class="logo-name">Portfolio View</span>
-          <span class="logo-tag">India</span>
-        </span>
-      </a>
-      <nav>
-        <a href="index.html">Overview</a>
-        <a href="new-to-finance.html">New To Finance</a>
-        <a href="ipo.html" class="active">IPOs</a>
-        <a href="gold-etf.html">Gold & ETF</a>
-        <a href="mutual-funds.html">Mutual Funds</a>
-        <a href="equity.html">Equity</a>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <div class="container">
-      <p class="back-link"><a href="index.html">&larr; Overview</a></p>
-      <section class="hero-block">
-        <h1>Who's listing, and at what price.</h1>
-        <p class="hero-sub">Grey-market premium, live from public sources.</p>
-      </section>
-      <div class="status-bar">
-        <button class="btn" id="refreshBtn" type="button"><span id="refreshIcon">&#8635;</span> Refresh</button>
-        <span id="lastUpdated">Pulling today's numbers…</span>
-      </div>
-      <div class="ipo-status-filters" role="tablist" aria-label="IPO status">
-        <button type="button" class="ipo-filter-btn active" data-status="Open" role="tab" aria-selected="true">Open</button>
-        <button type="button" class="ipo-filter-btn" data-status="Upcoming" role="tab" aria-selected="false">Upcoming</button>
-        <button type="button" class="ipo-filter-btn" data-status="Closed" role="tab" aria-selected="false">Closed</button>
-      </div>
-      <h2 class="table-heading">Mainboard</h2>
-      <div class="table-wrap" style="margin-bottom: 2rem;">
-        <table>
-          <thead><tr><th>Company</th><th>Price band</th><th>GMP</th><th>GMP %</th><th>Opens</th><th>Closes</th><th>Status</th></tr></thead>
-          <tbody id="mainboardBody"><tr><td colspan="7" class="empty-cell">Pulling today's numbers…</td></tr></tbody>
-        </table>
-      </div>
-      <h2 class="table-heading">SME</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Company</th><th>Price band</th><th>GMP</th><th>GMP %</th><th>Opens</th><th>Closes</th><th>Status</th></tr></thead>
-          <tbody id="smeBody"><tr><td colspan="7" class="empty-cell">Pulling today's numbers…</td></tr></tbody>
-        </table>
-      </div>
-      <p class="page-footnote">GMP is unofficial and moves fast — treat it as a mood, not a price.</p>
-      <section class="faq-section" id="faq">
-        <h2>Questions</h2>
-        <div class="faq-list">
-          <details class="faq-item"><summary>What is GMP?</summary><p>What the market's willing to pay before listing, unofficially.</p></details>
-          <details class="faq-item"><summary>Does a high GMP mean I should apply?</summary><p>No — it's sentiment, not a guarantee.</p></details>
-        </div>
-      </section>
-    </div>
-  </main>
-  <footer><div class="container"><p>Educational only. Not advice. Not SEBI-registered.</p></div></footer>
-  <script src="js/security.js"></script>
-  <script src="js/ipo.js"></script>
-  <script src="js/transitions.js"></script>
-</body>
-</html>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
+      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#0f6b4f"/>
+        <circle cx="20" cy="20" r="11" stroke="#fff" stroke-width="5" stroke-dasharray="24 45" transform="rotate(-90 20 20)" fill="none" opacity="0.95"/>
+        <circle cx="20" cy="20" r="11" stroke="#b8892b" stroke-width="5" stroke-dasharray="14 55" stroke-dashoffset="-24" transform="rotate(-90 20 20)" fill="none"/>
+        <circle cx="20" cy="20" r="5" fill="#0f6b4f"/>
+        <circle cx="20" cy="20" r="2" fill="#fff"/>
+      </svg>
+      <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
+    </a>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="new-to-finance.html" class="nav-cta">Start here</a>
+      <a href="ipo.html" aria-current="page">IPOs</a>
+      <a href="gold-etf.html">Gold &amp; ETF</a>
+      <a href="mutual-funds.html">Mutual Funds</a>
+      <a href="equity.html">Equity</a>
+    </nav>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<nav class="nav-drawer" id="navDrawer" aria-label="Mobile">
+  <a href="index.html">Home</a><a href="new-to-finance.html">Start here</a><a href="ipo.html" aria-current="page">IPOs</a><a href="gold-etf.html">Gold &amp; ETF</a><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a>
+</nav>
+<main id="main"><div class="container">
+<p class="breadcrumb"><a href="index.html">Home</a> / <span>IPOs</span></p>
+<h1>IPOs: what’s open, and how to think about it</h1>
+<p class="lead">Context first. Numbers second. GMP last.</p>
+<section class="card" style="margin-bottom:1.25rem">
+  <h2>How IPOs work</h2>
+  <div class="how-steps">
+    <div class="how-step"><strong>Step 1</strong> Read the offer document (RHP) — business, risks, use of proceeds.</div>
+    <div class="how-step"><strong>Step 2</strong> Apply via ASBA or UPI through your bank or broker. Money is blocked, not spent blindly.</div>
+    <div class="how-step"><strong>Step 3</strong> Allotment is not guaranteed. Only use a dedicated IPO pot — see <a href="new-to-finance.html#step4">New To Finance</a>.</div>
+  </div>
+</section>
+<div class="banner banner-amber">GMP is unofficial and unregulated. It is sentiment, not a price or a promise.</div>
+<div class="data-status" id="ipoStatus"><span class="skeleton" style="width:14rem;display:inline-block">&nbsp;</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1rem">
+  <button type="button" class="btn" id="refreshIpo"><span id="ipoSpin"></span> Refresh</button>
+  <div class="chips" id="ipoFilters" role="tablist">
+    <button type="button" class="chip active" data-status="Open">Open</button>
+    <button type="button" class="chip" data-status="Upcoming">Upcoming</button>
+    <button type="button" class="chip" data-status="Closed">Closed</button>
+  </div>
+</div>
+<h2 class="group-label" style="margin-top:0.5rem">Mainboard</h2>
+<div class="table-wrap stack-cards" style="margin-bottom:1.5rem">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="num">Price band</th><th class="num">Lot</th><th class="num">Min ₹</th>
+      <th>Issue size</th><th class="num">Sub (x)</th><th>Opens</th><th>Closes</th><th>Listing</th><th>Status</th><th class="num">GMP</th>
+    </tr></thead>
+    <tbody id="mainboardBody"></tbody>
+  </table>
+</div>
+<div class="banner banner-amber">SME IPOs often need a much higher minimum ticket, offer lower liquidity, and carry higher risk.</div>
+<h2 class="group-label">SME</h2>
+<div class="table-wrap stack-cards">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="num">Price band</th><th class="num">Lot</th><th class="num">Min ₹</th>
+      <th>Issue size</th><th class="num">Sub (x)</th><th>Opens</th><th>Closes</th><th>Listing</th><th>Status</th><th class="num">GMP</th>
+    </tr></thead>
+    <tbody id="smeBody"></tbody>
+  </table>
+</div>
+<section class="card" style="margin-top:1.5rem">
+  <h2>Before you apply</h2>
+  <ul class="checklist">
+    <li><input type="checkbox" id="c1" disabled checked><label for="c1">I have read the RHP (or will before applying)</label></li>
+    <li><input type="checkbox" id="c2" disabled checked><label for="c2">I understand the business, not just the GMP</label></li>
+    <li><input type="checkbox" id="c3" disabled checked><label for="c3">I will only use money set aside as an IPO pot</label></li>
+  </ul>
+</section>
+<section class="faq section-tight">
+  <h2>Questions</h2>
+  <details><summary>What is GMP?</summary><p>What the unofficial market is willing to pay before listing. Sentiment, not a guarantee.</p></details>
+  <details><summary>Does a high GMP mean I should apply?</summary><p>No — it is not a promise of listing gains.</p></details>
+</section>
+<div class="next-step"><p>Size an optional IPO pot after your core plan.</p><a class="btn btn-primary" href="new-to-finance.html#step4">IPO pot step →</a></div>
+</div></main>
+<footer class="site-footer"><div class="container">
+<div class="footer-grid">
+<div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
+<div><h4>Markets today</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold &amp; ETF</a></div>
+<div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a><a href="glossary.html">Glossary</a></div>
+<div><h4>About</h4><a href="about.html">About &amp; Methodology</a><a href="disclaimer.html">Disclaimer</a></div>
+</div>
+<p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered. Investments carry risk.</p>
+</div></footer>
+<script src="js/app.js"></script>
+<script>
+(function(){
+  var data = null, filter = 'Open';
+  function bucket(st){
+    var t = String(st||'').toLowerCase();
+    if(t.indexOf('open')>=0 && t.indexOf('up')<0) return 'Open';
+    if(t.indexOf('upcom')>=0) return 'Upcoming';
+    return 'Closed';
+  }
+  function badge(st){
+    var b = bucket(st);
+    var cls = b==='Open'?'badge-open':b==='Upcoming'?'badge-upcoming':'badge-closed';
+    return '<span class="badge '+cls+'">'+PV.escapeHtml(b)+'</span>';
+  }
+  function rows(list){
+    list = (list||[]).filter(function(x){ return bucket(x.status)===filter; });
+    if(!list.length) return '<tr><td colspan="11" data-label="">Nothing in this filter right now.</td></tr>';
+    return list.map(function(x){
+      var gmp = x.gmp!=null ? '₹'+x.gmp : '—';
+      var sub = x.subscription!=null ? x.subscription : '—';
+      var min = x.minAmount!=null ? PV.inr(x.minAmount) : '—';
+      return '<tr>'+
+        '<td data-label="Company">'+PV.escapeHtml(x.name)+'</td>'+
+        '<td class="num" data-label="Price band">'+PV.escapeHtml(String(x.priceBand||'—'))+'</td>'+
+        '<td class="num" data-label="Lot">'+PV.escapeHtml(String(x.lotSize||'—'))+'</td>'+
+        '<td class="num" data-label="Min ₹">'+min+'</td>'+
+        '<td data-label="Issue size">'+PV.escapeHtml(String(x.issueSize||'—'))+'</td>'+
+        '<td class="num" data-label="Sub (x)">'+sub+'</td>'+
+        '<td data-label="Opens">'+PV.escapeHtml(String(x.opens||'—'))+'</td>'+
+        '<td data-label="Closes">'+PV.escapeHtml(String(x.closes||'—'))+'</td>'+
+        '<td data-label="Listing">'+PV.escapeHtml(String(x.listing||'—'))+'</td>'+
+        '<td data-label="Status">'+badge(x.status)+'</td>'+
+        '<td class="num gmp-col" data-label="GMP">'+gmp+'</td></tr>';
+    }).join('');
+  }
+  function paint(){
+    if(!data) return;
+    document.getElementById('mainboardBody').innerHTML = rows(data.mainboard);
+    document.getElementById('smeBody').innerHTML = rows(data.sme);
+  }
+  function load(force){
+    var spin = document.getElementById('ipoSpin');
+    var btn = document.getElementById('refreshIpo');
+    if(spin) spin.className='spinner';
+    if(btn) btn.disabled=true;
+    PV.loadJson('data/ipo.json',{force:force}).then(function(d){
+      data=d;
+      var st=document.getElementById('ipoStatus');
+      var stale=PV.isStale(d.updated,36);
+      st.className='data-status'+(stale?' stale':'');
+      st.textContent=(stale?'Data may be out of date · ':'')+'Last updated: '+PV.formatIST(d.updated)+' · Source: '+(d.source||'—');
+      paint();
+    }).catch(function(){
+      document.getElementById('ipoStatus').className='data-status stale';
+      document.getElementById('ipoStatus').textContent='Could not load IPO data — try Refresh.';
+    }).finally(function(){
+      if(spin) spin.className='';
+      if(btn) btn.disabled=false;
+    });
+  }
+  document.getElementById('ipoFilters').addEventListener('click', function(e){
+    var b=e.target.closest('[data-status]');
+    if(!b) return;
+    filter=b.getAttribute('data-status');
+    document.querySelectorAll('#ipoFilters .chip').forEach(function(c){ c.classList.toggle('active', c===b); });
+    paint();
+  });
+  document.getElementById('refreshIpo').addEventListener('click', function(){ load(true); });
+  load(false);
+})();
+</script>
+</body></html>
