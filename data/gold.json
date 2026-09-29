@@ -1,7 +1,10 @@
 {
-  "updated": "2026-09-29T12:00:00+05:30",
+  "updated_at": "2026-09-29T18:15:00+05:30",
+  "updated": "2026-09-29T18:15:00+05:30",
   "source": "goodreturns.in",
-  "note": "Retail quotes vary by jeweller. Metal rate only — no making charges.",
+  "source_url": "https://www.goodreturns.in/gold-rates/",
+  "sourceUrl": "https://www.goodreturns.in/gold-rates/",
+  "note": "Metal rate only — no making charges.",
   "cities": [
     {"city": "Mumbai", "rate22k": 6850, "rate24k": 7470, "change24k": 12},
     {"city": "Bengaluru", "rate22k": 6840, "rate24k": 7460, "change24k": 10},
