@@ -114,6 +114,40 @@
 .alloc-large { background: #1e3a5f; }
 .alloc-small { background: #60a5fa; }
 
+/* IPO status filter buttons */
+.ipo-status-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.35rem;
+}
+.ipo-filter-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line, #e2e8f0);
+  background: #fff;
+  color: var(--ink-muted, #4a5d73);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.ipo-filter-btn:hover {
+  border-color: #94a3b8;
+  color: var(--ink, #0b1f3a);
+}
+.ipo-filter-btn.active {
+  background: var(--ink, #0b1f3a);
+  border-color: var(--ink, #0b1f3a);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(11, 31, 58, 0.18);
+}
+.ipo-filter-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
 @media (max-width: 600px) {
   .hold-row, .segment-row {
     grid-template-columns: 1fr;
