@@ -70,7 +70,7 @@
   <table>
     <thead><tr>
       <th>Company</th><th class="num">Price band</th><th class="num">Lot</th><th class="num">Min ₹</th>
-      <th>Issue size</th><th class="num">Sub (x)</th><th>Opens</th><th>Closes</th><th>Listing</th><th>Status</th><th class="num">GMP</th>
+      <th>Issue size</th><th>Opens</th><th>Closes</th><th>Listing</th><th>Status</th><th class="num">GMP</th><th class="num">GMP %</th>
     </tr></thead>
     <tbody id="mainboardBody"></tbody>
   </table>
@@ -81,7 +81,7 @@
   <table>
     <thead><tr>
       <th>Company</th><th class="num">Price band</th><th class="num">Lot</th><th class="num">Min ₹</th>
-      <th>Issue size</th><th class="num">Sub (x)</th><th>Opens</th><th>Closes</th><th>Listing</th><th>Status</th><th class="num">GMP</th>
+      <th>Issue size</th><th>Opens</th><th>Closes</th><th>Listing</th><th>Status</th><th class="num">GMP</th><th class="num">GMP %</th>
     </tr></thead>
     <tbody id="smeBody"></tbody>
   </table>
@@ -125,31 +125,62 @@
     var cls = b==='Open'?'badge-open':b==='Upcoming'?'badge-upcoming':'badge-closed';
     return '<span class="badge '+cls+'">'+PV.escapeHtml(b)+'</span>';
   }
+  function upperPrice(band){
+    if(!band) return null;
+    var s = String(band).replace(/[₹,]/g,'');
+    if(s.indexOf('-')>=0){
+      var p = parseFloat(s.split('-').pop().trim());
+      return isFinite(p)?p:null;
+    }
+    var n = parseFloat(s.trim());
+    return isFinite(n)?n:null;
+  }
+  function gmpPct(x){
+    if(x.gmpPct!=null) return x.gmpPct;
+    var up = upperPrice(x.priceBand);
+    if(up && x.gmp!=null && up>0) return Math.round((x.gmp/up)*1000)/10;
+    return null;
+  }
   function rows(list){
     list = (list||[]).filter(function(x){ return bucket(x.status)===filter; });
-    if(!list.length) return '<tr><td colspan="11" data-label="">Nothing in this filter right now.</td></tr>';
+    if(!list.length) return '<tr><td colspan="11" data-label="">Nothing in this filter right now — try another tab.</td></tr>';
     return list.map(function(x){
-      var gmp = x.gmp!=null ? '₹'+x.gmp : '—';
-      var sub = x.subscription!=null ? x.subscription : '—';
+      var gmp = x.gmp!=null ? ('₹'+x.gmp) : '—';
+      var pct = gmpPct(x);
+      var pctStr = pct!=null ? (pct+'%') : '—';
       var min = x.minAmount!=null ? PV.inr(x.minAmount) : '—';
+      var lot = x.lotSize!=null ? String(x.lotSize) : '—';
       return '<tr>'+
-        '<td data-label="Company">'+PV.escapeHtml(x.name)+'</td>'+
+        '<td data-label="Company"><strong>'+PV.escapeHtml(x.name)+'</strong></td>'+
         '<td class="num" data-label="Price band">'+PV.escapeHtml(String(x.priceBand||'—'))+'</td>'+
-        '<td class="num" data-label="Lot">'+PV.escapeHtml(String(x.lotSize||'—'))+'</td>'+
+        '<td class="num" data-label="Lot">'+lot+'</td>'+
         '<td class="num" data-label="Min ₹">'+min+'</td>'+
         '<td data-label="Issue size">'+PV.escapeHtml(String(x.issueSize||'—'))+'</td>'+
-        '<td class="num" data-label="Sub (x)">'+sub+'</td>'+
         '<td data-label="Opens">'+PV.escapeHtml(String(x.opens||'—'))+'</td>'+
         '<td data-label="Closes">'+PV.escapeHtml(String(x.closes||'—'))+'</td>'+
         '<td data-label="Listing">'+PV.escapeHtml(String(x.listing||'—'))+'</td>'+
         '<td data-label="Status">'+badge(x.status)+'</td>'+
-        '<td class="num gmp-col" data-label="GMP">'+gmp+'</td></tr>';
+        '<td class="num gmp-col" data-label="GMP">'+gmp+'</td>'+
+        '<td class="num gmp-col" data-label="GMP %">'+pctStr+'</td></tr>';
     }).join('');
+  }
+  function countBy(list, status){
+    return (list||[]).filter(function(x){ return bucket(x.status)===status; }).length;
+  }
+  function paintFilters(){
+    if(!data) return;
+    var all = (data.mainboard||[]).concat(data.sme||[]);
+    document.querySelectorAll('#ipoFilters .chip').forEach(function(c){
+      var st = c.getAttribute('data-status');
+      var n = countBy(all, st);
+      c.textContent = st + ' (' + n + ')';
+    });
   }
   function paint(){
     if(!data) return;
     document.getElementById('mainboardBody').innerHTML = rows(data.mainboard);
     document.getElementById('smeBody').innerHTML = rows(data.sme);
+    paintFilters();
   }
   function load(force){
     var spin = document.getElementById('ipoSpin');
@@ -161,11 +192,16 @@
       var st=document.getElementById('ipoStatus');
       var stale=PV.isStale(d.updated,36);
       st.className='data-status'+(stale?' stale':'');
-      st.textContent=(stale?'Data may be out of date · ':'')+'Last updated: '+PV.formatIST(d.updated)+' · Source: '+(d.source||'—');
+      st.innerHTML = (stale?'Data may be out of date · ':'')+
+        'Last updated: '+PV.formatIST(d.updated)+
+        ' · Source: <a href="'+(d.sourceUrl||'https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')+'" target="_blank" rel="noopener">'+(d.source||'ipowatch.in')+'</a>';
       paint();
-    }).catch(function(){
+    }).catch(function(err){
+      console.error(err);
       document.getElementById('ipoStatus').className='data-status stale';
       document.getElementById('ipoStatus').textContent='Could not load IPO data — try Refresh.';
+      document.getElementById('mainboardBody').innerHTML = '<tr><td colspan="11">Unable to load. Check data/ipo.json.</td></tr>';
+      document.getElementById('smeBody').innerHTML = '<tr><td colspan="11">Unable to load.</td></tr>';
     }).finally(function(){
       if(spin) spin.className='';
       if(btn) btn.disabled=false;
