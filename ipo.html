@@ -40,7 +40,7 @@
         <a href="index.html">Overview</a>
         <a href="new-to-finance.html">New To Finance</a>
         <a href="ipo.html" class="active">IPOs</a>
-        <a href="gold-etf.html">Gold &amp; ETF</a>
+        <a href="gold-etf.html">Gold & ETF</a>
         <a href="mutual-funds.html">Mutual Funds</a>
         <a href="equity.html">Equity</a>
       </nav>
@@ -56,6 +56,11 @@
       <div class="status-bar">
         <button class="btn" id="refreshBtn" type="button"><span id="refreshIcon">&#8635;</span> Refresh</button>
         <span id="lastUpdated">Pulling today's numbers…</span>
+      </div>
+      <div class="ipo-status-filters" role="tablist" aria-label="IPO status">
+        <button type="button" class="ipo-filter-btn active" data-status="Open" role="tab" aria-selected="true">Open</button>
+        <button type="button" class="ipo-filter-btn" data-status="Upcoming" role="tab" aria-selected="false">Upcoming</button>
+        <button type="button" class="ipo-filter-btn" data-status="Closed" role="tab" aria-selected="false">Closed</button>
       </div>
       <h2 class="table-heading">Mainboard</h2>
       <div class="table-wrap" style="margin-bottom: 2rem;">
