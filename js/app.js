@@ -1,12 +1,12 @@
 /**
- * Portfolio View India — shared utilities
+ * Portfolio View India — shared utilities + data loader
  */
 (function (global) {
   'use strict';
 
   function inr(n) {
-    n = Math.round(Number(n) || 0);
-    return '₹' + n.toLocaleString('en-IN');
+    if (n == null || n === '' || !isFinite(Number(n))) return '—';
+    return '₹' + Math.round(Number(n)).toLocaleString('en-IN');
   }
 
   function num(v) {
@@ -28,10 +28,10 @@
       .replace(/"/g, '&quot;');
   }
 
-  function formatIST(isoOrDate) {
+  function formatIST(iso) {
     try {
-      var d = isoOrDate instanceof Date ? isoOrDate : new Date(isoOrDate);
-      if (isNaN(d.getTime())) return String(isoOrDate || '—');
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return String(iso || '—');
       return d.toLocaleString('en-IN', {
         timeZone: 'Asia/Kolkata',
         day: 'numeric',
@@ -42,7 +42,7 @@
         hour12: true
       }) + ' IST';
     } catch (e) {
-      return String(isoOrDate || '—');
+      return String(iso || '—');
     }
   }
 
@@ -82,7 +82,7 @@
     if (!el || !mix) return;
     var e = mix.eq, d = mix.debt, g = mix.gold;
     el.style.background =
-      'conic-gradient(var(--equity) 0% ' + e + '%, var(--debt) ' + e + '% ' + (e + d) + '%, var(--gold-chart) ' + (e + d) + '% 100%)';
+      'conic-gradient(var(--c2) 0% ' + e + '%, var(--c1) ' + e + '% ' + (e + d) + '%, var(--c4) ' + (e + d) + '% 100%)';
   }
 
   function paintLegend(root, mix) {
@@ -113,12 +113,53 @@
     });
   }
 
-  async function loadJson(path, opts) {
+  async function loadData(opts) {
     opts = opts || {};
-    var url = path + (opts.force ? ('?t=' + Date.now()) : '');
-    var res = await fetch(url, { cache: opts.force ? 'no-store' : 'default' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return res.json();
+    var path = opts.path;
+    var statusEl = opts.statusEl;
+    var force = !!opts.force;
+    var url = path + (path.indexOf('?') >= 0 ? '&' : '?') + 'v=' + Date.now();
+
+    if (statusEl) {
+      statusEl.className = 'data-status';
+      statusEl.innerHTML = '<span class="skeleton" style="width:14rem;display:inline-block">&nbsp;</span>';
+    }
+
+    try {
+      var res = await fetch(url, { cache: force ? 'no-store' : 'default' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      var updated = data.updated_at || data.updated;
+      var source = data.source || '—';
+      var sourceUrl = data.source_url || data.sourceUrl || '#';
+      var stale = isStale(updated, 36);
+
+      if (statusEl) {
+        statusEl.className = 'data-status' + (stale ? ' stale' : '');
+        statusEl.innerHTML =
+          (stale ? 'Data may be out of date · ' : '') +
+          'Last updated ' + formatIST(updated) +
+          ' · Source: <a href="' + escapeHtml(sourceUrl) + '" target="_blank" rel="noopener">' +
+          escapeHtml(source) + ' ↗</a>';
+      }
+
+      if (typeof opts.onData === 'function') opts.onData(data);
+      return data;
+    } catch (err) {
+      if (statusEl) {
+        statusEl.className = 'data-status error';
+        statusEl.innerHTML =
+          "Couldn't load data. <button type=\"button\" class=\"btn\" data-retry style=\"min-height:36px;padding:0.3rem 0.75rem;margin-left:0.5rem\">Retry</button>";
+        var btn = statusEl.querySelector('[data-retry]');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            loadData(Object.assign({}, opts, { force: true }));
+          });
+        }
+      }
+      if (typeof opts.onError === 'function') opts.onError(err);
+      throw err;
+    }
   }
 
   global.PV = {
@@ -133,7 +174,16 @@
     paintDonut: paintDonut,
     paintLegend: paintLegend,
     initNav: initNav,
-    loadJson: loadJson
+    loadData: loadData,
+    loadJson: function (path, o) {
+      o = o || {};
+      return fetch(path + (o.force ? ('?t=' + Date.now()) : ''), {
+        cache: o.force ? 'no-store' : 'default'
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      });
+    }
   };
 
   if (document.readyState === 'loading') {
