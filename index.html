@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://accounts.google.com; frame-src https://accounts.google.com https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title>Indian Portfolio View — Know your mix</title>
@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="css/disclaimer.css">
   <link rel="stylesheet" href="css/headline-align.css">
   <link rel="stylesheet" href="css/new-to-finance.css">
-  <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
   <header>
@@ -42,14 +41,12 @@
         <a href="index.html" class="active">Overview</a>
         <a href="new-to-finance.html">New To Finance</a>
         <a href="ipo.html">IPOs</a>
-        <a href="gold-etf.html">Gold & ETF</a>
+        <a href="gold-etf.html">Gold &amp; ETF</a>
         <a href="mutual-funds.html">Mutual Funds</a>
         <a href="equity.html">Equity</a>
-        <span class="nav-auth" data-auth-nav></span>
       </nav>
     </div>
   </header>
-
   <main>
     <div class="container">
       <section class="hero-block">
@@ -61,12 +58,10 @@
           <span class="chip">Reference, not advice</span>
         </div>
       </section>
-
       <section class="ntf-teaser" id="beginner-teaser">
         <p class="ntf-teaser-text">Just starting out? Try the beginner path on the New To Finance page.</p>
         <a href="new-to-finance.html" class="btn btn-primary">New To Finance →</a>
       </section>
-
       <section class="dest-section">
         <p class="section-label">Updates daily</p>
         <div class="hero-grid">
@@ -75,7 +70,7 @@
             <p>Who's listing, and at what premium.</p>
           </a>
           <a href="gold-etf.html" class="hero-card">
-            <h3>Gold & ETF</h3>
+            <h3>Gold &amp; ETF</h3>
             <p>Today's rate, every city.</p>
           </a>
         </div>
@@ -91,12 +86,10 @@
           </a>
         </div>
       </section>
-
       <section class="cta-band">
         <p class="cta-line">Your age. Your mix. Ten seconds.</p>
         <a href="new-to-finance.html#calculator" class="btn btn-primary cta-btn">See my mix →</a>
       </section>
-
       <section class="faq-section" id="faq">
         <h2>Questions</h2>
         <div class="faq-list">
@@ -116,18 +109,13 @@
       </section>
     </div>
   </main>
-
   <footer>
     <div class="container">
       <p>Educational only. Not advice. Not SEBI-registered.</p>
     </div>
   </footer>
-
   <script src="js/security.js"></script>
   <script src="js/transitions.js"></script>
   <script src="js/disclaimer.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/auth-client.js"></script>
 </body>
 </html>
