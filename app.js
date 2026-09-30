@@ -49,13 +49,19 @@ const NAV = [
 function closeNav() {
   document.body.classList.remove("nav-open");
   const btn = $("#navToggle");
-  if (btn) btn.setAttribute("aria-expanded", "false");
+  if (btn) {
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", "Open menu");
+  }
 }
 
 function openNav() {
   document.body.classList.add("nav-open");
   const btn = $("#navToggle");
-  if (btn) btn.setAttribute("aria-expanded", "true");
+  if (btn) {
+    btn.setAttribute("aria-expanded", "true");
+    btn.setAttribute("aria-label", "Close menu");
+  }
 }
 
 function toggleNav() {
@@ -67,8 +73,11 @@ function layout() {
   const page = document.body.dataset.page || "";
   const hdr = $("#hdr");
   if (hdr) {
-    /* Header bar (logo + hamburger) is sticky alone.
-       Ribbon is a separate block BELOW it so it can never cover the toggle. */
+    /* Structure:
+       1) sticky .hdr = logo + hamburger only
+       2) .nav = desktop links + mobile drawer — OUTSIDE .hdr so z-index works
+       3) .mkt-ribbon below both
+    */
     hdr.innerHTML = `<header class="hdr"><div class="hdr-in">
         <a class="logo" href="index.html" aria-label="Portfolio View India home">
           <img src="assets/logo.svg" width="34" height="34" alt="Portfolio View India" class="logo-img" id="brandLogo" style="object-fit:contain;background:#000">
@@ -78,17 +87,16 @@ function layout() {
           <svg class="ico-open" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           <svg class="ico-close" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
-        <nav class="nav" id="primaryNav" aria-label="Primary">${NAV.map(n => {
+      </div></header>
+      <nav class="nav" id="primaryNav" aria-label="Primary">${NAV.map(n => {
           const cur = n.page === page ? ' aria-current="page"' : "";
           const cls = n.cta ? ' class="cta"' : "";
           return `<a href="${n.href}"${cls}${cur}>${n.label}</a>`;
         }).join("")}</nav>
-      </div></header>
       <div class="mkt-ribbon" id="mktRibbon" aria-label="Market ribbon">
         <div class="mkt-track" id="mktTrack"><span class="mkt-item"><span class="lbl">Markets</span><span class="val">Loading…</span></span></div>
       </div>`;
   }
-  /* Backdrop on body so it always covers the full viewport solid black */
   let backdrop = $("#navBackdrop");
   if (!backdrop) {
     backdrop = document.createElement("button");
@@ -191,7 +199,7 @@ async function fillMarketRibbon() {
   }
   const n = mkt && mkt.nifty50;
   if (n && n.price != null) {
-    items.push(`<a class="mkt-item" href="equity.html"><span class="val">${Number(n.price).toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>${fmtChg(n.change, n.change_pct)}</a>`.replace('<span class="val">', '<span class="lbl">Nifty 50</span><span class="val">'));
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">${Number(n.price).toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>${fmtChg(n.change, n.change_pct)}</a>`);
   } else {
     items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">—</span></a>`);
   }
