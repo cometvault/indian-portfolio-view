@@ -84,6 +84,8 @@ a:hover { text-decoration: underline; }
   -webkit-backdrop-filter: blur(16px);
   background: rgba(5, 8, 7, .82);
   border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 3;
 }
 .hdr-in {
   max-width: 1120px; margin: 0 auto; padding: 0 20px;
@@ -185,6 +187,8 @@ body.nav-open .nav-toggle {
   font-size: 12.5px;
   font-variant-numeric: tabular-nums;
   color: var(--mu);
+  position: relative;
+  z-index: 1;
 }
 .mkt-track {
   display: flex; align-items: center;
@@ -559,9 +563,23 @@ input[type="number"]:focus { border-color: var(--c2); }
 @media (max-width: 820px) {
   .logo-txt { display: none; }
 
-  .nav-toggle { display: inline-flex; z-index: 61; position: relative; }
+  .nav-toggle {
+    display: inline-flex;
+    position: relative;
+    z-index: 5;
+    margin-left: auto;
+  }
 
   .hdr-in { padding: 0 14px; gap: 10px; }
+
+  /* Ribbon stays strictly under header; never cover hamburger */
+  .mkt-ribbon {
+    z-index: 1;
+    position: relative;
+  }
+  .hdr {
+    z-index: 3;
+  }
 
   .nav {
     display: none !important;
@@ -570,11 +588,11 @@ input[type="number"]:focus { border-color: var(--c2); }
     right: 0;
     left: auto;
     bottom: 0;
-    width: 80%;
-    max-width: 80vw;
+    width: 65%;
+    max-width: 65vw;
     margin: 0;
     flex-direction: column;
-    gap: 2px;
+    gap: 0;
     padding: calc(56px + env(safe-area-inset-top, 0px) + 16px) 16px 32px;
     background: #000 !important;
     border: none;
@@ -590,49 +608,56 @@ input[type="number"]:focus { border-color: var(--c2); }
     display: flex !important;
   }
 
+  /* Options: grey text only, no background fills */
   .nav a {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
-    border-bottom: none !important;
+    padding: 14px 4px;
+    border-radius: 0;
+    border-bottom: 2px solid transparent !important;
     font-size: 15px;
     font-weight: 500;
     min-height: 48px;
     color: #9AA8A1 !important;
-    background: transparent;
+    background: transparent !important;
+    box-shadow: none !important;
   }
   .nav a:hover {
     color: #9AA8A1 !important;
-    background: rgba(255,255,255,.05);
+    background: transparent !important;
     text-decoration: none;
   }
+  /* Selected: coloured underline only */
   .nav a[aria-current="page"] {
-    background: rgba(255,255,255,.07);
-    color: #c5cec9 !important;
-    border-bottom: none !important;
-    border-radius: 12px;
-    box-shadow: inset 3px 0 0 var(--c2);
+    background: transparent !important;
+    color: #9AA8A1 !important;
+    border-bottom: 2px solid var(--c2) !important;
+    border-radius: 0;
+    box-shadow: none !important;
   }
+  /* Start here: brand colour text, no filled button */
   .nav a.cta {
-    margin-top: 12px;
-    justify-content: center;
-    border-radius: 12px;
-    background: var(--brand) !important;
-    color: #04140d !important;
+    margin-top: 8px;
+    justify-content: flex-start;
+    border-radius: 0;
+    background: transparent !important;
+    color: var(--c2) !important;
     font-weight: 700;
-    border-bottom: none !important;
-    box-shadow: none;
+    border-bottom: 2px solid transparent !important;
+    box-shadow: none !important;
+    padding: 14px 4px;
   }
   .nav a.cta:hover {
-    opacity: .92;
-    color: #04140d !important;
+    opacity: 1;
+    color: var(--c2) !important;
+    background: transparent !important;
   }
   .nav a.cta[aria-current="page"] {
-    background: var(--brand) !important;
-    color: #04140d !important;
-    box-shadow: none;
+    background: transparent !important;
+    color: var(--c2) !important;
+    border-bottom: 2px solid var(--c2) !important;
+    box-shadow: none !important;
   }
 
   .wrap { padding: 0 14px 48px; overflow-x: hidden; }
