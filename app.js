@@ -45,20 +45,21 @@ function layout() {
   const hdr = $("#hdr");
   if (hdr) {
     hdr.innerHTML = `<div class="hdr-stack">
+      <header class="hdr"><div class="hdr-in">
+        <a class="logo" href="index.html" aria-label="Portfolio View India home">
+          <img src="assets/logo.png" width="34" height="34" alt="" class="logo-img">
+          <span class="logo-txt">Portfolio View<span>India</span></span>
+        </a>
+        <nav class="nav" aria-label="Primary">${NAV.map(n => {
+          const cur = n.page === page ? ' aria-current="page"' : "";
+          const cls = n.cta ? ' class="cta"' : "";
+          return `<a href="${n.href}"${cls}${cur}>${n.label}</a>`;
+        }).join("")}</nav>
+      </div></header>
       <div class="mkt-ribbon" id="mktRibbon" aria-label="Market ribbon">
         <div class="mkt-track" id="mktTrack"><span class="mkt-item"><span class="lbl">Markets</span><span class="val">Loading…</span></span></div>
       </div>
-      <header class="hdr"><div class="hdr-in">
-      <a class="logo" href="index.html" aria-label="Portfolio View India home">
-        <img src="assets/logo.svg" width="34" height="34" alt="" class="logo-img">
-        <span class="logo-txt">Portfolio View<span>India</span></span>
-      </a>
-      <nav class="nav" aria-label="Primary">${NAV.map(n => {
-        const cur = n.page === page ? ' aria-current="page"' : "";
-        const cls = n.cta ? ' class="cta"' : "";
-        return `<a href="${n.href}"${cls}${cur}>${n.label}</a>`;
-      }).join("")}</nav>
-    </div></header></div>`;
+    </div>`;
   }
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) img.onerror = function () { this.outerHTML = MARK; };
@@ -86,6 +87,20 @@ function fmtChg(chg, pct) {
   return `<span class="${cls}">${parts.join(" ")}</span>`;
 }
 
+function isClosingToday(d) {
+  const c = d.closes;
+  if (c == null || c === "") return false;
+  if (typeof c === "number") {
+    const a = new Date(c), b = new Date();
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+  const s = String(c).toLowerCase();
+  const now = new Date();
+  const months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+  const day = String(now.getDate());
+  return s.includes(day) && s.includes(months[now.getMonth()]);
+}
+
 async function fillMarketRibbon() {
   const track = $("#mktTrack");
   if (!track) return;
@@ -96,32 +111,41 @@ async function fillMarketRibbon() {
 
   const items = [];
 
-  const n = mkt && mkt.nifty50;
-  if (n && n.price != null) {
-    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">${Number(n.price).toLocaleString("en-IN",{maximumFractionDigits:2})}</span>${fmtChg(n.change,n.change_pct)}</a>`);
-  } else {
-    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">—</span></a>`);
-  }
-
-  const b = mkt && mkt.bank_nifty;
-  if (b && b.price != null) {
-    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Bank Nifty</span><span class="val">${Number(b.price).toLocaleString("en-IN",{maximumFractionDigits:2})}</span>${fmtChg(b.change,b.change_pct)}</a>`);
-  } else {
-    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Bank Nifty</span><span class="val">—</span></a>`);
-  }
-
   if (ipo && ipo.rows) {
-    const ranked = ipo.rows
-      .filter(d => d.seg === "main" && (d.status === "open" || d.status === "upcoming") && d.gmpPct != null)
-      .sort((a, c) => (c.gmpPct ?? -1e9) - (a.gmpPct ?? -1e9))
-      .slice(0, 2);
-    ranked.forEach(d => {
-      const st = d.status === "open" ? "Open" : "Upcoming";
-      const tagCls = d.status === "open" ? "tag" : "tag upcom";
+    const open = ipo.rows
+      .filter(d => d.status === "open" && (d.gmpPct != null || d.gmp != null))
+      .sort((a, c) => (c.gmpPct ?? -1e9) - (a.gmpPct ?? -1e9));
+    if (open[0]) {
+      const d = open[0];
       const gmp = d.gmp != null ? "₹" + Math.round(d.gmp) : "—";
       const pct = d.gmpPct != null ? d.gmpPct.toFixed(1) + "%" : "—";
-      items.push(`<a class="mkt-item" href="ipo.html"><span class="lbl">IPO</span><span class="val">${esc(d.name)}</span><span class="val">GMP ${gmp} (${pct})</span><span class="${tagCls}">${st}</span></a>`);
-    });
+      items.push(`<a class="mkt-item" href="ipo.html"><span class="lbl">Best open IPO</span><span class="val">${esc(d.name)}</span><span class="val">GMP ${gmp} (${pct})</span><span class="tag">Open</span></a>`);
+    }
+    const closing = ipo.rows.filter(d => d.status === "open" && isClosingToday(d));
+    let pick = closing.sort((a, c) => (c.gmpPct ?? -1e9) - (a.gmpPct ?? -1e9))[0];
+    if (!pick) {
+      pick = ipo.rows.filter(d => d.status === "open").sort((a, c) => {
+        const ac = typeof a.closes === "number" ? a.closes : Number.MAX_SAFE_INTEGER;
+        const cc = typeof c.closes === "number" ? c.closes : Number.MAX_SAFE_INTEGER;
+        return ac - cc;
+      })[0];
+    }
+    if (pick && (!open[0] || pick.name !== open[0].name)) {
+      const gmp = pick.gmp != null ? "₹" + Math.round(pick.gmp) : "—";
+      const pct = pick.gmpPct != null ? pick.gmpPct.toFixed(1) + "%" : "—";
+      const closes = pick.closes != null ? (typeof pick.closes === "number" ? fd(pick.closes) : String(pick.closes)) : "today";
+      items.push(`<a class="mkt-item" href="ipo.html"><span class="lbl">Closing soon</span><span class="val">${esc(pick.name)}</span><span class="val">GMP ${gmp} (${pct})</span><span class="tag">Closes ${esc(closes)}</span></a>`);
+    } else if (pick) {
+      const closes = pick.closes != null ? (typeof pick.closes === "number" ? fd(pick.closes) : String(pick.closes)) : "today";
+      items.push(`<a class="mkt-item" href="ipo.html"><span class="lbl">Closing soon</span><span class="val">${esc(pick.name)}</span><span class="tag">Closes ${esc(closes)}</span></a>`);
+    }
+  }
+
+  const n = mkt && mkt.nifty50;
+  if (n && n.price != null) {
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">${Number(n.price).toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>${fmtChg(n.change, n.change_pct)}</a>`);
+  } else {
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">—</span></a>`);
   }
 
   if (gold && gold.j && gold.j.cities && gold.j.cities[0]) {
@@ -132,10 +156,11 @@ async function fillMarketRibbon() {
     items.push(`<a class="mkt-item" href="gold-etf.html"><span class="lbl">Gold 24K</span><span class="val">—</span></a>`);
   }
 
-  items.push(`<a class="mkt-item mkt-brand" href="new-to-finance.html"><span class="val">Portfolio View India: Free guide to investing in India</span></a>`);
-
-  const html = items.join("") + items.join("");
-  track.innerHTML = html;
+  if (!items.length) {
+    track.innerHTML = `<span class="mkt-item"><span class="lbl">Markets</span><span class="val">Updating…</span></span>`;
+    return;
+  }
+  track.innerHTML = items.join("") + items.join("");
 }
 
 /* Age mixes: [label, equity, debt, gold] */
