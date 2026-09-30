@@ -1,1 +1,143 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Start here — Portfolio View India</title>
+  <meta name="description" content="Cash flow, emergency fund, age-based mix, optional IPO pot. Educational only.">
+  <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/new-to-finance.html">
+  <meta name="theme-color" content="#050807">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
+      <img class="logo-mark" src="assets/logo.svg" width="32" height="32" alt="">
+      <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
+    </a>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="new-to-finance.html" class="nav-cta" aria-current="page">Start here</a>
+      <a href="ipo.html">IPOs</a>
+      <a href="gold-etf.html">Gold & ETF</a>
+      <a href="mutual-funds.html">Mutual Funds</a>
+      <a href="equity.html">Equity</a>
+    </nav>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<nav class="nav-drawer" id="navDrawer" aria-label="Mobile">
+  <a href="index.html">Home</a>
+  <a href="new-to-finance.html" aria-current="page">Start here</a>
+  <a href="ipo.html">IPOs</a>
+  <a href="gold-etf.html">Gold & ETF</a>
+  <a href="mutual-funds.html">Mutual Funds</a>
+  <a href="equity.html">Equity</a>
+</nav>
+<main id="main">
+  <div class="container">
+    <p class="breadcrumb"><a href="index.html">Home</a> / <span>Start here</span></p>
+    <h1>New to finance? <span class="accent">Start here.</span></h1>
+    <p class="lead">Four steps, in order. Safety first, growth second. Enter your numbers and get a plan for this month.</p>
+    <section class="card" id="step1">
+      <p class="group-label">Step 1 · Cash flow</p>
+      <h2>Know what comes in and goes out</h2>
+      <div class="field-grid">
+        <div class="field"><label for="income">Monthly take-home (₹)</label><input type="number" id="income" value="50000" min="0" step="500"></div>
+        <div class="field"><label for="expenses">Monthly expenses (₹)</label><input type="number" id="expenses" value="30000" min="0" step="500"></div>
+      </div>
+      <p class="result-big tabular" id="surplusText">₹20,000 left</p>
+    </section>
+    <section class="card" id="step2">
+      <p class="group-label">Step 2 · Safety net</p>
+      <h2>Build your emergency fund</h2>
+      <p class="muted">Cash you can reach in days — not investments. Typical target: 6 months of expenses.</p>
+      <div class="field"><label for="efCurrent">Current emergency savings (₹)</label><input type="number" id="efCurrent" value="20000" min="0" step="500"></div>
+      <p class="result-big tabular" id="efText">Target ₹1,80,000</p>
+    </section>
+    <section class="card" id="step3">
+      <p class="group-label">Step 3 · Invest by age</p>
+      <h2>Directional mix</h2>
+      <div class="chips" id="ageSeg">
+        <button type="button" class="chip" data-age="20-24">20–24</button>
+        <button type="button" class="chip active" data-age="25-29">25–29</button>
+        <button type="button" class="chip" data-age="30-39">30–39</button>
+        <button type="button" class="chip" data-age="40-49">40–49</button>
+        <button type="button" class="chip" data-age="50+">50+</button>
+      </div>
+      <div class="donut-wrap" style="margin-top:1rem">
+        <div class="donut" id="planDonut"></div>
+        <div class="legend" id="planLegend">
+          <div class="legend-row"><span class="dot dot-eq"></span> Equity <span class="leg-pct" id="eqPct">70%</span></div>
+          <div class="legend-row"><span class="dot dot-debt"></span> Debt <span class="leg-pct" id="debtPct">20%</span></div>
+          <div class="legend-row"><span class="dot dot-gold"></span> Gold <span class="leg-pct" id="goldPct">10%</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="card" id="step4">
+      <p class="group-label">Step 4 · Optional IPO pot</p>
+      <h2>Only after the core plan</h2>
+      <p class="muted">A small separate pot — never rent or emergency money. See <a href="ipo.html">IPOs</a> for context only.</p>
+    </section>
+    <section class="card" id="plan">
+      <h2>This month</h2>
+      <div id="planLines" class="muted">Enter numbers above to see a simple monthly split.</div>
+    </section>
+    <p class="footer-note" style="margin-top:2rem">Educational only. Not advice. Not SEBI-registered.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
+    <div><h4>Markets</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
+    <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a></div>
+    <div><h4>About</h4><a href="about.html">About</a><a href="disclaimer.html">Disclaimer</a></div>
+  </div>
+  <div class="container"><p class="footer-legal">Educational only. Not investment advice.</p></div>
+</footer>
+<script src="js/app.js"></script>
+<script>
+(function(){
+  function calc(){
+    var inc = +document.getElementById('income').value||0;
+    var exp = +document.getElementById('expenses').value||0;
+    var sur = Math.max(0, inc-exp);
+    document.getElementById('surplusText').textContent = PV.inr(sur)+' left';
+    var target = exp*6;
+    var cur = +document.getElementById('efCurrent').value||0;
+    document.getElementById('efText').textContent = 'Target '+PV.inr(target)+' · Gap '+PV.inr(Math.max(0,target-cur));
+    var age = document.querySelector('#ageSeg .chip.active');
+    var key = age ? age.getAttribute('data-age') : '25-29';
+    var mix = PV.mixForAge(key, 0);
+    PV.paintDonut(document.getElementById('planDonut'), mix);
+    document.getElementById('eqPct').textContent = mix.eq+'%';
+    document.getElementById('debtPct').textContent = mix.debt+'%';
+    document.getElementById('goldPct').textContent = mix.gold+'%';
+    var invest = Math.max(0, sur - Math.min(sur, Math.max(0, target-cur)/6));
+    document.getElementById('planLines').innerHTML =
+      '<p><strong>Surplus:</strong> '+PV.inr(sur)+'</p>'+
+      '<p><strong>Toward emergency (this month):</strong> '+PV.inr(Math.min(sur, Math.max(0,target-cur)/6))+'</p>'+
+      '<p><strong>Toward mix:</strong> Equity '+PV.inr(invest*mix.eq/100)+' · Debt '+PV.inr(invest*mix.debt/100)+' · Gold '+PV.inr(invest*mix.gold/100)+'</p>';
+  }
+  ['income','expenses','efCurrent'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calc);
+  });
+  document.getElementById('ageSeg').addEventListener('click', function(e){
+    var b=e.target.closest('[data-age]'); if(!b) return;
+    document.querySelectorAll('#ageSeg .chip').forEach(function(c){ c.classList.toggle('active', c===b); });
+    calc();
+  });
+  if(window.PV){ PV.initNav && PV.initNav(); calc(); }
+  else { document.addEventListener('DOMContentLoaded', calc); }
+})();
+</script>
+</body>
+</html>
