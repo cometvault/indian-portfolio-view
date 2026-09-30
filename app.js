@@ -46,6 +46,23 @@ const NAV = [
   { href: "equity.html", label: "Equity", page: "eq" }
 ];
 
+function closeNav() {
+  document.body.classList.remove("nav-open");
+  const btn = $("#navToggle");
+  if (btn) btn.setAttribute("aria-expanded", "false");
+}
+
+function openNav() {
+  document.body.classList.add("nav-open");
+  const btn = $("#navToggle");
+  if (btn) btn.setAttribute("aria-expanded", "true");
+}
+
+function toggleNav() {
+  if (document.body.classList.contains("nav-open")) closeNav();
+  else openNav();
+}
+
 function layout() {
   const page = document.body.dataset.page || "";
   const hdr = $("#hdr");
@@ -56,7 +73,11 @@ function layout() {
           <img src="assets/logo.svg" width="34" height="34" alt="Portfolio View India" class="logo-img" id="brandLogo" style="object-fit:contain;background:#000">
           <span class="logo-txt">Portfolio View<span>India</span></span>
         </a>
-        <nav class="nav" aria-label="Primary">${NAV.map(n => {
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+          <svg class="ico-open" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="ico-close" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <nav class="nav" id="primaryNav" aria-label="Primary">${NAV.map(n => {
           const cur = n.page === page ? ' aria-current="page"' : "";
           const cls = n.cta ? ' class="cta"' : "";
           return `<a href="${n.href}"${cls}${cur}>${n.label}</a>`;
@@ -65,7 +86,8 @@ function layout() {
       <div class="mkt-ribbon" id="mktRibbon" aria-label="Market ribbon">
         <div class="mkt-track" id="mktTrack"><span class="mkt-item"><span class="lbl">Markets</span><span class="val">Loading…</span></span></div>
       </div>
-    </div>`;
+    </div>
+    <button type="button" class="nav-backdrop" id="navBackdrop" aria-label="Close menu" tabindex="-1"></button>`;
   }
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) {
@@ -78,6 +100,19 @@ function layout() {
       document.head.appendChild(s);
     }
   }
+  const toggle = $("#navToggle");
+  const backdrop = $("#navBackdrop");
+  if (toggle) toggle.addEventListener("click", toggleNav);
+  if (backdrop) backdrop.addEventListener("click", closeNav);
+  $$("#primaryNav a").forEach(function (a) {
+    a.addEventListener("click", closeNav);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeNav();
+  });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 820) closeNav();
+  });
   const ftr = $("#ftr");
   if (ftr) {
     ftr.innerHTML = `<footer class="ftr"><div class="ftr-in">
