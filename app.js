@@ -67,8 +67,9 @@ function layout() {
   const page = document.body.dataset.page || "";
   const hdr = $("#hdr");
   if (hdr) {
-    hdr.innerHTML = `<div class="hdr-stack">
-      <header class="hdr"><div class="hdr-in">
+    /* Header bar (logo + hamburger) is sticky alone.
+       Ribbon is a separate block BELOW it so it can never cover the toggle. */
+    hdr.innerHTML = `<header class="hdr"><div class="hdr-in">
         <a class="logo" href="index.html" aria-label="Portfolio View India home">
           <img src="assets/logo.svg" width="34" height="34" alt="Portfolio View India" class="logo-img" id="brandLogo" style="object-fit:contain;background:#000">
           <span class="logo-txt">Portfolio View<span>India</span></span>
@@ -85,8 +86,7 @@ function layout() {
       </div></header>
       <div class="mkt-ribbon" id="mktRibbon" aria-label="Market ribbon">
         <div class="mkt-track" id="mktTrack"><span class="mkt-item"><span class="lbl">Markets</span><span class="val">Loading…</span></span></div>
-      </div>
-    </div>`;
+      </div>`;
   }
   /* Backdrop on body so it always covers the full viewport solid black */
   let backdrop = $("#navBackdrop");
@@ -191,7 +191,7 @@ async function fillMarketRibbon() {
   }
   const n = mkt && mkt.nifty50;
   if (n && n.price != null) {
-    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">${Number(n.price).toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>${fmtChg(n.change, n.change_pct)}</a>`);
+    items.push(`<a class="mkt-item" href="equity.html"><span class="val">${Number(n.price).toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>${fmtChg(n.change, n.change_pct)}</a>`.replace('<span class="val">', '<span class="lbl">Nifty 50</span><span class="val">'));
   } else {
     items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">—</span></a>`);
   }
