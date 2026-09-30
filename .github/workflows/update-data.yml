@@ -1,10 +1,9 @@
 name: Update market data
 on:
   schedule:
-    # Every 8 hours → 3 runs/day (IST: ~07:30, 15:30, 23:30)
-    - cron: "0 2 * * *"   # 07:30 IST
-    - cron: "0 10 * * *"  # 15:30 IST
-    - cron: "0 18 * * *"  # 23:30 IST
+    - cron: "0 2 * * *"
+    - cron: "0 10 * * *"
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 permissions:
@@ -26,11 +25,14 @@ jobs:
       - name: Fetch gold
         run: python scripts/fetch_gold.py
         continue-on-error: true
+      - name: Fetch indices
+        run: python scripts/fetch_markets.py
+        continue-on-error: true
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/ipo.json data/gold.json
+          git add data/ipo.json data/gold.json data/markets.json
           if git diff --staged --quiet; then
             echo "No data changes"
           else

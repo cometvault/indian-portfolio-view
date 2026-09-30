@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-09-30T15:27:04+05:30",
+  "source": "Yahoo Finance",
+  "source_url": "https://finance.yahoo.com",
+  "nifty50": {
+    "price": 22616.6,
+    "change": -446.5,
+    "change_pct": -1.94,
+    "name": "NIFTY 50"
+  },
+  "bank_nifty": {
+    "price": 54706.75,
+    "change": -731.75,
+    "change_pct": -1.32,
+    "name": "BANK NIFTY"
+  }
+}
