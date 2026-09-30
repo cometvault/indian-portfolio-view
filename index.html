@@ -1,176 +1,53 @@
 <!DOCTYPE html>
-<html lang="en-IN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Home — Portfolio View India</title>
-  <meta name="description" content="Know your mix before you invest a rupee. Age-based allocation, live IPO and gold context. Educational only.">
-  <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/index.html">
-  <meta name="theme-color" content="#050807">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
-      <img class="logo-mark" src="assets/logo.svg" width="32" height="32" alt="">
-      <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
-    </a>
-    <nav class="nav-desktop" aria-label="Primary">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="new-to-finance.html" class="nav-cta">Start here</a>
-      <a href="ipo.html">IPOs</a>
-      <a href="gold-etf.html">Gold & ETF</a>
-      <a href="mutual-funds.html">Mutual Funds</a>
-      <a href="equity.html">Equity</a>
-    </nav>
-    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </div>
-</header>
-<nav class="nav-drawer" id="navDrawer" aria-label="Mobile">
-  <a href="index.html" aria-current="page">Home</a>
-  <a href="new-to-finance.html">Start here</a>
-  <a href="ipo.html">IPOs</a>
-  <a href="gold-etf.html">Gold & ETF</a>
-  <a href="mutual-funds.html">Mutual Funds</a>
-  <a href="equity.html">Equity</a>
-</nav>
-<main id="main">
-  <div class="container">
-    <section class="hero-home" style="display:grid;grid-template-columns:1fr;gap:1.5rem;padding:2rem 0 1rem">
-      <div>
-        <h1>Know your mix before you invest a <span class="accent">rupee</span>.</h1>
-        <p class="lead">Pick an age band. See a directional Equity / Debt / Gold split. Then build a full plan — safety first.</p>
-        <a class="btn btn-primary" href="new-to-finance.html#plan">Build my full plan →</a>
-      </div>
-      <div class="card" id="heroWidget">
-        <p class="group-label" style="margin-top:0">Your age band</p>
-        <div class="chips" id="heroAges" role="group" aria-label="Age band">
-          <button type="button" class="chip" data-age="20-24">20–24</button>
-          <button type="button" class="chip active" data-age="25-29">25–29</button>
-          <button type="button" class="chip" data-age="30-39">30–39</button>
-          <button type="button" class="chip" data-age="40-49">40–49</button>
-          <button type="button" class="chip" data-age="50+">50+</button>
-        </div>
-        <div class="donut-wrap" style="margin-top:1.15rem">
-          <div class="donut" id="heroDonut" role="img" aria-label="Allocation chart"></div>
-          <div class="legend" id="heroLegend">
-            <div class="legend-row"><span class="dot dot-eq"></span> Equity <span class="leg-pct tabular" data-leg="eq">70%</span></div>
-            <div class="legend-row"><span class="dot dot-debt"></span> Debt <span class="leg-pct tabular" data-leg="debt">20%</span></div>
-            <div class="legend-row"><span class="dot dot-gold"></span> Gold <span class="leg-pct tabular" data-leg="gold">10%</span></div>
-          </div>
-        </div>
-        <p class="muted" style="margin:0.85rem 0 0;font-size:0.82rem">Directional shape only — not a product list.</p>
-      </div>
-    </section>
-    <div class="today-strip" id="todayStrip" aria-live="polite">
-      <a class="today-item" href="gold-etf.html">
-        <div class="today-label">Gold 24K / g</div>
-        <div class="today-value tabular" id="todayGold">—</div>
-      </a>
-      <a class="today-item" href="ipo.html">
-        <div class="today-label">Open IPOs</div>
-        <div class="today-value tabular" id="todayIpos">—</div>
-      </a>
-      <div class="today-item">
-        <div class="today-label">Data</div>
-        <div class="today-value" style="font-size:0.85rem;font-weight:500" id="todayStamp">Loading…</div>
-      </div>
-    </div>
-    <p class="group-label">Start</p>
-    <div class="card-grid">
-      <a class="card card-link" href="new-to-finance.html">
-        <h3>New To Finance</h3>
-        <p class="muted" style="margin:0;font-size:0.9rem">Cash flow, emergency fund, then a monthly plan. Built for first-timers.</p>
-      </a>
-    </div>
-    <p class="group-label">Markets today</p>
-    <div class="card-grid">
-      <a class="card card-link" href="ipo.html">
-        <h3>IPOs</h3>
-        <p class="muted" style="margin:0;font-size:0.9rem">What's open, how to apply, and how to think about grey-market premium.</p>
-      </a>
-      <a class="card card-link" href="gold-etf.html">
-        <h3>Gold & ETF</h3>
-        <p class="muted" style="margin:0;font-size:0.9rem">City rates and ways to hold gold — ETF first for liquidity.</p>
-      </a>
-    </div>
-    <p class="group-label">Learn</p>
-    <div class="card-grid">
-      <a class="card card-link" href="mutual-funds.html">
-        <h3>Mutual Funds</h3>
-        <p class="muted" style="margin:0;font-size:0.9rem">Categories only — equity, debt, hybrid. No scheme names.</p>
-      </a>
-      <a class="card card-link" href="equity.html">
-        <h3>Equity</h3>
-        <p class="muted" style="margin:0;font-size:0.9rem">A durable mid / large / small proportion inside the equity sleeve.</p>
-      </a>
-    </div>
-    <div class="next-step">
-      <p>New here? Start with a full plan — safety first.</p>
-      <a class="btn btn-primary" href="new-to-finance.html">Start here →</a>
-    </div>
-  </div>
-</main>
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
-    <div><h4>Markets</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
-    <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a><a href="glossary.html">Glossary</a></div>
-    <div><h4>About</h4><a href="about.html">About</a><a href="disclaimer.html">Disclaimer</a></div>
-  </div>
-  <div class="container"><p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered.</p></div>
-</footer>
-<script src="js/app.js"></script>
+<html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio View India — Know your mix</title>
+<meta name="description" content="Pick your age, see a sensible split across equity, debt and gold, then follow a safety-first plan. Educational only.">
+<meta name="theme-color" content="#050807"><link rel="icon" href="assets/favicon.png"><link rel="stylesheet" href="styles.css"></head>
+<body data-page="home"><a class="skip" href="#main">Skip to content</a><div id="hdr"></div><div class="glow"></div>
+<main id="main" class="wrap">
+<div class="hero two" style="align-items:center;padding-top:34px">
+<div>
+<h1>Know your mix before you invest a rupee.</h1>
+<p class="lead">A calm, safety-first guide for first-time investors in India. Start with your age, then build the plan around it.</p>
+<p style="margin-top:22px"><a class="go" href="new-to-finance.html">Start the 4-step guide</a></p>
+</div>
+<div class="panel">
+<label class="f">Your age</label>
+<div class="seg" id="age"><button data-v="0">20–24</button><button data-v="1" class="on">25–29</button><button data-v="2">30–39</button><button data-v="3">40–49</button><button data-v="4">50+</button></div>
+<div class="mix" style="margin-top:20px"><div class="donut" id="donut"></div><div class="lg" id="leg"></div></div>
+<p class="note" style="margin-top:16px">An illustration, not advice. <a href="new-to-finance.html#plan" style="color:var(--c2)">Turn it into your monthly plan</a></p>
+</div>
+</div>
+
+<section class="sec" style="margin-top:36px"><h2>Today</h2><p>Pulled from the daily data update.</p>
+<div id="st" class="status" style="margin-bottom:12px"></div>
+<div class="bento" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:0">
+<a class="tile" href="gold-etf.html" style="text-decoration:none"><small>24K gold per gram</small><b class="g num" id="tg">—</b><p id="tgc"></p></a>
+<a class="tile" href="ipo.html" style="text-decoration:none"><small>IPOs open now</small><b class="g num" id="ti">—</b><p>See dates and minimums</p></a>
+</div></section>
+
+<section class="sec"><h2>Where to go</h2><p>Follow the order if you're new, or jump to what you need.</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+<a class="card" href="new-to-finance.html" data-ic="start"><h3>New To Finance</h3><p>Cash flow, safety net, insurance, then your mix.</p></a>
+<a class="card" href="ipo.html" data-ic="ipo"><h3>IPOs</h3><p>What's open, minimum amounts and a readiness check.</p></a>
+<a class="card" href="gold-etf.html" data-ic="gold"><h3>Gold &amp; ETF</h3><p>City rates and how to hold gold sensibly.</p></a>
+<a class="card" href="mutual-funds.html" data-ic="mf"><h3>Mutual Funds</h3><p>Categories by risk or goal. No fund names.</p></a>
+<a class="card" href="equity.html" data-ic="eq"><h3>Equity</h3><p>Large, mid and small cap mixes and what can go wrong.</p></a>
+</div></section>
+
+<section class="sec faq"><h2>Questions</h2>
+<details><summary>Is this telling me what to buy?</summary><p>No. It shows the shape of a portfolio and how to get ready to invest. It never names stocks or funds.</p></details>
+<details><summary>Where does the data come from?</summary><p>IPO and gold figures are loaded from a daily update file and show their last-updated time and source. If the file is missing you'll see a clear demo-data notice instead.</p></details>
+<details><summary>How is the mix chosen?</summary><p>Younger investors have more time to recover from falls, so the illustration leans more toward equity. It is a starting shape you should adjust to your comfort and goals.</p></details>
+<details><summary>Why start with a safety net?</summary><p>Cash for emergencies means you never have to sell investments at a bad time.</p></details>
+</section>
+</main><div id="ftr"></div>
+<script src="app.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  var age = '25-29';
-  function paint() {
-    var mix = PV.mixForAge(age, 0);
-    PV.paintDonut(document.getElementById('heroDonut'), mix);
-    PV.paintLegend(document.getElementById('heroLegend'), mix);
-  }
-  document.getElementById('heroAges').addEventListener('click', function (e) {
-    var btn = e.target.closest('[data-age]');
-    if (!btn) return;
-    age = btn.getAttribute('data-age');
-    document.querySelectorAll('#heroAges .chip').forEach(function (c) {
-      c.classList.toggle('active', c === btn);
-    });
-    paint();
-  });
-  paint();
-  Promise.all([
-    PV.loadJson('data/gold.json').catch(function () { return null; }),
-    PV.loadJson('data/ipo.json').catch(function () { return null; })
-  ]).then(function (res) {
-    var gold = res[0], ipo = res[1];
-    var gEl = document.getElementById('todayGold');
-    var iEl = document.getElementById('todayIpos');
-    var sEl = document.getElementById('todayStamp');
-    if (gold && gold.cities && gold.cities[0]) {
-      var m = gold.cities.find(function (c) { return /mumbai/i.test(c.city); }) || gold.cities[0];
-      gEl.textContent = PV.inr(m.rate24k);
-    } else gEl.textContent = '—';
-    if (ipo) {
-      var open = (ipo.mainboard || []).concat(ipo.sme || []).filter(function (x) {
-        var s = String(x.status || '').toLowerCase();
-        return s.indexOf('open') >= 0 && s.indexOf('up') < 0;
-      });
-      iEl.textContent = String(open.length);
-    } else iEl.textContent = '—';
-    var u = (gold && (gold.updated_at || gold.updated)) || (ipo && (ipo.updated_at || ipo.updated));
-    sEl.textContent = u ? PV.formatIST(u) : 'Unavailable';
-  });
-});
-</script>
-</body>
-</html>
+$$("[data-ic]").forEach(a=>a.insertAdjacentHTML("afterbegin",ic(a.dataset.ic)));
+let age=1;const draw=()=>drawMix($("#donut"),$("#leg"),mixFor(age,0));segs($("#age"),v=>{age=+v;draw()});draw();
+(async()=>{const[g,i]=await Promise.all([getGold(),getIPO()]);
+const c=g.j.cities[0];$("#tg").textContent=inr(c.k24);$("#tgc").textContent=c.city+(g.live?"":" · demo");
+$("#ti").textContent=i.rows.filter(d=>d.status==="open").length;
+statusBar($("#st"),g.live?g:i)})();
+</script></body></html>
