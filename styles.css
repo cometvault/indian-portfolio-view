@@ -73,19 +73,21 @@ a:hover { text-decoration: underline; }
   padding: 0 20px 64px;
 }
 
-/* Header stack (ribbon + nav) */
+/* Header (logo + nav) sticky alone — ribbon is a sibling below, never covers toggle */
 .hdr-stack {
-  position: sticky; top: 0; z-index: 50;
+  position: static;
+  z-index: auto;
 }
 .hdr {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   height: 64px;
   display: flex; align-items: center;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(5, 8, 7, .82);
+  background: #050807;
   border-bottom: 1px solid var(--line);
-  position: relative;
-  z-index: 3;
 }
 .hdr-in {
   max-width: 1120px; margin: 0 auto; padding: 0 20px;
@@ -143,6 +145,9 @@ a:hover { text-decoration: underline; }
   align-items: center; justify-content: center;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
 }
 .nav-toggle:hover { border-color: rgba(61,245,160,.35); }
 .nav-toggle:focus-visible { outline: 2px solid var(--c2); outline-offset: 2px; }
@@ -188,7 +193,10 @@ body.nav-open .nav-toggle {
   font-variant-numeric: tabular-nums;
   color: var(--mu);
   position: relative;
-  z-index: 1;
+  z-index: 1; /* always below sticky .hdr (z-index 50) */
+  isolation: isolate;
+  contain: layout paint;
+  pointer-events: auto;
 }
 .mkt-track {
   display: flex; align-items: center;
@@ -568,17 +576,17 @@ input[type="number"]:focus { border-color: var(--c2); }
     position: relative;
     z-index: 5;
     margin-left: auto;
+    background: #131A18;
   }
 
   .hdr-in { padding: 0 14px; gap: 10px; }
 
-  /* Ribbon stays strictly under header; never cover hamburger */
   .mkt-ribbon {
     z-index: 1;
     position: relative;
   }
   .hdr {
-    z-index: 3;
+    z-index: 50;
   }
 
   .nav {
@@ -608,7 +616,6 @@ input[type="number"]:focus { border-color: var(--c2); }
     display: flex !important;
   }
 
-  /* Options: grey text only, no background fills */
   .nav a {
     display: flex;
     align-items: center;
@@ -628,7 +635,6 @@ input[type="number"]:focus { border-color: var(--c2); }
     background: transparent !important;
     text-decoration: none;
   }
-  /* Selected: coloured underline only */
   .nav a[aria-current="page"] {
     background: transparent !important;
     color: #9AA8A1 !important;
@@ -636,7 +642,6 @@ input[type="number"]:focus { border-color: var(--c2); }
     border-radius: 0;
     box-shadow: none !important;
   }
-  /* Start here: brand colour text, no filled button */
   .nav a.cta {
     margin-top: 8px;
     justify-content: flex-start;
