@@ -7,8 +7,8 @@ const inr = (n) => {
   return "₹" + Math.round(+n).toLocaleString("en-IN");
 };
 const esc = (s) => String(s ?? "")
-  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-  .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  .replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">")
+  .replace(/"/g, """).replace(/'/g, "&#39;");
 
 const DAY = 864e5;
 const T = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); })();
@@ -44,9 +44,13 @@ function layout() {
   const page = document.body.dataset.page || "";
   const hdr = $("#hdr");
   if (hdr) {
-    hdr.innerHTML = `<header class="hdr"><div class="hdr-in">
+    hdr.innerHTML = `<div class="hdr-stack">
+      <div class="mkt-ribbon" id="mktRibbon" aria-label="Market ribbon">
+        <div class="mkt-track" id="mktTrack"><span class="mkt-item"><span class="lbl">Markets</span><span class="val">Loading…</span></span></div>
+      </div>
+      <header class="hdr"><div class="hdr-in">
       <a class="logo" href="index.html" aria-label="Portfolio View India home">
-        <img src="assets/logo.png" width="34" height="34" alt="" class="logo-img">
+        <img src="assets/logo.svg" width="34" height="34" alt="" class="logo-img">
         <span class="logo-txt">Portfolio View<span>India</span></span>
       </a>
       <nav class="nav" aria-label="Primary">${NAV.map(n => {
@@ -54,7 +58,7 @@ function layout() {
         const cls = n.cta ? ' class="cta"' : "";
         return `<a href="${n.href}"${cls}${cur}>${n.label}</a>`;
       }).join("")}</nav>
-    </div></header>`;
+    </div></header></div>`;
   }
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) img.onerror = function () { this.outerHTML = MARK; };
@@ -62,13 +66,77 @@ function layout() {
   if (ftr) {
     ftr.innerHTML = `<footer class="ftr"><div class="ftr-in">
       <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
-      <div><h4>Markets today</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold &amp; ETF</a></div>
+      <div><h4>Markets today</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
       <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a></div>
     </div>
     <p class="ftr-legal">Educational only. Not investment advice. Not SEBI-registered. Investments carry risk and returns are not guaranteed.</p></footer>`;
   }
+  fillMarketRibbon();
 }
 layout();
+
+function fmtChg(chg, pct) {
+  if (chg == null && pct == null) return "";
+  const n = pct != null ? pct : chg;
+  const cls = n >= 0 ? "up" : "dn";
+  const sign = n >= 0 ? "+" : "";
+  const parts = [];
+  if (chg != null) parts.push(sign + Number(chg).toLocaleString("en-IN", { maximumFractionDigits: 2 }));
+  if (pct != null) parts.push("(" + sign + Number(pct).toFixed(2) + "%)");
+  return `<span class="${cls}">${parts.join(" ")}</span>`;
+}
+
+async function fillMarketRibbon() {
+  const track = $("#mktTrack");
+  if (!track) return;
+  let mkt = null, ipo = null, gold = null;
+  try { mkt = await getJSON("markets.json"); } catch (e) {}
+  try { ipo = await getIPO(); } catch (e) {}
+  try { gold = await getGold(); } catch (e) {}
+
+  const items = [];
+
+  const n = mkt && mkt.nifty50;
+  if (n && n.price != null) {
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">${Number(n.price).toLocaleString("en-IN",{maximumFractionDigits:2})}</span>${fmtChg(n.change,n.change_pct)}</a>`);
+  } else {
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Nifty 50</span><span class="val">—</span></a>`);
+  }
+
+  const b = mkt && mkt.bank_nifty;
+  if (b && b.price != null) {
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Bank Nifty</span><span class="val">${Number(b.price).toLocaleString("en-IN",{maximumFractionDigits:2})}</span>${fmtChg(b.change,b.change_pct)}</a>`);
+  } else {
+    items.push(`<a class="mkt-item" href="equity.html"><span class="lbl">Bank Nifty</span><span class="val">—</span></a>`);
+  }
+
+  if (ipo && ipo.rows) {
+    const ranked = ipo.rows
+      .filter(d => d.seg === "main" && (d.status === "open" || d.status === "upcoming") && d.gmpPct != null)
+      .sort((a, c) => (c.gmpPct ?? -1e9) - (a.gmpPct ?? -1e9))
+      .slice(0, 2);
+    ranked.forEach(d => {
+      const st = d.status === "open" ? "Open" : "Upcoming";
+      const tagCls = d.status === "open" ? "tag" : "tag upcom";
+      const gmp = d.gmp != null ? "₹" + Math.round(d.gmp) : "—";
+      const pct = d.gmpPct != null ? d.gmpPct.toFixed(1) + "%" : "—";
+      items.push(`<a class="mkt-item" href="ipo.html"><span class="lbl">IPO</span><span class="val">${esc(d.name)}</span><span class="val">GMP ${gmp} (${pct})</span><span class="${tagCls}">${st}</span></a>`);
+    });
+  }
+
+  if (gold && gold.j && gold.j.cities && gold.j.cities[0]) {
+    const c = gold.j.cities[0];
+    const per10 = (c.k24 || 0) * 10;
+    items.push(`<a class="mkt-item" href="gold-etf.html"><span class="lbl">Gold 24K</span><span class="val">${inr(per10)}/10g</span><span class="val">${esc(c.city)}</span></a>`);
+  } else {
+    items.push(`<a class="mkt-item" href="gold-etf.html"><span class="lbl">Gold 24K</span><span class="val">—</span></a>`);
+  }
+
+  items.push(`<a class="mkt-item mkt-brand" href="new-to-finance.html"><span class="val">Portfolio View India: Free guide to investing in India</span></a>`);
+
+  const html = items.join("") + items.join("");
+  track.innerHTML = html;
+}
 
 /* Age mixes: [label, equity, debt, gold] */
 const AGES = [
@@ -117,7 +185,6 @@ function segs(container, cb) {
   });
 }
 
-/* Demo IPO data — relative dates so open/upcoming/closed stay valid */
 function dmo(offset) { return T + offset * DAY; }
 const IPO_DEMO = [
   { name: "Demo Solar Ltd", sector: "Renewable Energy", seg: "main", band: "₹95–100", min: 14000, lot: 140, issue: 850, gmp: 22, gmpPct: 22, sub: 4.2, opens: dmo(-1), closes: dmo(2), listing: dmo(7), status: "open" },
