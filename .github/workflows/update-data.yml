@@ -1,8 +1,10 @@
 name: Update market data
 on:
   schedule:
-    - cron: "30 6 * * *"
-    - cron: "30 12 * * *"
+    # Every 8 hours → 3 runs/day (IST: ~07:30, 15:30, 23:30)
+    - cron: "0 2 * * *"   # 07:30 IST
+    - cron: "0 10 * * *"  # 15:30 IST
+    - cron: "0 18 * * *"  # 23:30 IST
   workflow_dispatch:
 
 permissions:
