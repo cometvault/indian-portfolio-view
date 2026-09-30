@@ -1,122 +1,42 @@
 <!DOCTYPE html>
-<html lang="en-IN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Gold & ETF — Portfolio View India</title>
-  <meta name="description" content="Today's gold rates by city and ways to hold gold. Educational only.">
-  <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/gold-etf.html">
-  <meta name="theme-color" content="#050807">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
-      <img class="logo-mark" src="assets/logo.svg" width="32" height="32" alt="">
-      <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
-    </a>
-    <nav class="nav-desktop" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="new-to-finance.html" class="nav-cta">Start here</a>
-      <a href="ipo.html">IPOs</a>
-      <a href="gold-etf.html" aria-current="page">Gold & ETF</a>
-      <a href="mutual-funds.html">Mutual Funds</a>
-      <a href="equity.html">Equity</a>
-    </nav>
-    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </div>
-</header>
-<nav class="nav-drawer" id="navDrawer" aria-label="Mobile">
-  <a href="index.html">Home</a>
-  <a href="new-to-finance.html">Start here</a>
-  <a href="ipo.html">IPOs</a>
-  <a href="gold-etf.html" aria-current="page">Gold & ETF</a>
-  <a href="mutual-funds.html">Mutual Funds</a>
-  <a href="equity.html">Equity</a>
-</nav>
-<main id="main">
-  <div class="container">
-    <p class="breadcrumb"><a href="index.html">Home</a> / <span>Gold & ETF</span></p>
-    <h1>Today's rate, in your city</h1>
-    <p class="lead">22K and 24K side by side. Metal rate only — no making charges.</p>
-    <div class="data-status" id="goldStatus"><span class="skeleton" style="width:12rem;display:inline-block">&nbsp;</span></div>
-    <button type="button" class="btn" id="refreshGold"><span id="goldSpin"></span> Refresh</button>
-    <div class="card-grid" id="goldCards" style="margin-top:1rem"></div>
-    <section style="margin-top:2rem">
-      <h2>Gold, ranked by how you hold it</h2>
-      <div class="card-grid" style="margin-top:0.75rem">
-        <div class="card"><h3>Gold ETF</h3><p class="muted" style="margin:0">Easiest to buy, easiest to sell.</p></div>
-        <div class="card"><h3>Digital gold</h3><p class="muted" style="margin:0">Convenient, smaller holdings.</p></div>
-        <div class="card"><h3>Physical gold</h3><p class="muted" style="margin:0">Yours to hold, harder to trade.</p></div>
-      </div>
-    </section>
-    <section class="card faq" style="margin-top:1.5rem">
-      <h2>Questions</h2>
-      <details><summary>Why is ETF ranked first?</summary><p>Liquidity — you can exit in seconds, not days.</p></details>
-      <details><summary>Do rates include making charges?</summary><p>No — this is the metal rate only.</p></details>
-    </section>
-    <div class="next-step"><p>Size gold inside a full plan.</p><a class="btn btn-primary" href="new-to-finance.html#plan">Build my plan →</a></div>
-  </div>
-</main>
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
-    <div><h4>Markets</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
-    <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a></div>
-    <div><h4>About</h4><a href="about.html">About</a><a href="disclaimer.html">Disclaimer</a></div>
-  </div>
-  <div class="container"><p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered.</p></div>
-</footer>
-<script src="js/app.js"></script>
+<html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold &amp; ETF — Portfolio View India</title>
+<meta name="description" content="City gold rates and a plain comparison of gold ETFs, digital gold and physical gold. Educational only.">
+<meta name="theme-color" content="#050807"><link rel="icon" href="assets/favicon.png"><link rel="stylesheet" href="styles.css"></head>
+<body data-page="gold"><a class="skip" href="#main">Skip to content</a><div id="hdr"></div><div class="glow"></div>
+<main id="main" class="wrap">
+<div class="crumb"><a href="index.html">Home</a> / Gold &amp; ETF</div>
+<div class="hero"><h1>Gold today, and how to hold it.</h1><p class="lead">Rates by city, then the honest trade-offs between an ETF, digital gold and the physical kind.</p></div>
+<div class="status" id="st" role="status"></div>
+<div class="ctl"><select id="city" aria-label="City"></select><div class="seg" id="kt"><button data-v="k24" class="on">24K</button><button data-v="k22">22K</button></div><div class="seg" id="un"><button data-v="1" class="on">per gram</button><button data-v="10">per 10 g</button></div></div>
+<div class="panel"><small style="color:var(--mu)" id="lab"></small><div class="big g num" id="rate" style="font-size:clamp(40px,9vw,72px)">—</div>
+<div class="note">Metal rate only. It excludes making charges and GST, which can add a lot on jewellery.</div></div>
+
+<section class="sec"><h2>Three ways to hold gold</h2><p>None is best for everyone. Pick by how easily you want to sell and what you're willing to pay.</p>
+<div class="tw"><table><thead><tr><th></th><th>Gold ETF</th><th>Digital gold</th><th>Physical gold</th></tr></thead><tbody>
+<tr><td>How you buy</td><td>Demat account and broker app</td><td>Apps and platforms</td><td>Jewellers, banks, coins</td></tr>
+<tr><td>Selling</td><td>Any market day on the exchange</td><td>Usually instant through the platform</td><td>To a jeweller, often at a discount</td></tr>
+<tr><td>Costs</td><td>Fund expense ratio plus brokerage</td><td>Gap between buy and sell price, plus GST on purchase</td><td>Making charges, GST, purity checks</td></tr>
+<tr><td>Storage</td><td>Held in your demat</td><td>Vaulted by the provider</td><td>Your locker or home</td></tr>
+<tr><td>Minimum</td><td>About one unit, a fraction of a gram</td><td>A few rupees</td><td>Any amount, coins from small weights</td></tr>
+<tr><td>Watch out for</td><td>Small gap versus the gold price</td><td>Platform risk: check who regulates the provider</td><td>Making charges are lost on resale. Insist on a hallmark.</td></tr>
+</tbody></table></div></section>
+
+<section class="sec"><h2>Gold ETF in plain words</h2><p></p>
+<div class="g2" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"><div class="tile"><h3>What it is</h3><p>A fund that holds gold and trades on the stock exchange. Its price moves with the gold price.</p></div><div class="tile"><h3>What it costs</h3><p>A small yearly fee (expense ratio) plus the brokerage you pay to buy and sell.</p></div><div class="tile"><h3>What you need</h3><p>A demat and trading account. Check the tracking difference: how closely it follows gold.</p></div></div></section>
+
+<section class="sec"><div class="panel"><h2>How much gold?</h2><p style="color:var(--mu);margin:6px 0 0">The age-based mixes on this site hold roughly 10–15% in gold, as a steadier counterweight to equity. It is not a place to put everything.</p><p style="margin-top:16px"><a class="go" href="new-to-finance.html#plan">See it in my plan</a></p></div></section>
+
+<section class="sec faq"><h2>Questions</h2>
+<details><summary>Why do rates differ by city?</summary><p>Local taxes, transport costs and jeweller pricing vary, so the same gram can cost a little differently in different cities.</p></details>
+<details><summary>What's the difference between 22K and 24K?</summary><p>24K is nearly pure gold, used for coins and bars. 22K is mixed with other metals to be hard enough for jewellery.</p></details></section>
+<div class="next"><div><h2>Gold is a supporting act.</h2><p>Learn what the main holdings look like.</p></div><a class="go" href="mutual-funds.html">Explore Mutual Funds</a></div>
+</main><div id="ftr"></div>
+<script src="app.js"></script>
 <script>
-(function () {
-  function render(data) {
-    var st = document.getElementById('goldStatus');
-    var cards = document.getElementById('goldCards');
-    if (!data || !data.cities) {
-      st.className = 'data-status stale';
-      st.textContent = 'Data may be out of date — try Refresh.';
-      return;
-    }
-    var updated = data.updated_at || data.updated;
-    var stale = PV.isStale(updated, 36);
-    st.className = 'data-status' + (stale ? ' stale' : '');
-    var src = data.source || '—';
-    var srcUrl = data.source_url || data.sourceUrl || '#';
-    st.innerHTML = (stale ? 'Data may be out of date · ' : '') +
-      'Last updated: ' + PV.formatIST(updated) +
-      ' · Source: <a href="' + PV.escapeHtml(srcUrl) + '" target="_blank" rel="noopener">' + PV.escapeHtml(src) + '</a>';
-    cards.innerHTML = data.cities.map(function (c) {
-      return '<div class="card"><h3>' + PV.escapeHtml(c.city) + '</h3>' +
-        '<p class="tabular" style="margin:0.35rem 0 0"><strong>24K</strong> ' + PV.inr(c.rate24k) + '/g</p>' +
-        '<p class="tabular muted" style="margin:0.2rem 0 0">22K ' + PV.inr(c.rate22k) + '/g</p></div>';
-    }).join('');
-  }
-  function load(force) {
-    var spin = document.getElementById('goldSpin');
-    var btn = document.getElementById('refreshGold');
-    if (spin) spin.className = 'spinner';
-    if (btn) btn.disabled = true;
-    PV.loadJson('data/gold.json', { force: force }).then(render).catch(function () {
-      document.getElementById('goldStatus').className = 'data-status error';
-      document.getElementById('goldStatus').textContent = 'Could not load gold data — try Refresh.';
-    }).finally(function () {
-      if (spin) spin.className = '';
-      if (btn) btn.disabled = false;
-    });
-  }
-  document.getElementById('refreshGold').addEventListener('click', function () { load(true); });
-  load(false);
-})();
-</script>
-</body>
-</html>
+let G,K="k24",U=1;
+function show(){const c=G.j.cities.find(x=>x.city===$("#city").value)||G.j.cities[0];$("#rate").textContent=inr(c[K]*U);$("#lab").textContent=(K==="k24"?"24K":"22K")+" gold · "+c.city+" · "+(U===1?"per gram":"per 10 grams")+(G.live?"":" · demo")}
+async function load(){const b=$("#rf");if(b)b.innerHTML='<span class="spin">↻</span> Refreshing';G=await getGold();
+const prev=$("#city").value;$("#city").innerHTML=G.j.cities.map(c=>`<option>${esc(c.city)}</option>`).join("");if(prev)$("#city").value=prev;statusBar($("#st"),G,load);show()}
+$("#city").onchange=show;segs($("#kt"),v=>{K=v;show()});segs($("#un"),v=>{U=+v;show()});load();
+</script></body></html>

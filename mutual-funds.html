@@ -1,79 +1,43 @@
 <!DOCTYPE html>
-<html lang="en-IN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Mutual Funds — Portfolio View India</title>
-  <meta name="description" content="Categories only — equity, debt, hybrid. No scheme names. Educational reference.">
-  <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/mutual-funds.html">
-  <meta name="theme-color" content="#050807">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
-      <img class="logo-mark" src="assets/logo.svg" width="32" height="32" alt="">
-      <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
-    </a>
-    <nav class="nav-desktop" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="new-to-finance.html" class="nav-cta">Start here</a>
-      <a href="ipo.html">IPOs</a>
-      <a href="gold-etf.html">Gold & ETF</a>
-      <a href="mutual-funds.html" aria-current="page">Mutual Funds</a>
-      <a href="equity.html">Equity</a>
-    </nav>
-    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </div>
-</header>
-<nav class="nav-drawer" id="navDrawer" aria-label="Mobile">
-  <a href="index.html">Home</a>
-  <a href="new-to-finance.html">Start here</a>
-  <a href="ipo.html">IPOs</a>
-  <a href="gold-etf.html">Gold & ETF</a>
-  <a href="mutual-funds.html" aria-current="page">Mutual Funds</a>
-  <a href="equity.html">Equity</a>
-</nav>
-<main id="main">
-  <div class="container">
-    <p class="breadcrumb"><a href="index.html">Home</a> / <span>Mutual Funds</span></p>
-    <h1>Categories, not fund names</h1>
-    <p class="lead">A framework for comparing roles — not a picks list. Bring this shape to your own research.</p>
-    <div class="card-grid">
-      <div class="card"><h3>Equity</h3><p class="muted" style="margin:0">Growth engine of the mix. Higher day-to-day movement, longer horizon.</p></div>
-      <div class="card"><h3>Debt</h3><p class="muted" style="margin:0">Where stability lives. Lower expected return, lower drama.</p></div>
-      <div class="card"><h3>Hybrid</h3><p class="muted" style="margin:0">A bit of both, in one place. Still not a substitute for a clear plan.</p></div>
-    </div>
-    <p class="muted" style="margin-top:1rem">No scheme names here — so you compare categories, not chase past returns.</p>
-    <section class="card faq" style="margin-top:1.5rem">
-      <h2>Questions</h2>
-      <details><summary>Why no fund names?</summary><p>So you compare categories, not chase past returns.</p></details>
-      <details><summary>Which category should I pick?</summary><p>Depends on your timeline — start with <a href="new-to-finance.html">Start here</a>.</p></details>
-    </section>
-    <div class="next-step">
-      <p>Ready to size a monthly plan?</p>
-      <a class="btn btn-primary" href="new-to-finance.html#plan">Build my plan →</a>
-    </div>
-  </div>
-</main>
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
-    <div><h4>Markets</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
-    <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a><a href="glossary.html">Glossary</a></div>
-    <div><h4>About</h4><a href="about.html">About</a><a href="disclaimer.html">Disclaimer</a></div>
-  </div>
-  <div class="container"><p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered.</p></div>
-</footer>
-<script src="js/app.js"></script>
-</body>
-</html>
+<html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mutual Funds — Portfolio View India</title>
+<meta name="description" content="A category guide to mutual funds, grouped by risk or by goal. No scheme names. Educational only.">
+<meta name="theme-color" content="#050807"><link rel="icon" href="assets/favicon.png"><link rel="stylesheet" href="styles.css"></head>
+<body data-page="mf"><a class="skip" href="#main">Skip to content</a><div id="hdr"></div><div class="glow"></div>
+<main id="main" class="wrap">
+<div class="crumb"><a href="index.html">Home</a> / Mutual Funds</div>
+<div class="hero"><h1>Mutual fund categories, made simple.</h1><p class="lead">A guide to what each category is for. It never names schemes. Group them by how risky they feel, or by what you're saving for.</p></div>
+<div class="ctl"><div class="seg" id="by"><button data-v="risk" class="on">By risk</button><button data-v="goal">By goal</button></div></div>
+<div class="note" style="margin:0 0 20px">Risk dots are a simplified, relative scale. Always check a scheme's official riskometer before investing.</div>
+<div id="out"></div>
+
+<section class="sec"><h2>Basics worth knowing</h2><p></p>
+<details class="ex"><summary>What is a SIP?</summary><p>A Systematic Investment Plan moves a fixed amount into a fund each month. It builds the habit and averages your buying price over time.</p></details>
+<details class="ex"><summary>Direct vs regular plans</summary><p>Direct plans charge a lower expense ratio because no distributor is paid. Regular plans include a distributor's commission. The portfolio is the same.</p></details>
+<details class="ex"><summary>What is the expense ratio?</summary><p>The yearly fee a fund takes, shown as a percentage of your money. Small differences compound over many years.</p></details>
+<details class="ex"><summary>What is the riskometer?</summary><p>An official label on every scheme showing how risky it is, from low to very high. Match it to how long you can stay invested.</p></details></section>
+<div class="next"><div><h2>Equity funds come in sizes.</h2><p>See how large, mid and small caps mix.</p></div><a class="go" href="equity.html">Explore Equity</a></div>
+</main><div id="ftr"></div>
+<script src="app.js"></script>
+<script>
+const RL=["","Lowest","Low to moderate","Moderate","High","Very high"];
+const GL={em:"Emergency and parking",s:"1 to 3 years",m:"3 to 5 years",l:"5+ years",x:"7+ years, high tolerance"};
+const CATS=[
+["Liquid","Debt",1,"em","Days to months","Parks money you may need soon.","Your emergency fund."],
+["Short duration","Debt",2,"s","1–3 years","Steadier returns for near-term goals.","A goal a couple of years away."],
+["Longer duration","Debt",3,"m","3–5 years","Can rise and fall with interest rates.","Someone who can wait out rate swings."],
+["Balanced advantage","Hybrid",3,"m","3–5 years","Shifts between equity and debt automatically.","A gentler first step into equity."],
+["Large cap","Equity",4,"l","5+ years","Big, established companies. Usually the steadier equity core.","A long-term core holding."],
+["Index fund","Equity",4,"l","5+ years","Copies a market index at low cost.","Simple, low-cost long-term investing."],
+["Flexi cap","Equity",4,"l","5+ years","Manager moves across company sizes.","One-fund equity exposure."],
+["Aggressive hybrid","Hybrid",4,"l","5+ years","Mostly equity with a debt cushion.","Equity with a smaller seatbelt."],
+["Tax-saving (ELSS)","Equity",4,"l","5+ years, 3-year lock-in","Equity fund with a mandatory lock-in.","Someone who wants the tax benefit and won't need the cash."],
+["Mid cap","Equity",5,"x","7+ years","Growing companies. Bigger swings.","A smaller slice of a long-term mix."],
+["Small cap","Equity",5,"x","7+ years","Small companies. Sharpest falls and gains.","A small slice, only if you can sit through big drops."]];
+const dots=n=>`<span class="dots" aria-label="Risk ${n} of 5">${[1,2,3,4,5].map(i=>`<i class="${i<=n?"on":""}"></i>`).join("")}</span>`;
+const card=c=>`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>${c[0]}</h3><span class="pill closed">${c[1]}</span></div><div style="margin:8px 0;font-size:13px;color:var(--mu)">Risk${dots(c[2])}</div><div class="kv"><div><small>Time horizon</small><b>${c[4]}</b></div></div><p style="color:var(--mu);margin:0 0 8px;font-size:15px">${c[5]}</p><p style="color:var(--dim);margin:0;font-size:14px"><b style="color:var(--mu);font-weight:500">Suits:</b> ${c[6]}</p></div>`;
+function draw(by){const keys=by==="risk"?[1,2,3,4,5]:["em","s","m","l","x"];
+$("#out").innerHTML=keys.map(k=>{const items=CATS.filter(c=>c[by==="risk"?2:3]===k);if(!items.length)return"";
+return`<section style="margin-top:34px"><h2 style="font-size:22px;margin-bottom:14px">${by==="risk"?RL[k]:GL[k]}</h2><div class="grid">${items.map(card).join("")}</div></section>`}).join("")}
+segs($("#by"),draw);draw("risk");
+</script></body></html>
