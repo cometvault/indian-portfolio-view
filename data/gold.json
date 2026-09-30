@@ -5,9 +5,11 @@
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
   "cities": [
-    {"city": "Mumbai", "rate22k": 10850, "rate24k": 11836},
-    {"city": "Delhi", "rate22k": 10880, "rate24k": 11870},
-    {"city": "Chennai", "rate22k": 10820, "rate24k": 11800},
-    {"city": "Kolkata", "rate22k": 10840, "rate24k": 11820}
+    {"city": "Mumbai", "k24": 11836, "k22": 10850, "rate24k": 11836, "rate22k": 10850},
+    {"city": "Delhi", "k24": 11870, "k22": 10880, "rate24k": 11870, "rate22k": 10880},
+    {"city": "Chennai", "k24": 11800, "k22": 10820, "rate24k": 11800, "rate22k": 10820},
+    {"city": "Kolkata", "k24": 11820, "k22": 10840, "rate24k": 11820, "rate22k": 10840},
+    {"city": "Bengaluru", "k24": 11810, "k22": 10830, "rate24k": 11810, "rate22k": 10830},
+    {"city": "Hyderabad", "k24": 11840, "k22": 10855, "rate24k": 11840, "rate22k": 10855}
   ]
 }
