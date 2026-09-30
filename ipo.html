@@ -51,11 +51,27 @@ $("#smeW").hidden=ST.seg!=="sme";
 let rows=seg.filter(d=>ST.wl?W.includes(d.name):d.status===ST.st);const q=ST.q.trim().toLowerCase();if(q)rows=rows.filter(d=>(d.name+" "+d.sector).toLowerCase().includes(q));
 const B=1e15;rows.sort((a,b)=>ST.sort==="sub"?(b.sub??-1)-(a.sub??-1):ST.sort==="min"?(a.min??B)-(b.min??B):(a.closes||0)-(b.closes||0));
 $("#grid").innerHTML=rows.length?rows.map(d=>{const ini=d.name.replace(/^Demo /,"").split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase(),w=Math.min((d.sub||0)/Math.max(d.sub||0,5)*100,100),on=W.includes(d.name);
-return`<article class="card"><div class="top"><div class="av">${esc(ini)}</div><div><h3>${esc(d.name)}</h3><p>${esc(d.sector)}</p></div><button class="star${on?" on":""}" data-n="${esc(d.name)}" aria-pressed="${on}" aria-label="Watchlist ${esc(d.name)}">${on?"★":"☆"}</button></div>
+return`<article class="card"><div class="top"><div class="av">${esc(ini)}</div><div><h3>${esc(d.name)}</h3><p>${esc(d.sector!=="—"?d.sector:(d.seg==="sme"?"SME":"Mainboard"))}</p></div><button class="star${on?" on":""}" data-n="${esc(d.name)}" aria-pressed="${on}" aria-label="Watchlist ${esc(d.name)}">${on?"★":"☆"}</button></div>
 <div style="margin:14px 0 4px"><span class="pill ${d.status}">${d.status[0].toUpperCase()+d.status.slice(1)}</span><span class="when">${wt(d)}</span></div>
-<div class="kv"><div><small>Price band</small><b class="num">${esc(d.band)}</b></div><div><small>Minimum to apply</small><b class="num">${inr(d.min)}</b></div></div>
-<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--mu)"><span>Subscription</span><span class="num">${d.sub!=null?d.sub.toFixed(1)+"x":"—"}</span></div><div class="bar"><i style="width:${w}%"></i></div>
-<details class="dt"><summary>Details</summary><div class="kv"><div><small>Opens to closes</small><b class="num">${fd(d.opens)} – ${fd(d.closes)}</b></div><div><small>Listing</small><b class="num">${fd(d.listing)}</b></div><div><small>Lot size</small><b class="num">${d.lot??"—"}</b></div><div><small>Issue size</small><b class="num">${d.issue!=null?inr(d.issue)+" Cr":"—"}</b></div><div><small>GMP (unofficial)</small><b class="gmp num">${d.gmp!=null?inr(d.gmp):"—"}${d.gmpPct!=null?" ("+d.gmpPct.toFixed(0)+"%)":""}</b></div></div></details></article>`}).join(""):`<div class="empty">${ST.wl?"Nothing starred yet. Tap ☆ on any IPO to track it.":"No IPOs match this view right now."}</div>`;
+<div class="kv">
+<div><small>Price band</small><b class="num">${esc(d.band)}</b></div>
+<div><small>Issue size</small><b class="num">${d.issue!=null?("₹"+Number(d.issue).toLocaleString("en-IN")+" Cr"):"—"}</b></div>
+<div><small>Opens – closes</small><b class="num">${fd(d.opens)} – ${fd(d.closes)}</b></div>
+<div><small>Listing</small><b class="num">${fd(d.listing)}</b></div>
+<div><small>GMP (unofficial)</small><b class="gmp num">${d.gmp!=null?inr(d.gmp):"—"}${d.gmpPct!=null?" ("+Number(d.gmpPct).toFixed(1)+"%)":""}</b></div>
+<div><small>Est. listing price</small><b class="num">${d.estListing!=null?inr(d.estListing):"—"}</b></div>
+<div><small>Lot size</small><b class="num">${d.lot!=null?d.lot:"—"}</b></div>
+<div><small>Min. application</small><b class="num">${d.min!=null?inr(d.min):"—"}</b></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--mu);margin-top:8px"><span>Subscription (total)</span><span class="num">${d.sub!=null?d.sub.toFixed(2)+"x":"—"}</span></div>
+<div class="bar"><i style="width:${w}%"></i></div>
+<div class="kv" style="margin-top:8px">
+<div><small>QIB</small><b class="num">${d.subQib!=null?d.subQib.toFixed(2)+"x":"—"}</b></div>
+<div><small>NII</small><b class="num">${d.subNii!=null?d.subNii.toFixed(2)+"x":"—"}</b></div>
+<div><small>Retail</small><b class="num">${d.subRetail!=null?d.subRetail.toFixed(2)+"x":"—"}</b></div>
+<div><small>Sub. updated</small><b class="num">${d.subUpdated?esc(d.subUpdated):"—"}</b></div>
+</div>
+</article>`}).join(""):`<div class="empty">${ST.wl?"Nothing starred yet. Tap ☆ on any IPO to track it.":"No IPOs match this view right now."}</div>`;
 setTimeout(()=>$$(".bar i").forEach(i=>i.style.width=i.style.width),0)}
 segs($("#seg"),v=>{ST.seg=v;render()});
 $$(".chip[data-st]").forEach(c=>c.onclick=()=>{$$(".chip[data-st]").forEach(x=>x.classList.remove("on"));c.classList.add("on");ST.st=c.dataset.st;ST.wl=false;$("#wl").classList.remove("on");$("#wl").setAttribute("aria-pressed","false");render()});
