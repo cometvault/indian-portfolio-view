@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Gold &amp; ETF — Portfolio View India</title>
-  <meta name="description" content="Today’s gold rates by city and ways to hold gold. Educational only.">
+  <title>Gold & ETF — Portfolio View India</title>
+  <meta name="description" content="Today's gold rates by city and ways to hold gold. Educational only.">
   <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/gold-etf.html">
-  <meta name="theme-color" content="#0f6b4f">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%230f6b4f'/%3E%3Ccircle cx='20' cy='20' r='2' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
+  <meta name="theme-color" content="#050807">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -18,98 +19,104 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
-      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" fill="#0f6b4f"/>
-        <circle cx="20" cy="20" r="11" stroke="#fff" stroke-width="5" stroke-dasharray="24 45" transform="rotate(-90 20 20)" fill="none" opacity="0.95"/>
-        <circle cx="20" cy="20" r="11" stroke="#b8892b" stroke-width="5" stroke-dasharray="14 55" stroke-dashoffset="-24" transform="rotate(-90 20 20)" fill="none"/>
-        <circle cx="20" cy="20" r="5" fill="#0f6b4f"/>
-        <circle cx="20" cy="20" r="2" fill="#fff"/>
-      </svg>
+      <img class="logo-mark" src="assets/logo.svg" width="32" height="32" alt="">
       <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
     </a>
     <nav class="nav-desktop" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="new-to-finance.html" class="nav-cta">Start here</a>
       <a href="ipo.html">IPOs</a>
-      <a href="gold-etf.html" aria-current="page">Gold &amp; ETF</a>
+      <a href="gold-etf.html" aria-current="page">Gold & ETF</a>
       <a href="mutual-funds.html">Mutual Funds</a>
       <a href="equity.html">Equity</a>
     </nav>
     <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
 </header>
 <nav class="nav-drawer" id="navDrawer" aria-label="Mobile">
-  <a href="index.html">Home</a><a href="new-to-finance.html">Start here</a><a href="ipo.html">IPOs</a><a href="gold-etf.html" aria-current="page">Gold &amp; ETF</a><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a>
+  <a href="index.html">Home</a>
+  <a href="new-to-finance.html">Start here</a>
+  <a href="ipo.html">IPOs</a>
+  <a href="gold-etf.html" aria-current="page">Gold & ETF</a>
+  <a href="mutual-funds.html">Mutual Funds</a>
+  <a href="equity.html">Equity</a>
 </nav>
-<main id="main"><div class="container">
-<p class="breadcrumb"><a href="index.html">Home</a> / <span>Gold &amp; ETF</span></p>
-<h1>Today’s rate, in your city</h1>
-<p class="lead">22K and 24K side by side. Metal rate only — no making charges.</p>
-<div class="data-status" id="goldStatus"><span class="skeleton" style="width:12rem;display:inline-block">&nbsp;</span></div>
-<button type="button" class="btn" id="refreshGold"><span id="goldSpin"></span> Refresh</button>
-<div class="card-grid" id="goldCards" style="margin-top:1rem"></div>
-<section style="margin-top:2rem">
-  <h2>Gold, ranked by how you hold it</h2>
-  <div class="card-grid" style="margin-top:0.75rem">
-    <div class="card"><h3>Gold ETF</h3><p class="muted" style="margin:0">Easiest to buy, easiest to sell.</p></div>
-    <div class="card"><h3>Digital gold</h3><p class="muted" style="margin:0">Convenient, smaller holdings.</p></div>
-    <div class="card"><h3>Physical gold</h3><p class="muted" style="margin:0">Yours to hold, harder to trade.</p></div>
+<main id="main">
+  <div class="container">
+    <p class="breadcrumb"><a href="index.html">Home</a> / <span>Gold & ETF</span></p>
+    <h1>Today's rate, in your city</h1>
+    <p class="lead">22K and 24K side by side. Metal rate only — no making charges.</p>
+    <div class="data-status" id="goldStatus"><span class="skeleton" style="width:12rem;display:inline-block">&nbsp;</span></div>
+    <button type="button" class="btn" id="refreshGold"><span id="goldSpin"></span> Refresh</button>
+    <div class="card-grid" id="goldCards" style="margin-top:1rem"></div>
+    <section style="margin-top:2rem">
+      <h2>Gold, ranked by how you hold it</h2>
+      <div class="card-grid" style="margin-top:0.75rem">
+        <div class="card"><h3>Gold ETF</h3><p class="muted" style="margin:0">Easiest to buy, easiest to sell.</p></div>
+        <div class="card"><h3>Digital gold</h3><p class="muted" style="margin:0">Convenient, smaller holdings.</p></div>
+        <div class="card"><h3>Physical gold</h3><p class="muted" style="margin:0">Yours to hold, harder to trade.</p></div>
+      </div>
+    </section>
+    <section class="card faq" style="margin-top:1.5rem">
+      <h2>Questions</h2>
+      <details><summary>Why is ETF ranked first?</summary><p>Liquidity — you can exit in seconds, not days.</p></details>
+      <details><summary>Do rates include making charges?</summary><p>No — this is the metal rate only.</p></details>
+    </section>
+    <div class="next-step"><p>Size gold inside a full plan.</p><a class="btn btn-primary" href="new-to-finance.html#plan">Build my plan →</a></div>
   </div>
-</section>
-<section class="faq section-tight">
-  <h2>Questions</h2>
-  <details><summary>Why is ETF ranked first?</summary><p>Liquidity — you can exit in seconds, not days.</p></details>
-  <details><summary>Do rates include making charges?</summary><p>No — this is the metal rate only.</p></details>
-</section>
-<div class="next-step"><p>Size gold inside a full plan.</p><a class="btn btn-primary" href="new-to-finance.html#plan">Build my plan →</a></div>
-</div></main>
-<footer class="site-footer"><div class="container">
-<div class="footer-grid">
-<div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
-<div><h4>Markets today</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold &amp; ETF</a></div>
-<div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a><a href="glossary.html">Glossary</a></div>
-<div><h4>About</h4><a href="about.html">About &amp; Methodology</a><a href="disclaimer.html">Disclaimer</a></div>
-</div>
-<p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered. Investments carry risk.</p>
-</div></footer>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
+    <div><h4>Markets</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
+    <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a></div>
+    <div><h4>About</h4><a href="about.html">About</a><a href="disclaimer.html">Disclaimer</a></div>
+  </div>
+  <div class="container"><p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered.</p></div>
+</footer>
 <script src="js/app.js"></script>
 <script>
-(function(){
-  function render(data){
+(function () {
+  function render(data) {
     var st = document.getElementById('goldStatus');
     var cards = document.getElementById('goldCards');
-    if(!data || !data.cities){
+    if (!data || !data.cities) {
       st.className = 'data-status stale';
       st.textContent = 'Data may be out of date — try Refresh.';
       return;
     }
-    var stale = PV.isStale(data.updated, 36);
+    var updated = data.updated_at || data.updated;
+    var stale = PV.isStale(updated, 36);
     st.className = 'data-status' + (stale ? ' stale' : '');
-    st.textContent = (stale ? 'Data may be out of date · ' : '') + 'Last updated: ' + PV.formatIST(data.updated) + ' · Source: ' + (data.source || '—');
-    cards.innerHTML = data.cities.map(function(c){
-      var ch = c.change24k != null ? ((c.change24k >= 0 ? '+' : '') + c.change24k) : '';
-      return '<div class="card"><h3>'+PV.escapeHtml(c.city)+'</h3>'+
-        '<p class="tabular" style="margin:0.35rem 0 0"><strong>24K</strong> '+PV.inr(c.rate24k)+'/g</p>'+
-        '<p class="tabular muted" style="margin:0.2rem 0 0">22K '+PV.inr(c.rate22k)+'/g'+(ch?' · <span class="'+(c.change24k>=0?'positive':'negative')+'">'+ch+'</span>':'')+'</p></div>';
+    var src = data.source || '—';
+    var srcUrl = data.source_url || data.sourceUrl || '#';
+    st.innerHTML = (stale ? 'Data may be out of date · ' : '') +
+      'Last updated: ' + PV.formatIST(updated) +
+      ' · Source: <a href="' + PV.escapeHtml(srcUrl) + '" target="_blank" rel="noopener">' + PV.escapeHtml(src) + '</a>';
+    cards.innerHTML = data.cities.map(function (c) {
+      return '<div class="card"><h3>' + PV.escapeHtml(c.city) + '</h3>' +
+        '<p class="tabular" style="margin:0.35rem 0 0"><strong>24K</strong> ' + PV.inr(c.rate24k) + '/g</p>' +
+        '<p class="tabular muted" style="margin:0.2rem 0 0">22K ' + PV.inr(c.rate22k) + '/g</p></div>';
     }).join('');
   }
-  function load(force){
+  function load(force) {
     var spin = document.getElementById('goldSpin');
     var btn = document.getElementById('refreshGold');
-    if(spin) spin.className = 'spinner';
-    if(btn) btn.disabled = true;
-    PV.loadJson('data/gold.json', {force:force}).then(render).catch(function(){
-      document.getElementById('goldStatus').className = 'data-status stale';
+    if (spin) spin.className = 'spinner';
+    if (btn) btn.disabled = true;
+    PV.loadJson('data/gold.json', { force: force }).then(render).catch(function () {
+      document.getElementById('goldStatus').className = 'data-status error';
       document.getElementById('goldStatus').textContent = 'Could not load gold data — try Refresh.';
-    }).finally(function(){
-      if(spin) spin.className = '';
-      if(btn) btn.disabled = false;
+    }).finally(function () {
+      if (spin) spin.className = '';
+      if (btn) btn.disabled = false;
     });
   }
-  document.getElementById('refreshGold').addEventListener('click', function(){ load(true); });
+  document.getElementById('refreshGold').addEventListener('click', function () { load(true); });
   load(false);
 })();
 </script>
-</body></html>
+</body>
+</html>
