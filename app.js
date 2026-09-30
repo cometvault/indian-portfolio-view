@@ -86,8 +86,18 @@ function layout() {
       <div class="mkt-ribbon" id="mktRibbon" aria-label="Market ribbon">
         <div class="mkt-track" id="mktTrack"><span class="mkt-item"><span class="lbl">Markets</span><span class="val">Loading…</span></span></div>
       </div>
-    </div>
-    <button type="button" class="nav-backdrop" id="navBackdrop" aria-label="Close menu" tabindex="-1"></button>`;
+    </div>`;
+  }
+  /* Backdrop on body so it always covers the full viewport solid black */
+  let backdrop = $("#navBackdrop");
+  if (!backdrop) {
+    backdrop = document.createElement("button");
+    backdrop.type = "button";
+    backdrop.className = "nav-backdrop";
+    backdrop.id = "navBackdrop";
+    backdrop.setAttribute("aria-label", "Close menu");
+    backdrop.tabIndex = -1;
+    document.body.appendChild(backdrop);
   }
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) {
@@ -101,7 +111,6 @@ function layout() {
     }
   }
   const toggle = $("#navToggle");
-  const backdrop = $("#navBackdrop");
   if (toggle) toggle.addEventListener("click", toggleNav);
   if (backdrop) backdrop.addEventListener("click", closeNav);
   $$("#primaryNav a").forEach(function (a) {
