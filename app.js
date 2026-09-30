@@ -68,7 +68,13 @@ function layout() {
     </div>`;
   }
   const img = hdr && hdr.querySelector(".logo-img");
-  if (img) img.onerror = function () { this.outerHTML = MARK; };
+  if (img) {
+    img.onerror = function () { this.outerHTML = MARK; };
+    const parts = ["assets/logo.b64.0", "assets/logo.b64.1", "assets/logo.b64.2", "assets/logo.b64.3", "assets/logo.b64.4"];
+    Promise.all(parts.map(function (p) { return fetch(p + "?v=2").then(function (r) { return r.ok ? r.text() : Promise.reject(); }); }))
+      .then(function (chunks) { img.src = "data:image/png;base64," + chunks.join("").replace(/\s+/g, ""); })
+      .catch(function () {});
+  }
   const ftr = $("#ftr");
   if (ftr) {
     ftr.innerHTML = `<footer class="ftr"><div class="ftr-in">
