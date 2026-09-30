@@ -6,11 +6,12 @@
   <title>Mutual Funds — Portfolio View India</title>
   <meta name="description" content="Categories only — equity, debt, hybrid. No scheme names. Educational reference.">
   <link rel="canonical" href="https://cometvault.github.io/indian-portfolio-view/mutual-funds.html">
-  <meta name="theme-color" content="#0f6b4f">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%230f6b4f'/%3E%3Ccircle cx='20' cy='20' r='2' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
+  <meta name="theme-color" content="#050807">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -18,25 +19,19 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="wordmark" aria-label="Portfolio View India home">
-      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" fill="#0f6b4f"/>
-        <circle cx="20" cy="20" r="11" stroke="#fff" stroke-width="5" stroke-dasharray="24 45" transform="rotate(-90 20 20)" fill="none" opacity="0.95"/>
-        <circle cx="20" cy="20" r="11" stroke="#b8892b" stroke-width="5" stroke-dasharray="14 55" stroke-dashoffset="-24" transform="rotate(-90 20 20)" fill="none"/>
-        <circle cx="20" cy="20" r="5" fill="#0f6b4f"/>
-        <circle cx="20" cy="20" r="2" fill="#fff"/>
-      </svg>
+      <img class="logo-mark" src="assets/logo.svg" width="32" height="32" alt="">
       <span class="wordmark-text">Portfolio View<span class="wordmark-sub">India</span></span>
     </a>
     <nav class="nav-desktop" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="new-to-finance.html" class="nav-cta">Start here</a>
       <a href="ipo.html">IPOs</a>
-      <a href="gold-etf.html">Gold &amp; ETF</a>
+      <a href="gold-etf.html">Gold & ETF</a>
       <a href="mutual-funds.html" aria-current="page">Mutual Funds</a>
       <a href="equity.html">Equity</a>
     </nav>
     <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
 </header>
@@ -44,7 +39,7 @@
   <a href="index.html">Home</a>
   <a href="new-to-finance.html">Start here</a>
   <a href="ipo.html">IPOs</a>
-  <a href="gold-etf.html">Gold &amp; ETF</a>
+  <a href="gold-etf.html">Gold & ETF</a>
   <a href="mutual-funds.html" aria-current="page">Mutual Funds</a>
   <a href="equity.html">Equity</a>
 </nav>
@@ -58,11 +53,11 @@
       <div class="card"><h3>Debt</h3><p class="muted" style="margin:0">Where stability lives. Lower expected return, lower drama.</p></div>
       <div class="card"><h3>Hybrid</h3><p class="muted" style="margin:0">A bit of both, in one place. Still not a substitute for a clear plan.</p></div>
     </div>
-    <p class="footer-note">No scheme names here — so you compare categories, not chase past returns.</p>
-    <section class="faq section-tight">
+    <p class="muted" style="margin-top:1rem">No scheme names here — so you compare categories, not chase past returns.</p>
+    <section class="card faq" style="margin-top:1.5rem">
       <h2>Questions</h2>
       <details><summary>Why no fund names?</summary><p>So you compare categories, not chase past returns.</p></details>
-      <details><summary>Which category should I pick?</summary><p>Depends on your timeline — start with <a href="new-to-finance.html">New To Finance</a>.</p></details>
+      <details><summary>Which category should I pick?</summary><p>Depends on your timeline — start with <a href="new-to-finance.html">Start here</a>.</p></details>
     </section>
     <div class="next-step">
       <p>Ready to size a monthly plan?</p>
@@ -71,15 +66,13 @@
   </div>
 </main>
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
-      <div><h4>Markets today</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold &amp; ETF</a></div>
-      <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a><a href="glossary.html">Glossary</a></div>
-      <div><h4>About</h4><a href="about.html">About &amp; Methodology</a><a href="disclaimer.html">Disclaimer</a></div>
-    </div>
-    <p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered. Investments carry risk.</p>
+  <div class="container footer-grid">
+    <div><h4>Start</h4><a href="new-to-finance.html">New To Finance</a></div>
+    <div><h4>Markets</h4><a href="ipo.html">IPOs</a><a href="gold-etf.html">Gold & ETF</a></div>
+    <div><h4>Learn</h4><a href="mutual-funds.html">Mutual Funds</a><a href="equity.html">Equity</a><a href="glossary.html">Glossary</a></div>
+    <div><h4>About</h4><a href="about.html">About</a><a href="disclaimer.html">Disclaimer</a></div>
   </div>
+  <div class="container"><p class="footer-legal">Educational only. Not investment advice. Not SEBI-registered.</p></div>
 </footer>
 <script src="js/app.js"></script>
 </body>
