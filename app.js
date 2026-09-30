@@ -6,9 +6,15 @@ const inr = (n) => {
   if (n == null || n === "" || Number.isNaN(+n)) return "—";
   return "₹" + Math.round(+n).toLocaleString("en-IN");
 };
-const esc = (s) => String(s ?? "")
-  .replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">")
-  .replace(/"/g, """).replace(/'/g, "&#39;");
+const esc = (s) => {
+  const a = String.fromCharCode(38); // &
+  return String(s ?? "")
+    .replace(/&/g, a + "amp;")
+    .replace(/</g, a + "lt;")
+    .replace(/>/g, a + "gt;")
+    .replace(/"/g, a + "quot;")
+    .replace(/'/g, a + "#39;");
+};
 
 const DAY = 864e5;
 const T = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); })();
@@ -163,7 +169,6 @@ async function fillMarketRibbon() {
   track.innerHTML = items.join("") + items.join("");
 }
 
-/* Age mixes: [label, equity, debt, gold] */
 const AGES = [
   ["20–24", 75, 15, 10],
   ["25–29", 70, 20, 10],
