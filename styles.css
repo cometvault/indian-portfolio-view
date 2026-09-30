@@ -73,19 +73,13 @@ a:hover { text-decoration: underline; }
   padding: 0 20px 64px;
 }
 
-/* Header (logo + nav) sticky alone — ribbon is a sibling below, never covers toggle */
-.hdr-stack {
-  position: static;
-  z-index: auto;
-}
+/* Sticky header bar */
 .hdr {
   position: sticky;
   top: 0;
   z-index: 50;
   height: 64px;
   display: flex; align-items: center;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   background: #050807;
   border-bottom: 1px solid var(--line);
 }
@@ -102,9 +96,21 @@ a:hover { text-decoration: underline; }
 .logo-txt { font-family: Sora, sans-serif; font-weight: 700; font-size: 15px; white-space: nowrap; }
 .logo-txt span { color: var(--mu); font-weight: 600; margin-left: 4px; }
 
+/* Desktop: nav sits in the sticky header row */
 .nav {
-  display: flex; gap: 4px; margin-left: auto;
+  display: flex; gap: 4px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 64px;
+  align-items: center;
+  padding: 0 20px 0 0;
+  margin: 0;
+  z-index: 51;
   -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  background: transparent;
+  max-width: calc(100% - 120px);
+  overflow-x: auto;
 }
 .nav::-webkit-scrollbar { display: none; }
 .nav a {
@@ -115,6 +121,7 @@ a:hover { text-decoration: underline; }
   color: var(--mu); text-decoration: none;
   white-space: nowrap;
   border-bottom: 2px solid transparent;
+  background: transparent;
 }
 .nav a:hover { color: var(--tx); text-decoration: none; }
 .nav a[aria-current="page"] {
@@ -146,8 +153,7 @@ a:hover { text-decoration: underline; }
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   position: relative;
-  z-index: 2;
-  isolation: isolate;
+  z-index: 62;
 }
 .nav-toggle:hover { border-color: rgba(61,245,160,.35); }
 .nav-toggle:focus-visible { outline: 2px solid var(--c2); outline-offset: 2px; }
@@ -160,7 +166,7 @@ a:hover { text-decoration: underline; }
   display: none;
   position: fixed;
   inset: 0;
-  background: #000;
+  background: rgba(0, 0, 0, .72);
   z-index: 55;
   border: none;
   padding: 0;
@@ -170,16 +176,14 @@ a:hover { text-decoration: underline; }
 }
 body.nav-open .nav-backdrop { display: block; }
 body.nav-open { overflow: hidden; }
-body.nav-open .glow { visibility: hidden; }
 body.nav-open .mkt-ribbon { visibility: hidden; }
 body.nav-open .hdr {
-  background: #000 !important;
-  border-bottom-color: rgba(255,255,255,.1);
+  z-index: 60;
+  background: #050807 !important;
 }
-body.nav-open .hdr-stack { z-index: 60; }
 body.nav-open .nav-toggle {
-  background: #111;
-  border-color: rgba(255,255,255,.15);
+  background: #131A18;
+  border-color: rgba(61,245,160,.35);
 }
 
 /* Market ribbon */
@@ -193,10 +197,9 @@ body.nav-open .nav-toggle {
   font-variant-numeric: tabular-nums;
   color: var(--mu);
   position: relative;
-  z-index: 1; /* always below sticky .hdr (z-index 50) */
+  z-index: 1;
   isolation: isolate;
   contain: layout paint;
-  pointer-events: auto;
 }
 .mkt-track {
   display: flex; align-items: center;
@@ -573,100 +576,84 @@ input[type="number"]:focus { border-color: var(--c2); }
 
   .nav-toggle {
     display: inline-flex;
-    position: relative;
-    z-index: 5;
-    margin-left: auto;
-    background: #131A18;
+    z-index: 62;
   }
 
   .hdr-in { padding: 0 14px; gap: 10px; }
-
-  .mkt-ribbon {
-    z-index: 1;
-    position: relative;
-  }
-  .hdr {
-    z-index: 50;
-  }
+  .hdr { height: 56px; z-index: 50; }
 
   .nav {
-    display: none !important;
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
     left: auto;
     bottom: 0;
-    width: 65%;
-    max-width: 65vw;
-    margin: 0;
-    flex-direction: column;
-    gap: 0;
-    padding: calc(56px + env(safe-area-inset-top, 0px) + 16px) 16px 32px;
-    background: #000 !important;
-    border: none;
-    border-left: 1px solid rgba(255,255,255,.1);
-    z-index: 56;
+    width: 72%;
+    max-width: 300px;
     height: 100dvh;
-    max-height: none;
+    margin: 0;
+    padding: calc(56px + env(safe-area-inset-top, 0px) + 20px) 20px 32px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 2px;
+    background: #0C1110;
+    border-left: 1px solid rgba(255,255,255,.1);
+    z-index: 58;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    box-shadow: none;
   }
   body.nav-open .nav {
-    display: flex !important;
+    display: flex;
   }
 
   .nav a {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 14px 4px;
-    border-radius: 0;
-    border-bottom: 2px solid transparent !important;
-    font-size: 15px;
-    font-weight: 500;
+    padding: 14px 8px;
     min-height: 48px;
-    color: #9AA8A1 !important;
-    background: transparent !important;
-    box-shadow: none !important;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    font-size: 16px;
+    font-weight: 500;
+    color: #9AA8A1;
+    background: transparent;
+    white-space: normal;
   }
   .nav a:hover {
-    color: #9AA8A1 !important;
-    background: transparent !important;
+    color: #9AA8A1;
     text-decoration: none;
+    background: transparent;
   }
   .nav a[aria-current="page"] {
-    background: transparent !important;
-    color: #9AA8A1 !important;
-    border-bottom: 2px solid var(--c2) !important;
+    color: #F2F7F4;
+    border-bottom: 2px solid var(--c2);
+    background: transparent;
     border-radius: 0;
-    box-shadow: none !important;
   }
   .nav a.cta {
-    margin-top: 8px;
+    margin-top: 10px;
     justify-content: flex-start;
-    border-radius: 0;
-    background: transparent !important;
+    background: transparent;
     color: var(--c2) !important;
     font-weight: 700;
-    border-bottom: 2px solid transparent !important;
-    box-shadow: none !important;
-    padding: 14px 4px;
+    border-bottom: 2px solid transparent;
+    padding: 14px 8px;
   }
   .nav a.cta:hover {
-    opacity: 1;
     color: var(--c2) !important;
-    background: transparent !important;
+    background: transparent;
+    opacity: 1;
   }
   .nav a.cta[aria-current="page"] {
-    background: transparent !important;
     color: var(--c2) !important;
-    border-bottom: 2px solid var(--c2) !important;
-    box-shadow: none !important;
+    border-bottom: 2px solid var(--c2);
+    background: transparent;
   }
 
   .wrap { padding: 0 14px 48px; overflow-x: hidden; }
-  .hdr { height: 56px; }
   .mkt-ribbon { height: 36px; font-size: 11.5px; }
   .mkt-item { padding: 0 14px; height: 36px; gap: 6px; }
   .mkt-item .lbl { font-size: 10px; }
