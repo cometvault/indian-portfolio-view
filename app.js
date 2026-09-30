@@ -53,7 +53,7 @@ function layout() {
     hdr.innerHTML = `<div class="hdr-stack">
       <header class="hdr"><div class="hdr-in">
         <a class="logo" href="index.html" aria-label="Portfolio View India home">
-          <img src="assets/logo.svg" width="34" height="34" alt="Portfolio View India" class="logo-img">
+          <img src="assets/logo.svg" width="34" height="34" alt="Portfolio View India" class="logo-img" id="brandLogo" style="object-fit:contain;background:#000">
           <span class="logo-txt">Portfolio View<span>India</span></span>
         </a>
         <nav class="nav" aria-label="Primary">${NAV.map(n => {
@@ -70,10 +70,13 @@ function layout() {
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) {
     img.onerror = function () { this.outerHTML = MARK; };
-    const parts = ["assets/logo.b64.0", "assets/logo.b64.1", "assets/logo.b64.2", "assets/logo.b64.3", "assets/logo.b64.4"];
-    Promise.all(parts.map(function (p) { return fetch(p + "?v=2").then(function (r) { return r.ok ? r.text() : Promise.reject(); }); }))
-      .then(function (chunks) { img.src = "data:image/png;base64," + chunks.join("").replace(/\s+/g, ""); })
-      .catch(function () {});
+    if (window.PV_LOGO) img.src = window.PV_LOGO;
+    else {
+      var s = document.createElement("script");
+      s.src = "assets/logo-data.js?v=1";
+      s.onload = function () { if (window.PV_LOGO) img.src = window.PV_LOGO; };
+      document.head.appendChild(s);
+    }
   }
   const ftr = $("#ftr");
   if (ftr) {
