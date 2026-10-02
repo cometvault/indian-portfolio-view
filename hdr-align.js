@@ -1,5 +1,11 @@
-/* hdr-align — keep header/nav aligned + mobile-ready */
+/* hdr-align — header structure, logo text, mobile */
 (function () {
+  function fixLogoText() {
+    var el = document.querySelector(".logo-txt");
+    if (!el) return;
+    el.innerHTML = "Portfolio View <span>India</span>";
+  }
+
   function fixHeader() {
     var root = document.getElementById("hdr");
     if (!root) return;
@@ -9,9 +15,7 @@
     var nav = document.getElementById("primaryNav") || root.querySelector("nav.nav");
     var toggle = document.getElementById("navToggle");
 
-    if (!hdrIn || !nav) return;
-
-    if (nav.parentElement !== hdrIn) {
+    if (hdrIn && nav && nav.parentElement !== hdrIn) {
       if (toggle && toggle.parentElement === hdrIn) {
         hdrIn.insertBefore(nav, toggle);
       } else {
@@ -19,20 +23,17 @@
       }
     }
 
-    nav.querySelectorAll("a.cta").forEach(function (a) {
-      a.classList.add("start");
-    });
+    if (nav) {
+      nav.querySelectorAll("a.cta").forEach(function (a) {
+        a.classList.add("start");
+      });
+    }
 
-    if (hdr && hdrIn.parentElement !== hdr) {
+    if (hdr && hdrIn && hdrIn.parentElement !== hdr) {
       hdr.appendChild(hdrIn);
     }
-  }
 
-  function fixRibbon() {
-    var root = document.getElementById("hdr");
-    if (!root) return;
     var ribbon = root.querySelector(".mkt-ribbon");
-    var hdr = root.querySelector("header.hdr");
     if (ribbon && hdr && ribbon.parentElement === hdr) {
       root.insertBefore(ribbon, hdr.nextSibling);
     }
@@ -40,18 +41,18 @@
 
   function run() {
     fixHeader();
-    fixRibbon();
+    fixLogoText();
   }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       run();
-      setTimeout(run, 30);
-      setTimeout(run, 120);
+      setTimeout(run, 40);
+      setTimeout(run, 150);
     });
   } else {
     run();
-    setTimeout(run, 30);
-    setTimeout(run, 120);
+    setTimeout(run, 40);
+    setTimeout(run, 150);
   }
 })();
