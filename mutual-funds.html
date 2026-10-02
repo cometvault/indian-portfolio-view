@@ -1,1 +1,64 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mutual Funds — Portfolio View India</title>
+<meta name="description" content="Mutual fund categories explained without fund names: risk, goals, time horizon. Educational only.">
+<meta name="theme-color" content="#050807">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles-kv.css?v=15">
+</head>
+<body data-page="mutual-funds"><a class="skip" href="#main">Skip to content</a><div id="hdr"></div><div class="glow"></div>
+<main id="main" class="wrap">
+<div class="crumb"><a href="index.html">Home</a> / Mutual Funds</div>
+<div class="hero"><h1>Mutual funds, by shape.</h1><p class="lead">Categories explained without fund names. Risk dots are relative, not a score.</p>
+<div class="seg" id="seg"><button class="on" data-v="risk">By risk</button><button data-v="goal">By goal</button></div></div>
+<div class="note" style="margin:0 0 20px">Risk dots are a simplified, relative scale. Always check a scheme's official riskometer before investing.</div>
+<div id="out"></div>
+
+<section class="sec"><h2>Basics worth knowing</h2>
+<details class="ex"><summary>What is a SIP?</summary><p>A Systematic Investment Plan moves a fixed amount into a fund each month. It builds the habit and averages your purchase price over time.</p></details>
+<details class="ex"><summary>Active vs index?</summary><p>Active funds try to beat a market benchmark. Index funds track one. Costs and style differ; neither is automatically better for every goal.</p></details>
+<details class="ex"><summary>What is NAV?</summary><p>Net Asset Value is the per-unit price of the fund on a day. You buy and sell at NAV, not a live market quote like a stock.</p></details>
+</section>
+
+<section class="sec pre-check" id="before-you-invest"><h2>Before you invest.</h2>
+<p class="pc-intro">Picking stocks directly? See <a href="equity.html#before-you-invest">Equity</a>.</p>
+</section>
+
+<section class="sec faq"><h2>Questions</h2>
+<details><summary>Do I need many funds?</summary><p>Often a small set that covers equity, debt and maybe gold is enough. Overlap can hide risk.</p></details>
+<details><summary>Can funds lose money?</summary><p>Yes. Equity and some hybrid categories can fall. Only put in money you can leave for the stated horizon.</p></details>
+</section>
+
+<p class="note" style="margin-top:40px">Educational only. Not advice. Not SEBI-registered.</p>
+</main>
+<div id="ftr"></div>
+<script src="app.js"></script>
+<script>
+const C=[
+["Liquid","Debt",1,"em","Days to months","Very short-term parking of cash.","Cash you may need soon."],
+["Overnight","Debt",1,"em","1 day","Park money for a single day.","Ultra-short cash needs."],
+["Ultra short duration","Debt",1,"em","A few months","Short debt with limited rate swings.","Near-term goals."],
+["Short duration","Debt",2,"s","1–3 years","Debt with modest interest-rate sensitivity.","Goals a few years out."],
+["Corporate bond","Debt",2,"s","2–4 years","Mainly high-rated company bonds.","Steady income preference."],
+["Banking & PSU","Debt",2,"s","2–4 years","Bonds from banks and public sector firms.","Lower credit drama, still rate risk."],
+["Medium duration","Debt",3,"m","3–5 years","Can rise and fall with interest rates.","Someone who can wait out rate swings."],
+["Balanced advantage","Hybrid",3,"m","3–5 years","Shifts between equity and debt automatically.","A gentler first step into equity."],
+["Large cap","Equity",4,"l","5+ years","Big, established companies. Usually the steadier equity core.","A long-term core holding."],
+["Index fund","Equity",4,"l","5+ years","Copies a market index at low cost.","Simple broad market exposure."],
+["Flexi / multi cap","Equity",4,"l","5+ years","Can hold large, mid and small companies.","One-fund equity sleeve."],
+["Mid cap","Equity",5,"x","7+ years","Medium-sized companies. More bounce than large caps.","Higher risk appetite and long horizon."],
+["Small cap","Equity",5,"x","7+ years","Smaller companies. Sharp swings are normal.","Money you will not need for many years."],
+["Sector / thematic","Equity",5,"x","7+ years","Concentrated in one idea or industry.","Only a small satellite, if at all."]
+];
+function dots(n){let s='<span class="dots">';for(let i=1;i<=5;i++)s+=`<i class="${i<=n?'on':''}"></i>`;return s+'</span>'}
+function card(c){return `<div class="panel" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><h3 style="margin:0">${c[0]}</h3><span class="pill closed">${c[1]}</span></div><div style="margin:8px 0;font-size:13px;color:var(--mu)">Risk ${dots(c[2])}</div><div class="kv"><div><small>Time horizon</small><b>${c[4]}</b></div></div><p style="color:var(--mu);margin:0 0 8px;font-size:15px">${c[5]}</p><p style="color:var(--dim);margin:0;font-size:14px"><b style="color:var(--mu);font-weight:500">Suits:</b> ${c[6]}</p></div>`}
+function draw(by){const keys=by==="risk"?[1,2,3,4,5]:["em","s","m","l","x"];
+const labels=by==="risk"?{1:"Lower relative risk",2:"Low–moderate",3:"Moderate",4:"Higher",5:"Highest among these"}:{em:"Emergency / very short",s:"Short",m:"Medium",l:"Long",x:"Extra long"};
+const idx=by==="risk"?2:3;
+$("#out").innerHTML=keys.map(k=>{const rows=C.filter(c=>c[idx]===k);if(!rows.length)return"";return `<div style="margin:0 0 22px"><h3 style="font-size:14px;color:var(--dim);margin:0 0 10px;text-transform:uppercase;letter-spacing:.04em">${labels[k]}</h3><div class="grid">${rows.map(card).join("")}</div></div>`}).join("")}
+$("#seg").onclick=e=>{const b=e.target.closest("button");if(!b)return;$$("#seg button").forEach(x=>x.classList.toggle("on",x===b));draw(b.dataset.v)};
+draw("risk");
+</script>
+<script src="hdr-align.js?v=12"></script>
+</body></html>
