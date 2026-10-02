@@ -2,6 +2,7 @@
 @import url('styles-more.css?v=15');
 @import url('styles-ui.css?v=15');
 @import url('styles-inputs.css?v=15');
+@import url('styles-kv.css?v=15');
 
 :root {
   color-scheme: dark;
