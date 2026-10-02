@@ -1,0 +1,35 @@
+/* Number / text inputs — dark theme, no native grey spinners */
+label.f {
+  display: block;
+  font-size: 13px;
+  color: var(--mu);
+  margin-bottom: 6px;
+}
+input[type="number"],
+input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--s2, #131A18);
+  border: 1px solid var(--line, rgba(255,255,255,.08));
+  color: var(--tx, #F2F7F4);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: 16px Inter, system-ui, sans-serif;
+  outline: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]:focus,
+input[type="text"]:focus {
+  border-color: var(--c2, #3DF5A0);
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  height: 0;
+  display: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
