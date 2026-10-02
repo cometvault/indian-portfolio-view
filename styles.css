@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import url('styles-more.css?v=7');
-@import url('hdr-align.css?v=2');
+@import url('hdr-align.css?v=3');
 
 :root {
   color-scheme: dark;
@@ -188,7 +188,6 @@ a.tile, a.card {
   text-decoration: none;
 }
 a.tile:hover, a.card:hover {
-  transform: translateY(-3px);
   border-color: rgba(61, 245, 160, .25);
   text-decoration: none;
   color: inherit;
