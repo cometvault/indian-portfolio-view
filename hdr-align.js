@@ -1,1 +1,1 @@
-(function(){function run(){var el=document.querySelector(".logo-txt");if(el)el.innerHTML="Portfolio View <span>India</span>";}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){run();setTimeout(run,50);});else{run();setTimeout(run,50);}})();
+(function(){function run(){var el=document.querySelector(".logo-txt");if(el)el.innerHTML="Easy <span>Nivesh</span>";}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){run();setTimeout(run,50);});else{run();setTimeout(run,50);}})();
