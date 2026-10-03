@@ -114,7 +114,7 @@ body.nav-open { overflow: hidden; }
 body.nav-open .mkt-ribbon { visibility: hidden; }
 
 .mkt-ribbon {
-  height: 38px; background: #070b0a; border-bottom: 1px solid var(--line);
+  height: 38px; background: #06140f; border-bottom: 1px solid rgba(61, 245, 160, .14);
   overflow: hidden; position: relative; z-index: 40;
 }
 .mkt-track {
@@ -127,11 +127,11 @@ body.nav-open .mkt-ribbon { visibility: hidden; }
 }
 .mkt-item {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 0 22px; font-size: 12.5px; color: var(--mu);
-  white-space: nowrap; border-right: 1px solid var(--line);
+  padding: 0 22px; font-size: 12.5px; color: #8fb5a4;
+  white-space: nowrap; border-right: 1px solid rgba(61, 245, 160, .12);
   text-decoration: none; height: 100%;
 }
-.mkt-item b { color: var(--tx); font-weight: 600; }
+.mkt-item b { color: #E8FFF4; font-weight: 600; }
 .mkt-item .up { color: var(--gain); }
 .mkt-item .dn { color: var(--loss); }
 
