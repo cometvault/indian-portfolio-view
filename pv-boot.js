@@ -1,4 +1,4 @@
-window.PV_VER="4";
+window.PV_VER="20";
 (function(){
   try{
     var p=localStorage.getItem("pv_ver");
