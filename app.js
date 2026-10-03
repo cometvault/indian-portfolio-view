@@ -1,4 +1,4 @@
-/* Portfolio View India — shared app */
+/* Easy Nivesh — shared app */
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
@@ -18,24 +18,12 @@ const esc = (s) => {
 
 const DAY = 864e5;
 const T = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); })();
-const dt = (offsetDays) => new Date(T + offsetDays * DAY);
 const fd = (d) => {
   if (d == null || d === "") return "—";
   const x = d instanceof Date ? d : new Date(d);
   if (Number.isNaN(+x)) return String(d);
   return x.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 };
-
-const IC = {
-  start: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="13" stroke="url(#g)" stroke-width="2"/><path d="M10 14h8M14 10v8" stroke="url(#g)" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="g" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00F0DC"/><stop offset="1" stop-color="#DFFF66"/></linearGradient></defs></svg>`,
-  ipo: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="4" y="6" width="20" height="16" rx="3" stroke="url(#g2)" stroke-width="2"/><path d="M9 12h10M9 16h6" stroke="url(#g2)" stroke-width="1.75" stroke-linecap="round"/><defs><linearGradient id="g2" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00F0DC"/><stop offset="1" stop-color="#DFFF66"/></linearGradient></defs></svg>`,
-  gold: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="9" stroke="url(#g3)" stroke-width="2"/><circle cx="14" cy="14" r="4" fill="url(#g3)" opacity=".5"/><defs><linearGradient id="g3" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00F0DC"/><stop offset="1" stop-color="#DFFF66"/></linearGradient></defs></svg>`,
-  mf: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M6 20V10l8-4 8 4v10" stroke="url(#g4)" stroke-width="2" stroke-linejoin="round"/><path d="M14 6v14" stroke="url(#g4)" stroke-width="1.5"/><defs><linearGradient id="g4" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00F0DC"/><stop offset="1" stop-color="#DFFF66"/></linearGradient></defs></svg>`,
-  eq: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M5 19l6-7 5 4 7-9" stroke="url(#g5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g5" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00F0DC"/><stop offset="1" stop-color="#DFFF66"/></linearGradient></defs></svg>`
-};
-const ic = (name) => IC[name] || "";
-
-const MARK = `<svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" rx="10" fill="url(#bm)"/><path d="M10 18c2-4 4-6 7-6s5 2 7 6" stroke="#04140d" stroke-width="2.2" stroke-linecap="round"/><circle cx="17" cy="12" r="2.2" fill="#04140d"/><defs><linearGradient id="bm" x1="0" y1="0" x2="34" y2="34"><stop stop-color="#00F0DC"/><stop offset=".45" stop-color="#3DF5A0"/><stop offset=".75" stop-color="#9BFF5A"/><stop offset="1" stop-color="#DFFF66"/></linearGradient></defs></svg>`;
 
 const NAV = [
   { href: "index.html", label: "Home", page: "home" },
@@ -49,39 +37,25 @@ const NAV = [
 function closeNav() {
   document.body.classList.remove("nav-open");
   const btn = $("#navToggle");
-  if (btn) {
-    btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", "Open menu");
-  }
+  if (btn) { btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-label", "Open menu"); }
 }
-
 function openNav() {
   document.body.classList.add("nav-open");
   const btn = $("#navToggle");
-  if (btn) {
-    btn.setAttribute("aria-expanded", "true");
-    btn.setAttribute("aria-label", "Close menu");
-  }
+  if (btn) { btn.setAttribute("aria-expanded", "true"); btn.setAttribute("aria-label", "Close menu"); }
 }
-
 function toggleNav() {
-  if (document.body.classList.contains("nav-open")) closeNav();
-  else openNav();
+  if (document.body.classList.contains("nav-open")) closeNav(); else openNav();
 }
 
 function layout() {
   const page = document.body.dataset.page || "";
   const hdr = $("#hdr");
   if (hdr) {
-    /* Structure:
-       1) sticky .hdr = logo + hamburger only
-       2) .nav = desktop links + mobile drawer — OUTSIDE .hdr so z-index works
-       3) .mkt-ribbon below both
-    */
     hdr.innerHTML = `<header class="hdr"><div class="hdr-in">
-        <a class="logo" href="index.html" aria-label="Portfolio View India home">
-          <img src="assets/logo.svg" width="34" height="34" alt="Portfolio View India" class="logo-img" id="brandLogo" style="object-fit:contain;background:#000">
-          <span class="logo-txt">Portfolio View<span>India</span></span>
+        <a class="logo" href="index.html" aria-label="Easy Nivesh home">
+          <img src="assets/logo.svg" width="34" height="34" alt="Easy Nivesh" class="logo-img" id="brandLogo" style="object-fit:contain;background:#000">
+          <span class="logo-txt">Easy <span>Nivesh</span></span>
         </a>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
           <svg class="ico-open" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -109,27 +83,14 @@ function layout() {
   }
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) {
-    img.onerror = function () { this.outerHTML = MARK; };
-    if (window.PV_LOGO) img.src = window.PV_LOGO;
-    else {
-      var s = document.createElement("script");
-      s.src = "assets/logo-data.js?v=1";
-      s.onload = function () { if (window.PV_LOGO) img.src = window.PV_LOGO; };
-      document.head.appendChild(s);
-    }
+    img.onerror = function () { this.style.display = "none"; };
   }
   const toggle = $("#navToggle");
   if (toggle) toggle.addEventListener("click", toggleNav);
   if (backdrop) backdrop.addEventListener("click", closeNav);
-  $$("#primaryNav a").forEach(function (a) {
-    a.addEventListener("click", closeNav);
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeNav();
-  });
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 820) closeNav();
-  });
+  $$("#primaryNav a").forEach(function (a) { a.addEventListener("click", closeNav); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
+  window.addEventListener("resize", function () { if (window.innerWidth > 820) closeNav(); });
   const ftr = $("#ftr");
   if (ftr) {
     ftr.innerHTML = `<footer class="ftr"><div class="ftr-in">
@@ -216,47 +177,13 @@ async function fillMarketRibbon() {
   track.innerHTML = items.join("") + items.join("");
 }
 
-const AGES = [["20–24", 75, 15, 10], ["25–29", 70, 20, 10], ["30–39", 60, 30, 10], ["40–49", 50, 40, 10], ["50+", 35, 50, 15]];
-const MIXC = ["var(--c2)", "var(--blue)", "var(--c4)"];
-const MIXN = ["Equity", "Debt", "Gold"];
-
-function mixFor(ageIndex, riskShift) {
-  const row = AGES[ageIndex] || AGES[1];
-  let eq = Math.max(10, Math.min(90, row[1] + (+riskShift || 0)));
-  const gold = row[3];
-  return [eq, 100 - eq - gold, gold];
+async function getJSON(file) {
+  try {
+    const res = await fetch("data/" + file + "?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) { return null; }
 }
-
-function drawMix(donutEl, legendEl, values) {
-  if (!donutEl) return;
-  const [e, d, g] = values;
-  donutEl.style.background = `conic-gradient(${MIXC[0]} 0% ${e}%, ${MIXC[1]} ${e}% ${e + d}%, ${MIXC[2]} ${e + d}% 100%)`;
-  if (legendEl) {
-    legendEl.innerHTML = MIXN.map((n, i) =>
-      `<div class="row"><span><span class="dot" style="background:${MIXC[i]}"></span>${n}</span><b class="num">${values[i]}%</b></div>`
-    ).join("");
-  }
-}
-
-function segs(container, cb) {
-  if (!container) return;
-  container.addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (!b || !container.contains(b)) return;
-    $$("button", container).forEach((x) => x.classList.remove("on"));
-    b.classList.add("on");
-    cb(b.dataset.v);
-  });
-}
-
-function dmo(offset) { return T + offset * DAY; }
-const IPO_DEMO = [
-  { name: "Demo Solar Ltd", sector: "Renewable Energy", seg: "main", band: "₹95–100", min: 14000, lot: 140, issue: 850, gmp: 22, gmpPct: 22, sub: 4.2, opens: dmo(-1), closes: dmo(2), listing: dmo(7), status: "open" }
-];
-const GOLD_DEMO = {
-  updated_at: new Date().toISOString(), source: "demo", source_url: "#",
-  cities: [{ city: "Mumbai", k24: 7470, k22: 6850 }, { city: "Delhi", k24: 7465, k22: 6845 }]
-};
 
 function parseDate(v) {
   if (v == null || v === "") return null;
@@ -294,49 +221,38 @@ function normIPO(raw) {
       if (!status || status === "live") status = ipoStatus(opens, closes);
       if (!["open", "upcoming", "closed"].includes(status)) status = "open";
       rows.push({
-        name,
-        sector: r.sector || "—",
-        seg: seg || r.seg || "main",
+        name, sector: r.sector || "—", seg: seg || r.seg || "main",
         band: r.price_band || r.priceBand || r.band || "—",
         min: r.min_amount ?? r.minAmount ?? r.min ?? null,
         lot: r.lot_size ?? r.lotSize ?? r.lot ?? null,
         issue: r.issue_size ?? r.issueSize ?? r.issue ?? null,
-        gmp: r.gmp ?? null,
-        gmpPct: r.gmp_pct ?? r.gmpPct ?? null,
+        gmp: r.gmp ?? null, gmpPct: r.gmp_pct ?? r.gmpPct ?? null,
         estListing: r.est_listing ?? r.estListing ?? null,
         sub: r.subscription_x ?? r.subscription ?? r.sub ?? null,
         subQib: r.sub_qib ?? r.subQib ?? null,
         subNii: r.sub_nii ?? r.subNii ?? null,
         subRetail: r.sub_retail ?? r.subRetail ?? null,
         subUpdated: r.sub_updated ?? r.subUpdated ?? null,
-        opens: opens ?? r.opens,
-        closes: closes ?? r.closes,
-        listing: listing ?? r.listing_date ?? r.listing,
-        status
+        opens: opens ?? r.opens, closes: closes ?? r.closes,
+        listing: listing ?? r.listing_date ?? r.listing, status
       });
     });
   };
   if (Array.isArray(raw.mainboard) || Array.isArray(raw.sme)) {
-    push(raw.mainboard, "main");
-    push(raw.sme, "sme");
+    push(raw.mainboard, "main"); push(raw.sme, "sme");
   } else if (Array.isArray(raw.rows)) push(raw.rows, null);
   else if (Array.isArray(raw)) push(raw, null);
   return rows.length ? rows : null;
 }
 
-async function getJSON(file) {
-  try {
-    const res = await fetch("data/" + file + "?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (e) { return null; }
-}
+const IPO_DEMO = [{ name: "Demo Solar Ltd", sector: "Renewable Energy", seg: "main", band: "₹95–100", min: 14000, lot: 140, issue: 850, gmp: 22, gmpPct: 22, sub: 4.2, opens: T - DAY, closes: T + 2 * DAY, listing: T + 7 * DAY, status: "open" }];
+const GOLD_DEMO = { updated_at: new Date().toISOString(), source: "demo", cities: [{ city: "Mumbai", k24: 7470, k22: 6850 }, { city: "Delhi", k24: 7465, k22: 6845 }] };
 
 async function getIPO() {
   const raw = await getJSON("ipo.json");
   const rows = normIPO(raw);
   if (rows && rows.length) {
-    return { rows, live: true, updated: raw.updated_at || raw.updated, source: raw.source || "ipowatch.in", source_url: raw.source_url || raw.sourceUrl || "https://ipowatch.in/", file: "ipo.json" };
+    return { rows, live: true, updated: raw.updated_at || raw.updated, source: raw.source || "ipowatch.in", source_url: raw.source_url || "https://ipowatch.in/", file: "ipo.json" };
   }
   return { rows: IPO_DEMO, live: false, updated: new Date().toISOString(), source: "demo", source_url: "#", file: "ipo.json" };
 }
@@ -345,9 +261,16 @@ async function getGold() {
   const raw = await getJSON("gold.json");
   if (raw && Array.isArray(raw.cities) && raw.cities.length) {
     const cities = raw.cities.map((c) => ({ city: c.city, k24: c.k24 ?? c.rate24k ?? 0, k22: c.k22 ?? c.rate22k ?? 0 }));
-    return { j: { cities, updated_at: raw.updated_at || raw.updated, source: raw.source, source_url: raw.source_url || raw.sourceUrl }, live: true, updated: raw.updated_at || raw.updated, source: raw.source || "goodreturns.in", source_url: raw.source_url || raw.sourceUrl || "#", file: "gold.json" };
+    return { j: { cities, updated_at: raw.updated_at || raw.updated, source: raw.source }, live: true, updated: raw.updated_at || raw.updated, source: raw.source || "goodreturns.in", source_url: raw.source_url || "#", file: "gold.json" };
   }
   return { j: GOLD_DEMO, live: false, updated: GOLD_DEMO.updated_at, source: "demo", source_url: "#", file: "gold.json" };
+}
+
+function fmtIST(updated) {
+  if (!updated) return "—";
+  const t = Date.parse(updated);
+  if (Number.isNaN(t)) return String(updated);
+  return new Date(t).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false }) + " IST";
 }
 
 function statusBar(el, result, retryFn) {
@@ -363,15 +286,36 @@ function statusBar(el, result, retryFn) {
   if (!live) { el.className = "status warn"; html = `◐ Demo data shown. Add data/${result.file || "…"} from the update script to go live.`; }
   else if (stale) { el.className = "status warn"; html = `⚠ Data may be out of date · Updated ${fmtIST(updated)} · Source: <a href="${esc(srcUrl)}" target="_blank" rel="noopener">${esc(src)} ↗</a>`; }
   else { el.className = "status"; html = `● Live · Updated ${fmtIST(updated)} · Source: <a href="${esc(srcUrl)}" target="_blank" rel="noopener">${esc(src)} ↗</a>`; }
-  if (typeof retryFn === "function") html += ` <button type="button" id="rf">↻ Refresh</button>`;
   el.innerHTML = html;
-  const btn = $("#rf", el);
-  if (btn && retryFn) btn.onclick = () => retryFn(true);
 }
 
-function fmtIST(iso) {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  if (Number.isNaN(+d)) return String(iso);
-  return d.toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false }) + " IST";
+function segs(container, cb) {
+  if (!container) return;
+  container.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b || !container.contains(b)) return;
+    $$("button", container).forEach((x) => x.classList.remove("on"));
+    b.classList.add("on");
+    cb(b.dataset.v);
+  });
+}
+
+const AGES = [["20–24", 75, 15, 10], ["25–29", 70, 20, 10], ["30–39", 60, 30, 10], ["40–49", 50, 40, 10], ["50+", 35, 50, 15]];
+const MIXC = ["var(--c2)", "var(--blue)", "var(--c4)"];
+const MIXN = ["Equity", "Debt", "Gold"];
+function mixFor(ageIndex, riskShift) {
+  const row = AGES[ageIndex] || AGES[1];
+  let eq = Math.max(10, Math.min(90, row[1] + (+riskShift || 0)));
+  const gold = row[3];
+  return [eq, 100 - eq - gold, gold];
+}
+function drawMix(donutEl, legendEl, values) {
+  if (!donutEl) return;
+  const [e, d, g] = values;
+  donutEl.style.background = `conic-gradient(${MIXC[0]} 0% ${e}%, ${MIXC[1]} ${e}% ${e + d}%, ${MIXC[2]} ${e + d}% 100%)`;
+  if (legendEl) {
+    legendEl.innerHTML = MIXN.map((n, i) =>
+      `<div class="row"><span><span class="dot" style="background:${MIXC[i]}"></span>${n}</span><b class="num">${values[i]}%</b></div>`
+    ).join("");
+  }
 }
