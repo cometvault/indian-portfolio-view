@@ -101,6 +101,9 @@ function layout() {
     <p class="ftr-legal">Educational only. Not investment advice. Not SEBI-registered. Investments carry risk and returns are not guaranteed.</p></footer>`;
   }
   fillMarketRibbon();
+  if (document.title && document.title.indexOf("Portfolio View India") >= 0) {
+    document.title = document.title.split("Portfolio View India").join("Easy Nivesh");
+  }
 }
 layout();
 
@@ -300,7 +303,7 @@ function segs(container, cb) {
   });
 }
 
-const AGES = [["20–24", 75, 15, 10], ["25–29", 70, 20, 10], ["30–39", 60, 30, 10], ["40–49", 50, 40, 10], ["50+", 35, 50, 15]];
+const AGES = [["20–24", 75, 15, 10], ["25–29", 70, 20, 10], ["30–39", 60, 30, 10], ["40–49", 50, 40, 15], ["50+", 35, 50, 15]];
 const MIXC = ["var(--c2)", "var(--blue)", "var(--c4)"];
 const MIXN = ["Equity", "Debt", "Gold"];
 function mixFor(ageIndex, riskShift) {
