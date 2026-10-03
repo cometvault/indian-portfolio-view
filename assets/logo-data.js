@@ -1,1 +1,1 @@
-window.PV_LOGO="assets/logo.svg?v=22";
+window.PV_LOGO="assets/logo.svg?v=23";
