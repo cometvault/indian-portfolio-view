@@ -67,14 +67,35 @@
 }
 
 @media (max-width: 820px) {
+  /* Hide desktop horizontal nav; drawer is controlled by body.nav-open */
   #hdr > .nav, #hdr .nav, .hdr-in > .nav, .nav#primaryNav {
-    display: none !important; position: fixed !important;
-    top: 0; right: 0; left: auto; bottom: 0;
-    width: 65%; max-width: 300px; height: 100dvh !important; margin: 0;
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: 0 !important;
+    width: 65% !important;
+    max-width: 300px !important;
+    height: 100dvh !important;
+    height: 100vh !important;
+    margin: 0 !important;
     padding: calc(56px + env(safe-area-inset-top, 0px) + 20px) 20px 32px !important;
-    flex-direction: column; align-items: stretch; gap: 2px;
-    background: #000 !important; z-index: 70 !important; overflow-y: auto;
-    visibility: visible;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 2px !important;
+    background: #000000 !important;
+    border-left: 1px solid rgba(255,255,255,.12) !important;
+    z-index: 100 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: -8px 0 24px rgba(0,0,0,.5);
+  }
+  /* Raise header stacking context so drawer sits above backdrop */
+  body.nav-open #hdr {
+    z-index: 100 !important;
+    overflow: visible !important;
   }
   body.nav-open #hdr > .nav,
   body.nav-open #hdr .nav,
@@ -84,19 +105,55 @@
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    z-index: 70 !important;
-    background: #000 !important;
+    z-index: 100 !important;
+    background: #000000 !important;
   }
   body.nav-open .nav-backdrop {
     display: block !important;
-    z-index: 65 !important;
-    background: #000 !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 90 !important;
+    background: #000000 !important;
+    opacity: 1 !important;
   }
   body.nav-open .mkt-ribbon {
     visibility: hidden !important;
     pointer-events: none !important;
   }
-  .nav-toggle { z-index: 72 !important; position: relative; }
+  .nav-toggle {
+    display: inline-flex !important;
+    z-index: 110 !important;
+    position: relative !important;
+  }
+  /* Menu link colours: grey, Start Here brand green, active underline */
+  #hdr > .nav a, #hdr .nav a, .nav#primaryNav a {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 48px !important;
+    padding: 14px 8px !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid transparent !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #9AA8A1 !important;
+    background: transparent !important;
+    white-space: normal !important;
+  }
+  #hdr > .nav a[aria-current="page"],
+  .nav#primaryNav a[aria-current="page"] {
+    color: #F2F7F4 !important;
+    border-bottom: 2px solid #3DF5A0 !important;
+    background: transparent !important;
+  }
+  #hdr > .nav a.start, #hdr > .nav a.cta,
+  .nav#primaryNav a.start, .nav#primaryNav a.cta {
+    margin-top: 10px !important;
+    color: #3DF5A0 !important;
+    font-weight: 700 !important;
+    background: transparent !important;
+  }
 }
 
 .sec p, .panel p, .card p, .stack p, .pc-note, .pc-intro { color: var(--mu); }
