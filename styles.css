@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
-@import url('styles-more.css?v=16');
-@import url('styles-ui.css?v=16');
-@import url('styles-inputs.css?v=16');
-@import url('styles-kv.css?v=16');
+@import url('styles-more.css?v=19');
+@import url('styles-ui.css?v=19');
+@import url('styles-inputs.css?v=19');
+@import url('styles-kv.css?v=19');
 
 :root {
   color-scheme: dark;
@@ -114,7 +114,7 @@ body.nav-open { overflow: hidden; }
 body.nav-open .mkt-ribbon { visibility: hidden; }
 
 .mkt-ribbon {
-  height: 38px; background: #06140f; border-bottom: 1px solid rgba(61, 245, 160, .14);
+  height: 38px; background: #0a1f18; border-bottom: 1px solid rgba(61, 245, 160, .22);
   overflow: hidden; position: relative; z-index: 40;
 }
 .mkt-track {
@@ -127,8 +127,8 @@ body.nav-open .mkt-ribbon { visibility: hidden; }
 }
 .mkt-item {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 0 22px; font-size: 12.5px; color: #8fb5a4;
-  white-space: nowrap; border-right: 1px solid rgba(61, 245, 160, .12);
+  padding: 0 22px; font-size: 12.5px; color: #a8e0c8;
+  white-space: nowrap; border-right: 1px solid rgba(61, 245, 160, .18);
   text-decoration: none; height: 100%;
 }
 .mkt-item b { color: #E8FFF4; font-weight: 600; }
