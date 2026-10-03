@@ -83,14 +83,12 @@
 .sec p, .panel p, .card p, .stack p, .pc-note, .pc-intro { color: var(--mu); }
 .sec h2, .sec h3 { color: var(--tx); }
 
-/* Logo seamless on pure black */
+/* Match site to logo background (pure black) */
 :root { --bg: #000000; }
-html, body { background: #000000 !important; }
-#hdr, .hdr, #hdr .hdr { background: #000000 !important; }
-.logo img, .logo-img, .logo svg {
-  background: #000000 !important;
-  border-radius: 10px;
-  box-shadow: none !important;
-  outline: none;
+html, body { background: #000000; }
+#hdr { background: #000000 !important; }
+#hdr .hdr { background: transparent; }
+.logo img, .logo-img {
+  background: #000000;
+  object-fit: contain;
 }
-.logo { background: transparent; }
