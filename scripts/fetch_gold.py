@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch gold rates. Never wipe last good JSON on failure."""
+"""Fetch gold rates per gram from goodreturns.in. Never wipe last good JSON on failure."""
 from __future__ import annotations
 
 import json
@@ -26,9 +26,11 @@ IST = timezone(timedelta(hours=5, minutes=30))
 
 CITIES = {
     "Mumbai": "https://www.goodreturns.in/gold-rates/mumbai.html",
+    "Delhi": "https://www.goodreturns.in/gold-rates/delhi.html",
     "Bengaluru": "https://www.goodreturns.in/gold-rates/bangalore.html",
     "Kolkata": "https://www.goodreturns.in/gold-rates/kolkata.html",
     "Hyderabad": "https://www.goodreturns.in/gold-rates/hyderabad.html",
+    "Chennai": "https://www.goodreturns.in/gold-rates/chennai.html",
 }
 
 
@@ -48,15 +50,36 @@ def fetch(url: str, retries: int = 3) -> str:
 
 
 def parse_rates(html: str):
-    text = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
-    r22 = r24 = None
-    m22 = re.search(r"22\s*K[^\d]{0,20}([\d,]{4,})", text, re.I)
-    m24 = re.search(r"24\s*K[^\d]{0,20}([\d,]{4,})", text, re.I)
-    if m22:
-        r22 = int(m22.group(1).replace(",", ""))
-    if m24:
-        r24 = int(m24.group(1).replace(",", ""))
-    return r22, r24
+    soup = BeautifulSoup(html, "html.parser")
+    r22 = r24 = chg = None
+    for table in soup.find_all("table"):
+        rows = table.find_all("tr")
+        if not rows:
+            continue
+        headers = [c.get_text(" ", strip=True).lower() for c in rows[0].find_all(["td", "th"])]
+        if any("gram" in h for h in headers) or (
+            len(headers) >= 3 and "24" in (headers[1] if len(headers) > 1 else "")
+        ):
+            for tr in rows[1:]:
+                cells = [c.get_text(" ", strip=True) for c in tr.find_all(["td", "th"])]
+                if not cells:
+                    continue
+                if cells[0].strip() in ("1", "1g", "1 g"):
+                    def num(s):
+                        m = re.search(r"[\d,]+", s.replace("₹", ""))
+                        return int(m.group(0).replace(",", "")) if m else None
+                    if len(cells) >= 3:
+                        r24 = num(cells[1])
+                        r22 = num(cells[2])
+                    break
+        if any("date" in h for h in headers) and chg is None:
+            for tr in rows[1:2]:
+                cells = [c.get_text(" ", strip=True) for c in tr.find_all(["td", "th"])]
+                if len(cells) >= 2:
+                    m = re.search(r"\(([+-]?\d+)\)", cells[1])
+                    if m:
+                        chg = int(m.group(1))
+    return r22, r24, chg
 
 
 def main() -> int:
@@ -64,10 +87,18 @@ def main() -> int:
     for name, url in CITIES.items():
         print(f"Fetching {name}")
         html = fetch(url)
-        r22, r24 = parse_rates(html)
+        r22, r24, chg = parse_rates(html)
         if not r22 and not r24:
             raise RuntimeError(f"No rates for {name}")
-        cities.append({"city": name, "rate22k": r22, "rate24k": r24, "change24k": None})
+        cities.append({
+            "city": name,
+            "k24": r24,
+            "k22": r22,
+            "rate24k": r24,
+            "rate22k": r22,
+            "change24k": chg,
+        })
+        print(f"  24K={r24} 22K={r22} chg={chg}")
     if len(cities) < 1:
         raise RuntimeError("No cities parsed")
     now = datetime.now(IST).strftime("%Y-%m-%dT%H:%M:%S+05:30")
@@ -77,12 +108,13 @@ def main() -> int:
         "source": "goodreturns.in",
         "source_url": "https://www.goodreturns.in/gold-rates/",
         "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-        "note": "Metal rate only — no making charges.",
+        "note": "Rates per gram. Metal rate only \u2014 no making charges.",
+        "unit": "per_gram",
         "cities": cities,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {OUT}")
+    OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print("Wrote", OUT, "cities", len(cities))
     return 0
 
 
