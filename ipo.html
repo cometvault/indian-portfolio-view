@@ -6,7 +6,6 @@
 <meta name="description" content="What's open, what's next and whether it's for you: dates, minimum amounts, subscription and a readiness check. Educational only.">
 <meta name="theme-color" content="#050807"><link rel="icon" href="assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
 <style>.top{display:flex;gap:12px;align-items:center}.av{width:44px;height:44px;border-radius:14px;background:var(--brand);color:#04140d;display:grid;place-items:center;font:700 16px Sora;flex:none}.top p{margin:0;color:var(--dim);font-size:13px}.star{margin-left:auto;background:none;border:1px solid var(--line);color:var(--dim);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:17px;flex:none}.star.on{color:#04140d;background:var(--brand);border-color:transparent}.when{font-size:13px;color:var(--mu);margin-left:8px}.gmp{color:var(--dim)}.ring{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:var(--s2);margin:0 auto 12px}.ring div{width:124px;height:124px;border-radius:50%;background:var(--s);display:grid;place-items:center;font:700 36px Sora}</style>
-<style>.pre-check{margin-top:36px}.pre-check .pc-intro{color:var(--mu);max-width:54ch;margin:8px 0 18px;font-size:15px;line-height:1.55}.pre-check .pc-card{background:var(--s);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 10px}.pre-check .pc-card label.pc-title{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font:600 15px/1.35 Sora,system-ui,sans-serif;color:var(--fg);margin:0}.pre-check .pc-card input[type=checkbox]{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--c2)}.pre-check .pc-rows{margin:12px 0 0;display:grid;gap:8px}.pre-check .pc-row{display:grid;grid-template-columns:110px 1fr;gap:8px;font-size:13.5px;line-height:1.45}.pre-check .pc-row small{color:var(--dim);font-size:12px}.pre-check .pc-row span{color:var(--mu)}.pre-check .pc-score{margin-top:20px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--s2)}.pre-check .pc-score b{font:700 16px Sora,system-ui,sans-serif}.pre-check .pc-score p{margin:8px 0 0;color:var(--mu);font-size:14px}.pre-check .pc-note{margin:12px 0 0;font-size:12.5px;color:var(--dim)}.faq-more-toggle{display:inline-flex;margin-top:14px;background:transparent;border:1px solid var(--line);color:var(--mu);padding:8px 14px;border-radius:999px;font:500 13px Inter,system-ui,sans-serif;cursor:pointer}@media(max-width:520px){.pre-check .pc-row{grid-template-columns:1fr}}</style>
 </head>
 <body data-page="ipo"><a class="skip" href="#main">Skip to content</a><div id="hdr"></div><div class="glow"></div>
 <main id="main" class="wrap">
@@ -27,25 +26,9 @@
 <label class="tg"><input type="checkbox"><span class="sw"></span>I'm fine with the money being blocked for a few days</label>
 <label class="tg"><input type="checkbox"><span class="sw"></span>I'm okay if it lists flat or below issue price</label></div>
 <div class="panel" style="text-align:center"><div class="ring" id="ring"><div><span id="rn">0</span></div></div><small style="color:var(--dim)">out of 4</small><p id="rm" style="color:var(--mu);margin:8px 0 0"></p></div></div></section>
-<section class="sec"><h2>How an IPO works</h2>
-<div class="g2" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"><div class="tile"><small>Step 1</small><h3>Apply with UPI</h3><p>Pick lots and price in your broker app and approve the mandate. Money is blocked, not spent.</p></div><div class="tile"><small>Step 2</small><h3>Wait for allotment</h3><p>Popular issues are oversubscribed, so many applicants get nothing.</p></div><div class="tile"><small>Step 3</small><h3>Shares list</h3><p>If allotted, shares reach your demat and start trading.</p></div></div></section>
-<section class="pre-check sec" id="before-you-invest"><h2>Before you apply.</h2><p class="pc-intro">Five checks that GMP can't tell you.</p>
-<div class="pc-card"><label class="pc-title"><input type="checkbox" data-pc="1"> What is the money being raised for?</label></div>
-<div class="pc-card"><label class="pc-title"><input type="checkbox" data-pc="2"> Fresh issue or offer for sale?</label></div>
-<div class="pc-card"><label class="pc-title"><input type="checkbox" data-pc="3"> Who are the promoters, and how much do they keep?</label></div>
-<div class="pc-card"><label class="pc-title"><input type="checkbox" data-pc="4"> Is the price fair against listed peers?</label></div>
-<div class="pc-card"><label class="pc-title"><input type="checkbox" data-pc="5"> Have I read the RHP risk section?</label></div>
-<div class="pc-score"><b>You've cleared <span data-pc-count>0</span> of 5 checks.</b></div>
-</section>
-<section class="sec faq"><h2>Questions</h2>
-<details><summary>What is GMP?</summary><p>The unofficial premium people pay for an IPO share before listing.</p></details>
-<details><summary>Does a high GMP mean I should apply?</summary><p>No. It can vanish overnight.</p></details>
-<details><summary>What's a lot?</summary><p>The minimum bundle of shares you can bid for.</p></details>
-<details><summary>Why am I often not allotted?</summary><p>When an issue is heavily oversubscribed, shares go by lottery.</p></details>
-</section>
 <div class="next"><div><h2>IPO money has a place. Not the first place.</h2><p>Build your safety net and core investing first.</p></div><a class="go" href="new-to-finance.html#plan">Build my plan</a></div>
 </main><div id="ftr"></div>
-<script src="app.js?v=22"></script>
+<script src="app.js?v=23"></script>
 <script>
 let R=null,ST={seg:"main",st:"open",wl:false,q:"",sort:"close"},W=[];
 try{W=JSON.parse(localStorage.getItem("pv_watch")||"[]")}catch(e){}
@@ -57,42 +40,71 @@ async function load(){
     R=await getIPO();
     if(typeof statusBar==="function")statusBar($("#st"),R,load);
     else if(typeof setStatus==="function")setStatus($("#st"),R,load);
+    // If Mainboard has no open IPOs but SME does, stay on Mainboard (user can switch)
     render();
   }catch(err){console.error(err);$("#grid").innerHTML='<div class="empty">Could not load IPO data. Try again in a moment.</div>';}
 }
 function wt(d){const n=Math.round((d.closes-T)/DAY),m=Math.round((d.opens-T)/DAY);if(d.status==="open")return n<=0?"closes today":"closes in "+n+"d";if(d.status==="upcoming")return"opens in "+m+"d";return d.listing?"listing "+fd(d.listing):"closed"}
-function cnt(from,to,el,f){const t0=performance.now();(function s(t){const p=Math.min((t-t0)/700,1);el.textContent=f(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)})(t0)}
-function render(){if(!R||!R.rows)return;const all=R.rows,seg=all.filter(d=>d.seg===ST.seg),c=k=>seg.filter(d=>d.status===k).length;
-$("#nO").textContent=c("open");$("#nU").textContent=c("upcoming");$("#nC").textContent=c("closed");
-const op=all.filter(d=>d.status==="open"),sb=op.filter(d=>d.sub!=null);
-cnt(0,op.length,$("#sO"),v=>Math.round(v));cnt(0,op.filter(d=>(d.closes-T)/DAY<=3).length,$("#sC"),v=>Math.round(v));cnt(0,sb.length?sb.reduce((a,d)=>a+d.sub,0)/sb.length:0,$("#sS"),v=>v.toFixed(1)+"x");$("#sW").textContent=W.length;
-$("#smeW").hidden=ST.seg!=="sme";
-let rows=seg.filter(d=>ST.wl?W.includes(d.name):d.status===ST.st);const q=ST.q.trim().toLowerCase();if(q)rows=rows.filter(d=>(d.name+" "+d.sector).toLowerCase().includes(q));
-const B=1e15;rows.sort((a,b)=>ST.sort==="sub"?(b.sub??-1)-(a.sub??-1):ST.sort==="min"?(a.min??B)-(b.min??B):(a.closes||0)-(b.closes||0));
-$("#grid").innerHTML=rows.length?rows.map(d=>{const ini=d.name.replace(/^Demo /,"").split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase(),w=Math.min((d.sub||0)/Math.max(d.sub||0,5)*100,100),on=W.includes(d.name);
-return`<article class="card"><div class="top"><div class="av">${esc(ini)}</div><div><h3>${esc(d.name)}</h3><p>${esc(d.sector!=="—"?d.sector:(d.seg==="sme"?"SME":"Mainboard"))}</p></div><button class="star${on?" on":""}" data-n="${esc(d.name)}" aria-pressed="${on}">${on?"★":"☆"}</button></div>
+function cnt(from,to,el,f){if(!el)return;const t0=performance.now();(function s(t){const p=Math.min((t-t0)/700,1);el.textContent=f(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)})(t0)}
+function render(){
+  if(!R||!R.rows){$("#grid").innerHTML='<div class="empty">No IPO data loaded.</div>';return;}
+  const all=R.rows;
+  const seg=all.filter(d=>d.seg===ST.seg);
+  const c=k=>seg.filter(d=>d.status===k).length;
+  $("#nO").textContent=c("open");
+  $("#nU").textContent=c("upcoming");
+  $("#nC").textContent=c("closed");
+  const op=all.filter(d=>d.status==="open"),sb=op.filter(d=>d.sub!=null);
+  cnt(0,op.length,$("#sO"),v=>Math.round(v));
+  cnt(0,op.filter(d=>(d.closes-T)/DAY<=3).length,$("#sC"),v=>Math.round(v));
+  cnt(0,sb.length?sb.reduce((a,d)=>a+d.sub,0)/sb.length:0,$("#sS"),v=>v.toFixed(1)+"x");
+  $("#sW").textContent=W.length;
+  const smeW=$("#smeW"); if(smeW) smeW.hidden=ST.seg!=="sme";
+  let rows=seg.filter(d=>ST.wl?W.includes(d.name):d.status===ST.st);
+  const q=ST.q.trim().toLowerCase();
+  if(q)rows=rows.filter(d=>(d.name+" "+(d.sector||"")).toLowerCase().includes(q));
+  const B=1e15;
+  rows.sort((a,b)=>ST.sort==="sub"?(b.sub??-1)-(a.sub??-1):ST.sort==="min"?(a.min??B)-(b.min??B):(a.closes||0)-(b.closes||0));
+  $("#grid").innerHTML=rows.length?rows.map(d=>{
+    const ini=d.name.replace(/^Demo /,"").split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase();
+    const w=Math.min((d.sub||0)/Math.max(d.sub||0,5)*100,100);
+    const on=W.includes(d.name);
+    return`<article class="card"><div class="top"><div class="av">${esc(ini)}</div><div><h3>${esc(d.name)}</h3><p>${esc(d.sector!=="—"&&d.sector?d.sector:(d.seg==="sme"?"SME":"Mainboard"))}</p></div><button class="star${on?" on":""}" data-n="${esc(d.name)}" aria-pressed="${on}">${on?"★":"☆"}</button></div>
 <div style="margin:14px 0 4px"><span class="pill ${d.status}">${d.status[0].toUpperCase()+d.status.slice(1)}</span><span class="when">${wt(d)}</span></div>
 <div class="kv">
 <div><small>Price band</small><b class="num">${esc(d.band)}</b></div>
-<div><small>Issue size</small><b class="num">${d.issue!=null?("₹"+Number(d.issue).toLocaleString("en-IN")+" Cr"):"—"}</b></div>
 <div><small>Opens – closes</small><b class="num">${fd(d.opens)} – ${fd(d.closes)}</b></div>
 <div><small>GMP (unofficial)</small><b class="gmp num">${d.gmp!=null?inr(d.gmp):"—"}${d.gmpPct!=null?" ("+Number(d.gmpPct).toFixed(1)+"%)":""}</b></div>
 <div><small>Lot size</small><b class="num">${d.lot!=null?d.lot:"—"}</b></div>
 <div><small>Min. application</small><b class="num">${d.min!=null?inr(d.min):"—"}</b></div>
 </div>
-<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--mu);margin-top:8px"><span>Subscription</span><span class="num">${d.sub!=null?d.sub.toFixed(2)+"x":"—"}</span></div>
-<div class="bar"><i style="width:${w}%"></i></div>
-</article>`}).join(""):`<div class="empty">${ST.wl?"Nothing starred yet.":"No IPOs match this view right now."}</div>`;
+</article>`;
+  }).join(""):`<div class="empty">${ST.wl?"Nothing starred yet. Tap ☆ on any IPO to track it.":"No "+ST.st+" IPOs in "+(ST.seg==="sme"?"SME":"Mainboard")+" right now. Try the other segment or status."}</div>`;
 }
 segs($("#seg"),v=>{ST.seg=v;render()});
-$$(".chip[data-st]").forEach(c=>c.onclick=()=>{$$(".chip[data-st]").forEach(x=>x.classList.remove("on"));c.classList.add("on");ST.st=c.dataset.st;ST.wl=false;$("#wl").classList.remove("on");render()});
-$("#wl").onclick=e=>{ST.wl=!ST.wl;e.currentTarget.classList.toggle("on",ST.wl);render()};
-$("#q").oninput=e=>{ST.q=e.target.value;render()};$("#sort").onchange=e=>{ST.sort=e.target.value;render()};
+$$(".chip[data-st]").forEach(c=>c.onclick=()=>{
+  $$(".chip[data-st]").forEach(x=>x.classList.remove("on"));
+  c.classList.add("on");
+  ST.st=c.dataset.st;
+  ST.wl=false;
+  const wl=$("#wl"); if(wl){wl.classList.remove("on"); wl.setAttribute("aria-pressed","false");}
+  render();
+});
+const wlBtn=$("#wl");
+if(wlBtn) wlBtn.onclick=e=>{
+  ST.wl=!ST.wl;
+  e.currentTarget.classList.toggle("on",ST.wl);
+  e.currentTarget.setAttribute("aria-pressed", String(ST.wl));
+  if(ST.wl) $$(".chip[data-st]").forEach(x=>x.classList.remove("on"));
+  else $$(".chip[data-st]").forEach(x=>x.classList.toggle("on", x.dataset.st===ST.st));
+  render();
+};
+$("#q").oninput=e=>{ST.q=e.target.value;render()};
+$("#sort").onchange=e=>{ST.sort=e.target.value;render()};
 $("#grid").onclick=e=>{const b=e.target.closest(".star");if(!b)return;const n=b.dataset.n,i=W.indexOf(n);i>-1?W.splice(i,1):W.push(n);sv();render()};
 const M=["Pause. Read first.","Not yet.","Getting there.","Nearly ready.","Prepared."];
 function ck(){const n=$$("#chk input:checked").length;$("#rn").textContent=n;$("#ring").style.background=n?`conic-gradient(var(--c2) 0%,var(--c4) ${n*25}%,var(--s2) ${n*25}%)`:"var(--s2)";$("#rm").textContent=M[n]}
 $$("#chk input").forEach(i=>i.onchange=ck);ck();
-(function(){var root=document.getElementById("before-you-invest");if(!root)return;var boxes=root.querySelectorAll("input[data-pc]");var count=root.querySelector("[data-pc-count]");function upd(){var n=0;boxes.forEach(function(b){if(b.checked)n++});if(count)count.textContent=n}boxes.forEach(function(b){b.addEventListener("change",upd)});upd()})();
 load();
 </script>
 </body></html>
