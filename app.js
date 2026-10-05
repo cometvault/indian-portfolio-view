@@ -151,7 +151,11 @@ async function fillMarketRibbon() {
 
 async function getJSON(file, demo) {
   try {
-    const r = await fetch("data/" + file + "?t=" + Date.now(), { cache: "no-store" });
+    const url = "data/" + file + "?t=" + Date.now() + "&r=" + Math.random().toString(36).slice(2, 8);
+    const r = await fetch(url, {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache, no-store, must-revalidate", Pragma: "no-cache" }
+    });
     if (!r.ok) throw new Error("missing");
     const j = await r.json();
     return {
@@ -342,6 +346,18 @@ function drawMix(donutEl, legendEl, values) {
     legendEl.innerHTML = MIXN.map((n, i) => `<div class="row"><span><span class="dot" style="background:${MIXC[i]}"></span>${n}</span><b class="num">${values[i]}%</b></div>`).join("");
   }
 }
+
+function enRefreshLiveData() {
+  try { fillMarketRibbon(); } catch (e) {}
+  try {
+    if (typeof window.load === "function") window.load();
+  } catch (e) {}
+  try { window.dispatchEvent(new CustomEvent("en-data-refresh")); } catch (e) {}
+}
+window.addEventListener("pageshow", function () { enRefreshLiveData(); });
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "visible") enRefreshLiveData();
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   layout();
