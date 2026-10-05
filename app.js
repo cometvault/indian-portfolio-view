@@ -1,3 +1,4 @@
+/* build: 2026-10-06T02:26 IST pages-sync */
 /* Easy Nivesh — shared app */
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
