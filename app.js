@@ -202,8 +202,14 @@ function normIPO(raw) {
       name = String(name).replace(/\s+(Open|Closed|Upcoming|Listed)\s*$/i, "").trim();
       const opens = r.opens ?? r.open;
       const closes = r.closes ?? r.close;
-      let status = (r.status || "").toLowerCase();
-      if (!status || status === "live") status = ipoStatus(opens, closes);
+      // Prefer date-based status so Open/Upcoming/Closed tabs stay accurate
+      let status = ipoStatus(opens, closes);
+      const rawSt = (r.status || "").toLowerCase().trim();
+      // Use scraped status only when dates are missing
+      if ((opens == null || opens === "") && (closes == null || closes === "") &&
+          ["open", "upcoming", "closed"].includes(rawSt)) {
+        status = rawSt;
+      }
       if (!["open", "upcoming", "closed"].includes(status)) status = "open";
       rows.push({
         name,
@@ -247,7 +253,6 @@ function normCityRate(c) {
   let k22 = c.k22;
   if (k24 == null && c.rate24k != null) k24 = +c.rate24k > 50000 ? +c.rate24k / 10 : +c.rate24k;
   if (k22 == null && c.rate22k != null) k22 = +c.rate22k > 50000 ? +c.rate22k / 10 : +c.rate22k;
-  // Rates are already per gram (~14000). Only divide if clearly per-10g legacy (>50000).
   return { city: c.city || "—", k24: k24 != null ? +k24 : 0, k22: k22 != null ? +k22 : 0, change24k: c.change24k ?? null };
 }
 
@@ -311,7 +316,6 @@ function setStatus(el, result, retryFn) {
   const btn = $("#rf", el);
   if (btn && retryFn) btn.onclick = () => retryFn(true);
 }
-/** Alias used by IPO and Gold pages */
 function statusBar(el, result, retryFn) { return setStatus(el, result, retryFn); }
 
 function segs(container, cb) {
