@@ -28,7 +28,7 @@
 <div class="panel" style="text-align:center"><div class="ring" id="ring"><div><span id="rn">0</span></div></div><small style="color:var(--dim)">out of 4</small><p id="rm" style="color:var(--mu);margin:8px 0 0"></p></div></div></section>
 <div class="next"><div><h2>IPO money has a place. Not the first place.</h2><p>Build your safety net and core investing first.</p></div><a class="go" href="new-to-finance.html#plan">Build my plan</a></div>
 </main><div id="ftr"></div>
-<script src="app.js?v=23"></script>
+<script src="app.js?v=24"></script>
 <script>
 let R=null,ST={seg:"main",st:"open",wl:false,q:"",sort:"close"},W=[];
 try{W=JSON.parse(localStorage.getItem("pv_watch")||"[]")}catch(e){}
@@ -40,7 +40,6 @@ async function load(){
     R=await getIPO();
     if(typeof statusBar==="function")statusBar($("#st"),R,load);
     else if(typeof setStatus==="function")setStatus($("#st"),R,load);
-    // If Mainboard has no open IPOs but SME does, stay on Mainboard (user can switch)
     render();
   }catch(err){console.error(err);$("#grid").innerHTML='<div class="empty">Could not load IPO data. Try again in a moment.</div>';}
 }
