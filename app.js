@@ -133,8 +133,7 @@ async function fillMarketRibbon() {
   }
   if (ipo && ipo.rows) {
     const open = ipo.rows.filter(r => r.status === "open").sort((a,b) => (b.gmpPct||0)-(a.gmpPct||0));
-    const closing = ipo.rows.filter(r => r.status === "open" || r.status === "upcoming");
-    const pick = open[0] || closing[0];
+    const pick = open[0] || ipo.rows.filter(r => r.status === "upcoming")[0];
     if (pick) items.push(`<a class="mkt-item" href="ipo.html"><b>${esc(pick.name)}</b> GMP ${pick.gmp != null ? "₹"+pick.gmp : "—"} ${pick.gmpPct != null ? "(" + pick.gmpPct + "%)" : ""} · ${pick.status}</a>`);
     if (open[1]) items.push(`<a class="mkt-item" href="ipo.html"><b>${esc(open[1].name)}</b> GMP ${open[1].gmp != null ? "₹"+open[1].gmp : "—"} · ${open[1].status}</a>`);
   }
@@ -199,7 +198,8 @@ function normIPO(raw) {
   const rows = [];
   const push = (arr, seg) => {
     (arr || []).forEach((r) => {
-      const name = r.name || r.company || "—";
+      let name = r.name || r.company || "—";
+      name = String(name).replace(/\s+(Open|Closed|Upcoming|Listed)\s*$/i, "").trim();
       const opens = r.opens ?? r.open;
       const closes = r.closes ?? r.close;
       let status = (r.status || "").toLowerCase();
@@ -232,11 +232,8 @@ function normIPO(raw) {
     push(raw.mainboard, "main");
     push(raw.sme, "sme");
   } else if (raw.open || raw.upcoming || raw.closed) {
-    push(raw.open, null);
-    push(raw.upcoming, null);
-    push(raw.closed, null);
+    push(raw.open, null); push(raw.upcoming, null); push(raw.closed, null);
   } else if (raw.rows) push(raw.rows, null);
-  else if (raw.items) push(raw.items, null);
   else if (Array.isArray(raw)) push(raw, null);
   return rows.length ? rows : null;
 }
@@ -248,12 +245,9 @@ const DEMO_IPO = { open: [], upcoming: [], updated_at: null };
 function normCityRate(c) {
   let k24 = c.k24;
   let k22 = c.k22;
-  if (k24 == null && c.rate24k != null) {
-    k24 = +c.rate24k > 5000 ? +c.rate24k / 10 : +c.rate24k;
-  }
-  if (k22 == null && c.rate22k != null) {
-    k22 = +c.rate22k > 5000 ? +c.rate22k / 10 : +c.rate22k;
-  }
+  if (k24 == null && c.rate24k != null) k24 = +c.rate24k > 50000 ? +c.rate24k / 10 : +c.rate24k;
+  if (k22 == null && c.rate22k != null) k22 = +c.rate22k > 50000 ? +c.rate22k / 10 : +c.rate22k;
+  // Rates are already per gram (~14000). Only divide if clearly per-10g legacy (>50000).
   return { city: c.city || "—", k24: k24 != null ? +k24 : 0, k22: k22 != null ? +k22 : 0, change24k: c.change24k ?? null };
 }
 
@@ -317,6 +311,8 @@ function setStatus(el, result, retryFn) {
   const btn = $("#rf", el);
   if (btn && retryFn) btn.onclick = () => retryFn(true);
 }
+/** Alias used by IPO and Gold pages */
+function statusBar(el, result, retryFn) { return setStatus(el, result, retryFn); }
 
 function segs(container, cb) {
   if (!container) return;
@@ -349,14 +345,15 @@ function drawMix(donutEl, legendEl, values) {
 
 function enRefreshLiveData() {
   try { fillMarketRibbon(); } catch (e) {}
-  try {
-    if (typeof window.load === "function") window.load();
-  } catch (e) {}
-  try { window.dispatchEvent(new CustomEvent("en-data-refresh")); } catch (e) {}
+  try { if (typeof window.load === "function") window.load(); } catch (e) {}
 }
-window.addEventListener("pageshow", function () { enRefreshLiveData(); });
+window.addEventListener("pageshow", function (ev) {
+  if (ev.persisted) enRefreshLiveData();
+});
 document.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "visible") enRefreshLiveData();
+  if (document.visibilityState === "visible") {
+    try { fillMarketRibbon(); } catch (e) {}
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
