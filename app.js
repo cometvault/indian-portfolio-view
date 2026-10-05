@@ -64,7 +64,8 @@ function layout() {
       </div></header>
       <nav class="nav" id="primaryNav" aria-label="Primary">${NAV.map(n =>
         `<a href="${n.href}" class="${n.cta ? "start" : ""}" ${n.page === page ? 'aria-current="page"' : ""}>${n.label}</a>`
-      ).join("")}</nav>`;
+      ).join("")}</nav>
+      <div class="mkt-ribbon" id="mktRibbon" role="region" aria-label="Live market ticker"><div class="mkt-track"></div></div>`;
   }
   const img = hdr && hdr.querySelector(".logo-img");
   if (img) {
@@ -202,10 +203,8 @@ function normIPO(raw) {
       name = String(name).replace(/\s+(Open|Closed|Upcoming|Listed)\s*$/i, "").trim();
       const opens = r.opens ?? r.open;
       const closes = r.closes ?? r.close;
-      // Prefer date-based status so Open/Upcoming/Closed tabs stay accurate
       let status = ipoStatus(opens, closes);
       const rawSt = (r.status || "").toLowerCase().trim();
-      // Use scraped status only when dates are missing
       if ((opens == null || opens === "") && (closes == null || closes === "") &&
           ["open", "upcoming", "closed"].includes(rawSt)) {
         status = rawSt;
