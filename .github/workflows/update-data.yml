@@ -1,10 +1,12 @@
 name: Update market data
+
+# Runs every day at 5:00 PM IST and 12:00 AM IST
+# IST = UTC+5:30 → 11:30 UTC and 18:30 UTC
 on:
   schedule:
-    - cron: "0 2 * * *"
-    - cron: "0 10 * * *"
-    - cron: "0 18 * * *"
-  workflow_dispatch:
+    - cron: "30 11 * * *"   # 5:00 PM IST
+    - cron: "30 18 * * *"   # 12:00 AM IST
+  workflow_dispatch:          # manual run from Actions tab
 
 permissions:
   contents: write
@@ -14,21 +16,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Install deps
         run: pip install requests beautifulsoup4
-      - name: Fetch IPO
+
+      - name: Fetch IPO (investorgain.com)
         run: python scripts/fetch_ipo.py
         continue-on-error: true
-      - name: Fetch gold
+
+      - name: Fetch gold (goodreturns.in)
         run: python scripts/fetch_gold.py
         continue-on-error: true
+
       - name: Fetch indices
         run: python scripts/fetch_markets.py
         continue-on-error: true
-      - name: Commit if changed
+
+      - name: Commit and push if data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

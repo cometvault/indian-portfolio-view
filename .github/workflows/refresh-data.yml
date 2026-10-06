@@ -1,17 +1,14 @@
-name: Refresh market data
+name: Refresh market data (legacy stub)
+
+# Disabled — real schedule lives in update-data.yml (5 PM + 12 AM IST)
 on:
-  schedule:
-    - cron: "30 6 * * 1-5"
-    - cron: "30 12 * * 1-5"
   workflow_dispatch:
 
 jobs:
-  refresh:
+  note:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - name: Note
         run: |
-          echo "Wire scrapers for data/ipo.json and data/gold.json here."
-          echo "Schema: see data/SCHEMA.md"
-          date -u
+          echo "Use workflow 'Update market data' instead."
+          echo "Schedule: 5:00 PM IST and 12:00 AM IST daily."
