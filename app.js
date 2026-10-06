@@ -1,4 +1,4 @@
-/* build: 2026-10-06T02:26 IST pages-sync */
+/* build: 2026-10-06T14:16 IST data-pipeline-fix */
 /* Easy Nivesh — shared app */
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -204,12 +204,11 @@ function normIPO(raw) {
       name = String(name).replace(/\s+(Open|Closed|Upcoming|Listed)\s*$/i, "").trim();
       const opens = r.opens ?? r.open;
       const closes = r.closes ?? r.close;
-      let status = ipoStatus(opens, closes);
       const rawSt = (r.status || "").toLowerCase().trim();
-      if ((opens == null || opens === "") && (closes == null || closes === "") &&
-          ["open", "upcoming", "closed"].includes(rawSt)) {
-        status = rawSt;
-      }
+      // Prefer scraped status (open/upcoming/closed); fall back to dates
+      let status = ["open", "upcoming", "closed"].includes(rawSt)
+        ? rawSt
+        : ipoStatus(opens, closes);
       if (!["open", "upcoming", "closed"].includes(status)) status = "open";
       rows.push({
         name,
