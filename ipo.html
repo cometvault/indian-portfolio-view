@@ -4,7 +4,7 @@
 <meta http-equiv="Pragma" content="no-cache"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>IPOs — Easy Nivesh</title>
-<meta name="description" content="Open, upcoming and closed IPOs with GMP, price bands and dates. Educational only.">
+<meta name="description" content="Open, upcoming and closed Mainboard and SME IPOs with GMP, price bands and dates. Educational only.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=20">
@@ -21,6 +21,7 @@
 .pill.open{background:rgba(61,245,160,.15);color:var(--c2)}
 .pill.upcoming{background:rgba(100,160,255,.15);color:#8ab4ff}
 .pill.closed{background:rgba(255,255,255,.06);color:var(--mu)}
+.hint{font-size:13px;color:var(--mu);margin:8px 0 0}
 </style>
 </head>
 <body data-page="ipo">
@@ -30,7 +31,7 @@
 <div class="crumb"><a href="index.html">Home</a> / IPOs</div>
 <div class="hero">
   <h1>IPOs, minus the hype.</h1>
-  <p class="lead">What's open, what's next, and what has closed. Filter by status — each group is separate.</p>
+  <p class="lead">Mainboard and SME. Filter by Open, Upcoming or Closed — your choice stays put.</p>
   <div class="bento">
     <div class="tile"><small>Open now</small><b class="g num" id="sO">0</b><p>Apply window live</p></div>
     <div class="tile"><small>Upcoming</small><b class="num" id="sU">0</b><p>Not open yet</p></div>
@@ -41,7 +42,7 @@
 </div>
 
 <div class="ctl">
-  <div class="seg" id="seg">
+  <div class="seg" id="seg" role="group" aria-label="Exchange segment">
     <button type="button" class="on" data-v="main">Mainboard</button>
     <button type="button" data-v="sme">SME</button>
   </div>
@@ -58,6 +59,7 @@
 </div>
 
 <div class="banner" id="smeW" hidden><b>SME heads-up:</b> minimum tickets are much higher and shares can be hard to sell.</div>
+<p class="hint" id="filterHint" hidden></p>
 <div class="grid" id="grid"></div>
 <div class="banner" style="margin-top:16px">GMP is unofficial and unregulated. Never size your application off it.</div>
 
@@ -85,10 +87,12 @@
 </div>
 </main>
 <div id="ftr"></div>
-<script src="app.js?v=26"></script>
+<script src="app.js?v=27"></script>
 <script>
+/* IPO filters: segment and status are independent and sticky.
+   Choosing SME never jumps back to Mainboard. */
 let R = null;
-let ST = { seg: "main", st: "open", wl: false, q: "", sort: "close" };
+let ST = { seg: "main", st: "open", wl: false, q: "", sort: "close", userPickedSeg: false };
 let W = [];
 try { W = JSON.parse(localStorage.getItem("pv_watch") || "[]"); } catch (e) {}
 const sv = () => { try { localStorage.setItem("pv_watch", JSON.stringify(W)); } catch (e) {} };
@@ -113,16 +117,32 @@ function setSegUI() {
 function setStatusUI() {
   $$(".chip[data-st]").forEach(c => c.classList.toggle("on", !ST.wl && c.dataset.st === ST.st));
   const wl = $("#wl");
-  if (wl) { wl.classList.toggle("on", ST.wl); wl.setAttribute("aria-pressed", String(ST.wl)); }
+  if (wl) {
+    wl.classList.toggle("on", ST.wl);
+    wl.setAttribute("aria-pressed", String(ST.wl));
+  }
 }
 
-function ensureSegHasStatus() {
-  if (!R || !R.rows || ST.wl) return;
-  const has = (seg) => R.rows.some(d => d.seg === seg && d.status === ST.st);
-  if (has(ST.seg)) return;
-  if (has("sme")) ST.seg = "sme";
-  else if (has("main")) ST.seg = "main";
-  setSegUI();
+function countIn(seg, st) {
+  if (!R || !R.rows) return 0;
+  return R.rows.filter(d => d.seg === seg && d.status === st).length;
+}
+
+function updateHint() {
+  const el = $("#filterHint");
+  if (!el || ST.wl) { if (el) el.hidden = true; return; }
+  const here = countIn(ST.seg, ST.st);
+  const otherSeg = ST.seg === "sme" ? "main" : "sme";
+  const otherLabel = otherSeg === "sme" ? "SME" : "Mainboard";
+  const other = countIn(otherSeg, ST.st);
+  if (here === 0 && other > 0) {
+    el.hidden = false;
+    el.textContent = "No " + ST.st + " IPOs in " + (ST.seg === "sme" ? "SME" : "Mainboard") +
+      ". " + other + " " + ST.st + " in " + otherLabel + " — switch segment to see them.";
+  } else {
+    el.hidden = true;
+    el.textContent = "";
+  }
 }
 
 function render() {
@@ -132,18 +152,21 @@ function render() {
   }
   const all = R.rows;
   const segRows = all.filter(d => d.seg === ST.seg);
+
   const count = (st) => segRows.filter(d => d.status === st).length;
   $("#nO").textContent = count("open");
   $("#nU").textContent = count("upcoming");
   $("#nC").textContent = count("closed");
+
   $("#sO").textContent = all.filter(d => d.status === "open").length;
   $("#sU").textContent = all.filter(d => d.status === "upcoming").length;
   $("#sCl").textContent = all.filter(d => d.status === "closed").length;
   $("#sW").textContent = W.length;
+
   const smeW = $("#smeW");
   if (smeW) smeW.hidden = ST.seg !== "sme";
+  updateHint();
 
-  // STRICT: only selected status in selected segment
   let rows = ST.wl
     ? all.filter(d => W.includes(d.name))
     : segRows.filter(d => d.status === ST.st);
@@ -158,14 +181,15 @@ function render() {
   });
 
   if (!rows.length) {
-    const label = ST.wl ? "Nothing starred yet. Tap ☆ on any IPO."
-      : "No " + ST.st + " IPOs in " + (ST.seg === "sme" ? "SME" : "Mainboard") + ". Try the other segment or another status.";
+    const label = ST.wl
+      ? "Nothing starred yet. Tap ☆ on any IPO."
+      : "No " + ST.st + " IPOs in " + (ST.seg === "sme" ? "SME" : "Mainboard") + " right now.";
     $("#grid").innerHTML = '<div class="empty">' + label + "</div>";
     return;
   }
 
   $("#grid").innerHTML = rows.map(d => {
-    const ini = d.name.replace(/^Demo /, "").split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+    const ini = d.name.replace(/^Demo /, "").split(/\s+/).map(w => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
     const on = W.includes(d.name);
     const stLabel = d.status.charAt(0).toUpperCase() + d.status.slice(1);
     return `<article class="card">
@@ -195,35 +219,57 @@ async function load() {
     R = await getIPO();
     if (typeof statusBar === "function") statusBar($("#st"), R, load);
     else if (typeof setStatus === "function") setStatus($("#st"), R, load);
-    ensureSegHasStatus();
+
+    if (!ST.userPickedSeg && R && R.rows) {
+      const mainOpen = R.rows.some(d => d.seg === "main" && d.status === "open");
+      const smeOpen = R.rows.some(d => d.seg === "sme" && d.status === "open");
+      if (!mainOpen && smeOpen) {
+        ST.seg = "sme";
+        ST.st = "open";
+      }
+    }
     setSegUI();
     setStatusUI();
     render();
   } catch (err) {
     console.error(err);
-    $("#grid").innerHTML = '<div class="empty">Could not load IPO data. Try again.</div>';
+    $("#grid").innerHTML = '<div class="empty">Could not load IPO data. Try Refresh.</div>';
   }
 }
 
-segs($("#seg"), v => { ST.seg = v; ST.wl = false; setStatusUI(); render(); });
-
-$$(".chip[data-st]").forEach(c => {
-  c.onclick = () => {
-    ST.st = c.dataset.st;
+$$("#seg button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    ST.seg = btn.dataset.v;
+    ST.userPickedSeg = true;
     ST.wl = false;
-    ensureSegHasStatus();
+    setSegUI();
     setStatusUI();
     render();
-  };
+  });
+});
+
+$$(".chip[data-st]").forEach(c => {
+  c.addEventListener("click", () => {
+    ST.st = c.dataset.st;
+    ST.wl = false;
+    setStatusUI();
+    render();
+  });
 });
 
 const wlBtn = $("#wl");
-if (wlBtn) wlBtn.onclick = () => { ST.wl = !ST.wl; setStatusUI(); render(); };
+if (wlBtn) {
+  wlBtn.addEventListener("click", () => {
+    ST.wl = !ST.wl;
+    setStatusUI();
+    render();
+  });
+}
 
-$("#q").oninput = e => { ST.q = e.target.value; render(); };
-$("#sort").onchange = e => { ST.sort = e.target.value; render(); };
+$("#q").addEventListener("input", e => { ST.q = e.target.value; render(); });
+$("#sort").addEventListener("change", e => { ST.sort = e.target.value; render(); });
 
-$("#grid").onclick = e => {
+$("#grid").addEventListener("click", e => {
   const b = e.target.closest(".star");
   if (!b) return;
   const n = b.dataset.n;
@@ -231,16 +277,18 @@ $("#grid").onclick = e => {
   if (i > -1) W.splice(i, 1); else W.push(n);
   sv();
   render();
-};
+});
 
 const M = ["Pause. Read first.", "Not yet.", "Getting there.", "Nearly ready.", "Prepared."];
 function ck() {
   const n = $$("#chk input:checked").length;
   $("#rn").textContent = n;
-  $("#ring").style.background = n ? `conic-gradient(var(--c2) 0%,var(--c4) ${n * 25}%,var(--s2) ${n * 25}%)` : "var(--s2)";
+  $("#ring").style.background = n
+    ? `conic-gradient(var(--c2) 0%,var(--c4) ${n * 25}%,var(--s2) ${n * 25}%)`
+    : "var(--s2)";
   $("#rm").textContent = M[n];
 }
-$$("#chk input").forEach(i => i.onchange = ck);
+$$("#chk input").forEach(i => i.addEventListener("change", ck));
 ck();
 load();
 </script>
