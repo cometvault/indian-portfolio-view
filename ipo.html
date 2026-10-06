@@ -1,130 +1,247 @@
 <!DOCTYPE html>
 <html lang="en-IN"><head>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Pragma" content="no-cache"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>IPOs — Easy Nivesh</title>
-<meta name="description" content="What's open, what's next and whether it's for you: dates, minimum amounts, subscription and a readiness check. Educational only.">
-<meta name="theme-color" content="#050807"><link rel="icon" href="assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
-<style>.top{display:flex;gap:12px;align-items:center}.av{width:44px;height:44px;border-radius:14px;background:var(--brand);color:#04140d;display:grid;place-items:center;font:700 16px Sora;flex:none}.top p{margin:0;color:var(--dim);font-size:13px}.star{margin-left:auto;background:none;border:1px solid var(--line);color:var(--dim);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:17px;flex:none}.star.on{color:#04140d;background:var(--brand);border-color:transparent}.when{font-size:13px;color:var(--mu);margin-left:8px}.gmp{color:var(--dim)}.ring{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:var(--s2);margin:0 auto 12px}.ring div{width:124px;height:124px;border-radius:50%;background:var(--s);display:grid;place-items:center;font:700 36px Sora}</style>
+<meta name="description" content="Open, upcoming and closed IPOs with GMP, price bands and dates. Educational only.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=20">
+<style>
+.top{display:flex;gap:12px;align-items:center}
+.av{width:44px;height:44px;border-radius:14px;background:var(--brand);color:#04140d;display:grid;place-items:center;font:700 16px Sora;flex:none}
+.top p{margin:0;color:var(--dim);font-size:13px}
+.star{margin-left:auto;background:none;border:1px solid var(--line);color:var(--dim);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:17px;flex:none}
+.star.on{color:#04140d;background:var(--brand);border-color:transparent}
+.when{font-size:13px;color:var(--mu);margin-left:8px}
+.gmp{color:var(--dim)}
+.ring{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:var(--s2);margin:0 auto 12px}
+.ring div{width:124px;height:124px;border-radius:50%;background:var(--s);display:grid;place-items:center;font:700 36px Sora}
+.pill.open{background:rgba(61,245,160,.15);color:var(--c2)}
+.pill.upcoming{background:rgba(100,160,255,.15);color:#8ab4ff}
+.pill.closed{background:rgba(255,255,255,.06);color:var(--mu)}
+</style>
 </head>
-<body data-page="ipo"><a class="skip" href="#main">Skip to content</a><div id="hdr"></div><div class="glow"></div>
+<body data-page="ipo">
+<a class="skip" href="#main">Skip to content</a>
+<div id="hdr"></div><div class="glow"></div>
 <main id="main" class="wrap">
 <div class="crumb"><a href="index.html">Home</a> / IPOs</div>
-<div class="hero"><h1>IPOs, minus the hype.</h1><p class="lead">What's open, what's next, and whether it's actually for you.</p>
-<div class="bento"><div class="tile"><small>Open now</small><b class="g num" id="sO">0</b><p>Apply window live</p></div><div class="tile"><small>Closing within 3 days</small><b class="num" id="sC">0</b><p>Read before you rush</p></div><div class="tile"><small>Avg. subscription</small><b class="num" id="sS">0x</b><p>Across open issues</p></div><div class="tile"><small>Your watchlist</small><b class="num" id="sW">0</b><p>Saved on this device</p></div></div>
-<div class="status" id="st" role="status"></div></div>
-<div class="ctl"><div class="seg" id="seg"><button class="on" data-v="main">Mainboard</button><button data-v="sme">SME</button></div>
-<button class="chip on" data-st="open">Open<i id="nO">0</i></button><button class="chip" data-st="upcoming">Upcoming<i id="nU">0</i></button><button class="chip" data-st="closed">Closed<i id="nC">0</i></button><button class="chip" id="wl" aria-pressed="false">★ Watchlist</button>
-<input type="search" id="q" placeholder="Search company or sector" aria-label="Search"><select id="sort" aria-label="Sort"><option value="close">Closing soon</option><option value="sub">Most subscribed</option><option value="min">Lowest minimum</option></select></div>
+<div class="hero">
+  <h1>IPOs, minus the hype.</h1>
+  <p class="lead">What's open, what's next, and what has closed. Filter by status — each group is separate.</p>
+  <div class="bento">
+    <div class="tile"><small>Open now</small><b class="g num" id="sO">0</b><p>Apply window live</p></div>
+    <div class="tile"><small>Upcoming</small><b class="num" id="sU">0</b><p>Not open yet</p></div>
+    <div class="tile"><small>Closed</small><b class="num" id="sCl">0</b><p>Window over</p></div>
+    <div class="tile"><small>Your watchlist</small><b class="num" id="sW">0</b><p>Saved on this device</p></div>
+  </div>
+  <div class="status" id="st" role="status"></div>
+</div>
+
+<div class="ctl">
+  <div class="seg" id="seg">
+    <button type="button" class="on" data-v="main">Mainboard</button>
+    <button type="button" data-v="sme">SME</button>
+  </div>
+  <button type="button" class="chip on" data-st="open">Open <i id="nO">0</i></button>
+  <button type="button" class="chip" data-st="upcoming">Upcoming <i id="nU">0</i></button>
+  <button type="button" class="chip" data-st="closed">Closed <i id="nC">0</i></button>
+  <button type="button" class="chip" id="wl" aria-pressed="false">★ Watchlist</button>
+  <input type="search" id="q" placeholder="Search company" aria-label="Search">
+  <select id="sort" aria-label="Sort">
+    <option value="close">Closing soon</option>
+    <option value="gmp">Highest GMP</option>
+    <option value="name">Name</option>
+  </select>
+</div>
+
 <div class="banner" id="smeW" hidden><b>SME heads-up:</b> minimum tickets are much higher and shares can be hard to sell.</div>
 <div class="grid" id="grid"></div>
 <div class="banner" style="margin-top:16px">GMP is unofficial and unregulated. Never size your application off it.</div>
-<section class="sec"><h2>Check yourself before you apply</h2><p>Four honest questions. Toggle what's true for you.</p>
-<div class="two"><div class="panel" id="chk">
-<label class="tg"><input type="checkbox"><span class="sw"></span>I've read the summary of the offer document (RHP)</label>
-<label class="tg"><input type="checkbox"><span class="sw"></span>This is from my IPO pot, not my emergency fund</label>
-<label class="tg"><input type="checkbox"><span class="sw"></span>I'm fine with the money being blocked for a few days</label>
-<label class="tg"><input type="checkbox"><span class="sw"></span>I'm okay if it lists flat or below issue price</label></div>
-<div class="panel" style="text-align:center"><div class="ring" id="ring"><div><span id="rn">0</span></div></div><small style="color:var(--dim)">out of 4</small><p id="rm" style="color:var(--mu);margin:8px 0 0"></p></div></div></section>
-<div class="next"><div><h2>IPO money has a place. Not the first place.</h2><p>Build your safety net and core investing first.</p></div><a class="go" href="new-to-finance.html#plan">Build my plan</a></div>
-</main><div id="ftr"></div>
-<script src="app.js?v=25"></script>
-<script>
-let R=null,ST={seg:"main",st:"open",wl:false,q:"",sort:"close"},W=[];
-try{W=JSON.parse(localStorage.getItem("pv_watch")||"[]")}catch(e){}
-const sv=()=>{try{localStorage.setItem("pv_watch",JSON.stringify(W))}catch(e){}};
-async function load(){
-  try{
-    $("#grid").innerHTML='<div class="sk"></div>'.repeat(6);
-    const b=$("#rf");if(b)b.innerHTML='<span class="spin">↻</span> Refreshing';
-    R=await getIPO();
-    if(typeof statusBar==="function")statusBar($("#st"),R,load);
-    else if(typeof setStatus==="function")setStatus($("#st"),R,load);
-    // If current segment has nothing for selected status, switch to the segment that does
-    if(R && R.rows && R.rows.length){
-      const has = (seg, st) => R.rows.some(d => d.seg===seg && d.status===st);
-      if(!ST.wl && !has(ST.seg, ST.st)){
-        if(has("sme", ST.st)) ST.seg = "sme";
-        else if(has("main", ST.st)) ST.seg = "main";
-        else if(has("sme", "open")) { ST.seg = "sme"; ST.st = "open"; }
-        else if(has("main", "upcoming")) { ST.seg = "main"; ST.st = "upcoming"; }
-        const segBox = $("#seg");
-        if(segBox) $$("#seg button").forEach(btn => btn.classList.toggle("on", btn.dataset.v===ST.seg));
-        $$(".chip[data-st]").forEach(c => c.classList.toggle("on", !ST.wl && c.dataset.st===ST.st));
-      }
-    }
-    render();
-  }catch(err){console.error(err);$("#grid").innerHTML='<div class="empty">Could not load IPO data. Try again in a moment.</div>';}
-}
-function wt(d){const n=Math.round((d.closes-T)/DAY),m=Math.round((d.opens-T)/DAY);if(d.status==="open")return n<=0?"closes today":"closes in "+n+"d";if(d.status==="upcoming")return"opens in "+m+"d";return d.listing?"listing "+fd(d.listing):"closed"}
-function cnt(from,to,el,f){if(!el)return;const t0=performance.now();(function s(t){const p=Math.min((t-t0)/700,1);el.textContent=f(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)})(t0)}
-function render(){
-  if(!R||!R.rows){$("#grid").innerHTML='<div class="empty">No IPO data loaded.</div>';return;}
-  const all=R.rows;
-  const seg=all.filter(d=>d.seg===ST.seg);
-  const c=k=>seg.filter(d=>d.status===k).length;
-  $("#nO").textContent=c("open");
-  $("#nU").textContent=c("upcoming");
-  $("#nC").textContent=c("closed");
-  const op=all.filter(d=>d.status==="open"),sb=op.filter(d=>d.sub!=null);
-  cnt(0,op.length,$("#sO"),v=>Math.round(v));
-  cnt(0,op.filter(d=>(d.closes-T)/DAY<=3).length,$("#sC"),v=>Math.round(v));
-  cnt(0,sb.length?sb.reduce((a,d)=>a+d.sub,0)/sb.length:0,$("#sS"),v=>v.toFixed(1)+"x");
-  $("#sW").textContent=W.length;
-  const smeW=$("#smeW"); if(smeW) smeW.hidden=ST.seg!=="sme";
-  let rows=seg.filter(d=>ST.wl?W.includes(d.name):d.status===ST.st);
-  const q=ST.q.trim().toLowerCase();
-  if(q)rows=rows.filter(d=>(d.name+" "+(d.sector||"")).toLowerCase().includes(q));
-  const B=1e15;
-  rows.sort((a,b)=>ST.sort==="sub"?(b.sub??-1)-(a.sub??-1):ST.sort==="min"?(a.min??B)-(b.min??B):(a.closes||0)-(b.closes||0));
-  $("#grid").innerHTML=rows.length?rows.map(d=>{
-    const ini=d.name.replace(/^Demo /,"").split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase();
-    const on=W.includes(d.name);
-    return`<article class="card"><div class="top"><div class="av">${esc(ini)}</div><div><h3>${esc(d.name)}</h3><p>${esc(d.sector!=="—"&&d.sector?d.sector:(d.seg==="sme"?"SME":"Mainboard"))}</p></div><button class="star${on?" on":""}" data-n="${esc(d.name)}" aria-pressed="${on}">${on?"★":"☆"}</button></div>
-<div style="margin:14px 0 4px"><span class="pill ${d.status}">${d.status[0].toUpperCase()+d.status.slice(1)}</span><span class="when">${wt(d)}</span></div>
-<div class="kv">
-<div><small>Price band</small><b class="num">${esc(d.band)}</b></div>
-<div><small>Opens – closes</small><b class="num">${fd(d.opens)} – ${fd(d.closes)}</b></div>
-<div><small>GMP (unofficial)</small><b class="gmp num">${d.gmp!=null?inr(d.gmp):"—"}${d.gmpPct!=null?" ("+Number(d.gmpPct).toFixed(1)+"%)":""}</b></div>
-<div><small>Lot size</small><b class="num">${d.lot!=null?d.lot:"—"}</b></div>
-<div><small>Min. application</small><b class="num">${d.min!=null?inr(d.min):"—"}</b></div>
+
+<section class="sec">
+  <h2>Check yourself before you apply</h2>
+  <p>Four honest questions. Toggle what's true for you.</p>
+  <div class="two">
+    <div class="panel" id="chk">
+      <label class="tg"><input type="checkbox"><span class="sw"></span>I've read the summary of the offer document (RHP)</label>
+      <label class="tg"><input type="checkbox"><span class="sw"></span>This is from my IPO pot, not my emergency fund</label>
+      <label class="tg"><input type="checkbox"><span class="sw"></span>I'm fine with the money being blocked for a few days</label>
+      <label class="tg"><input type="checkbox"><span class="sw"></span>I'm okay if it lists flat or below issue price</label>
+    </div>
+    <div class="panel" style="text-align:center">
+      <div class="ring" id="ring"><div><span id="rn">0</span></div></div>
+      <small style="color:var(--dim)">out of 4</small>
+      <p id="rm" style="color:var(--mu);margin:8px 0 0"></p>
+    </div>
+  </div>
+</section>
+
+<div class="next">
+  <div><h2>IPO money has a place. Not the first place.</h2><p>Build your safety net and core investing first.</p></div>
+  <a class="go" href="new-to-finance.html#plan">Build my plan</a>
 </div>
-</article>`;
-  }).join(""):`<div class="empty">${ST.wl?"Nothing starred yet. Tap ☆ on any IPO to track it.":"No "+ST.st+" IPOs in "+(ST.seg==="sme"?"SME":"Mainboard")+" right now. Try the other segment or status."}</div>`;
-}
-segs($("#seg"),v=>{ST.seg=v;render()});
-$$(".chip[data-st]").forEach(c=>c.onclick=()=>{
-  $$(".chip[data-st]").forEach(x=>x.classList.remove("on"));
-  c.classList.add("on");
-  ST.st=c.dataset.st;
-  ST.wl=false;
-  const wl=$("#wl"); if(wl){wl.classList.remove("on"); wl.setAttribute("aria-pressed","false");}
-  // auto-pick segment that has this status
-  if(R&&R.rows){
-    const has=(seg)=>R.rows.some(d=>d.seg===seg&&d.status===ST.st);
-    if(!has(ST.seg)){
-      if(has("sme")) ST.seg="sme";
-      else if(has("main")) ST.seg="main";
-      $$("#seg button").forEach(btn=>btn.classList.toggle("on",btn.dataset.v===ST.seg));
-    }
+</main>
+<div id="ftr"></div>
+<script src="app.js?v=26"></script>
+<script>
+let R = null;
+let ST = { seg: "main", st: "open", wl: false, q: "", sort: "close" };
+let W = [];
+try { W = JSON.parse(localStorage.getItem("pv_watch") || "[]"); } catch (e) {}
+const sv = () => { try { localStorage.setItem("pv_watch", JSON.stringify(W)); } catch (e) {} };
+
+function whenText(d) {
+  if (d.status === "open") {
+    const n = Math.round((d.closes - T) / DAY);
+    if (Number.isNaN(n)) return "open now";
+    return n <= 0 ? "closes today" : "closes in " + n + "d";
   }
-  render();
+  if (d.status === "upcoming") {
+    const m = Math.round((d.opens - T) / DAY);
+    if (Number.isNaN(m)) return "upcoming";
+    return m <= 0 ? "opens soon" : "opens in " + m + "d";
+  }
+  return "window closed";
+}
+
+function setSegUI() {
+  $$("#seg button").forEach(btn => btn.classList.toggle("on", btn.dataset.v === ST.seg));
+}
+function setStatusUI() {
+  $$(".chip[data-st]").forEach(c => c.classList.toggle("on", !ST.wl && c.dataset.st === ST.st));
+  const wl = $("#wl");
+  if (wl) { wl.classList.toggle("on", ST.wl); wl.setAttribute("aria-pressed", String(ST.wl)); }
+}
+
+function ensureSegHasStatus() {
+  if (!R || !R.rows || ST.wl) return;
+  const has = (seg) => R.rows.some(d => d.seg === seg && d.status === ST.st);
+  if (has(ST.seg)) return;
+  if (has("sme")) ST.seg = "sme";
+  else if (has("main")) ST.seg = "main";
+  setSegUI();
+}
+
+function render() {
+  if (!R || !R.rows) {
+    $("#grid").innerHTML = '<div class="empty">No IPO data loaded.</div>';
+    return;
+  }
+  const all = R.rows;
+  const segRows = all.filter(d => d.seg === ST.seg);
+  const count = (st) => segRows.filter(d => d.status === st).length;
+  $("#nO").textContent = count("open");
+  $("#nU").textContent = count("upcoming");
+  $("#nC").textContent = count("closed");
+  $("#sO").textContent = all.filter(d => d.status === "open").length;
+  $("#sU").textContent = all.filter(d => d.status === "upcoming").length;
+  $("#sCl").textContent = all.filter(d => d.status === "closed").length;
+  $("#sW").textContent = W.length;
+  const smeW = $("#smeW");
+  if (smeW) smeW.hidden = ST.seg !== "sme";
+
+  // STRICT: only selected status in selected segment
+  let rows = ST.wl
+    ? all.filter(d => W.includes(d.name))
+    : segRows.filter(d => d.status === ST.st);
+
+  const q = (ST.q || "").trim().toLowerCase();
+  if (q) rows = rows.filter(d => (d.name || "").toLowerCase().includes(q));
+
+  rows = rows.slice().sort((a, b) => {
+    if (ST.sort === "gmp") return (b.gmpPct || -1) - (a.gmpPct || -1);
+    if (ST.sort === "name") return (a.name || "").localeCompare(b.name || "");
+    return (a.closes || 0) - (b.closes || 0);
+  });
+
+  if (!rows.length) {
+    const label = ST.wl ? "Nothing starred yet. Tap ☆ on any IPO."
+      : "No " + ST.st + " IPOs in " + (ST.seg === "sme" ? "SME" : "Mainboard") + ". Try the other segment or another status.";
+    $("#grid").innerHTML = '<div class="empty">' + label + "</div>";
+    return;
+  }
+
+  $("#grid").innerHTML = rows.map(d => {
+    const ini = d.name.replace(/^Demo /, "").split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+    const on = W.includes(d.name);
+    const stLabel = d.status.charAt(0).toUpperCase() + d.status.slice(1);
+    return `<article class="card">
+      <div class="top">
+        <div class="av">${esc(ini)}</div>
+        <div><h3>${esc(d.name)}</h3><p>${d.seg === "sme" ? "SME" : "Mainboard"}</p></div>
+        <button type="button" class="star${on ? " on" : ""}" data-n="${esc(d.name)}" aria-pressed="${on}">${on ? "★" : "☆"}</button>
+      </div>
+      <div style="margin:14px 0 4px">
+        <span class="pill ${d.status}">${stLabel}</span>
+        <span class="when">${whenText(d)}</span>
+      </div>
+      <div class="kv">
+        <div><small>Price band</small><b class="num">${esc(d.band || "—")}</b></div>
+        <div><small>Opens – closes</small><b class="num">${fd(d.opens)} – ${fd(d.closes)}</b></div>
+        <div><small>GMP (unofficial)</small><b class="gmp num">${d.gmp != null ? inr(d.gmp) : "—"}${d.gmpPct != null ? " (" + Number(d.gmpPct).toFixed(1) + "%)" : ""}</b></div>
+        <div><small>Lot size</small><b class="num">${d.lot != null ? d.lot : "—"}</b></div>
+        <div><small>Min. application</small><b class="num">${d.min != null ? inr(d.min) : "—"}</b></div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+async function load() {
+  try {
+    $("#grid").innerHTML = '<div class="sk"></div>'.repeat(4);
+    R = await getIPO();
+    if (typeof statusBar === "function") statusBar($("#st"), R, load);
+    else if (typeof setStatus === "function") setStatus($("#st"), R, load);
+    ensureSegHasStatus();
+    setSegUI();
+    setStatusUI();
+    render();
+  } catch (err) {
+    console.error(err);
+    $("#grid").innerHTML = '<div class="empty">Could not load IPO data. Try again.</div>';
+  }
+}
+
+segs($("#seg"), v => { ST.seg = v; ST.wl = false; setStatusUI(); render(); });
+
+$$(".chip[data-st]").forEach(c => {
+  c.onclick = () => {
+    ST.st = c.dataset.st;
+    ST.wl = false;
+    ensureSegHasStatus();
+    setStatusUI();
+    render();
+  };
 });
-const wlBtn=$("#wl");
-if(wlBtn) wlBtn.onclick=e=>{
-  ST.wl=!ST.wl;
-  e.currentTarget.classList.toggle("on",ST.wl);
-  e.currentTarget.setAttribute("aria-pressed", String(ST.wl));
-  if(ST.wl) $$(".chip[data-st]").forEach(x=>x.classList.remove("on"));
-  else $$(".chip[data-st]").forEach(x=>x.classList.toggle("on", x.dataset.st===ST.st));
+
+const wlBtn = $("#wl");
+if (wlBtn) wlBtn.onclick = () => { ST.wl = !ST.wl; setStatusUI(); render(); };
+
+$("#q").oninput = e => { ST.q = e.target.value; render(); };
+$("#sort").onchange = e => { ST.sort = e.target.value; render(); };
+
+$("#grid").onclick = e => {
+  const b = e.target.closest(".star");
+  if (!b) return;
+  const n = b.dataset.n;
+  const i = W.indexOf(n);
+  if (i > -1) W.splice(i, 1); else W.push(n);
+  sv();
   render();
 };
-$("#q").oninput=e=>{ST.q=e.target.value;render()};
-$("#sort").onchange=e=>{ST.sort=e.target.value;render()};
-$("#grid").onclick=e=>{const b=e.target.closest(".star");if(!b)return;const n=b.dataset.n,i=W.indexOf(n);i>-1?W.splice(i,1):W.push(n);sv();render()};
-const M=["Pause. Read first.","Not yet.","Getting there.","Nearly ready.","Prepared."];
-function ck(){const n=$$("#chk input:checked").length;$("#rn").textContent=n;$("#ring").style.background=n?`conic-gradient(var(--c2) 0%,var(--c4) ${n*25}%,var(--s2) ${n*25}%)`:"var(--s2)";$("#rm").textContent=M[n]}
-$$("#chk input").forEach(i=>i.onchange=ck);ck();
+
+const M = ["Pause. Read first.", "Not yet.", "Getting there.", "Nearly ready.", "Prepared."];
+function ck() {
+  const n = $$("#chk input:checked").length;
+  $("#rn").textContent = n;
+  $("#ring").style.background = n ? `conic-gradient(var(--c2) 0%,var(--c4) ${n * 25}%,var(--s2) ${n * 25}%)` : "var(--s2)";
+  $("#rm").textContent = M[n];
+}
+$$("#chk input").forEach(i => i.onchange = ck);
+ck();
 load();
 </script>
 </body></html>
