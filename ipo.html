@@ -4,24 +4,33 @@
 <meta http-equiv="Pragma" content="no-cache"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>IPOs — Easy Nivesh</title>
-<meta name="description" content="Open, upcoming and closed Mainboard and SME IPOs with GMP, price bands and dates. Educational only.">
+<meta name="description" content="Open, upcoming and closed Mainboard and SME IPOs in a clear table. Educational only.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=20">
 <style>
-.top{display:flex;gap:12px;align-items:center}
-.av{width:44px;height:44px;border-radius:14px;background:var(--brand);color:#04140d;display:grid;place-items:center;font:700 16px Sora;flex:none}
-.top p{margin:0;color:var(--dim);font-size:13px}
-.star{margin-left:auto;background:none;border:1px solid var(--line);color:var(--dim);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:17px;flex:none}
-.star.on{color:#04140d;background:var(--brand);border-color:transparent}
-.when{font-size:13px;color:var(--mu);margin-left:8px}
-.gmp{color:var(--dim)}
 .ring{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:var(--s2);margin:0 auto 12px}
 .ring div{width:124px;height:124px;border-radius:50%;background:var(--s);display:grid;place-items:center;font:700 36px Sora}
+.hint{font-size:13px;color:var(--mu);margin:8px 0 12px}
+.ipo-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px;background:var(--s)}
+.ipo-table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
+.ipo-table th,.ipo-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle;white-space:nowrap}
+.ipo-table th{color:var(--mu);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;background:rgba(0,0,0,.35);position:sticky;top:0;z-index:1}
+.ipo-table tbody tr:hover{background:rgba(72,253,156,.04)}
+.ipo-table tbody tr:last-child td{border-bottom:none}
+.ipo-table .name{font-weight:600;color:var(--fg);white-space:normal;min-width:140px}
+.ipo-table .num{font-variant-numeric:tabular-nums;font-family:inherit}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;text-transform:capitalize}
 .pill.open{background:rgba(61,245,160,.15);color:var(--c2)}
 .pill.upcoming{background:rgba(100,160,255,.15);color:#8ab4ff}
 .pill.closed{background:rgba(255,255,255,.06);color:var(--mu)}
-.hint{font-size:13px;color:var(--mu);margin:8px 0 0}
+.star{background:none;border:1px solid var(--line);color:var(--dim);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:14px}
+.star.on{color:#04140d;background:var(--brand);border-color:transparent}
+.ipo-empty{padding:28px 16px;text-align:center;color:var(--mu);font-size:14px}
+@media (max-width:600px){
+  .ipo-table{font-size:12px;min-width:640px}
+  .ipo-table th,.ipo-table td{padding:10px 10px}
+}
 </style>
 </head>
 <body data-page="ipo">
@@ -31,7 +40,7 @@
 <div class="crumb"><a href="index.html">Home</a> / IPOs</div>
 <div class="hero">
   <h1>IPOs, minus the hype.</h1>
-  <p class="lead">Mainboard and SME. Filter by Open, Upcoming or Closed — your choice stays put.</p>
+  <p class="lead">Mainboard and SME in one table. Use the filters — Open, Upcoming and Closed stay separate.</p>
   <div class="bento">
     <div class="tile"><small>Open now</small><b class="g num" id="sO">0</b><p>Apply window live</p></div>
     <div class="tile"><small>Upcoming</small><b class="num" id="sU">0</b><p>Not open yet</p></div>
@@ -54,13 +63,13 @@
   <select id="sort" aria-label="Sort">
     <option value="close">Closing soon</option>
     <option value="gmp">Highest GMP</option>
-    <option value="name">Name</option>
+    <option value="name">Name A–Z</option>
   </select>
 </div>
 
 <div class="banner" id="smeW" hidden><b>SME heads-up:</b> minimum tickets are much higher and shares can be hard to sell.</div>
 <p class="hint" id="filterHint" hidden></p>
-<div class="grid" id="grid"></div>
+<div id="grid"></div>
 <div class="banner" style="margin-top:16px">GMP is unofficial and unregulated. Never size your application off it.</div>
 
 <section class="sec">
@@ -87,10 +96,8 @@
 </div>
 </main>
 <div id="ftr"></div>
-<script src="app.js?v=27"></script>
+<script src="app.js?v=28"></script>
 <script>
-/* IPO filters: segment and status are independent and sticky.
-   Choosing SME never jumps back to Mainboard. */
 let R = null;
 let ST = { seg: "main", st: "open", wl: false, q: "", sort: "close", userPickedSeg: false };
 let W = [];
@@ -100,15 +107,15 @@ const sv = () => { try { localStorage.setItem("pv_watch", JSON.stringify(W)); } 
 function whenText(d) {
   if (d.status === "open") {
     const n = Math.round((d.closes - T) / DAY);
-    if (Number.isNaN(n)) return "open now";
-    return n <= 0 ? "closes today" : "closes in " + n + "d";
+    if (Number.isNaN(n)) return "Open";
+    return n <= 0 ? "Closes today" : "Closes in " + n + "d";
   }
   if (d.status === "upcoming") {
     const m = Math.round((d.opens - T) / DAY);
-    if (Number.isNaN(m)) return "upcoming";
-    return m <= 0 ? "opens soon" : "opens in " + m + "d";
+    if (Number.isNaN(m)) return "Upcoming";
+    return m <= 0 ? "Opens soon" : "Opens in " + m + "d";
   }
-  return "window closed";
+  return "Closed";
 }
 
 function setSegUI() {
@@ -141,22 +148,39 @@ function updateHint() {
       ". " + other + " " + ST.st + " in " + otherLabel + " — switch segment to see them.";
   } else {
     el.hidden = true;
-    el.textContent = "";
   }
+}
+
+function filteredRows() {
+  if (!R || !R.rows) return [];
+  const all = R.rows;
+  let rows = ST.wl
+    ? all.filter(d => W.includes(d.name))
+    : all.filter(d => d.seg === ST.seg && d.status === ST.st);
+
+  const q = (ST.q || "").trim().toLowerCase();
+  if (q) rows = rows.filter(d => (d.name || "").toLowerCase().includes(q));
+
+  rows = rows.slice().sort((a, b) => {
+    if (ST.sort === "gmp") return (b.gmpPct || -1) - (a.gmpPct || -1);
+    if (ST.sort === "name") return (a.name || "").localeCompare(b.name || "");
+    if (ST.st === "upcoming") return (a.opens || 0) - (b.opens || 0);
+    return (a.closes || 0) - (b.closes || 0);
+  });
+  return rows;
 }
 
 function render() {
   if (!R || !R.rows) {
-    $("#grid").innerHTML = '<div class="empty">No IPO data loaded.</div>';
+    $("#grid").innerHTML = '<div class="ipo-empty">No IPO data loaded.</div>';
     return;
   }
   const all = R.rows;
   const segRows = all.filter(d => d.seg === ST.seg);
 
-  const count = (st) => segRows.filter(d => d.status === st).length;
-  $("#nO").textContent = count("open");
-  $("#nU").textContent = count("upcoming");
-  $("#nC").textContent = count("closed");
+  $("#nO").textContent = segRows.filter(d => d.status === "open").length;
+  $("#nU").textContent = segRows.filter(d => d.status === "upcoming").length;
+  $("#nC").textContent = segRows.filter(d => d.status === "closed").length;
 
   $("#sO").textContent = all.filter(d => d.status === "open").length;
   $("#sU").textContent = all.filter(d => d.status === "upcoming").length;
@@ -167,55 +191,55 @@ function render() {
   if (smeW) smeW.hidden = ST.seg !== "sme";
   updateHint();
 
-  let rows = ST.wl
-    ? all.filter(d => W.includes(d.name))
-    : segRows.filter(d => d.status === ST.st);
-
-  const q = (ST.q || "").trim().toLowerCase();
-  if (q) rows = rows.filter(d => (d.name || "").toLowerCase().includes(q));
-
-  rows = rows.slice().sort((a, b) => {
-    if (ST.sort === "gmp") return (b.gmpPct || -1) - (a.gmpPct || -1);
-    if (ST.sort === "name") return (a.name || "").localeCompare(b.name || "");
-    return (a.closes || 0) - (b.closes || 0);
-  });
-
+  const rows = filteredRows();
   if (!rows.length) {
     const label = ST.wl
-      ? "Nothing starred yet. Tap ☆ on any IPO."
+      ? "Nothing starred yet. Tap ★ on any row."
       : "No " + ST.st + " IPOs in " + (ST.seg === "sme" ? "SME" : "Mainboard") + " right now.";
-    $("#grid").innerHTML = '<div class="empty">' + label + "</div>";
+    $("#grid").innerHTML = '<div class="ipo-empty">' + label + "</div>";
     return;
   }
 
-  $("#grid").innerHTML = rows.map(d => {
-    const ini = d.name.replace(/^Demo /, "").split(/\s+/).map(w => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
+  const head = `<div class="ipo-wrap" role="region" aria-label="IPO list"><table class="ipo-table">
+<thead><tr>
+  <th scope="col">Company</th>
+  <th scope="col">Status</th>
+  <th scope="col">Price</th>
+  <th scope="col">GMP</th>
+  <th scope="col">Opens</th>
+  <th scope="col">Closes</th>
+  <th scope="col">Lot</th>
+  <th scope="col">Min. app</th>
+  <th scope="col">Sub</th>
+  <th scope="col"></th>
+</tr></thead><tbody>`;
+
+  const body = rows.map(d => {
     const on = W.includes(d.name);
     const stLabel = d.status.charAt(0).toUpperCase() + d.status.slice(1);
-    return `<article class="card">
-      <div class="top">
-        <div class="av">${esc(ini)}</div>
-        <div><h3>${esc(d.name)}</h3><p>${d.seg === "sme" ? "SME" : "Mainboard"}</p></div>
-        <button type="button" class="star${on ? " on" : ""}" data-n="${esc(d.name)}" aria-pressed="${on}">${on ? "★" : "☆"}</button>
-      </div>
-      <div style="margin:14px 0 4px">
-        <span class="pill ${d.status}">${stLabel}</span>
-        <span class="when">${whenText(d)}</span>
-      </div>
-      <div class="kv">
-        <div><small>Price band</small><b class="num">${esc(d.band || "—")}</b></div>
-        <div><small>Opens – closes</small><b class="num">${fd(d.opens)} – ${fd(d.closes)}</b></div>
-        <div><small>GMP (unofficial)</small><b class="gmp num">${d.gmp != null ? inr(d.gmp) : "—"}${d.gmpPct != null ? " (" + Number(d.gmpPct).toFixed(1) + "%)" : ""}</b></div>
-        <div><small>Lot size</small><b class="num">${d.lot != null ? d.lot : "—"}</b></div>
-        <div><small>Min. application</small><b class="num">${d.min != null ? inr(d.min) : "—"}</b></div>
-      </div>
-    </article>`;
+    const gmpTxt = d.gmp != null
+      ? (inr(d.gmp) + (d.gmpPct != null ? " (" + Number(d.gmpPct).toFixed(1) + "%)" : ""))
+      : "—";
+    return `<tr data-status="${d.status}">
+      <td class="name">${esc(d.name)}<div style="font-size:11px;color:var(--mu);font-weight:400">${d.seg === "sme" ? "SME" : "Mainboard"} · ${whenText(d)}</div></td>
+      <td><span class="pill ${d.status}">${stLabel}</span></td>
+      <td class="num">${esc(d.band || "—")}</td>
+      <td class="num">${gmpTxt}</td>
+      <td class="num">${fd(d.opens)}</td>
+      <td class="num">${fd(d.closes)}</td>
+      <td class="num">${d.lot != null ? d.lot : "—"}</td>
+      <td class="num">${d.min != null ? inr(d.min) : "—"}</td>
+      <td class="num">${d.sub != null ? Number(d.sub).toFixed(2) + "x" : "—"}</td>
+      <td><button type="button" class="star${on ? " on" : ""}" data-n="${esc(d.name)}" aria-label="Watch ${esc(d.name)}" aria-pressed="${on}">${on ? "★" : "☆"}</button></td>
+    </tr>`;
   }).join("");
+
+  $("#grid").innerHTML = head + body + "</tbody></table></div>";
 }
 
 async function load() {
   try {
-    $("#grid").innerHTML = '<div class="sk"></div>'.repeat(4);
+    $("#grid").innerHTML = '<div class="ipo-empty">Loading…</div>';
     R = await getIPO();
     if (typeof statusBar === "function") statusBar($("#st"), R, load);
     else if (typeof setStatus === "function") setStatus($("#st"), R, load);
@@ -233,7 +257,7 @@ async function load() {
     render();
   } catch (err) {
     console.error(err);
-    $("#grid").innerHTML = '<div class="empty">Could not load IPO data. Try Refresh.</div>';
+    $("#grid").innerHTML = '<div class="ipo-empty">Could not load IPO data. Try Refresh.</div>';
   }
 }
 
