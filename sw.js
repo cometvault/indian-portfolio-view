@@ -1,5 +1,5 @@
 /* Easy Nivesh service worker — versioned cache clear */
-const CACHE = "easy-nivesh-v21";
+const CACHE = "easy-nivesh-v26";
 self.addEventListener("install", (e) => {
   self.skipWaiting();
 });
