@@ -1,4 +1,4 @@
-/* build: 2026-10-06T14:25 IST strict-ipo-status */
+/* build: 2026-10-06T14:50 IST strict-source-status */
 /* Easy Nivesh — shared app */
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -207,8 +207,13 @@ function normIPO(raw) {
       const closes = r.closes ?? r.close;
       const rawSt = (r.status || "").toLowerCase().trim();
       const dateSt = ipoStatus(opens, closes);
-      // Dates win when available (keeps Open/Upcoming/Closed accurate over time)
-      let status = dateSt || (["open", "upcoming", "closed"].includes(rawSt) ? rawSt : "upcoming");
+      // STRICT: scraped status is source of truth — never reclassify Open as Closed
+      let status;
+      if (["open", "upcoming", "closed"].includes(rawSt)) {
+        status = rawSt;
+      } else {
+        status = dateSt || "upcoming";
+      }
       if (!["open", "upcoming", "closed"].includes(status)) status = "upcoming";
       rows.push({
         name,
@@ -272,7 +277,7 @@ async function getIPO() {
   const res = await getJSON("ipo.json", DEMO_IPO);
   const rows = normIPO(res.j) || (res.live ? null : IPO_DEMO);
   if (rows && rows.length) {
-    return { rows, live: res.live, updated: res.updated || (res.j && (res.j.updated_at || res.j.updated)), source: res.source || "ipowatch.in", source_url: res.source_url || "https://ipowatch.in/", file: "ipo.json", j: res.j };
+    return { rows, live: res.live, updated: res.updated || (res.j && (res.j.updated_at || res.j.updated)), source: res.source || "investorgain.com", source_url: res.source_url || "https://www.investorgain.com/", file: "ipo.json", j: res.j };
   }
   return { rows: IPO_DEMO, live: false, updated: null, source: "demo", source_url: "#", file: "ipo.json", j: DEMO_IPO };
 }
