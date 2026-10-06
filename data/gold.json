@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-06T17:09:56+05:30",
-  "updated": "2026-10-06T17:09:56+05:30",
+  "updated_at": "2026-10-07T00:19:13+05:30",
+  "updated": "2026-10-07T00:19:13+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
@@ -9,43 +9,43 @@
   "cities": [
     {
       "city": "Mumbai",
-      "k24": 14902,
-      "k22": 13660,
-      "rate24k": 14902,
-      "rate22k": 13660,
-      "change24k": -16
+      "k24": 15022,
+      "k22": 13770,
+      "rate24k": 15022,
+      "rate22k": 13770,
+      "change24k": 104
     },
     {
       "city": "Delhi",
-      "k24": 14917,
-      "k22": 13675,
-      "rate24k": 14917,
-      "rate22k": 13675,
-      "change24k": -16
+      "k24": 15037,
+      "k22": 13785,
+      "rate24k": 15037,
+      "rate22k": 13785,
+      "change24k": 104
     },
     {
       "city": "Bengaluru",
-      "k24": 14902,
-      "k22": 13660,
-      "rate24k": 14902,
-      "rate22k": 13660,
-      "change24k": -16
+      "k24": 15022,
+      "k22": 13770,
+      "rate24k": 15022,
+      "rate22k": 13770,
+      "change24k": 104
     },
     {
       "city": "Kolkata",
-      "k24": 14902,
-      "k22": 13660,
-      "rate24k": 14902,
-      "rate22k": 13660,
-      "change24k": -16
+      "k24": 15022,
+      "k22": 13770,
+      "rate24k": 15022,
+      "rate22k": 13770,
+      "change24k": 104
     },
     {
       "city": "Hyderabad",
-      "k24": 14902,
-      "k22": 13660,
-      "rate24k": 14902,
-      "rate22k": 13660,
-      "change24k": -16
+      "k24": 15022,
+      "k22": 13770,
+      "rate24k": 15022,
+      "rate22k": 13770,
+      "change24k": 104
     },
     {
       "city": "Chennai",
