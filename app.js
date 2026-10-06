@@ -1,4 +1,4 @@
-/* build: 2026-10-06T14:16 IST data-pipeline-fix */
+/* build: 2026-10-06T14:25 IST strict-ipo-status */
 /* Easy Nivesh — shared app */
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -192,7 +192,8 @@ function ipoStatus(opens, closes) {
   const o = parseDate(opens), c = parseDate(closes);
   if (o != null && o > T) return "upcoming";
   if (c != null && c < T) return "closed";
-  return "open";
+  if (o != null || c != null) return "open";
+  return null;
 }
 
 function normIPO(raw) {
@@ -205,11 +206,10 @@ function normIPO(raw) {
       const opens = r.opens ?? r.open;
       const closes = r.closes ?? r.close;
       const rawSt = (r.status || "").toLowerCase().trim();
-      // Prefer scraped status (open/upcoming/closed); fall back to dates
-      let status = ["open", "upcoming", "closed"].includes(rawSt)
-        ? rawSt
-        : ipoStatus(opens, closes);
-      if (!["open", "upcoming", "closed"].includes(status)) status = "open";
+      const dateSt = ipoStatus(opens, closes);
+      // Dates win when available (keeps Open/Upcoming/Closed accurate over time)
+      let status = dateSt || (["open", "upcoming", "closed"].includes(rawSt) ? rawSt : "upcoming");
+      if (!["open", "upcoming", "closed"].includes(status)) status = "upcoming";
       rows.push({
         name,
         sector: r.sector || "—",
@@ -221,9 +221,6 @@ function normIPO(raw) {
         gmp: r.gmp ?? null,
         gmpPct: r.gmp_pct ?? r.gmpPct ?? null,
         sub: r.sub ?? r.subscription ?? null,
-        subQib: r.sub_qib ?? r.subQib ?? null,
-        subNii: r.sub_nii ?? r.subNii ?? null,
-        subRetail: r.sub_retail ?? r.subRetail ?? null,
         opens: parseDate(opens),
         closes: parseDate(closes),
         listing: parseDate(r.listing_date ?? r.listing),
