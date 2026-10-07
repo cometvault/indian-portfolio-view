@@ -1,59 +1,59 @@
 {
-  "updated_at": "2026-10-07T00:19:13+05:30",
-  "updated": "2026-10-07T00:19:13+05:30",
+  "updated_at": "2026-10-07T06:02:17+05:30",
+  "updated": "2026-10-07T06:02:17+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-  "note": "Rates per gram. Metal rate only — no making charges.",
+  "note": "Rates per gram from the Gram=1 row. Metal rate only \u2014 no making charges.",
   "unit": "per_gram",
   "cities": [
     {
       "city": "Mumbai",
-      "k24": 15022,
-      "k22": 13770,
-      "rate24k": 15022,
-      "rate22k": 13770,
-      "change24k": 104
+      "k24": 15023,
+      "k22": 13771,
+      "rate24k": 15023,
+      "rate22k": 13771,
+      "change24k": 1
     },
     {
       "city": "Delhi",
-      "k24": 15037,
-      "k22": 13785,
-      "rate24k": 15037,
-      "rate22k": 13785,
-      "change24k": 104
+      "k24": 15038,
+      "k22": 13786,
+      "rate24k": 15038,
+      "rate22k": 13786,
+      "change24k": 1
     },
     {
       "city": "Bengaluru",
-      "k24": 15022,
-      "k22": 13770,
-      "rate24k": 15022,
-      "rate22k": 13770,
-      "change24k": 104
+      "k24": 15023,
+      "k22": 13771,
+      "rate24k": 15023,
+      "rate22k": 13771,
+      "change24k": 1
     },
     {
       "city": "Kolkata",
-      "k24": 15022,
-      "k22": 13770,
-      "rate24k": 15022,
-      "rate22k": 13770,
-      "change24k": 104
+      "k24": 15023,
+      "k22": 13771,
+      "rate24k": 15023,
+      "rate22k": 13771,
+      "change24k": 1
     },
     {
       "city": "Hyderabad",
-      "k24": 15022,
-      "k22": 13770,
-      "rate24k": 15022,
-      "rate22k": 13770,
-      "change24k": 104
+      "k24": 15023,
+      "k22": 13771,
+      "rate24k": 15023,
+      "rate22k": 13771,
+      "change24k": 1
     },
     {
       "city": "Chennai",
-      "k24": 14902,
-      "k22": 13660,
-      "rate24k": 14902,
-      "rate22k": 13660,
-      "change24k": -16
+      "k24": 14901,
+      "k22": 13659,
+      "rate24k": 14901,
+      "rate22k": 13659,
+      "change24k": -1
     }
   ]
 }
