@@ -1,59 +1,59 @@
 {
-  "updated_at": "2026-10-09T06:08:00+05:30",
-  "updated": "2026-10-09T06:08:00+05:30",
+  "updated_at": "2026-10-09T14:16:00+05:30",
+  "updated": "2026-10-09T14:16:00+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-  "note": "Rates per gram from Gram=1 row. Latest published city pages are 8 Oct 2026 (unchanged vs prior day). Metal rate only \u2014 no making charges.",
+  "note": "Rates per gram from Gram=1 row on 9 Oct 2026. Delhi change from Delhi city page; other cities match the India page (+114). Metal rate only \u2014 no making charges.",
   "unit": "per_gram",
   "cities": [
     {
       "city": "Mumbai",
-      "k24": 14957,
-      "k22": 13710,
-      "rate24k": 14957,
-      "rate22k": 13710,
-      "change24k": 0
+      "k24": 15071,
+      "k22": 13815,
+      "rate24k": 15071,
+      "rate22k": 13815,
+      "change24k": 114
     },
     {
       "city": "Delhi",
-      "k24": 14970,
-      "k22": 13725,
-      "rate24k": 14970,
-      "rate22k": 13725,
-      "change24k": 0
+      "k24": 15086,
+      "k22": 13830,
+      "rate24k": 15086,
+      "rate22k": 13830,
+      "change24k": 116
     },
     {
       "city": "Bengaluru",
-      "k24": 14957,
-      "k22": 13710,
-      "rate24k": 14957,
-      "rate22k": 13710,
-      "change24k": 0
+      "k24": 15071,
+      "k22": 13815,
+      "rate24k": 15071,
+      "rate22k": 13815,
+      "change24k": 114
     },
     {
       "city": "Kolkata",
-      "k24": 14957,
-      "k22": 13710,
-      "rate24k": 14957,
-      "rate22k": 13710,
-      "change24k": 0
+      "k24": 15071,
+      "k22": 13815,
+      "rate24k": 15071,
+      "rate22k": 13815,
+      "change24k": 114
     },
     {
       "city": "Hyderabad",
-      "k24": 14957,
-      "k22": 13710,
-      "rate24k": 14957,
-      "rate22k": 13710,
-      "change24k": 0
+      "k24": 15071,
+      "k22": 13815,
+      "rate24k": 15071,
+      "rate22k": 13815,
+      "change24k": 114
     },
     {
       "city": "Chennai",
-      "k24": 14957,
-      "k22": 13710,
-      "rate24k": 14957,
-      "rate22k": 13710,
-      "change24k": 0
+      "k24": 15071,
+      "k22": 13815,
+      "rate24k": 15071,
+      "rate22k": 13815,
+      "change24k": 114
     }
   ]
 }
