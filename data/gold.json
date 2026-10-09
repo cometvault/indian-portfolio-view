@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-10-09T14:16:00+05:30",
-  "updated": "2026-10-09T14:16:00+05:30",
+  "updated_at": "2026-10-09T17:09:10+05:30",
+  "updated": "2026-10-09T17:09:10+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-  "note": "Rates per gram from Gram=1 row on 9 Oct 2026. Delhi change from Delhi city page; other cities match the India page (+114). Metal rate only \u2014 no making charges.",
+  "note": "Rates per gram. Metal rate only — no making charges.",
   "unit": "per_gram",
   "cities": [
     {
