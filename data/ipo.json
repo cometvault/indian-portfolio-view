@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-10-09T06:08:00+05:30",
-  "updated": "2026-10-09T06:08:00+05:30",
+  "updated_at": "2026-10-09T14:16:00+05:30",
+  "updated": "2026-10-09T14:16:00+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
-  "note": "GMP unofficial (IPOWatch current mainboard/SME tables). (O)/(U)/(C) = open/upcoming/closed. Lot/issue filled only where the listing page or a matching prior record agreed; detail pages were template-polluted.",
+  "note": "GMP unofficial (IPOWatch current mainboard/SME tables). (O)/(U)/(C) = open/upcoming/closed. Lot/issue filled only where a matching prior record agreed; GMP page has no lot/sub columns and detail pages were template-polluted.",
   "mainboard": [
     {
       "company": "Jio Platforms (U)",
