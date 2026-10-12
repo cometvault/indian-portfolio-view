@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-12T14:13:39+05:30",
-  "updated": "2026-10-12T14:13:39+05:30",
+  "updated_at": "2026-10-12T17:14:58+05:30",
+  "updated": "2026-10-12T17:14:58+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
@@ -17,11 +17,11 @@
     },
     {
       "city": "Delhi",
-      "k24": 15156,
-      "k22": 13894,
-      "rate24k": 15156,
-      "rate22k": 13894,
-      "change24k": -1
+      "k24": 15113,
+      "k22": 13855,
+      "rate24k": 15113,
+      "rate22k": 13855,
+      "change24k": -44
     },
     {
       "city": "Bengaluru",
