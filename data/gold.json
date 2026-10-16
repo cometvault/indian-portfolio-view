@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-10-16T06:02:00+05:30",
-  "updated": "2026-10-16T06:02:00+05:30",
+  "updated_at": "2026-10-16T14:13:33+05:30",
+  "updated": "2026-10-16T14:13:33+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-  "note": "Rates per gram. Metal rate only — no making charges.",
+  "note": "Rates per gram. Metal rate only \u2014 no making charges.",
   "unit": "per_gram",
   "cities": [
     {
@@ -13,15 +13,15 @@
       "k22": 13515,
       "rate24k": 14744,
       "rate22k": 13515,
-      "change24k": -82
+      "change24k": 0
     },
     {
       "city": "Delhi",
-      "k24": 14759,
-      "k22": 13530,
-      "rate24k": 14759,
-      "rate22k": 13530,
-      "change24k": -82
+      "k24": 14758,
+      "k22": 13529,
+      "rate24k": 14758,
+      "rate22k": 13529,
+      "change24k": -1
     },
     {
       "city": "Bengaluru",
@@ -29,7 +29,7 @@
       "k22": 13515,
       "rate24k": 14744,
       "rate22k": 13515,
-      "change24k": -82
+      "change24k": 0
     },
     {
       "city": "Kolkata",
@@ -37,7 +37,7 @@
       "k22": 13515,
       "rate24k": 14744,
       "rate22k": 13515,
-      "change24k": -82
+      "change24k": 0
     },
     {
       "city": "Hyderabad",
@@ -45,15 +45,15 @@
       "k22": 13515,
       "rate24k": 14744,
       "rate22k": 13515,
-      "change24k": -82
+      "change24k": 0
     },
     {
       "city": "Chennai",
-      "k24": 14744,
-      "k22": 13515,
-      "rate24k": 14744,
-      "rate22k": 13515,
-      "change24k": -82
+      "k24": 14743,
+      "k22": 13514,
+      "rate24k": 14743,
+      "rate22k": 13514,
+      "change24k": -1
     }
   ]
 }
