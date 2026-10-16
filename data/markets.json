@@ -1,1 +1,17 @@
-$(cat /workspace/artifacts/data/markets.json)
+{
+  "updated_at": "2026-10-16T06:02:00+05:30",
+  "source": "Yahoo Finance",
+  "source_url": "https://finance.yahoo.com/quote/%5ENSEI",
+  "nifty50": {
+    "price": 23037.35,
+    "change": 414.65,
+    "change_pct": 1.83,
+    "name": "NIFTY 50"
+  },
+  "bank_nifty": {
+    "price": 55842.20,
+    "change": 526.20,
+    "change_pct": 0.95,
+    "name": "BANK NIFTY"
+  }
+}
