@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-10-17T06:01:00+05:30",
-  "updated": "2026-10-17T06:01:00+05:30",
+  "updated_at": "2026-10-17T14:14:00+05:30",
+  "updated": "2026-10-17T14:14:00+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
-  "note": "GMP from ipowatch.in. Status marked (O)/(U)/(C) in company names.",
+  "note": "GMP from ipowatch.in. Status marked (O)/(U)/(C) in company names. Lot/min/issue/sub from prior data where available.",
   "mainboard": [
     {
       "company": "Jio Platforms (U)",
@@ -34,9 +34,9 @@
       "seg": "main",
       "price_band": "660-693",
       "priceBand": "660-693",
-      "gmp": 90,
-      "gmp_pct": 12.99,
-      "gmpPct": 12.99,
+      "gmp": 95,
+      "gmp_pct": 13.71,
+      "gmpPct": 13.71,
       "sub": null,
       "subscription": null,
       "lot": 21,
@@ -56,9 +56,9 @@
       "seg": "main",
       "price_band": "558-586",
       "priceBand": "558-586",
-      "gmp": 125,
-      "gmp_pct": 21.33,
-      "gmpPct": 21.33,
+      "gmp": 130,
+      "gmp_pct": 22.18,
+      "gmpPct": 22.18,
       "sub": 0.99,
       "subscription": 0.99,
       "lot": 25,
@@ -78,9 +78,9 @@
       "seg": "main",
       "price_band": "665-700",
       "priceBand": "665-700",
-      "gmp": 500,
-      "gmp_pct": 71.43,
-      "gmpPct": 71.43,
+      "gmp": 516,
+      "gmp_pct": 73.71,
+      "gmpPct": 73.71,
       "sub": 7.78,
       "subscription": 7.78,
       "lot": 21,
@@ -100,9 +100,9 @@
       "seg": "main",
       "price_band": "143-151",
       "priceBand": "143-151",
-      "gmp": 11,
-      "gmp_pct": 7.28,
-      "gmpPct": 7.28,
+      "gmp": 7,
+      "gmp_pct": 4.64,
+      "gmpPct": 4.64,
       "sub": 0.31,
       "subscription": 0.31,
       "lot": 99,
@@ -122,9 +122,9 @@
       "seg": "main",
       "price_band": "327-344",
       "priceBand": "327-344",
-      "gmp": 40,
-      "gmp_pct": 11.63,
-      "gmpPct": 11.63,
+      "gmp": 35,
+      "gmp_pct": 10.17,
+      "gmpPct": 10.17,
       "sub": 0.83,
       "subscription": 0.83,
       "lot": 43,
@@ -139,8 +139,8 @@
       "status": "open"
     },
     {
-      "company": "Fusion CX (O)",
-      "name": "Fusion CX (O)",
+      "company": "Fusion CX (C)",
+      "name": "Fusion CX (C)",
       "seg": "main",
       "price_band": "275-289",
       "priceBand": "275-289",
@@ -158,7 +158,7 @@
       "opens": "14 Oct",
       "closes": "16 Oct",
       "listing": "22 Oct",
-      "status": "open"
+      "status": "closed"
     },
     {
       "company": "HD Fire Protect (C)",
@@ -207,8 +207,8 @@
       "status": "open"
     },
     {
-      "company": "Ravita Engineering (O)",
-      "name": "Ravita Engineering (O)",
+      "company": "Ravita Engineering (C)",
+      "name": "Ravita Engineering (C)",
       "seg": "sme",
       "price_band": "105-112",
       "priceBand": "105-112",
@@ -226,7 +226,7 @@
       "opens": "14 Oct",
       "closes": "16 Oct",
       "listing": null,
-      "status": "open"
+      "status": "closed"
     },
     {
       "company": "Vaibhav Vyapaar (C)",
