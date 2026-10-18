@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-10-18T00:26:08+05:30",
-  "updated": "2026-10-18T00:26:08+05:30",
+  "updated_at": "2026-10-18T06:01:51+05:30",
+  "updated": "2026-10-18T06:01:51+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-  "note": "Rates per gram. Metal rate only — no making charges.",
+  "note": "Rates per gram. Metal rate only — no making charges. From Gram=1 row.",
   "unit": "per_gram",
   "cities": [
     {
@@ -49,11 +49,11 @@
     },
     {
       "city": "Chennai",
-      "k24": 14766,
-      "k22": 13535,
-      "rate24k": 14766,
-      "rate22k": 13535,
-      "change24k": 22
+      "k24": 14743,
+      "k22": 13514,
+      "rate24k": 14743,
+      "rate22k": 13514,
+      "change24k": -1
     }
   ]
 }
