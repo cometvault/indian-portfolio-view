@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-24T06:05:00+05:30",
-  "updated": "2026-10-24T06:05:00+05:30",
+  "updated_at": "2026-10-24T14:13:36+05:30",
+  "updated": "2026-10-24T14:13:36+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
@@ -12,9 +12,9 @@
       "seg": "main",
       "price_band": "82",
       "priceBand": "82",
-      "gmp": 0,
-      "gmp_pct": 0.0,
-      "gmpPct": 0.0,
+      "gmp": 8,
+      "gmp_pct": 6.10,
+      "gmpPct": 6.10,
       "sub": null,
       "subscription": null,
       "lot": 182,
@@ -100,9 +100,9 @@
       "seg": "main",
       "price_band": "1665",
       "priceBand": "1665",
-      "gmp": 0,
-      "gmp_pct": 0.0,
-      "gmpPct": 0.0,
+      "gmp": 121,
+      "gmp_pct": 7.27,
+      "gmpPct": 7.27,
       "sub": null,
       "subscription": null,
       "lot": 9,
@@ -117,14 +117,14 @@
       "status": "upcoming"
     },
     {
-      "company": "Jio Platforms (O)",
-      "name": "Jio Platforms (O)",
+      "company": "Jio Platforms (C)",
+      "name": "Jio Platforms (C)",
       "seg": "main",
       "price_band": "1119",
       "priceBand": "1119",
-      "gmp": 255,
-      "gmp_pct": 22.79,
-      "gmpPct": 22.79,
+      "gmp": 260,
+      "gmp_pct": 23.24,
+      "gmpPct": 23.24,
       "sub": 21.36,
       "subscription": 21.36,
       "lot": 12,
@@ -136,11 +136,11 @@
       "opens": "21 Oct",
       "closes": "23 Oct",
       "listing": "28 Oct",
-      "status": "open"
+      "status": "closed"
     },
     {
-      "company": "Paras Healthcare (O)",
-      "name": "Paras Healthcare (O)",
+      "company": "Paras Healthcare (C)",
+      "name": "Paras Healthcare (C)",
       "seg": "main",
       "price_band": "693",
       "priceBand": "693",
@@ -158,7 +158,7 @@
       "opens": "21 Oct",
       "closes": "23 Oct",
       "listing": "28 Oct",
-      "status": "open"
+      "status": "closed"
     }
   ],
   "sme": [
