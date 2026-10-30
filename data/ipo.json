@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-30T06:05:00+05:30",
-  "updated": "2026-10-30T06:05:00+05:30",
+  "updated_at": "2026-10-30T14:15:00+05:30",
+  "updated": "2026-10-30T14:15:00+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
@@ -34,9 +34,9 @@
       "seg": "main",
       "price_band": "162",
       "priceBand": "162",
-      "gmp": 15,
-      "gmp_pct": 9.26,
-      "gmpPct": 9.26,
+      "gmp": 12,
+      "gmp_pct": 7.41,
+      "gmpPct": 7.41,
       "sub": 1.18,
       "subscription": 1.18,
       "lot": 91,
@@ -51,14 +51,14 @@
       "status": "open"
     },
     {
-      "company": "SFC Environmental Technologies (O)",
-      "name": "SFC Environmental Technologies (O)",
+      "company": "SFC Environmental Technologies (C)",
+      "name": "SFC Environmental Technologies (C)",
       "seg": "main",
       "price_band": "330",
       "priceBand": "330",
-      "gmp": 12,
-      "gmp_pct": 3.64,
-      "gmpPct": 3.64,
+      "gmp": 20,
+      "gmp_pct": 6.06,
+      "gmpPct": 6.06,
       "sub": 9.47,
       "subscription": 9.47,
       "lot": 45,
@@ -70,17 +70,17 @@
       "opens": "27 Oct",
       "closes": "29 Oct",
       "listing": "3 Nov",
-      "status": "open"
+      "status": "closed"
     },
     {
-      "company": "BLS Polymers (O)",
-      "name": "BLS Polymers (O)",
+      "company": "BLS Polymers (C)",
+      "name": "BLS Polymers (C)",
       "seg": "main",
       "price_band": "150",
       "priceBand": "150",
-      "gmp": 51,
-      "gmp_pct": 34.0,
-      "gmpPct": 34.0,
+      "gmp": 68,
+      "gmp_pct": 45.33,
+      "gmpPct": 45.33,
       "sub": 241.22,
       "subscription": 241.22,
       "lot": 100,
@@ -92,7 +92,7 @@
       "opens": "27 Oct",
       "closes": "29 Oct",
       "listing": "3 Nov",
-      "status": "open"
+      "status": "closed"
     },
     {
       "company": "EAAA India Alternatives (C)",
@@ -100,9 +100,9 @@
       "seg": "main",
       "price_band": "1665",
       "priceBand": "1665",
-      "gmp": 30,
-      "gmp_pct": 1.8,
-      "gmpPct": 1.8,
+      "gmp": 40,
+      "gmp_pct": 2.40,
+      "gmpPct": 2.40,
       "sub": 5.51,
       "subscription": 5.51,
       "lot": 9,
@@ -141,14 +141,14 @@
       "status": "upcoming"
     },
     {
-      "company": "Johnsoncab Electricals (U)",
-      "name": "Johnsoncab Electricals (U)",
+      "company": "Johnsoncab Electricals (O)",
+      "name": "Johnsoncab Electricals (O)",
       "seg": "sme",
       "price_band": "200",
       "priceBand": "200",
-      "gmp": 10,
-      "gmp_pct": 5.0,
-      "gmpPct": 5.0,
+      "gmp": 13,
+      "gmp_pct": 6.5,
+      "gmpPct": 6.5,
       "sub": null,
       "subscription": null,
       "lot": 600,
@@ -160,11 +160,11 @@
       "opens": "30 Oct",
       "closes": "3 Nov",
       "listing": "6 Nov",
-      "status": "upcoming"
+      "status": "open"
     },
     {
-      "company": "HGS (India) (U)",
-      "name": "HGS (India) (U)",
+      "company": "HGS (India) (O)",
+      "name": "HGS (India) (O)",
       "seg": "sme",
       "price_band": "120",
       "priceBand": "120",
@@ -182,17 +182,17 @@
       "opens": "30 Oct",
       "closes": "3 Nov",
       "listing": "6 Nov",
-      "status": "upcoming"
+      "status": "open"
     },
     {
-      "company": "Maxwell Engineering (U)",
-      "name": "Maxwell Engineering (U)",
+      "company": "Maxwell Engineering (O)",
+      "name": "Maxwell Engineering (O)",
       "seg": "sme",
       "price_band": "158",
       "priceBand": "158",
-      "gmp": 40,
-      "gmp_pct": 25.32,
-      "gmpPct": 25.32,
+      "gmp": 70,
+      "gmp_pct": 44.3,
+      "gmpPct": 44.3,
       "sub": null,
       "subscription": null,
       "lot": 800,
@@ -204,11 +204,11 @@
       "opens": "30 Oct",
       "closes": "3 Nov",
       "listing": "6 Nov",
-      "status": "upcoming"
+      "status": "open"
     },
     {
-      "company": "Vectras Enprocon (U)",
-      "name": "Vectras Enprocon (U)",
+      "company": "Vectras Enprocon (O)",
+      "name": "Vectras Enprocon (O)",
       "seg": "sme",
       "price_band": "105",
       "priceBand": "105",
@@ -226,7 +226,7 @@
       "opens": "30 Oct",
       "closes": "3 Nov",
       "listing": "6 Nov",
-      "status": "upcoming"
+      "status": "open"
     },
     {
       "company": "Antala Industries (O)",
@@ -256,9 +256,9 @@
       "seg": "sme",
       "price_band": "203",
       "priceBand": "203",
-      "gmp": 35,
-      "gmp_pct": 17.24,
-      "gmpPct": 17.24,
+      "gmp": 5,
+      "gmp_pct": 2.46,
+      "gmpPct": 2.46,
       "sub": 0.87,
       "subscription": 0.87,
       "lot": 600,
@@ -295,8 +295,8 @@
       "status": "open"
     },
     {
-      "company": "Wiscon Industries (O)",
-      "name": "Wiscon Industries (O)",
+      "company": "Wiscon Industries (C)",
+      "name": "Wiscon Industries (C)",
       "seg": "sme",
       "price_band": "204",
       "priceBand": "204",
@@ -314,7 +314,7 @@
       "opens": "27 Oct",
       "closes": "29 Oct",
       "listing": "3 Nov",
-      "status": "open"
+      "status": "closed"
     },
     {
       "company": "Core4 Engineers (C)",
