@@ -1,1 +1,17 @@
-PLACEHOLDER_MARKETS
+{
+  "updated_at": "2026-11-02T06:02:00+05:30",
+  "source": "Yahoo Finance",
+  "source_url": "https://finance.yahoo.com/quote/%5ENSEI",
+  "nifty50": {
+    "price": 23053.10,
+    "change": 116.30,
+    "change_pct": 0.51,
+    "name": "NIFTY 50"
+  },
+  "bank_nifty": {
+    "price": 54686.95,
+    "change": -222.65,
+    "change_pct": -0.41,
+    "name": "BANK NIFTY"
+  }
+}
