@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-05T14:14:00+05:30",
-  "updated": "2026-11-05T14:14:00+05:30",
+  "updated_at": "2026-11-06T00:23:18+05:30",
+  "updated": "2026-11-06T00:23:18+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
-  "note": "Rates per gram from Gram=1 row. Metal rate only — no making charges.",
+  "note": "Rates per gram. Metal rate only — no making charges.",
   "unit": "per_gram",
   "cities": [
     {
@@ -53,7 +53,7 @@
       "k22": 13385,
       "rate24k": 14602,
       "rate22k": 13385,
-      "change24k": 322
+      "change24k": 311
     }
   ]
 }
