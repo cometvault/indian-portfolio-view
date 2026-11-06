@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-06T06:01:57+05:30",
-  "updated": "2026-11-06T06:01:57+05:30",
+  "updated_at": "2026-11-06T14:13:00+05:30",
+  "updated": "2026-11-06T14:13:00+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
-  "note": "GMP unofficial (IPOWatch). Status from page markers (O/U/C).",
+  "note": "GMP unofficial (IPOWatch). Status markers (O)/(U)/(C) in company names.",
   "mainboard": [
     {
       "company": "Bombay Coated and Special Steels (C)",
@@ -102,9 +102,9 @@
       "seg": "sme",
       "price_band": "158",
       "priceBand": "158",
-      "gmp": 113,
-      "gmp_pct": 71.52,
-      "gmpPct": 71.52,
+      "gmp": 105,
+      "gmp_pct": 66.46,
+      "gmpPct": 66.46,
       "sub": null,
       "subscription": null,
       "lot": null,
@@ -141,8 +141,8 @@
       "status": "closed"
     },
     {
-      "company": "Antala Industries (O)",
-      "name": "Antala Industries (O)",
+      "company": "Antala Industries (C)",
+      "name": "Antala Industries (C)",
       "seg": "sme",
       "price_band": "66",
       "priceBand": "66",
@@ -160,7 +160,7 @@
       "opens": "29 Oct",
       "closes": "5 Nov",
       "listing": null,
-      "status": "open"
+      "status": "closed"
     }
   ]
 }

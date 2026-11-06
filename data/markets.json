@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-11-06T06:01:57+05:30",
+  "updated_at": "2026-11-06T14:13:00+05:30",
   "source": "Yahoo Finance",
   "source_url": "https://finance.yahoo.com/quote/%5ENSEI",
   "nifty50": {
-    "price": 24536.6,
-    "change": 576.0,
-    "change_pct": 2.4,
+    "price": 24792.75,
+    "change": 256.15,
+    "change_pct": 1.04,
     "name": "NIFTY 50"
   },
   "bank_nifty": {
-    "price": 57773.65,
-    "change": 1860.05,
-    "change_pct": 3.33,
+    "price": 58576.25,
+    "change": 802.60,
+    "change_pct": 1.39,
     "name": "BANK NIFTY"
   }
 }
