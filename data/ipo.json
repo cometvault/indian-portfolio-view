@@ -1,25 +1,12 @@
 {
-  "updated_at": "2026-11-09T06:10:00+05:30",
-  "updated": "2026-11-09T06:10:00+05:30",
+  "updated_at": "2026-11-09T14:14:00+05:30",
+  "updated": "2026-11-09T14:14:00+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
-  "note": "GMP unofficial (IPOWatch). Status from live markers (O/U/C). Currently 0 open, 0 upcoming, 2 closed SME.",
+  "note": "GMP unofficial (IPOWatch). Status from live markers (O/U/C). Currently 0 open, 0 upcoming, 1 closed SME.",
   "mainboard": [],
   "sme": [
-    {
-      "company": "Vedant Poly Fabs (C)",
-      "name": "Vedant Poly Fabs (C)",
-      "seg": "sme",
-      "price_band": "88-94",
-      "priceBand": "88-94",
-      "gmp": 1,
-      "gmp_pct": 1.06,
-      "gmpPct": 1.06,
-      "opens": "2 Nov",
-      "closes": "4 Nov",
-      "status": "closed"
-    },
     {
       "company": "Antala Industries (C)",
       "name": "Antala Industries (C)",
