@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-13T06:03:22+05:30",
-  "updated": "2026-11-13T06:03:22+05:30",
+  "updated_at": "2026-11-13T14:14:14+05:30",
+  "updated": "2026-11-13T14:14:14+05:30",
   "source": "ipowatch.in",
   "source_url": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
   "sourceUrl": "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/",
@@ -10,11 +10,11 @@
       "company": "Crystal Crop Protection (U)",
       "name": "Crystal Crop Protection (U)",
       "seg": "main",
-      "price_band": "0",
-      "priceBand": "0",
-      "gmp": 0,
-      "gmp_pct": 0,
-      "gmpPct": 0,
+      "price_band": "₹259 - ₹272",
+      "priceBand": "₹259 - ₹272",
+      "gmp": 45,
+      "gmp_pct": 16.54,
+      "gmpPct": 16.54,
       "sub": null,
       "subscription": null,
       "lot": null,
@@ -73,5 +73,28 @@
       "status": "upcoming"
     }
   ],
-  "sme": []
+  "sme": [
+    {
+      "company": "Watrana Rentals (U)",
+      "name": "Watrana Rentals (U)",
+      "seg": "sme",
+      "price_band": "₹232 - ₹245",
+      "priceBand": "₹232 - ₹245",
+      "gmp": null,
+      "gmp_pct": null,
+      "gmpPct": null,
+      "sub": null,
+      "subscription": null,
+      "lot": null,
+      "lot_size": null,
+      "min": null,
+      "min_amount": null,
+      "issue": null,
+      "issue_size": null,
+      "opens": "19 Nov",
+      "closes": "23 Nov",
+      "listing": null,
+      "status": "upcoming"
+    }
+  ]
 }
