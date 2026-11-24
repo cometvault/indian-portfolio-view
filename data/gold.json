@@ -1,1 +1,59 @@
-PLACEHOLDER
+{
+  "updated_at": "2026-11-24T06:05:00+05:30",
+  "updated": "2026-11-24T06:05:00+05:30",
+  "source": "goodreturns.in",
+  "source_url": "https://www.goodreturns.in/gold-rates/",
+  "sourceUrl": "https://www.goodreturns.in/gold-rates/",
+  "note": "Rates per gram. Metal rate only — no making charges.",
+  "unit": "per_gram",
+  "cities": [
+    {
+      "city": "Mumbai",
+      "k24": 12656,
+      "k22": 11600,
+      "rate24k": 12656,
+      "rate22k": 11600,
+      "change24k": 148
+    },
+    {
+      "city": "Delhi",
+      "k24": 12671,
+      "k22": 11615,
+      "rate24k": 12671,
+      "rate22k": 11615,
+      "change24k": 148
+    },
+    {
+      "city": "Bengaluru",
+      "k24": 12656,
+      "k22": 11600,
+      "rate24k": 12656,
+      "rate22k": 11600,
+      "change24k": 148
+    },
+    {
+      "city": "Kolkata",
+      "k24": 12656,
+      "k22": 11600,
+      "rate24k": 12656,
+      "rate22k": 11600,
+      "change24k": 148
+    },
+    {
+      "city": "Hyderabad",
+      "k24": 12656,
+      "k22": 11600,
+      "rate24k": 12656,
+      "rate22k": 11600,
+      "change24k": 148
+    },
+    {
+      "city": "Chennai",
+      "k24": 12656,
+      "k22": 11600,
+      "rate24k": 12656,
+      "rate22k": 11600,
+      "change24k": 148
+    }
+  ]
+}
