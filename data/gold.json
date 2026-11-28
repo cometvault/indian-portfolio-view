@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-28T01:36:47+05:30",
-  "updated": "2026-11-28T01:36:47+05:30",
+  "updated_at": "2026-11-28T06:05:00+05:30",
+  "updated": "2026-11-28T06:05:00+05:30",
   "source": "goodreturns.in",
   "source_url": "https://www.goodreturns.in/gold-rates/",
   "sourceUrl": "https://www.goodreturns.in/gold-rates/",
@@ -53,7 +53,7 @@
       "k22": 11770,
       "rate24k": 12840,
       "rate22k": 11770,
-      "change24k": 251
+      "change24k": 360
     }
   ]
 }
